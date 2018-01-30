@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             xmlns:code="clr-namespace:TrainingDay.Code;assembly=TrainingDay"
+             x:Class="TrainingDay.View.TrainingExercisesPage" Title="Тренировка">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="remove.png" Command="{Binding DeleteSelectedExercisesCommand}"/>
+        <ToolbarItem Icon="accept.png" Command="{Binding SaveChangesCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding Items}" SeparatorColor="Black" SeparatorVisibility="Default" HasUnevenRows="True" SelectedItem="{Binding SelectedItem}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" >
+                                <Label Text="{Binding ExerciseItemName}" FontSize="Medium" VerticalTextAlignment="Center"/>
+                                <Label Text="{Binding ExerciseShortDescription}" FontSize="Medium" VerticalTextAlignment="Center"/>
+                            </StackLayout>
+                            <controls:CheckBox Checked="{Binding IsSelected}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Behaviors>
+                <code:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ExerciseSelectedCommand}" />
+            </ListView.Behaviors>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

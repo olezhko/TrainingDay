@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="TrainingDay.View.TrainingImplementPage" BindingContext="{Binding}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding CurrentTime,StringFormat='Время: {0}'}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding Items}" SeparatorColor="Black" SeparatorVisibility="Default" HasUnevenRows="True" SelectedItem="{Binding SelectedItem}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" >
+                                    <Label Text="{Binding ExerciseItemName,StringFormat='Название: {0}'}" FontSize="Medium" FontAttributes="Bold"/>
+                                    <Label Text="{Binding CountOfApproches,StringFormat='Кол-во подходов: {0}'}" FontSize="Small"/>
+                                    <Label Text="{Binding CountOfTimes,StringFormat='Кол-во раз: {0}'}" FontSize="Small"/>
+                                    <Label Text="{Binding ShortDescription,StringFormat='Краткое описание: {0}'}" FontSize="Small"/>
+                                </StackLayout>
+                                <controls:CheckBox Checked="{Binding IsImplemented}" CheckedText="Выполнено"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Завершить" Clicked="FinishButtonClicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

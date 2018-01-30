@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             xmlns:code="clr-namespace:TrainingDay.Code;assembly=TrainingDay"
+             x:Class="TrainingDay.View.ExerciseListPage" Title="Упражнения">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="add.png" Clicked="AddExercisesButton_Clicked" />
+        <ToolbarItem Icon="remove.png" Command="{Binding DeleteExerciseCommand}"/>
+        <ToolbarItem Icon="accept.png" Command="{Binding ListViewModel.ChoseExercisesCommand}" CommandParameter="{Binding}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding Items}" SeparatorColor="Black" SeparatorVisibility="Default" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" >
+                                <Label Text="{Binding ExerciseItemName}" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                                <Label Text="{Binding ExerciseShortDescription}" FontSize="Medium" VerticalTextAlignment="Center"/>
+                            </StackLayout>
+                            <controls:CheckBox Checked="{Binding IsSelected}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
