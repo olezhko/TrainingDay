@@ -10,12 +10,12 @@ namespace TrainingDay.ViewModel
 {
     public class MakeTrainingPageViewModel:BaseViewModel
     {
+        public bool IsVisibleNoTrainingsNeedAddNewLabel { get; set; }
         public ObservableCollection<TrainingViewModel> Items { get; set; }
         public MakeTrainingPageViewModel()
         {
             Items = new ObservableCollection<TrainingViewModel>();
         }
-
 
         public void LoadItems()
         {
@@ -41,6 +41,8 @@ namespace TrainingDay.ViewModel
                     }
                 }
             }
+            IsVisibleNoTrainingsNeedAddNewLabel = Items.Any();
+            OnPropertyChanged(nameof(IsVisibleNoTrainingsNeedAddNewLabel));
             DrawItems();
         }
 

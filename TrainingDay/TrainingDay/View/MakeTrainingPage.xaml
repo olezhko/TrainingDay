@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:trainingDay="clr-namespace:TrainingDay;assembly=TrainingDay"
              xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
              x:Class="TrainingDay.View.MakeTrainingPage" Title="{model:Translate MakeTrainingString}">
     <ContentPage.Content>
@@ -11,6 +10,7 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.ColumnSpan="2" Text="{model:Translate NoTrainingsNeedAddNewString}" IsVisible="{Binding IsVisibleNoTrainingsNeedAddNewLabel}" FontSize="20" HorizontalTextAlignment="Center"/>
                 <StackLayout x:Name="LeftStackLayout" Orientation="Vertical"/>
                 <StackLayout x:Name="RightStackLayout" Orientation="Vertical" Grid.Column="1"/>
             </Grid>

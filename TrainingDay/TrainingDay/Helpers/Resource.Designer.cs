@@ -62,11 +62,56 @@ namespace TrainingDay.Helpers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добавление тренировки.
+        /// </summary>
+        internal static string AddTrainingString {
+            get {
+                return ResourceManager.GetString("AddTrainingString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выбрать упражнения.
+        /// </summary>
+        internal static string ChouseExerciseString {
+            get {
+                return ResourceManager.GetString("ChouseExerciseString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выполнить тренеровку.
         /// </summary>
         internal static string MakeTrainingString {
             get {
                 return ResourceManager.GetString("MakeTrainingString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нет тренеровок. Добавьте тренеровку..
+        /// </summary>
+        internal static string NoTrainingsNeedAddNewString {
+            get {
+                return ResourceManager.GetString("NoTrainingsNeedAddNewString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Описание тренировки:.
+        /// </summary>
+        internal static string TrainingDescriptionString {
+            get {
+                return ResourceManager.GetString("TrainingDescriptionString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Название тренировки:.
+        /// </summary>
+        internal static string TrainingNameString {
+            get {
+                return ResourceManager.GetString("TrainingNameString", resourceCulture);
             }
         }
     }

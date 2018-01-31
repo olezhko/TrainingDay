@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddTrainingString" xml:space="preserve">
+    <value>Добавление тренировки</value>
+  </data>
+  <data name="ChouseExerciseString" xml:space="preserve">
+    <value>Выбрать упражнения</value>
+  </data>
   <data name="MakeTrainingString" xml:space="preserve">
     <value>Выполнить тренеровку</value>
+  </data>
+  <data name="NoTrainingsNeedAddNewString" xml:space="preserve">
+    <value>Нет тренеровок. Добавьте тренеровку.</value>
+  </data>
+  <data name="TrainingDescriptionString" xml:space="preserve">
+    <value>Описание тренировки:</value>
+  </data>
+  <data name="TrainingNameString" xml:space="preserve">
+    <value>Название тренировки:</value>
   </data>
 </root>

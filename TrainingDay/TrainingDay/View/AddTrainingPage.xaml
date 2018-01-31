@@ -1,21 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TrainingDay.View.AddTrainingPage" Title="Добавление тренировки">
+             xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
+             x:Class="TrainingDay.View.AddTrainingPage" Title="{model:Translate AddTrainingString}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="add.png" Command="{Binding AddTrainingItemCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal">
-                <Label Text="Название тренировки:" FontSize="Medium" VerticalTextAlignment="Center"/>
+                <Label Text="{model:Translate TrainingNameString}" FontSize="Medium" VerticalTextAlignment="Center"/>
                 <Entry Text="{Binding Title}" FontSize="Medium" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-                <Label Text="Описание тренировки:" FontSize="Medium" VerticalTextAlignment="Center"/>
+                <Label Text="{model:Translate TrainingDescriptionString}" FontSize="Medium" VerticalTextAlignment="Center"/>
                 <Entry Text="{Binding Description}" FontSize="Medium" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
-            <Button Text="Выбрать упражнения" Command="{Binding SelectExercisesCommand}" />
+            <Button Text="{model:Translate ChouseExerciseString}" Command="{Binding SelectExercisesCommand}" />
             <ListView ItemsSource="{Binding ExerciseItems}" ItemTapped="OnItemTapped" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
