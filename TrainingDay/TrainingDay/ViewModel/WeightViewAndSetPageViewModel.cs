@@ -5,6 +5,7 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using TrainingDay.Code;
+using TrainingDay.Helpers;
 using TrainingDay.Model;
 using Xamarin.Forms;
 
@@ -84,10 +85,10 @@ namespace TrainingDay.ViewModel
             int res = App.Database.SaveWeightNotesItem(note);
             if (res != 1)
             {
-                DependencyService.Get<IMessage>().ShortAlert("Не сохранено");
+                DependencyService.Get<IMessage>().ShortAlert(Resource.NotSavedString);
                 return;
             }
-            DependencyService.Get<IMessage>().ShortAlert("Сохранено");
+            DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
             WeightPeriodChanged();
         }
 

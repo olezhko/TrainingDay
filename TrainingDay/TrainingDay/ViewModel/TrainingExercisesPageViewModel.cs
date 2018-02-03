@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TrainingDay.Code;
+using TrainingDay.Helpers;
 using TrainingDay.Model;
 using TrainingDay.View;
 using Xamarin.Forms;
@@ -60,12 +61,12 @@ namespace TrainingDay.ViewModel
                 Items.Remove(item);
             }
             if (IsDeleted)
-                DependencyService.Get<IMessage>().ShortAlert("Удалено");
+                DependencyService.Get<IMessage>().ShortAlert(Resource.DeletedString);
         }
 
         private void SaveChanges()
         {
-            DependencyService.Get<IMessage>().ShortAlert("Сохранено");
+            DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
             TrainingExercisesChanges?.Invoke(this,null);
             Navigation.PopAsync();
         }

@@ -62,6 +62,24 @@ namespace TrainingDay.Helpers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Принять.
+        /// </summary>
+        internal static string AcceptString {
+            get {
+                return ResourceManager.GetString("AcceptString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Добавлено.
+        /// </summary>
+        internal static string AddedString {
+            get {
+                return ResourceManager.GetString("AddedString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Добавление тренировки.
         /// </summary>
         internal static string AddTrainingString {
@@ -80,6 +98,78 @@ namespace TrainingDay.Helpers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите период:.
+        /// </summary>
+        internal static string ChousePeriodString {
+            get {
+                return ResourceManager.GetString("ChousePeriodString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Кол-во подходов: {0}.
+        /// </summary>
+        internal static string CountOfApprochesString {
+            get {
+                return ResourceManager.GetString("CountOfApprochesString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Кол-во раз: {0}.
+        /// </summary>
+        internal static string CountOfTimesString {
+            get {
+                return ResourceManager.GetString("CountOfTimesString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удалено.
+        /// </summary>
+        internal static string DeletedString {
+            get {
+                return ResourceManager.GetString("DeletedString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите текущий вес:.
+        /// </summary>
+        internal static string EnterCurrentWeightString {
+            get {
+                return ResourceManager.GetString("EnterCurrentWeightString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Полгода.
+        /// </summary>
+        internal static string HalfYearString {
+            get {
+                return ResourceManager.GetString("HalfYearString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to   кг  .
+        /// </summary>
+        internal static string KilogramsString {
+            get {
+                return ResourceManager.GetString("KilogramsString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пройденные тренировки.
+        /// </summary>
+        internal static string LastTrainingsString {
+            get {
+                return ResourceManager.GetString("LastTrainingsString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выполнить тренеровку.
         /// </summary>
         internal static string MakeTrainingString {
@@ -89,11 +179,65 @@ namespace TrainingDay.Helpers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Название: {0}.
+        /// </summary>
+        internal static string NameString {
+            get {
+                return ResourceManager.GetString("NameString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Нет тренеровок. Добавьте тренеровку..
         /// </summary>
         internal static string NoTrainingsNeedAddNewString {
             get {
                 return ResourceManager.GetString("NoTrainingsNeedAddNewString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not Saved.
+        /// </summary>
+        internal static string NotSavedString {
+            get {
+                return ResourceManager.GetString("NotSavedString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Месяц.
+        /// </summary>
+        internal static string OneMounthString {
+            get {
+                return ResourceManager.GetString("OneMounthString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранено.
+        /// </summary>
+        internal static string SavedString {
+            get {
+                return ResourceManager.GetString("SavedString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Краткое описание: {0}.
+        /// </summary>
+        internal static string ShortDescriptionString {
+            get {
+                return ResourceManager.GetString("ShortDescriptionString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3 месяца.
+        /// </summary>
+        internal static string ThreeMounthString {
+            get {
+                return ResourceManager.GetString("ThreeMounthString", resourceCulture);
             }
         }
         
@@ -112,6 +256,60 @@ namespace TrainingDay.Helpers {
         internal static string TrainingNameString {
             get {
                 return ResourceManager.GetString("TrainingNameString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тренировка.
+        /// </summary>
+        internal static string TrainingString {
+            get {
+                return ResourceManager.GetString("TrainingString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 месяца.
+        /// </summary>
+        internal static string TwoMounthString {
+            get {
+                return ResourceManager.GetString("TwoMounthString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 недели.
+        /// </summary>
+        internal static string TwoWeeksString {
+            get {
+                return ResourceManager.GetString("TwoWeeksString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неделя.
+        /// </summary>
+        internal static string WeekString {
+            get {
+                return ResourceManager.GetString("WeekString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Контроль веса.
+        /// </summary>
+        internal static string WeightString {
+            get {
+                return ResourceManager.GetString("WeightString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Год.
+        /// </summary>
+        internal static string YearString {
+            get {
+                return ResourceManager.GetString("YearString", resourceCulture);
             }
         }
     }

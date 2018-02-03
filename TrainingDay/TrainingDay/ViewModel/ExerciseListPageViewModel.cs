@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TrainingDay.Annotations;
 using TrainingDay.Code;
+using TrainingDay.Helpers;
 using TrainingDay.Model;
 using Xamarin.Forms;
 using XLabs;
@@ -53,7 +54,7 @@ namespace TrainingDay.ViewModel
             }
             if (isDeleted)
             {
-                DependencyService.Get<IMessage>().ShortAlert("Удалено");
+                DependencyService.Get<IMessage>().ShortAlert(Resource.DeletedString);
                 LoadItems();
             }
         }

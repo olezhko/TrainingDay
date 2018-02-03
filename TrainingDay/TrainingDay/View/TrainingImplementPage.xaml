@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
-             x:Class="TrainingDay.View.TrainingImplementPage" BindingContext="{Binding}">
+             xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
+             x:Name="Page"
+             x:Class="TrainingDay.View.TrainingImplementPage" BindingContext="{x:Reference Name=Page}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{Binding CurrentTime,StringFormat='Время: {0}'}"/>
     </ContentPage.ToolbarItems>
@@ -14,10 +16,10 @@
                         <ViewCell>
                             <StackLayout Orientation="Vertical">
                                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" >
-                                    <Label Text="{Binding ExerciseItemName,StringFormat='Название: {0}'}" FontSize="Medium" FontAttributes="Bold"/>
-                                    <Label Text="{Binding CountOfApproches,StringFormat='Кол-во подходов: {0}'}" FontSize="Small"/>
-                                    <Label Text="{Binding CountOfTimes,StringFormat='Кол-во раз: {0}'}" FontSize="Small"/>
-                                    <Label Text="{Binding ShortDescription,StringFormat='Краткое описание: {0}'}" FontSize="Small"/>
+                                    <Label Text="{Binding ExerciseItemName,StringFormat={model:Translate NameString}}" FontSize="Medium" FontAttributes="Bold"/>
+                                    <Label Text="{Binding ExerciseCountOfApproches,StringFormat={model:Translate CountOfApprochesString}}" FontSize="Small"/>
+                                    <Label Text="{Binding ExerciseCountOfTimes,StringFormat={model:Translate CountOfTimesString}}" FontSize="Small"/>
+                                    <Label Text="{Binding ExerciseShortDescription,StringFormat={model:Translate ShortDescriptionString}}" FontSize="Small"/>
                                 </StackLayout>
                                 <controls:CheckBox Checked="{Binding IsImplemented}" CheckedText="Выполнено"/>
                             </StackLayout>

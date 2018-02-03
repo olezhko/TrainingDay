@@ -2,8 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xlabs="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
-             xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
-             x:Class="TrainingDay.View.TrainingItemsBasePage" Title="Тренировки" >
+             xmlns:viewModel="clr-namespace:TrainingDay.ViewModel;assembly=TrainingDay"
+             x:Class="TrainingDay.View.TrainingItemsBasePage" Title="Тренировки">
+    <ContentPage.BindingContext>
+        <viewModel:TrainingItemsBasePageViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="remove.png" Command="{Binding DeleteSelectedTrainingsCommand}" />
     </ContentPage.ToolbarItems>
@@ -15,7 +18,7 @@
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="" Grid.Column="0" FontAttributes="Bold"/>
+                <Label Grid.Column="0" FontAttributes="Bold"/>
                 <Label Text="Название" Grid.Column="1" FontAttributes="Bold"/>
                 <Label Text="Описание" Grid.Column="2" FontAttributes="Bold"/>
             </Grid>

@@ -117,22 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddedString" xml:space="preserve">
+    <value>Добавлено</value>
+  </data>
   <data name="AddTrainingString" xml:space="preserve">
     <value>Добавление тренировки</value>
   </data>
   <data name="ChouseExerciseString" xml:space="preserve">
     <value>Выбрать упражнения</value>
   </data>
+  <data name="DeletedString" xml:space="preserve">
+    <value>Удалено</value>
+  </data>
   <data name="MakeTrainingString" xml:space="preserve">
     <value>Выполнить тренеровку</value>
   </data>
+  <data name="NameString" xml:space="preserve">
+    <value>Название: {0}</value>
+  </data>
   <data name="NoTrainingsNeedAddNewString" xml:space="preserve">
     <value>Нет тренеровок. Добавьте тренеровку.</value>
+  </data>
+  <data name="NotSavedString" xml:space="preserve">
+    <value>Not Saved</value>
+  </data>
+  <data name="SavedString" xml:space="preserve">
+    <value>Сохранено</value>
   </data>
   <data name="TrainingDescriptionString" xml:space="preserve">
     <value>Описание тренировки:</value>
   </data>
   <data name="TrainingNameString" xml:space="preserve">
     <value>Название тренировки:</value>
+  </data>
+  <data name="CountOfApprochesString" xml:space="preserve">
+    <value>Кол-во подходов: {0}</value>
+  </data>
+  <data name="CountOfTimesString" xml:space="preserve">
+    <value>Кол-во раз: {0}</value>
+  </data>
+  <data name="ShortDescriptionString" xml:space="preserve">
+    <value>Краткое описание: {0}</value>
+  </data>
+  <data name="LastTrainingsString" xml:space="preserve">
+    <value>Пройденные тренировки</value>
+  </data>
+  <data name="TrainingString" xml:space="preserve">
+    <value>Тренировка</value>
+  </data>
+  <data name="AcceptString" xml:space="preserve">
+    <value>Принять</value>
+  </data>
+  <data name="ChousePeriodString" xml:space="preserve">
+    <value>Выберите период:</value>
+  </data>
+  <data name="EnterCurrentWeightString" xml:space="preserve">
+    <value>Введите текущий вес:</value>
+  </data>
+  <data name="HalfYearString" xml:space="preserve">
+    <value>Полгода</value>
+  </data>
+  <data name="KilogramsString" xml:space="preserve">
+    <value>  кг  </value>
+  </data>
+  <data name="OneMounthString" xml:space="preserve">
+    <value>Месяц</value>
+  </data>
+  <data name="ThreeMounthString" xml:space="preserve">
+    <value>3 месяца</value>
+  </data>
+  <data name="TwoMounthString" xml:space="preserve">
+    <value>2 месяца</value>
+  </data>
+  <data name="TwoWeeksString" xml:space="preserve">
+    <value>2 недели</value>
+  </data>
+  <data name="WeekString" xml:space="preserve">
+    <value>Неделя</value>
+  </data>
+  <data name="WeightString" xml:space="preserve">
+    <value>Контроль веса</value>
+  </data>
+  <data name="YearString" xml:space="preserve">
+    <value>Год</value>
   </data>
 </root>

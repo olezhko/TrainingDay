@@ -2,7 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
+             xmlns:viewModel="clr-namespace:TrainingDay.ViewModel;assembly=TrainingDay"
              x:Class="TrainingDay.View.AddTrainingPage" Title="{model:Translate AddTrainingString}">
+    <ContentPage.BindingContext>
+        <viewModel:AddTrainingViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="add.png" Command="{Binding AddTrainingItemCommand}"/>
     </ContentPage.ToolbarItems>
@@ -23,10 +27,10 @@
                         <ViewCell>
                             <ViewCell.View>
                                 <StackLayout>
-                                    <Label Text="{Binding ExerciseItemName,StringFormat='Название: {0}'}" FontSize="Medium" FontAttributes="Bold"/>
-                                    <Label Text="{Binding CountOfApproches,StringFormat='Кол-во подходов: {0}'}" FontSize="Small"/>
-                                    <Label Text="{Binding CountOfTimes,StringFormat='Кол-во раз: {0}'}" FontSize="Small"/>
-                                    <Label Text="{Binding ShortDescription,StringFormat='Краткое описание: {0}'}" FontSize="Small"/>
+                                    <Label Text="{Binding ExerciseItemName,StringFormat={model:Translate NameString}}" FontSize="Medium" FontAttributes="Bold"/>
+                                    <Label Text="{Binding CountOfApproches,StringFormat={model:Translate CountOfApprochesString}}" FontSize="Small"/>
+                                    <Label Text="{Binding CountOfTimes,StringFormat={model:Translate CountOfTimesString}}" FontSize="Small"/>
+                                    <Label Text="{Binding ShortDescription,StringFormat={model:Translate ShortDescriptionString}}" FontSize="Small"/>
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>

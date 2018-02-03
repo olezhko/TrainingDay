@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:code="clr-namespace:TrainingDay.Code;assembly=TrainingDay"
              xmlns:plot="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
-             x:Class="TrainingDay.View.WeightViewAndSetPage" Title="Контроль веса">
+             xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
+             x:Class="TrainingDay.View.WeightViewAndSetPage" Title="{model:Translate WeightString}">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -13,22 +14,13 @@
             <StackLayout Orientation="Vertical">
                 <StackLayout Orientation="Vertical">
                     <StackLayout Orientation="Horizontal">
-                        <Entry Text="{Binding CurrentWeightValue,Mode=OneWayToSource}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" Placeholder="Введите текущий вес:"/>
-                        <Label Text="  кг  " VerticalTextAlignment="Center" FontSize="Medium"/>
-                        <Button Text="Принять" Command="{Binding SaveCurrentWeightCommand}" />
+                        <Entry Text="{Binding CurrentWeightValue,Mode=OneWayToSource}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" Placeholder="{model:Translate EnterCurrentWeightString}"/>
+                        <Label Text="{model:Translate KilogramsString}" VerticalTextAlignment="Center" FontSize="Medium"/>
+                        <Button Text="{model:Translate AcceptString}" Command="{Binding SaveCurrentWeightCommand}" />
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Picker SelectedIndex="{Binding WeightChartPeriod}" Title="Выберите период:" HorizontalOptions="FillAndExpand" >
-                        <Picker.Items>
-                            <x:String>Неделя</x:String>
-                            <x:String>2 недели</x:String>
-                            <x:String>Месяц</x:String>
-                            <x:String>2 месяца</x:String>
-                            <x:String>3 месяца</x:String>
-                            <x:String>Полгода</x:String>
-                            <x:String>Год</x:String>
-                        </Picker.Items>
+                    <Picker SelectedIndex="{Binding WeightChartPeriod}" Title="{model:Translate ChousePeriodString}" HorizontalOptions="FillAndExpand" x:Name="PeriodPicker">
                         <Picker.Behaviors>
                             <code:EventToCommandBehavior EventName="SelectedIndexChanged" Command="{Binding WeightPeriodChangedCommand}"/>
                         </Picker.Behaviors>
@@ -36,7 +28,7 @@
                 </StackLayout>
             </StackLayout>
 
-            <plot:PlotView Model="{Binding PlotView}" Grid.Row="1"/>
+            <plot:PlotView Model="{Binding PlotView}" Grid.Row="1" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using TrainingDay.Annotations;
+using TrainingDay.Helpers;
 using TrainingDay.Model;
 using TrainingDay.View;
 using Xamarin.Forms;
@@ -70,7 +71,7 @@ namespace TrainingDay.ViewModel
                 App.Database.SaveTrainingExerciseItem(new TrainingExerciseComm(){ExerciseId = trainingItemExercise.Id,TrainingId = newId });
             }
 
-            DependencyService.Get<IMessage>().ShortAlert("Добавлено");
+            DependencyService.Get<IMessage>().ShortAlert(Resource.AddedString);
             App.Current.MainPage = new MainPage();
         }
 

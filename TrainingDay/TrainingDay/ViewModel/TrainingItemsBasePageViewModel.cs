@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using TrainingDay.Code;
+using TrainingDay.Helpers;
 using TrainingDay.Model;
 using TrainingDay.View;
 using Xamarin.Forms;
@@ -75,7 +76,7 @@ namespace TrainingDay.ViewModel
                     ExerciseId = exerciseSelectViewModel.Id
                 });
             }
-            DependencyService.Get<IMessage>().ShortAlert("Сохранено");
+            DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
         }
 
         private void DeleteSelectedTrainings()
@@ -92,7 +93,7 @@ namespace TrainingDay.ViewModel
             }
             if (isDeleted)
             {
-                DependencyService.Get<IMessage>().ShortAlert("Удалено");
+                DependencyService.Get<IMessage>().ShortAlert(Resource.DeletedString);
                 LoadItems();
             }
         }
