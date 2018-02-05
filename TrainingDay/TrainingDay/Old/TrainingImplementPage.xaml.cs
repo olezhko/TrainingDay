@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrainingDay.Code;
+using TrainingDay.Helpers;
 using TrainingDay.Model;
 using TrainingDay.ViewModel;
 using Xamarin.Forms;
@@ -38,6 +39,7 @@ namespace TrainingDay.View
         private bool OnTimerTick()
         {
             CurrentTime = (DateTime.Now - startTrainingDateTime).ToString(@"hh\:mm\:ss");
+            OnPropertyChanged(nameof(CurrentTime));
             return true;
         }
 
@@ -52,7 +54,7 @@ namespace TrainingDay.View
                 Time = startTrainingDateTime,
                 TrainingId = TrainingItem.TrainingId,
             });
-            DependencyService.Get<IMessage>().ShortAlert("Упражнение завершено");
+            DependencyService.Get<IMessage>().ShortAlert(Resource.TrainingFinishedString);
         }
     }
 }

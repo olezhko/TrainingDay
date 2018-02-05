@@ -125,6 +125,15 @@ namespace TrainingDay.Helpers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Время: {0}.
+        /// </summary>
+        internal static string CurrentTimeString {
+            get {
+                return ResourceManager.GetString("CurrentTimeString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Удалено.
         /// </summary>
         internal static string DeletedString {
@@ -247,6 +256,15 @@ namespace TrainingDay.Helpers {
         internal static string TrainingDescriptionString {
             get {
                 return ResourceManager.GetString("TrainingDescriptionString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Упражнение завершено.
+        /// </summary>
+        internal static string TrainingFinishedString {
+            get {
+                return ResourceManager.GetString("TrainingFinishedString", resourceCulture);
             }
         }
         

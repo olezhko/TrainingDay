@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
-             x:Name="Page"
-             x:Class="TrainingDay.View.TrainingImplementPage" BindingContext="{x:Reference Name=Page}">
+             x:Name="Page" x:Class="TrainingDay.View.TrainingImplementPage" BindingContext="{x:Reference Name=Page}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{Binding CurrentTime,StringFormat='Время: {0}'}"/>
+        <ToolbarItem Text="{Binding CurrentTime,StringFormat={model:Translate CurrentTimeString}}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
@@ -21,7 +19,6 @@
                                     <Label Text="{Binding ExerciseCountOfTimes,StringFormat={model:Translate CountOfTimesString}}" FontSize="Small"/>
                                     <Label Text="{Binding ExerciseShortDescription,StringFormat={model:Translate ShortDescriptionString}}" FontSize="Small"/>
                                 </StackLayout>
-                                <controls:CheckBox Checked="{Binding IsImplemented}" CheckedText="Выполнено"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

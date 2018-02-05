@@ -2,10 +2,26 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
+             xmlns:viewModel="clr-namespace:TrainingDay.ViewModel;assembly=TrainingDay"
              x:Class="TrainingDay.View.HistoryTrainingPage" Title="{model:Translate LastTrainingsString}">
+    <ContentPage.BindingContext>
+        <viewModel:TrainingsHistoryViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
+        <ListView ItemsSource="{Binding LastTrainings}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding ImplementeDateTime}"/>
+                            <Label Text="{Binding Title}"/>
+                        </StackLayout>
 
-        </StackLayout>
+                        <Label Text="{Binding Description}"/>
+                    </StackLayout>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>

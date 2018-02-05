@@ -74,11 +74,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AddTrainingViewModel.cs" />
     <Compile Include="ViewModel\ExerciseListPageViewModel.cs" />
-    <Compile Include="ViewModel\MakeTrainingPageViewModel.cs" />
     <Compile Include="ViewModel\TrainingExercisesPageViewModel.cs" />
     <Compile Include="ViewModel\TrainingItemsBasePageViewModel.cs" />
+    <Compile Include="ViewModel\TrainingsHistoryViewModel.cs" />
     <Compile Include="ViewModel\WeightViewAndSetPageViewModel.cs" />
-    <Compile Include="View\AddTrainingPage.xaml.cs">
+    <Compile Include="Old\AddTrainingPage.xaml.cs">
       <DependentUpon>AddTrainingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Old\ExerciseItemPage.xaml.cs">
@@ -90,16 +90,16 @@
     <Compile Include="View\HistoryTrainingPage.xaml.cs">
       <DependentUpon>HistoryTrainingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MakeTrainingPage.xaml.cs">
+    <Compile Include="Old\MakeTrainingPage.xaml.cs">
       <DependentUpon>MakeTrainingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TrainingExercisesPage.xaml.cs">
+    <Compile Include="Old\TrainingExercisesPage.xaml.cs">
       <DependentUpon>TrainingExercisesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TrainingImplementPage.xaml.cs">
+    <Compile Include="Old\TrainingImplementPage.xaml.cs">
       <DependentUpon>TrainingImplementPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TrainingItemsBasePage.xaml.cs">
+    <Compile Include="Old\TrainingItemsBasePage.xaml.cs">
       <DependentUpon>TrainingItemsBasePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WeightViewAndSetPage.xaml.cs">
@@ -186,7 +186,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="View\AddTrainingPage.xaml">
+    <EmbeddedResource Include="Old\AddTrainingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -198,7 +198,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="View\TrainingItemsBasePage.xaml">
+    <EmbeddedResource Include="Old\TrainingItemsBasePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -210,7 +210,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="View\TrainingExercisesPage.xaml">
+    <EmbeddedResource Include="Old\TrainingExercisesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -234,7 +234,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="View\MakeTrainingPage.xaml">
+    <EmbeddedResource Include="Old\MakeTrainingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -249,7 +249,7 @@
     <Content Include="Todo.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="View\TrainingImplementPage.xaml">
+    <EmbeddedResource Include="Old\TrainingImplementPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

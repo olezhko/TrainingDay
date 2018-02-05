@@ -201,4 +201,10 @@
   <data name="YearString" xml:space="preserve">
     <value>Год</value>
   </data>
+  <data name="CurrentTimeString" xml:space="preserve">
+    <value>Время: {0}</value>
+  </data>
+  <data name="TrainingFinishedString" xml:space="preserve">
+    <value>Упражнение завершено</value>
+  </data>
 </root>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +17,12 @@ namespace TrainingDay.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MakeTrainingPage : ContentPage
     {
+        public bool IsVisibleNoTrainingsNeedAddNewLabel { get; set; }
         public ObservableCollection<TrainingViewModel> Items { get; set; }
         public MakeTrainingPage()
         {
             InitializeComponent();
+            BindingContext = this;
         }
 
         protected override void OnAppearing()
@@ -57,10 +60,14 @@ namespace TrainingDay.View
                 }
             }
             DrawItems();
+            IsVisibleNoTrainingsNeedAddNewLabel = !Items.Any();
+            OnPropertyChanged(nameof(IsVisibleNoTrainingsNeedAddNewLabel));
         }
 
         private void DrawItems()
         {
+            LeftStackLayout.Children.Clear();
+            RightStackLayout.Children.Clear();
             int i = 0; // %2 left or right stacklayout
             foreach (var trainingViewModel in Items)
             {
