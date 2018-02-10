@@ -61,5 +61,6 @@ namespace TrainingDay.Model
         public int Id { get; set; }
         public int TrainingId { get; set; }
         public DateTime Time { get; set; }
+        public TimeSpan ElapsedTime { get; set; }
     }
 }

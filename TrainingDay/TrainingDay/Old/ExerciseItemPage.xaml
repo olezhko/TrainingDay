@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TrainingDay.View.ExerciseItemPage" Title="Информация о упражнении">
+             xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
+             x:Class="TrainingDay.View.ExerciseItemPage" Title="{model:Translate ExerciseInformationString}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="accept.png" Clicked="Save_clicked" />
     </ContentPage.ToolbarItems>
@@ -18,18 +19,18 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Text="Название:" Grid.Column="0" Grid.Row="0" VerticalTextAlignment="Center"/>
+            <Label Text="{model:Translate NameString}" Grid.Column="0" Grid.Row="0" VerticalTextAlignment="Center"/>
             <Entry Text="{Binding ExerciseItemName}" FontSize="Medium" HorizontalOptions="FillAndExpand" Grid.Column="1" Grid.Row="0"/>
 
-            <Label Text="Подходов:" Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center"/>
+            <Label Text="{model:Translate CountOfApprochesString}" Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center"/>
             <Stepper Value="{Binding CountOfApproches}" Grid.Column="1" Grid.Row="1" x:Name="CountOfApproachesStepper"/>
             <Label Text="{Binding Value}" Grid.Column="1" Grid.Row="1"  FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand" BindingContext="{x:Reference CountOfApproachesStepper}"/>
 
-            <Label Text="Раз:" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center"/>
+            <Label Text="{model:Translate CountOfTimesString}" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center"/>
             <Stepper Value="{Binding CountOfTimes}" Grid.Column="1" Grid.Row="2" x:Name="CountOfTimesStepper"/>
             <Label Text="{Binding Value}" Grid.Column="1" Grid.Row="2" FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand" BindingContext="{x:Reference CountOfTimesStepper}"/>
 
-            <Label Text="Краткая информация:" Grid.Column="0" Grid.Row="3" VerticalTextAlignment="Center"/>
+            <Label Text="{model:Translate ShortDescriptionString}" Grid.Column="0" Grid.Row="3" VerticalTextAlignment="Center"/>
             <Entry Text="{Binding ShortDescription}" FontSize="Medium" HorizontalOptions="FillAndExpand" Grid.Column="1" Grid.Row="3"/>
         </Grid>
     </ContentPage.Content>

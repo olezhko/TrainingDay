@@ -143,11 +143,38 @@ namespace TrainingDay.Helpers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Потраченное время: {0}.
+        /// </summary>
+        internal static string ElapsedTimeString {
+            get {
+                return ResourceManager.GetString("ElapsedTimeString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Введите текущий вес:.
         /// </summary>
         internal static string EnterCurrentWeightString {
             get {
                 return ResourceManager.GetString("EnterCurrentWeightString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Информация о упражнении.
+        /// </summary>
+        internal static string ExerciseInformationString {
+            get {
+                return ResourceManager.GetString("ExerciseInformationString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Завершить.
+        /// </summary>
+        internal static string FinishString {
+            get {
+                return ResourceManager.GetString("FinishString", resourceCulture);
             }
         }
         

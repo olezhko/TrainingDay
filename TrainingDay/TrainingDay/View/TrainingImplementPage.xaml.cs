@@ -51,6 +51,7 @@ namespace TrainingDay.View
         {
             App.Database.SaveLastTrainingItem(new LastTraining()
             {
+                ElapsedTime = DateTime.Now - startTrainingDateTime,
                 Time = startTrainingDateTime,
                 TrainingId = TrainingItem.TrainingId,
             });

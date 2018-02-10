@@ -8,18 +8,19 @@
         <viewModel:TrainingsHistoryViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding LastTrainings}">
+        <ListView ItemsSource="{Binding LastTrainings}" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Orientation="Vertical">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding ImplementeDateTime}"/>
-                            <Label Text="{Binding Title}"/>
+                    <ViewCell >
+                        <StackLayout Orientation="Vertical">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding ImplementeDateTime}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Title}" FontAttributes="Bold"/>
+                            </StackLayout>
+                            <Label Text="{Binding Description}"/>
+                            <Label Text="{Binding ElapsedTime,StringFormat={model:Translate ElapsedTimeString}}"/>
                         </StackLayout>
-
-                        <Label Text="{Binding Description}"/>
-                    </StackLayout>
-
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

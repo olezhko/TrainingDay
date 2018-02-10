@@ -8,7 +8,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <ListView ItemsSource="{Binding Items}" SeparatorColor="Black" SeparatorVisibility="Default" HasUnevenRows="True" SelectedItem="{Binding SelectedItem}">
+            <ListView ItemsSource="{Binding Items}" SeparatorColor="Black" SeparatorVisibility="Default" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -24,7 +24,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="Завершить" Clicked="FinishButtonClicked"/>
+            <Button Text="{model:Translate FinishString}" Clicked="FinishButtonClicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

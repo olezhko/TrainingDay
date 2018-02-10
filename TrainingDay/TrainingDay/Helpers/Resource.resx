@@ -207,4 +207,13 @@
   <data name="TrainingFinishedString" xml:space="preserve">
     <value>Упражнение завершено</value>
   </data>
+  <data name="ElapsedTimeString" xml:space="preserve">
+    <value>Потраченное время: {0}</value>
+  </data>
+  <data name="ExerciseInformationString" xml:space="preserve">
+    <value>Информация о упражнении</value>
+  </data>
+  <data name="FinishString" xml:space="preserve">
+    <value>Завершить</value>
+  </data>
 </root>

@@ -31,6 +31,7 @@ namespace TrainingDay.ViewModel
             //    {
             //        LastTrainings.Add(new LastTrainingViewModel()
             //        {
+            //            ElapsedTime = lastTraining.ElapsedTime,
             //            ImplementeDateTime = lastTraining.Time,
             //            Description = training.Description,
             //            Title = training.Title
@@ -38,15 +39,17 @@ namespace TrainingDay.ViewModel
             //    }
             //}
 
-            LastTrainings.Add(new LastTrainingViewModel() {ImplementeDateTime = DateTime.Now, Description = "ПРИСЕДАНИЯ СО ШТАНГОЙ НА ПЛЕЧАХ", Title = "Тренеровка ног" });
-            LastTrainings.Add(new LastTrainingViewModel() { ImplementeDateTime = DateTime.Now, Description = "ПРИСЕДАНИЯ СО ШТАНГОЙ НА ПЛЕЧАХ", Title = "Тренеровка ног" });
-            LastTrainings.Add(new LastTrainingViewModel() { ImplementeDateTime = DateTime.Now, Description = "ПРИСЕДАНИЯ СО ШТАНГОЙ НА ПЛЕЧАХ", Title = "Тренеровка ног" });
-            LastTrainings.Add(new LastTrainingViewModel() { ImplementeDateTime = DateTime.Now, Description = "ПРИСЕДАНИЯ СО ШТАНГОЙ НА ПЛЕЧАХ", Title = "Тренеровка ног" });
+            LastTrainings.Add(new LastTrainingViewModel() { ImplementeDateTime = DateTime.Now, Description = "ПРИСЕДАНИЯ СО ШТАНГОЙ НА ПЛЕЧАХ", Title = "Тренеровка ног",ElapsedTime = TimeSpan.FromMinutes(84)});
+            LastTrainings.Add(new LastTrainingViewModel() { ImplementeDateTime = DateTime.Now, Description = "ПРИСЕДАНИЯ СО ШТАНГОЙ НА ПЛЕЧАХ", Title = "Тренеровка ног", ElapsedTime = TimeSpan.FromMinutes(25) });
+            LastTrainings.Add(new LastTrainingViewModel() { ImplementeDateTime = DateTime.Now, Description = "ПРИСЕДАНИЯ СО ШТАНГОЙ НА ПЛЕЧАХ", Title = "Тренеровка ног", ElapsedTime = TimeSpan.FromMinutes(51) });
+            LastTrainings.Add(new LastTrainingViewModel() { ImplementeDateTime = DateTime.Now, Description = "ПРИСЕДАНИЯ СО ШТАНГОЙ НА ПЛЕЧАХ", Title = "Тренеровка ног", ElapsedTime = TimeSpan.FromMinutes(60) });
+            OnPropertyChanged(nameof(LastTrainings));
         }
     }
 
     public class LastTrainingViewModel:Training
     {
         public DateTime ImplementeDateTime { get; set; }
+        public TimeSpan ElapsedTime { get; set; }
     }
 }
