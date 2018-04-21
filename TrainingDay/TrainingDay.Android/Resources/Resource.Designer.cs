@@ -5827,6 +5827,9 @@ namespace TrainingDay.Droid
 			// aapt resource value: 0x7f0a018e
 			public const int MainTheme_Base = 2131362190;
 			
+			// aapt resource value: 0x7f0a0190
+			public const int MyCustomTheme = 2131362192;
+			
 			// aapt resource value: 0x7f0a0031
 			public const int Platform_AppCompat = 2131361841;
 			

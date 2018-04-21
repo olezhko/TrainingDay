@@ -4,6 +4,6 @@
              xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
              x:Class="TrainingDay.App">
     <Application.Resources>
-
-	</Application.Resources>
+        
+    </Application.Resources>
 </Application>

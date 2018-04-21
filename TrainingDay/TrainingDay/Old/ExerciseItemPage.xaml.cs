@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrainingDay.Controls;
+using TrainingDay.Helpers;
 using TrainingDay.Model;
+using TrainingDay.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,13 +23,11 @@ namespace TrainingDay.View
         }
 
         private void Save_clicked(object sender, EventArgs e)
-        {
-            var friend = (Exercise)BindingContext;
-            if (!String.IsNullOrEmpty(friend.ExerciseItemName))
+        {        
+            if (!String.IsNullOrEmpty(ExerciseView.CurrentExercise.ExerciseItemName))
             {
-                DependencyService.Get<IMessage>().ShortAlert("Сохранено");
-                int id = App.Database.SaveExerciseItem(friend);
-                Debug.WriteLine("Сохранено упражнение с id = " + id);
+                DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
+                App.Database.SaveExerciseItem(ExerciseView.CurrentExercise.GetExercise());
             }
             this.Navigation.PopAsync();
         }
@@ -33,7 +35,8 @@ namespace TrainingDay.View
         public void LoadExercise(int id)
         {
             var item = App.Database.GetExerciseItem(id);
-            BindingContext = item;
+            //BindingContext = item;
+            ExerciseView.BindingContext = new ExerciseSelectViewModel(item);
         }
     }
 }

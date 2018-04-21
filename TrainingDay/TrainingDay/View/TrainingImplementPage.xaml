@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
+             xmlns:controls="clr-namespace:TrainingDay.Controls;assembly=TrainingDay"
              x:Name="Page" x:Class="TrainingDay.View.TrainingImplementPage" BindingContext="{x:Reference Name=Page}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{Binding CurrentTime,StringFormat={model:Translate CurrentTimeString}}"/>
@@ -12,14 +13,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Vertical">
-                                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" >
-                                    <Label Text="{Binding ExerciseItemName,StringFormat={model:Translate NameString}}" FontSize="Medium" FontAttributes="Bold"/>
-                                    <Label Text="{Binding ExerciseCountOfApproches,StringFormat={model:Translate CountOfApprochesString}}" FontSize="Small"/>
-                                    <Label Text="{Binding ExerciseCountOfTimes,StringFormat={model:Translate CountOfTimesString}}" FontSize="Small"/>
-                                    <Label Text="{Binding ExerciseShortDescription,StringFormat={model:Translate ShortDescriptionString}}" FontSize="Small"/>
-                                </StackLayout>
-                            </StackLayout>
+                            <Frame OutlineColor="Gray" Padding="5" CornerRadius="2" >
+                                <controls:ExerciseView x:Name="ExerciseView" BindingContext="{Binding .}"/>
+                            </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

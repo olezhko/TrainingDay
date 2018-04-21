@@ -117,7 +117,127 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AcceptString" xml:space="preserve">
+    <value>Принять</value>
+  </data>
+  <data name="AddedString" xml:space="preserve">
+    <value>Добавлено</value>
+  </data>
+  <data name="AddTrainingString" xml:space="preserve">
+    <value>Добавление тренировки</value>
+  </data>
+  <data name="ChouseExerciseString" xml:space="preserve">
+    <value>Выбрать упражнения</value>
+  </data>
+  <data name="ChousePeriodString" xml:space="preserve">
+    <value>Выберите период:</value>
+  </data>
+  <data name="CountOfApprochesString" xml:space="preserve">
+    <value>Кол-во подходов: {0}</value>
+  </data>
+  <data name="CountOfTimesString" xml:space="preserve">
+    <value>Кол-во раз: {0}</value>
+  </data>
+  <data name="CurrentTimeString" xml:space="preserve">
+    <value>Время: {0}</value>
+  </data>
+  <data name="DeletedString" xml:space="preserve">
+    <value>Удалено</value>
+  </data>
+  <data name="ElapsedTimeString" xml:space="preserve">
+    <value>Потраченное время: {0}</value>
+  </data>
+  <data name="EmptyFields" xml:space="preserve">
+    <value>Пустые поля. Введите данные во все поля</value>
+  </data>
+  <data name="EnterCurrentWeightString" xml:space="preserve">
+    <value>Введите текущий вес:</value>
+  </data>
+  <data name="ExerciseInformationString" xml:space="preserve">
+    <value>Информация о упражнении</value>
+  </data>
+  <data name="ExercisesString" xml:space="preserve">
+    <value>Упражнения</value>
+  </data>
+  <data name="FinishString" xml:space="preserve">
+    <value>Завершить</value>
+  </data>
+  <data name="HalfYearString" xml:space="preserve">
+    <value>Полгода</value>
+  </data>
+  <data name="KilogramsString" xml:space="preserve">
+    <value>  кг  </value>
+  </data>
+  <data name="LastTrainingsString" xml:space="preserve">
+    <value>Пройденные тренировки</value>
+  </data>
   <data name="MakeTrainingString" xml:space="preserve">
     <value>Выполнить тренировку</value>
+  </data>
+  <data name="MusclesString" xml:space="preserve">
+    <value>Мышцы</value>
+  </data>
+  <data name="NameString" xml:space="preserve">
+    <value>Название: {0}</value>
+  </data>
+  <data name="NameString1" xml:space="preserve">
+    <value>Название:</value>
+  </data>
+  <data name="NoTrainingsNeedAddNewString" xml:space="preserve">
+    <value>Нет тренировок. Добавьте тренировку.</value>
+  </data>
+  <data name="NotSavedString" xml:space="preserve">
+    <value>Не сохранено</value>
+  </data>
+  <data name="OneMounthString" xml:space="preserve">
+    <value>Месяц</value>
+  </data>
+  <data name="SavedString" xml:space="preserve">
+    <value>Сохранено</value>
+  </data>
+  <data name="ShortDescriptionString" xml:space="preserve">
+    <value>Краткое описание: {0}</value>
+  </data>
+  <data name="ShortDescriptionString1" xml:space="preserve">
+    <value>Краткое описание:</value>
+  </data>
+  <data name="ThreeMounthString" xml:space="preserve">
+    <value>3 месяца</value>
+  </data>
+  <data name="TrainingDescriptionString" xml:space="preserve">
+    <value>Описание тренировки:</value>
+  </data>
+  <data name="TrainingFinishedString" xml:space="preserve">
+    <value>Упражнение завершено</value>
+  </data>
+  <data name="TrainingNameString" xml:space="preserve">
+    <value>Название тренировки:</value>
+  </data>
+  <data name="TrainingsBaseString" xml:space="preserve">
+    <value>Тренировки</value>
+  </data>
+  <data name="TrainingString" xml:space="preserve">
+    <value>Тренировка</value>
+  </data>
+  <data name="TwoMounthString" xml:space="preserve">
+    <value>2 месяца</value>
+  </data>
+  <data name="TwoWeeksString" xml:space="preserve">
+    <value>2 недели</value>
+  </data>
+  <data name="WeekString" xml:space="preserve">
+    <value>Неделя</value>
+  </data>
+  <data name="WeightLabel" xml:space="preserve">
+    <value>Вес: {0}</value>
+  </data>
+  <data name="WeightString" xml:space="preserve">
+    <value>Контроль веса</value>
+  </data>
+  <data name="YearString" xml:space="preserve">
+    <value>Год</value>
+  </data>
+  <data name="FilterString" xml:space="preserve">
+    <value>Фильтр по мускулам</value>
   </data>
 </root>

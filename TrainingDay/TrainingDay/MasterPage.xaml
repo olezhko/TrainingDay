@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="TrainingDay.MasterPage"
-             Icon="hamburger.png" Title="Training Day">
+             Icon="hamburger.png" Title="Training Day" BackgroundColor="LightGray">
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal">

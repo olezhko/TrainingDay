@@ -67,8 +67,6 @@ namespace TrainingDay.View
         private void DrawItems()
         {
             LeftStackLayout.Children.Clear();
-            RightStackLayout.Children.Clear();
-            int i = 0; // %2 left or right stacklayout
             foreach (var trainingViewModel in Items)
             {
                 TrainingView item = new TrainingView();
@@ -77,21 +75,14 @@ namespace TrainingDay.View
                 item.TrainingId = trainingViewModel.Id;
                 item.LoadExercise(trainingViewModel.Exercises);
                 item.TrainingTapped += Item_TrainingTapped;
-                if (i%2==0)
-                {
-                    LeftStackLayout.Children.Add(item);
-                }
-                else
-                {
-                    RightStackLayout.Children.Add(item);
-                }
+                LeftStackLayout.Children.Add(item);
             }
         }
 
         private void Item_TrainingTapped(object sender, EventArgs e)
         {
             var training = sender as TrainingView;
-            Navigation.PushAsync(new TrainingImplementPage() {TrainingItem = training});
+            Navigation.PushAsync(new TrainingImplementPage() {TrainingItem = training, Title = training.Title});
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TrainingDay.Code;
+using TrainingDay.Controls;
 using TrainingDay.Helpers;
 using TrainingDay.Model;
 using TrainingDay.View;
@@ -44,9 +45,9 @@ namespace TrainingDay.ViewModel
                 {
                     Id = exercise.Id,
                     ExerciseItemName = exercise.ExerciseItemName,
-                    ExerciseCountOfApproches = exercise.CountOfApproches,
-                    ExerciseCountOfTimes = exercise.CountOfTimes,
-                    ExerciseShortDescription = exercise.ShortDescription,
+                    CountOfApproches = exercise.CountOfApproches,
+                    CountOfTimes = exercise.CountOfTimes,
+                    ShortDescription = exercise.ShortDescription,
                 });
             }
             OnPropertyChanged(nameof(Items));

@@ -21,12 +21,5 @@ namespace TrainingDay.View
             viewModel.Navigation = this.Navigation;
             BindingContext = viewModel;
         }
-
-        public async void OnItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            Exercise selectedPhone = e.Item as Exercise;
-            if (selectedPhone != null)
-                await DisplayAlert(selectedPhone.ExerciseItemName, $"Кол-во подходов: {selectedPhone.CountOfApproches}. Кол-во раз за подход: {selectedPhone.CountOfTimes} \nКраткое описание: {selectedPhone.ShortDescription}", "OK");
-        }
     }
 }

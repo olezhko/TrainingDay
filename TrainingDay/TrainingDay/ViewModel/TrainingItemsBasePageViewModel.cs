@@ -19,10 +19,19 @@ namespace TrainingDay.ViewModel
             DeleteSelectedTrainingsCommand = new Command(DeleteSelectedTrainings);
             ShowTrainingExercieseCommand = new Command(ShowTrainingExercieses);
             TrainingItemSelectedCommand = new Command(EditSelectedTraining);
+            AddNewTrainingCommand = new Command(AddNewTraining);
         }
 
+        private void AddNewTraining()
+        {
+            Navigation.PushAsync(new AddTrainingPage());
+        }
+
+
+        public bool IsVisibleNoTrainingsNeedAddNewLabel { get; set; } = true;
         public void LoadItems()
         {
+
             Items.Clear();
             var trainingExerciseItems = App.Database.GetTrainingExerciseItems();
             var exerciseItems = App.Database.GetExerciseItems();
@@ -34,7 +43,7 @@ namespace TrainingDay.ViewModel
                 {
                     if (!Items.Any(a => a.Id == training.Id))
                     {
-                        Items.Add(new TrainingViewModel() { Id = training.Id,Description = training.Description,Title = training.Title});
+                        Items.Add(new TrainingViewModel(training));
                     }
 
                     var allExercises = trainingExerciseItems.Where(ex => ex.TrainingId == training.Id).ToList();
@@ -45,6 +54,9 @@ namespace TrainingDay.ViewModel
                     }
                 }
             }
+
+            IsVisibleNoTrainingsNeedAddNewLabel = !Items.Any();
+            OnPropertyChanged(nameof(IsVisibleNoTrainingsNeedAddNewLabel));
             OnPropertyChanged(nameof(Items));
         }
 
@@ -111,9 +123,6 @@ namespace TrainingDay.ViewModel
             Navigation.PushAsync(new AddTrainingPage() {BindingContext = viewModel});
         }
 
-
-
-
         private Command _itemSelectedCommand;
         public ICommand ItemSelectedCommand
         {
@@ -132,7 +141,7 @@ namespace TrainingDay.ViewModel
         public ICommand DeleteSelectedTrainingsCommand { get; set; }
         public ICommand ShowTrainingExercieseCommand { get; set; }
         public ICommand TrainingItemSelectedCommand { get; set; }
-
+        public ICommand AddNewTrainingCommand { get; set; }
         public TrainingViewModel SelectedTraining { get; set; }
         public ObservableCollection<TrainingViewModel> Items { get; set; }
         private TrainingExercisesPageViewModel vm;
@@ -149,6 +158,14 @@ namespace TrainingDay.ViewModel
 
         public TrainingViewModel()
         {
+            Exercises = new ObservableCollection<Exercise>();
+        }
+
+        public TrainingViewModel(Training tr)
+        {
+            Title = tr.Title;
+            Description = tr.Description;
+            Id = tr.Id;
             Exercises = new ObservableCollection<Exercise>();
         }
     }

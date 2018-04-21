@@ -5,6 +5,7 @@
              xmlns:code="clr-namespace:TrainingDay.Code;assembly=TrainingDay"
              xmlns:viewModel="clr-namespace:TrainingDay.ViewModel;assembly=TrainingDay"
              xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
+             xmlns:controls1="clr-namespace:TrainingDay.Controls;assembly=TrainingDay"
              x:Class="TrainingDay.View.TrainingExercisesPage" Title="{model:Translate TrainingString}">
     <ContentPage.BindingContext>
         <viewModel:TrainingExercisesPageViewModel/>
@@ -19,10 +20,9 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
-                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" >
-                                <Label Text="{Binding ExerciseItemName}" FontSize="Medium" VerticalTextAlignment="Center"/>
-                                <Label Text="{Binding ExerciseShortDescription}" FontSize="Medium" VerticalTextAlignment="Center"/>
-                            </StackLayout>
+                            <Frame OutlineColor="Gray" Padding="5" CornerRadius="2" >
+                                <controls1:ExerciseView x:Name="ExerciseView" BindingContext="{Binding .}"/>
+                            </Frame>
                             <controls:CheckBox Checked="{Binding IsSelected}" />
                         </StackLayout>
                     </ViewCell>

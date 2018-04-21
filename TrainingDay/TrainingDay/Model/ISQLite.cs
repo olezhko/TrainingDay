@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SQLite;
 using TrainingDay.Helpers;
+using TrainingDay.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -24,7 +25,8 @@ namespace TrainingDay.Model
         {
             string databasePath = DependencyService.Get<ISQLite>().GetDatabasePath(filename);
             database = new SQLiteConnection(databasePath);
-            if(Settings.IsFirstTime)
+            //DropTable();
+            if (Settings.IsFirstTime)
                 InitBasic();
         }
 
@@ -32,11 +34,9 @@ namespace TrainingDay.Model
         {
             try
             {
-                database.DropTable<Exercise>();
-                database.DropTable<TrainingExerciseComm>();
-                database.DropTable<Training>();
-                database.DropTable<LastTraining>();
-                database.DropTable<WeightNote>();
+                Settings.IsFirstTime = true;
+                database.DeleteAll<Exercise>();
+                database.DeleteAll<Training>();
             }
             catch
             {
@@ -76,27 +76,25 @@ namespace TrainingDay.Model
         private ObservableCollection<Exercise> InitDefaultExecricesOfHands()
         {
             var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
-            if (ci.Name == "ru-Ru")
-            {
-                
-            }
             var Exercises = new ObservableCollection<Exercise>();
             // ноги
             Exercises.Add(new Exercise()
             {
+                Muscles = MusclesConverter.SetMuscles(MusclesEnum.Shoulders, MusclesEnum.Trapezium, MusclesEnum.Deltoid),
                 Weight = 5,
                 CountOfApproches = 3,
                 CountOfTimes = 15,
-                ExerciseItemName = "Поочерёдные подъёмы рук с гантелями вперёд",
+                ExerciseItemName = ci.Name == "ru-Ru"?"Поочерёдные подъёмы рук с гантелями вперёд": "Alternete hand lifts with dumbbells",
                 ShortDescription = "сидя или стоя, гантели в опущенных руках, перед бёдрами. Поднимите одну гантель вперед до уровня глаз. Опустите гантель в исходное положение, одновременно поднимая другую гантель. Гантели не должны расходиться "
             });
 
             Exercises.Add(new Exercise()
             {
+                Muscles = MusclesConverter.SetMuscles(MusclesEnum.Shoulders, MusclesEnum.Trapezium, MusclesEnum.Deltoid),
                 Weight = 5,
                 CountOfApproches = 3,
                 CountOfTimes = 15,
-                ExerciseItemName = "Подъёмы рук с гантелями через стороны",
+                ExerciseItemName = ci.Name == "ru-Ru" ? "Подъёмы рук с гантелями через стороны": "Rises of hands with dumbbells through the sides",
                 ShortDescription = "возьмите  гантели, ноги на ширину плеч, немного наклонитесь вперед, согните руки в локтях и поднимите гантели по широкой дуге вверх и немного вперед на уровень чуть выше плеч. Ладони при этом направлены вниз. В верхней точке мизинцы должны быть выше больших пальцев. Задержитесь в этом положении и медленно опустите руки в исходное положение. Для большего эффекта старайтесь не раскачивать тело, лучше выполнять сидя."
             });
 
@@ -105,7 +103,7 @@ namespace TrainingDay.Model
                 Weight = 5,
                 CountOfApproches = 3,
                 CountOfTimes = 15,
-                ExerciseItemName = "Сгибания рук со штангой",
+                ExerciseItemName = ci.Name == "ru-Ru" ? "Сгибания рук со штангой": "Bending of arms with a barbell",
                 ShortDescription = "возьмите гриф хватом снизу так, чтобы руки находились на расстоянии немного превышающем ширину Ваших плеч. В исходном положении гриф должен находиться в опущенных руках чуть ниже пояса. Для правильного исполнения этого упражнения необходимо прижимать локти к туловищу и сохранять их неподвижными в течение всего подхода. Из исходного положения поднимите штангу к плечам, в этой точке необходимо задержатся на секунду."
             });
 
@@ -114,7 +112,7 @@ namespace TrainingDay.Model
                 Weight = 5,
                 CountOfApproches = 3,
                 CountOfTimes = 15,
-                ExerciseItemName = "Сгибания рук со штангой на \"скамье проповедника\"",
+                ExerciseItemName = ci.Name == "ru-Ru" ? "Сгибания рук со штангой на \"скамье проповедника\"": "Bending of hands with a barbell on a \"preacher's bench\"",
                 ShortDescription = "займите исходное положение, упритесь грудью в так называемую \"скамью проповедника\" и возьмите штангу хватом снизу. В таком положении бицепсы должны быть параллельными друг другу. Сохраняя туловище неподвижным, поднимите штангу вверх, тянув её к плечам, затем, сохраняя контроль над весом, опустите штангу до полного выпрямления рук."
             });
 
@@ -123,7 +121,7 @@ namespace TrainingDay.Model
                 Weight = 5,
                 CountOfApproches = 3,
                 CountOfTimes = 15,
-                ExerciseItemName = "Сгибания рук со штангой обратным хватом на \"скамье проповедника\"",
+                ExerciseItemName = ci.Name == "ru-Ru" ? "Сгибания рук со штангой обратным хватом на \"скамье проповедника\"": "Bending of hands with a bar with a back grip on a \"preacher's bench\"",
                 ShortDescription = "займите исходное положение расположив руки на \"скамье проповедника\". Возьмитесь за гриф штанги хватом сверху на ширине плеч. Сгибая руки в локтях, медленно поднимайте штангу вверх и также медленно, сохраняя контроль над весом, верните ее в исходное положение. При выполнении упражнения необходимо удерживать корпус неподвижно"
             });
 
@@ -132,7 +130,7 @@ namespace TrainingDay.Model
                 Weight = 5,
                 CountOfApproches = 3,
                 CountOfTimes = 15,
-                ExerciseItemName = "Сгибания рук с гантелями стоя, сидя",
+                ExerciseItemName = ci.Name == "ru-Ru" ? "Сгибания рук с гантелями стоя, сидя" : "Bending of hands with dumbbells while standing or sitting",
                 ShortDescription = "Стоя: исходное положение, стоя прямо, гантели в опущенных руках. Сохраняя корпус прямым, одновременно поднимайте обе гантели к плечам. При этом запястья слегка поворачивайте наружу, чтобы максимально сократить бицепс. Медленно, сопровождая вес, опустите гантели вниз в исходное положение. "
             });
 
@@ -309,6 +307,7 @@ namespace TrainingDay.Model
             // ноги
             Exercises.Add(new Exercise()
             {
+                Muscles = MusclesConverter.SetMuscles(MusclesEnum.Caviar, MusclesEnum.Thighs),
                 Weight = 35,
                 CountOfApproches = 3,
                 CountOfTimes = 15,
@@ -370,7 +369,7 @@ namespace TrainingDay.Model
                 CountOfApproches = 3,
                 CountOfTimes = 15,
                 ExerciseItemName = "Жим штанги лежа",
-                ShortDescription = ""
+                ShortDescription = "Лежа на горизонтальной скамье, штанга берется двумя руками с креплений и опускается к середине груди до легкого касания. Затем без выдоха штанга выжимается вверх до момента фиксирования локтей. Ноги стоят на полу, лопатки сведены, грудь выставлена вперед, ягодицы прижаты к скамье."
             });
 
 
@@ -390,24 +389,6 @@ namespace TrainingDay.Model
                 CountOfTimes = 15,
                 ExerciseItemName = "Приседания со штангой на груди",
                 ShortDescription = "Исходное положение - стоя перед штангой, лежащей на стойках, захватите гриф, как показано на фотографии, и сделайте шаг вперёд. Сохраняя туловище (чтобы не травмировать спину) и голову прямыми (выберите перед собой точку выше своего роста и смотрите на неё), медленно присядьте. Поднимитесь в исходное положение. Под пятки желательно подкладывайте блин. Приседая, делаем вдох, поднимаясь - выдох."
-            });
-
-            Exercises.Add(new Exercise()
-            {
-                Weight = 5,
-                CountOfApproches = 3,
-                CountOfTimes = 15,
-                ExerciseItemName = "Приседания со штангой на груди",
-                ShortDescription = ""
-            });
-
-            Exercises.Add(new Exercise()
-            {
-                Weight = 5,
-                CountOfApproches = 3,
-                CountOfTimes = 15,
-                ExerciseItemName = "Приседания со штангой на груди",
-                ShortDescription = ""
             });
 
             return Exercises;
@@ -518,7 +499,6 @@ namespace TrainingDay.Model
 
             return Exercises;
         }
-
 
         #region Weight Save And Load
 

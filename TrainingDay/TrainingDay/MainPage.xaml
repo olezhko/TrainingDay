@@ -10,7 +10,7 @@
     <MasterDetailPage.Detail>
         <NavigationPage>
             <x:Arguments>
-                <view:MakeTrainingPage />
+                <view:TrainingItemsBasePage />
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>

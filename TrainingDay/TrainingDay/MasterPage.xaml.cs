@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrainingDay.Helpers;
+using TrainingDay.Model;
 using TrainingDay.View;
 using TrainingDay.ViewModel;
 using Xamarin.Forms;
@@ -22,34 +24,34 @@ namespace TrainingDay
             masterPageItems.Add(new MasterPageItem
             {
                 Args = true, // 
-                Title = "Выполнить тренировку",
+                Title = Resource.MakeTrainingString,
                 IconSource = "make_gym.png",
                 TargetType = typeof(MakeTrainingPage)
             });
             masterPageItems.Add(new MasterPageItem
             {
-                Title = "История тренировок",
+                Title = Resource.HistoryTrainings,
                 IconSource = "train_hist.png",
                 TargetType = typeof(HistoryTrainingPage)
             });
-            masterPageItems.Add(new MasterPageItem
-            {
-                Title = "Добавить тренировку",
-                IconSource = "add_train.png",
-                TargetType = typeof(AddTrainingPage)
-            });
+            //masterPageItems.Add(new MasterPageItem
+            //{
+            //    Title = "Добавить тренировку",
+            //    IconSource = "add_train.png",
+            //    TargetType = typeof(AddTrainingPage)
+            //});
 
             masterPageItems.Add(new MasterPageItem
             {
                 Args = false,
-                Title = "Доступные тренировки",
+                Title = Resource.TrainingsBaseString,
                 IconSource = "main.png",
                 TargetType = typeof(TrainingItemsBasePage)
             });
 
             masterPageItems.Add(new MasterPageItem
             {
-                Title = "Контроль веса",
+                Title = Resource.WeightString,
                 IconSource = "weight.png",
                 TargetType = typeof(WeightViewAndSetPage)
             });

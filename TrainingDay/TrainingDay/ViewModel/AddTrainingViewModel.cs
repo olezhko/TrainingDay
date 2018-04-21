@@ -59,6 +59,11 @@ namespace TrainingDay.ViewModel
 
         private void AddTrainingItemMethod()
         {
+            if (String.IsNullOrEmpty(TrainingItem.Description) || string.IsNullOrEmpty(TrainingItem.Title) || ExerciseItems.Count == 0)
+            {
+                DependencyService.Get<IMessage>().ShortAlert(Resource.EmptyFields);
+                return;
+            }
             App.Database.SaveTrainingItem(new Training()
             {
                 Description = TrainingItem.Description,

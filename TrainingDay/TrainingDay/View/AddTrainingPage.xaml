@@ -14,14 +14,16 @@
         <StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Label Text="{model:Translate TrainingNameString}" FontSize="Medium" VerticalTextAlignment="Center"/>
-                <Entry Text="{Binding Title}" FontSize="Medium" HorizontalOptions="FillAndExpand"/>
+                <Entry Keyboard="Text" Text="{Binding Title}" FontSize="Medium" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Label Text="{model:Translate TrainingDescriptionString}" FontSize="Medium" VerticalTextAlignment="Center"/>
-                <Entry Text="{Binding Description}" FontSize="Medium" HorizontalOptions="FillAndExpand"/>
+                <Entry Keyboard="Text" Text="{Binding Description}" FontSize="Medium" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
+                      
+            
             <Button Text="{model:Translate ChouseExerciseString}" Command="{Binding SelectExercisesCommand}" />
-            <ListView ItemsSource="{Binding ExerciseItems}" ItemTapped="OnItemTapped" HasUnevenRows="True">
+            <ListView ItemsSource="{Binding ExerciseItems}" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -31,6 +33,7 @@
                                     <Label Text="{Binding CountOfApproches,StringFormat={model:Translate CountOfApprochesString}}" FontSize="Small"/>
                                     <Label Text="{Binding CountOfTimes,StringFormat={model:Translate CountOfTimesString}}" FontSize="Small"/>
                                     <Label Text="{Binding ShortDescription,StringFormat={model:Translate ShortDescriptionString}}" FontSize="Small"/>
+                                    <Label Text="{Binding Weight,StringFormat={model:Translate WeightLabel}}" FontSize="Small"/>
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>

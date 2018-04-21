@@ -3,38 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xlabs="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              xmlns:viewModel="clr-namespace:TrainingDay.ViewModel;assembly=TrainingDay"
-             x:Class="TrainingDay.View.TrainingItemsBasePage" Title="Тренировки">
+             xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
+             xmlns:code="clr-namespace:TrainingDay.Code;assembly=TrainingDay"
+             x:Class="TrainingDay.View.TrainingItemsBasePage" Title="{model:Translate TrainingsBaseString}">
     <ContentPage.BindingContext>
         <viewModel:TrainingItemsBasePageViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="add.png" Command="{Binding AddNewTrainingCommand}" />
         <ToolbarItem Icon="remove.png" Command="{Binding DeleteSelectedTrainingsCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" FontAttributes="Bold"/>
-                <Label Text="Название" Grid.Column="1" FontAttributes="Bold"/>
-                <Label Text="Описание" Grid.Column="2" FontAttributes="Bold"/>
-            </Grid>
+            <Label Grid.Column="0" Text="{model:Translate NoTrainingsNeedAddNewString}" IsVisible="{Binding IsVisibleNoTrainingsNeedAddNewLabel}" FontSize="20" HorizontalTextAlignment="Center"/>
             <ListView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedTraining}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ItemSelected="HandleItemSelected" x:Name="ItemsListView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <xlabs:CheckBox Checked="{Binding IsSelected}" HorizontalOptions="FillAndExpand"  />
-                                <Label Text="{Binding Title}" Grid.Column="1" />
-                                <Label Text="{Binding Description}" Grid.Column="2" />
+                                <xlabs:CheckBox Checked="{Binding IsSelected}" HorizontalOptions="FillAndExpand" />
+                                <Label Text="{Binding Title}" Grid.Column="1" VerticalTextAlignment="Center"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

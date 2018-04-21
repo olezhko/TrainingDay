@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,7 @@ namespace TrainingDay.Model
         public int CountOfApproches { get; set; }
         public int CountOfTimes { get; set; }
         public string ShortDescription { get; set; }
+        public int Muscles { get; set; }
     }
 
     [Table("Trainings")]
@@ -63,4 +65,5 @@ namespace TrainingDay.Model
         public DateTime Time { get; set; }
         public TimeSpan ElapsedTime { get; set; }
     }
+
 }

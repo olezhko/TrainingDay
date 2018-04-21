@@ -117,7 +117,127 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AcceptString" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="AddedString" xml:space="preserve">
+    <value>Added</value>
+  </data>
+  <data name="AddTrainingString" xml:space="preserve">
+    <value>Add training</value>
+  </data>
+  <data name="ChouseExerciseString" xml:space="preserve">
+    <value>Chouse exercise</value>
+  </data>
+  <data name="ChousePeriodString" xml:space="preserve">
+    <value>Chouse period:</value>
+  </data>
+  <data name="CountOfApprochesString" xml:space="preserve">
+    <value>Approaches: {0}</value>
+  </data>
+  <data name="CountOfTimesString" xml:space="preserve">
+    <value>Times: {0}</value>
+  </data>
+  <data name="CurrentTimeString" xml:space="preserve">
+    <value>Time: {0}</value>
+  </data>
+  <data name="DeletedString" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="ElapsedTimeString" xml:space="preserve">
+    <value>Elapsed Time: {0}</value>
+  </data>
+  <data name="EmptyFields" xml:space="preserve">
+    <value>Empty fields. All fields should be entered</value>
+  </data>
+  <data name="EnterCurrentWeightString" xml:space="preserve">
+    <value>Enter weight:</value>
+  </data>
+  <data name="ExerciseInformationString" xml:space="preserve">
+    <value>Exercise information</value>
+  </data>
+  <data name="ExercisesString" xml:space="preserve">
+    <value>Exercises</value>
+  </data>
+  <data name="FinishString" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="HalfYearString" xml:space="preserve">
+    <value>Weather</value>
+  </data>
+  <data name="KilogramsString" xml:space="preserve">
+    <value> kg </value>
+  </data>
+  <data name="LastTrainingsString" xml:space="preserve">
+    <value>Finished trainings</value>
+  </data>
   <data name="MakeTrainingString" xml:space="preserve">
     <value>Make Training</value>
+  </data>
+  <data name="MusclesString" xml:space="preserve">
+    <value>Muscles</value>
+  </data>
+  <data name="NameString" xml:space="preserve">
+    <value>Name: {0}</value>
+  </data>
+  <data name="NameString1" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="NoTrainingsNeedAddNewString" xml:space="preserve">
+    <value>No trainings. You should add training.</value>
+  </data>
+  <data name="NotSavedString" xml:space="preserve">
+    <value>Not saved</value>
+  </data>
+  <data name="OneMounthString" xml:space="preserve">
+    <value>Mounth</value>
+  </data>
+  <data name="SavedString" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="ShortDescriptionString" xml:space="preserve">
+    <value>Short Description: {0}</value>
+  </data>
+  <data name="ShortDescriptionString1" xml:space="preserve">
+    <value>Short Description:</value>
+  </data>
+  <data name="ThreeMounthString" xml:space="preserve">
+    <value>3 mounth</value>
+  </data>
+  <data name="TrainingDescriptionString" xml:space="preserve">
+    <value>Training`s description:</value>
+  </data>
+  <data name="TrainingFinishedString" xml:space="preserve">
+    <value>Training finished</value>
+  </data>
+  <data name="TrainingNameString" xml:space="preserve">
+    <value>Training`s name:</value>
+  </data>
+  <data name="TrainingsBaseString" xml:space="preserve">
+    <value>Trainings</value>
+  </data>
+  <data name="TrainingString" xml:space="preserve">
+    <value>Training</value>
+  </data>
+  <data name="TwoMounthString" xml:space="preserve">
+    <value>2 mounth</value>
+  </data>
+  <data name="TwoWeeksString" xml:space="preserve">
+    <value>2 weeks</value>
+  </data>
+  <data name="WeekString" xml:space="preserve">
+    <value>Week</value>
+  </data>
+  <data name="WeightLabel" xml:space="preserve">
+    <value>Weight: {0}</value>
+  </data>
+  <data name="WeightString" xml:space="preserve">
+    <value>Weight control</value>
+  </data>
+  <data name="YearString" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="FilterString" xml:space="preserve">
+    <value>Muscle`s Filter</value>
   </data>
 </root>

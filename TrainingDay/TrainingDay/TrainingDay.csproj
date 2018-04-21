@@ -40,8 +40,18 @@
     </Compile>
     <Compile Include="Code\BaseViewModel.cs" />
     <Compile Include="Code\EventToCommandBehavior.cs" />
-    <Compile Include="Code\TrainingView.xaml.cs">
+    <Compile Include="Controls\TrainingView.xaml.cs">
       <DependentUpon>TrainingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EnumPicker.cs" />
+    <Compile Include="Controls\ExerciseView.xaml.cs">
+      <DependentUpon>ExerciseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WrapPanel.cs" />
+    <Compile Include="Helpers\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Resource.ru.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -53,11 +63,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.en.resx</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Resource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.resx</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -65,6 +70,7 @@
     <Compile Include="MasterPage.xaml.cs">
       <DependentUpon>MasterPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\DescriptionAttribute.cs" />
     <Compile Include="Model\ILocalizable.cs" />
     <Compile Include="Model\IMessage.cs" />
     <Compile Include="Model\ISQLite.cs" />
@@ -90,7 +96,7 @@
     <Compile Include="View\HistoryTrainingPage.xaml.cs">
       <DependentUpon>HistoryTrainingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Old\MakeTrainingPage.xaml.cs">
+    <Compile Include="View\MakeTrainingPage.xaml.cs">
       <DependentUpon>MakeTrainingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Old\TrainingExercisesPage.xaml.cs">
@@ -99,7 +105,7 @@
     <Compile Include="View\TrainingImplementPage.xaml.cs">
       <DependentUpon>TrainingImplementPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Old\TrainingItemsBasePage.xaml.cs">
+    <Compile Include="View\TrainingItemsBasePage.xaml.cs">
       <DependentUpon>TrainingItemsBasePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WeightViewAndSetPage.xaml.cs">
@@ -198,7 +204,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Old\TrainingItemsBasePage.xaml">
+    <EmbeddedResource Include="View\TrainingItemsBasePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -234,13 +240,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Old\MakeTrainingPage.xaml">
+    <EmbeddedResource Include="View\MakeTrainingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Code\TrainingView.xaml">
+    <EmbeddedResource Include="Controls\TrainingView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -250,6 +256,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\TrainingImplementPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\ExerciseView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

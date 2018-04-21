@@ -139,7 +139,7 @@
     <value>Нет тренеровок. Добавьте тренеровку.</value>
   </data>
   <data name="NotSavedString" xml:space="preserve">
-    <value>Not Saved</value>
+    <value>Не сохранено</value>
   </data>
   <data name="SavedString" xml:space="preserve">
     <value>Сохранено</value>
@@ -215,5 +215,32 @@
   </data>
   <data name="FinishString" xml:space="preserve">
     <value>Завершить</value>
+  </data>
+  <data name="NameString1" xml:space="preserve">
+    <value>Название:</value>
+  </data>
+  <data name="ShortDescriptionString1" xml:space="preserve">
+    <value>Краткое описание:</value>
+  </data>
+  <data name="ExercisesString" xml:space="preserve">
+    <value>Упражнения</value>
+  </data>
+  <data name="EmptyFields" xml:space="preserve">
+    <value>Пустые поля. Введите данные во все поля</value>
+  </data>
+  <data name="MusclesString" xml:space="preserve">
+    <value>Мышцы</value>
+  </data>
+  <data name="WeightLabel" xml:space="preserve">
+    <value>Вес: {0}</value>
+  </data>
+  <data name="HistoryTrainings" xml:space="preserve">
+    <value>История тренировок</value>
+  </data>
+  <data name="TrainingsBaseString" xml:space="preserve">
+    <value>Тренировки</value>
+  </data>
+  <data name="FilterString" xml:space="preserve">
+    <value>Фильтр по мускулам</value>
   </data>
 </root>

@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using OxyPlot.Xamarin.Android;
+using TrainingDay.Droid.Helpers;
 
 namespace TrainingDay.Droid
 {
