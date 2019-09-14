@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TrainingDay.Controls;assembly=TrainingDay"
+             xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             x:Class="TrainingDay.Views.MakeTrainingAlarmPage" Title="{services:Translate Notification}">
+    <ContentPage.BindingContext>
+        <viewModels:MakeTrainingAlarmPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Icon="accept.png" Command="{Binding SaveAlarmCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="0">
+                <!--<Label Text="{services:Translate TrainingString}" Style="{StaticResource LargeCenteredHeading}"/>-->
+                <controls:CustomPicker x:Name="TrainingsPicker" SelectedItem="{Binding SelectedTrainingItem, Mode=TwoWay}" Title="{services:Translate SelectTraining}" ItemsSource="{Binding TrainingItems}" ItemDisplayBinding="{Binding Title}" FontSize="Large" Margin="10,0"/>
+                
+                <Entry Text="{Binding Alarm.Name}" Placeholder="{services:Translate NameString1}" Margin="40, 0"/>
+                <TimePicker Time="{Binding Alarm.Time}" HorizontalOptions="Center"/>
+                
+                <!--<StackLayout Orientation="Horizontal">
+                    <Button ImageSource="music.png" Command="{Binding GoToTonesCommand}" HorizontalOptions="Start"/>
+                    <Label Text="{Binding Alarm.ToneFilename}" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+                </StackLayout>-->
+
+                <Label Text="{services:Translate OnTheseDays}" Style="{StaticResource LargeCenteredHeading}"/>
+                <ScrollView Orientation="Horizontal">
+                    <controls:DaysOfWeekSelection Days="{Binding Alarm.Days, Mode=TwoWay}" HorizontalOptions="Center" x:Name="DaysOfWeekSelection"/>
+                </ScrollView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="ListViewSelected">#96BCE3</color>
+  <color name="windowBackground">#2f2230</color>
+  <color name="actionModeBackground">#1A1E29</color>
+  <color name="launcher_background">#FFFFFF</color>
+  <color name="splashScreenBackground">#000000</color>
+  <color name="ListViewHighlighted">#263269</color>
+
+
+
+  <color name="ListViewSelectedInverse">#69431c</color>
+  <color name="windowBackgroundInverse">#d0ddcf</color>
+  <color name="actionModeBackgroundInverse">#e5e1d6</color>
+  <color name="ListViewHighlightedInverse">#d9cd96</color>
+
+
+
+
+  <color name="colorPrimary">#3F51B5</color>
+  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorAccent">#FF4081</color>
+</resources>

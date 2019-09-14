@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="TrainingDay.Old.FilterPage"
+             Title="{services:Translate FilterString}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="accept.png" Clicked="AcceptFilter_Click"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout HorizontalOptions="Fill" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <Button Text="{services:Translate SelectMusclesString}" Clicked="SelectMuscles_Click"/>
+                <Grid x:Name="CanvasGrid" VerticalOptions="Start" HorizontalOptions="Fill">
+                    <Image Source="muscle.jpg" x:Name="MuscleImage" VerticalOptions="Start"/>
+                    <forms:SKCanvasView x:Name="skiaView" PaintSurface="OnPaintSurface" VerticalOptions="FillAndExpand"/>
+                </Grid>
+            </StackLayout>
+
+            <ContentView x:Name="popupLoginView" BackgroundColor="{DynamicResource FilterBackground}" Padding="10" IsVisible="False" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout Orientation="Vertical">
+                    <ListView x:Name="MusclesListView" VerticalOptions="FillAndExpand" SeparatorVisibility="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal">
+                                        <controls:CheckBox Checked="{Binding IsChecked}" />
+                                        <Label Text="{Binding Text}" VerticalTextAlignment="Center"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+
+            </ContentView>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

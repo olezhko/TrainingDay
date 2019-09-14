@@ -1,1 +1,23 @@
-﻿1. Сделать на упражнения теги и поиск по тегам
+﻿1. Сделать кнопку "Повторить" на тренировку, которая в выполненных+
+2. Сделать друнгую палитру цветов на мышцы+
+3. супер-сеты
+2. сделать поделиться на упражнение, тренировку
+3. сделай фичу "фиксированные вес"/ "набор веса" упражнения
+4. добавить упражненния новые на тренажеры: фронтальная тяга на высоком-низком блоке, трицепс жим сидя , Machine high row
+5. выполненные тренировки - выйти из списка упражнений - кнопка назад
+6. удалять выполненную тренировку
+Подсказки что делать при первлм запуске
+на графике веса показывать тултипы
+может сделать в базу теги на упражнение. чтобы юзер сам их создавал. автоподстановка тегов
+вывод поощряющего сообщения по окончанию тренировки
+
+
+
+https://appetize.io/demo?device=iphone6s&scale=75&orientation=portrait&osVersion=11.4&debug=true&proxy=intercept&deviceColor=black
+https://habr.com/company/microsoft/blog/316714/
+https://habr.com/company/microsoft/blog/347638/
+https://xamdev.ru/5-ways-to-boost-xamarin-forms/
+https://habr.com/post/418007/
+
+https://material.io/tools/icons/?icon=note_add&style=baseline
+https://github.com/google/material-design-icons/tree/master/action/drawable-anydpi-v21

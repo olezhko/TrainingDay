@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:controls1="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             x:Class="TrainingDay.Views.TrainingAlarmListPage" Title="{services:Translate TrainingNotifications}" Icon = "alarm.png">
+    <ContentPage.BindingContext>
+        <viewModels:TrainingAlarmListPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="add.xml" Command="{Binding NewAlarmCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <services:CountToBoolConverter x:Key="CountToBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <ListView BackgroundColor="Transparent" ItemsSource="{Binding Alarms}" HasUnevenRows="true" SelectedItem="{Binding SelectedAlarm, Mode=TwoWay}" 
+                      x:Name="listView" SeparatorColor="{StaticResource SeparatorColor}" >
+                <ListView.Behaviors>
+                    <services:EventToCommandBehavior Command="{Binding ItemTappedCommand}" EventName="ItemTapped"/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <controls1:AlarmListCell x:Name="viewCell" >
+                            <controls1:AlarmListCell.ContextActions>
+                                <MenuItem Icon="remove.png" Command="{Binding Source={x:Reference listView}, Path=BindingContext.DeleteAlarmCommand}" 
+                                          CommandParameter="{Binding Source={x:Reference viewCell}}" IsDestructive="true"/>
+                            </controls1:AlarmListCell.ContextActions>
+                        </controls1:AlarmListCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout Orientation="Vertical" VerticalOptions="Center" >
+                <StackLayout.Triggers>
+                    <!-- If we have 0 items, show the label -->
+                    <DataTrigger TargetType="StackLayout" Binding="{Binding Source={x:Reference listView}, Path=ItemsSource.Count}" Value="0">
+                        <Setter Property="IsVisible" Value="true"/>
+                    </DataTrigger>
+                    <!-- If we have items, hide the label -->
+                    <DataTrigger TargetType="StackLayout" Binding="{Binding Source={x:Reference listView}, Path=ItemsSource.Count, Converter={StaticResource CountToBoolConverter}}" Value="true">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                </StackLayout.Triggers>
+                <Label Text="{services:Translate NoNotificationsString}" HorizontalTextAlignment="Center" FontSize="20"/>
+                <Image Source="add.xml" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="60" WidthRequest="60">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NewAlarmCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+           </Grid>
+    </ContentPage.Content>
+</ContentPage>

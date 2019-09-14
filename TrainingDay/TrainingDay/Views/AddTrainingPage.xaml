@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:controls1="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             x:Class="TrainingDay.Views.AddTrainingPage" Title="{services:Translate AddTrainingString}">
+    <ContentPage.BindingContext>
+        <viewModels:AddTrainingViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="accept.png" Command="{Binding AddTrainingItemCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout>
+                <Entry Keyboard="Text" Text="{Binding Title}" FontSize="Medium" HorizontalOptions="FillAndExpand" Placeholder="{services:Translate NameString1}"/>
+
+                <Button Text="{services:Translate ChouseExerciseString}" Command="{Binding SelectExercisesCommand}" />
+                <controls1:DraggableListView  ItemsSource="{Binding ExerciseItems}" HasUnevenRows="True" IsDragEnabled="True" x:Name="ItemsListView" SeparatorColor="{StaticResource SeparatorColor}">
+                    <controls1:DraggableListView.ItemTemplate>
+                        <DataTemplate>
+                            <controls1:DraggableViewCell >
+                                <Grid Padding="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="20"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding ExerciseItemName}" FontSize="Medium" FontAttributes="Bold" />
+                                    <Image Source="clear.png" HorizontalOptions="End" Grid.Column="1" >
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.DeleteExerciseCommand}" BindingContext="{Binding .}" CommandParameter="{Binding .}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </controls1:DraggableViewCell>
+                        </DataTemplate>
+                    </controls1:DraggableListView.ItemTemplate>
+                </controls1:DraggableListView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

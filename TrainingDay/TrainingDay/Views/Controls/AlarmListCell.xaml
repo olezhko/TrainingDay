@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          xmlns:controls="clr-namespace:TrainingDay.Controls;assembly=TrainingDay"
+          x:Class="TrainingDay.Views.Controls.AlarmListCell">
+    <ViewCell.View>
+        <StackLayout Orientation="Horizontal" Padding="20, 0" VerticalOptions="CenterAndExpand">
+            <StackLayout Spacing="3">
+              <Label x:Name="NameLabel" Style="{StaticResource AlarmNameHeading}" Margin="0, 0, 0, -10"/>
+              <Label x:Name="TrainingNameLabel" Style="{StaticResource AlarmNameHeading}" Margin="0, 0, 0, -10"/>
+                <Label x:Name="TimeLabel"  Style="{StaticResource AlarmTimeHeading}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span x:Name="StartSpan"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <StackLayout Orientation="Horizontal" Spacing="0">
+                    <Label x:Name="FrequencyLabel" Style="{StaticResource AlarmExtrasHeading}"/>
+                    <controls:DaysOfWeekView x:Name="DaysOfWeekView" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            </StackLayout>
+            <Switch x:Name="ActiveSwitch" IsToggled="{Binding IsActive}" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+    </ViewCell.View>
+</ViewCell>

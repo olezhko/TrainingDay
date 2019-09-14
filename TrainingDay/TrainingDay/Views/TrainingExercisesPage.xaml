@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
+             xmlns:controls2="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             x:Class="TrainingDay.View.TrainingExercisesPage" Title="{services:Translate TrainingString}">
+    <ContentPage.BindingContext>
+        <viewModels:TrainingExercisesPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="add_alarm.png" Command="{Binding MakeNotifyCommand}" x:Name="AddAlarmToolbarItem"/>
+        <ToolbarItem Icon="add.png" Command="{Binding AddExercisesCommand}" Order="Primary" Text="{services:Translate AddExercisesToTrainingString}"/>
+        <ToolbarItem Icon="accept.png" Command="{Binding SaveChangesCommand}" Order="Primary" Text="{services:Translate SaveTrainingString}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Entry Keyboard="Text" Text="{Binding Training.Title}" FontSize="Large" HorizontalOptions="FillAndExpand" Placeholder="{services:Translate NameString1}" Grid.Row="0" FontAttributes="Bold" Margin="5,0"  />
+
+            <controls2:DraggableListView ItemsSource="{Binding Items}" SeparatorVisibility="None" Grid.Row="1" HasUnevenRows="True" IsDragEnabled="True" x:Name="ItemsListView"
+                                         IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+                <controls2:DraggableListView.Behaviors>
+                    <services:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}" />
+                </controls2:DraggableListView.Behaviors>
+                <controls2:DraggableListView.ItemTemplate>
+                    <DataTemplate>
+                        <controls2:DraggableViewCell>
+                            <Frame Style="{StaticResource FrameCellStyle}" Padding="5">
+                                <Grid>   
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="20"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Frame Grid.Column="0" Padding="0">
+                                        <Image HeightRequest="80" WidthRequest="80">
+                                            <Image.Source>
+                                                <UriImageSource Uri="{Binding ExerciseImageUrl}" CacheValidity="100" CachingEnabled="true"/>
+                                            </Image.Source>
+                                        </Image>
+                                    </Frame>
+
+                                    <Label Text="{Binding ExerciseItemName}" FontSize="20" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Grid.Column="1" VerticalOptions="Center"/>
+
+                                    <Image Source="clear.png" Grid.Column="2">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.DeleteExerciseCommand}" CommandParameter="{Binding .}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </Frame>
+                        </controls2:DraggableViewCell>
+                    </DataTemplate>
+                </controls2:DraggableListView.ItemTemplate>
+            </controls2:DraggableListView>
+
+            <Button Command="{Binding MakeTrainingCommand}" Text="{services:Translate MakeTrainingString}" Grid.Row="2" VerticalOptions="End" FontSize="Large" x:Name="MakeTrainingButton" Margin="5"/>
+
+            <controls2:AdMobView AdUnitId="ca-app-pub-8728883017081055/3839299823" BackgroundColor="Transparent" VerticalOptions="Start" Grid.Row="3"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

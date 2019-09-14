@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:controls1="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             x:Class="TrainingDay.View.ExerciseItemPage" Title="{services:Translate ExerciseInformationString}" >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="accept.png" Clicked="Save_clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Frame BorderColor="Black" CornerRadius="2" HeightRequest="80" WidthRequest="80" HorizontalOptions="Center" Padding="0">
+                    <Image Source="{Binding ExerciseImageUrl, Mode=TwoWay}">
+                        <!--<Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"/>
+                        </Image.GestureRecognizers>-->
+                    </Image>
+                </Frame>
+
+                <Label Text="{services:Translate NameString1}" Grid.Row="1" FontSize="12" VerticalTextAlignment="Start" HorizontalOptions="StartAndExpand" FontAttributes="Bold"/>
+                <Editor Keyboard="Text" Text="{Binding ExerciseItemName, Mode=TwoWay}" FontSize="Large" Grid.Row="1" x:Name="NameEditor" AutoSize="TextChanges"/>
+
+                <controls1:WrapPanel x:Name="MusclesWrapPanel" Orientation="Horizontal" ItemsSource="{Binding Muscles, Mode=TwoWay}" IsEditableItems="True" Grid.Row="3" AddContent="{services:Translate MusclesString}">
+                    <controls1:WrapPanel.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="3" BackgroundColor="{Binding Color}" BorderColor="Gray" Padding="2,5">
+                                <Label Text="{Binding Name}" FontSize="Small"/>
+                            </Frame>
+                        </DataTemplate>
+                    </controls1:WrapPanel.ItemTemplate>
+                </controls1:WrapPanel>
+
+                <Editor Keyboard="Text" Text="{Binding ShortDescription, Mode=TwoWay}" FontSize="Small" Margin="0" AutoSize="TextChanges" Grid.Row="4" />
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

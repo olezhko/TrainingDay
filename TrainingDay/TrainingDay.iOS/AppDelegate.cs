@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Plugin.LocalNotifications;
 using UIKit;
 
 namespace TrainingDay.iOS
@@ -23,8 +24,11 @@ namespace TrainingDay.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            OxyPlot.Xamarin.Forms.Platform.iOS.PlotViewRenderer.Init();
             LoadApplication(new App());
+            App.ScreenWidth = UIScreen.MainScreen.Bounds.Width;
+            App.ScreenHeight = UIScreen.MainScreen.Bounds.Height;
+            OxyPlot.Xamarin.Forms.Platform.iOS.PlotViewRenderer.Init();
+
             return base.FinishedLaunching(app, options);
         }
     }

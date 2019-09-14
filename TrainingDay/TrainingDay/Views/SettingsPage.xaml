@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="TrainingDay.Views.SettingsPage" Icon = "settings.png" Title="{services:Translate SettingsString}">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="10">
+                <Label Text="{services:Translate LightThemeString}" FontSize="Medium"/>
+                <Switch Toggled="Switch_OnToggled" x:Name="ThemeSwitch"/>
+                <Label Text="{services:Translate ChangesAcceptAfterReboot}" FontSize="Medium" TextColor="Green" x:Name="ChangesHideLabel" IsVisible="False"/>
+            </StackLayout>
+
+
+            <Frame Style="{StaticResource FrameCellStyle}">
+                <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <controls:CheckBox CheckedChanged="WeightNotifyChanged" x:Name="WeightNotifyCheckBox" Checked="True" />
+                        <Label Text="{services:Translate WeightNotifyString}" VerticalTextAlignment="Center" FontSize="Medium" HorizontalOptions="StartAndExpand"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                        <Label Text="{services:Translate DayFreqString}" IsEnabled="{Binding Path=Checked,Source={x:Reference WeightNotifyCheckBox}}" HorizontalOptions="Start" VerticalTextAlignment="Center" FontSize="Medium" />
+                        <Entry Keyboard="Numeric" x:Name="FreqWeightNotify" IsEnabled="{Binding Path=Checked,Source={x:Reference WeightNotifyCheckBox}}" Text="1" TextChanged="FreqWeightNotify_OnTextChanged" HorizontalOptions="Start" FontSize="Medium" WidthRequest="30" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

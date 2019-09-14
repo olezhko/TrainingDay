@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TrainingDay.Controls;assembly=TrainingDay"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             x:Class="TrainingDay.Controls.DaysOfWeekSelection"  x:Name="ThisView">
+  <ContentView.Content>
+        <Grid x:Name="DayGrid" Padding="5" ColumnSpacing="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <controls:DayOfWeekButton Clicked="Monday_OnClicked" x:Name="Monday" Text="{services:Translate DayTextMonday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Monday}"/>
+            <controls:DayOfWeekButton Clicked="Tuesday_OnClicked" x:Name="Tuesday" Text="{services:Translate DayTextThusday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Tuesday}" Grid.Column="1"/>
+            <controls:DayOfWeekButton Clicked="Wednesday_OnClicked" x:Name="Wednesday" Text="{services:Translate DayTextWensdey}"  IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Wednesday}"  Grid.Column="2"/>
+            <controls:DayOfWeekButton Clicked="Thursday_OnClicked" x:Name="Thursday" Text="{services:Translate DayTextThursday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Thursday}"  Grid.Column="3"/>
+            <controls:DayOfWeekButton Clicked="Friday_OnClicked" x:Name="Friday" Text="{services:Translate DayTextFriday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Friday}" Grid.Column="4"/>
+            <controls:DayOfWeekButton Clicked="Saturday_OnClicked" x:Name="Saturday" Text="{services:Translate DayTextSaturday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Saturday}" Grid.Column="5"/>
+            <controls:DayOfWeekButton Clicked="Sunday_OnClicked" x:Name="Sunday" Text="{services:Translate DayTextSunday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Sunday}" Grid.Column="6"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
