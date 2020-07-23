@@ -31,5 +31,18 @@ namespace TrainingDay.iOS.Services
             }
             return ci;
         }
+
+        public string GetCurrentLanguage()
+        {
+            var netLanguage = "en";
+            var prefLanguage = "en-US";
+            if (NSLocale.PreferredLanguages.Length > 0)
+            {
+                var pref = NSLocale.PreferredLanguages[0];
+                netLanguage = pref.Replace("_", "-"); // заменяет pt_BR на pt-BR
+            }
+
+            return netLanguage;
+        }
     }
 }

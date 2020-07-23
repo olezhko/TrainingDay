@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
-using Plugin.LocalNotifications;
 using UIKit;
 
 namespace TrainingDay.iOS

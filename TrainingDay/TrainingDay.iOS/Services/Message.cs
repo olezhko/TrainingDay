@@ -21,7 +21,17 @@ namespace TrainingDay.iOS.Services
 
         public void ShowMessage(string message, string title)
         {
-            
+            UIAlertView alert = new UIAlertView()
+            {
+                Title = title,
+                Message = message
+            };
+            alert.AddButton("OK");
+
+            alert.Clicked += delegate (object a, UIButtonEventArgs b) {
+                Console.WriteLine("Button " + b.ButtonIndex.ToString() + " clicked");
+            };
+            alert.Show();
         }
 
         public void LongAlert(string message)
@@ -33,10 +43,10 @@ namespace TrainingDay.iOS.Services
             ShowAlert(message, SHORT_DELAY);
         }
 
-        public string EnterAlert(string title, string odlValue)
+        public void ShowNotification(string title, string message, int openedPage)
         {
-            return "";
         }
+
 
         void ShowAlert(string message, double seconds)
         {
