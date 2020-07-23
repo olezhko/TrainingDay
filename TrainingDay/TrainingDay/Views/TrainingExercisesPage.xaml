@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
+             xmlns:controls2="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             x:Class="TrainingDay.View.TrainingExercisesPage" Title="{services:Translate TrainingString}" x:Name="ContentPage">
+    <ContentPage.BindingContext>
+        <viewModels:TrainingExercisesPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <!--<ToolbarItem Icon="add_alarm.png" Command="{Binding MakeNotifyCommand}" Order="Secondary" x:Name="AddAlarmToolbarItem" Text="{services:Translate Notification}"/>-->
+        <ToolbarItem IconImageSource="add.png" Command="{Binding AddExercisesCommand}" Order="Primary" Text="{services:Translate AddExercisesToTrainingString}"/>
+        <ToolbarItem IconImageSource="accept.png" Command="{Binding SaveChangesCommand}" Order="Primary" Text="{services:Translate SaveTrainingString}"/>
+
+
+        <ToolbarItem Text="{services:Translate ShareString}" Command="{Binding ShareTrainingCommand}" Order="Secondary" />
+        <ToolbarItem Text="{services:Translate SuperSetString}" Command="{Binding SetSuperSetCommand}" Order="Secondary" />
+        <ToolbarItem Text="{services:Translate MoveString}" Command="{Binding StartMoveExerciseCommand}" Order="Secondary" />
+        <ToolbarItem Text="{services:Translate CopyString}" Command="{Binding StartCopyExerciseCommand}" Order="Secondary" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Entry Keyboard="Text" Text="{Binding Training.Title}" FontSize="Large" HorizontalOptions="FillAndExpand" Placeholder="{services:Translate NameString1}" Grid.Row="0" FontAttributes="Bold" Margin="5,0"/>
+
+            <xForms:SfListView ItemsSource="{Binding Training.Exercises}" Grid.Row="1" x:Name="ItemsListView" AutoFitMode="Height" DragStartMode="OnHold">
+                <xForms:SfListView.Behaviors>
+                    <services:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}" />
+                </xForms:SfListView.Behaviors>
+                <xForms:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource FrameCellStyle}" BackgroundColor="{DynamicResource ListItemBackgroundColor}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <!--<Switch VerticalOptions="Center" IsToggled="{Binding IsSelected, Mode=TwoWay}" IsVisible="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.IsExercisesCheckBoxVisible}" HorizontalOptions="CenterAndExpand">
+                                    <Switch.Style>
+                                        <Style TargetType="Switch">
+                                            <Style.Triggers>
+                                                <MultiTrigger TargetType="Switch">
+                                                    <MultiTrigger.Conditions>
+                                                        <BindingCondition Binding="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.CurrentAction}" 
+                                                                          Value="{x:Static viewModels:ExerciseCheckBoxAction.SuperSet}" />
+                                                        <BindingCondition Binding="{Binding SuperSetId,Converter={StaticResource SuperSetMenuConverter}}" Value="True" />
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </MultiTrigger>
+                                            </Style.Triggers>
+                                            <Setter Property="IsEnabled" Value="True"/>
+                                        </Style>
+                                    </Switch.Style>
+                                    <Switch.Behaviors>
+                                        <services:EventToCommandBehavior EventName="Toggled" Command="{Binding Source={x:Reference ContentPage}, 
+                                            Path=BindingContext.SuperSetExercisesCheckedChangedCommand}" CommandParameter="{Binding }"/>
+                                    </Switch.Behaviors>
+                                </Switch>-->
+
+                                <CheckBox VerticalOptions="Center" IsChecked="{Binding IsSelected, Mode=TwoWay}" IsVisible="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.IsExercisesCheckBoxVisible}" HorizontalOptions="CenterAndExpand">
+                                    <CheckBox.Style>
+                                        <Style TargetType="CheckBox">
+                                            <Style.Triggers>
+                                                <MultiTrigger TargetType="CheckBox">
+                                                    <MultiTrigger.Conditions>
+                                                        <BindingCondition Binding="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.CurrentAction}" 
+                                                                          Value="{x:Static viewModels:ExerciseCheckBoxAction.SuperSet}" />
+                                                        <BindingCondition Binding="{Binding SuperSetId,Converter={StaticResource SuperSetMenuConverter}}" Value="True" />
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </MultiTrigger >
+
+                                                <DataTrigger Binding="{Binding SuperSetId,Converter={StaticResource SuperSetMenuConverter}}" Value="True" TargetType="CheckBox">
+                                                    <Setter Property="Color" Value="Gray"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                            <Setter Property="IsEnabled" Value="True"/>
+                                        </Style>
+                                    </CheckBox.Style>
+                                    <CheckBox.Behaviors>
+                                        <services:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding Source={x:Reference ContentPage}, 
+                                            Path=BindingContext.ExercisesCheckedChangedCommand}" CommandParameter="{Binding }"/>
+                                    </CheckBox.Behaviors>
+                                </CheckBox>
+
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Frame Grid.Column="0" Padding="0" VerticalOptions="Center">
+                                        <controls2:ImageCache HeightRequest="60" WidthRequest="60" x:Name="ImageControl" ImageUrl="{Binding ExerciseImageUrl}"/>
+                                    </Frame>
+
+                                    <StackLayout Orientation="Vertical" Grid.Column="1" Padding="0" Margin="0">
+                                        <Label Text="{Binding ExerciseItemName}" FontSize="20" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="0"/>
+                                        <!--<controls2:WrapLayout ItemsSource="{Binding Muscles}" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="FillAndExpand">
+                                            <controls2:WrapLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Frame CornerRadius="3" BackgroundColor="{Binding Color}" BorderColor="Gray" Padding="2,5">
+                                                        <Label Text="{Binding Name}" FontSize="Micro" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                                                    </Frame>
+                                                </DataTemplate>
+                                            </controls2:WrapLayout.ItemTemplate>
+                                        </controls2:WrapLayout>-->
+                                    </StackLayout>
+
+
+                                    <Frame Grid.Column="2" BorderColor="Black" VerticalOptions="Start" BackgroundColor="Orange" Padding="1" Margin="0,-5,0,0" 
+                                           IsVisible="{Binding SuperSetId,Converter={StaticResource SuperSetMenuConverter}}" CornerRadius="5">
+                                        <Label HorizontalOptions="Center" FontSize="Small" Text="{Binding SuperSetNum}"/>
+                                    </Frame>
+
+                                    <Frame Grid.Column="2" BorderColor="Black" VerticalOptions="Center" BackgroundColor="Transparent"  WidthRequest="30" HeightRequest="30" Padding="0">
+                                        <Image Source="clear.png" WidthRequest="30" HeightRequest="30" >
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.DeleteExerciseCommand}" CommandParameter="{Binding }" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Frame>
+                                </Grid>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </xForms:SfListView.ItemTemplate>
+            </xForms:SfListView>
+
+
+
+
+
+
+
+
+
+
+            <Button Command="{Binding MakeTrainingCommand}" Text="{services:Translate MakeTrainingString}" Grid.Row="2" FontSize="Large" x:Name="MakeTrainingButton" Margin="5">
+                <Button.Style>
+                    <Style TargetType="Button" >
+                        <Style.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsExercisesCheckBoxVisible}" Value="True" >
+                                <Setter Property="IsVisible" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger  TargetType="Button"  Binding="{Binding IsExercisesCheckBoxVisible}" Value="False">
+                                <Setter Property="IsVisible" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Frame Grid.Row="3" IsVisible="{Binding IsExercisesCheckBoxVisible}" Style="{DynamicResource FrameCellStyle}" HorizontalOptions="Center">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                    <Button Text="{services:Translate CancelString}" Command="{Binding CancelActionCommand}"/>
+                    <Button Text="{Binding ExerciseActionString}" Command="{Binding StartActionCommand}"/>
+                </StackLayout>
+            </Frame>
+
+            <controls2:AdMobView AdUnitId="ca-app-pub-8728883017081055/3839299823" BackgroundColor="Transparent" VerticalOptions="Start" Grid.Row="4"/>
+
+            <StackLayout IsVisible="{Binding IsMoveOrCopyAction}" Grid.Row="0" Grid.RowSpan="4" BackgroundColor="{DynamicResource ContentPageBackgroundColor}">
+                <Label Text="{services:Translate ChooseTrainingOrNewString}" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Start" FontSize="Medium"/>
+                <ListView ItemsSource="{Binding TrainingItems}" HasUnevenRows="True" RowHeight="-1" VerticalOptions="Start">
+                    <ListView.Behaviors>
+                        <services:EventToCommandBehavior EventName="ItemTapped" Command="{Binding TrainingSelectedCommand}" />
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell x:Name="viewCell">
+                                <Frame BackgroundColor="Transparent" Style="{StaticResource FrameCellStyle}" Padding="20">
+                                    <Label Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="Medium"  HorizontalOptions="Center" FontAttributes="Bold" VerticalOptions="Center"/>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
+                    <ImageButton Source="add.png" VerticalOptions="Center" HeightRequest="40" WidthRequest="40" Command="{Binding CreateNewAndPasteCommand}" BackgroundColor="Transparent"/>
+                    <Button VerticalOptions="Center" Command="{Binding CreateNewAndPasteCommand}" Text="{services:Translate CreateNewString}"/>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

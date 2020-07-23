@@ -1,0 +1,38 @@
+﻿+1. группировка тренировок для тренера
++1.1 ошибка запуска тренировки, если она была незакончена
++2. Сделать штуку : "Что нового" с описанием
+
++1. Поиск видео в youtube по названию для человека, первая попавшаяся в отображение
++2. Сделать номера для предустановленных упражнений
++2. Переделать предустановленные тренировки. сделать логику наоборот через галочки.
+
+
+1. Предустановленных страница долго загружается
+2. кнопки на главном меню не нажимаются
+
+
+
+3. описание разбить на три этапа: начальная позиция, выполнение, советы
+1. статистика упражнений
+
+1. нотификации каждый день, а не на запуск
+2. Не работают напоминания
+
+1. картинки на сайт
+2. авторизация через гугл 
+
+https://weighttraining.guide/training-programs/muscle/
+https://fb.ru/article/311787/osnovnyie-vidyi-trenirovok-v-trenajernom-zale
+https://builderbody.ru/trenirovka-supersetami/
+https://itvdn.com/ru/shares/android-free?utm_source=newsletter&utm_campaign=15.08.2019&utm_medium=email
+https://appetize.io/demo?device=iphone6s&scale=75&orientation=portrait&osVersion=11.4&debug=true&proxy=intercept&deviceColor=black
+https://habr.com/company/microsoft/blog/316714/
+https://habr.com/company/microsoft/blog/347638/
+https://xamdev.ru/5-ways-to-boost-xamarin-forms/
+https://habr.com/post/418007/
+https://www.xamboy.com/2019/03/01/showing-tooltips-in-xamarin-forms/
+https://material.io/tools/icons/?icon=note_add&style=baseline
+https://github.com/google/material-design-icons/tree/master/action/drawable-anydpi-v21
+
+
+https://devblogs.microsoft.com/xamarin/xamarin-essentials-now-with-permissions-app-theme-authentication/

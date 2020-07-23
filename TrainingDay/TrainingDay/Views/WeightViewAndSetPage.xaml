@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:plot="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
+             xmlns:services="clr-namespace:TrainingDay.Services"
+             xmlns:controls="clr-namespace:TrainingDay.Controls;assembly=TrainingDay"
+             x:Class="TrainingDay.Views.WeightViewAndSetPage" Title="{services:Translate WeightString}" IconImageSource = "weight.png">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="ShowWeightHistory_Click" x:Name="ShowWeightHistoryMenu" Text="{services:Translate HistoryString}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid x:Name="WeightGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout Orientation="Vertical" Padding="0,5">
+                        <Label Text="{services:Translate CurrentString}" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium"/>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <controls:EntryWithDot MaxLength="{Binding MaxLengthWeightField}" Text="{Binding CurrentWeightString,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" HorizontalTextAlignment="Center" x:Name="CurrentEntry" VerticalOptions="Center"/>
+                            <Label Text="{services:Translate KilogramsString}" VerticalTextAlignment="Center" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="End"/>
+                            <ImageButton Command="{Binding SaveCurrentWeightCommand}" Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" x:Name="SaveCurrentWeightImageButton" />
+                        </StackLayout>
+                    </StackLayout>
+
+                    <Grid Grid.Column="1" Margin="1" BackgroundColor="Gray" />
+
+                    <StackLayout Orientation="Vertical" Grid.Column="2" Padding="0,5">
+                        <Label Text="{services:Translate GoalString}"  VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium" />
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+                            <controls:EntryWithDot MaxLength="{Binding MaxLengthWeightField}" Text="{Binding GoalWeightString,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" HorizontalTextAlignment="Center" x:Name="GoalEntry" VerticalOptions="Center"/>
+                            <Label Text="{services:Translate KilogramsString}" VerticalTextAlignment="Center" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center"/>
+                            <ImageButton Command="{Binding SaveGoalWeightCommand}" Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" x:Name="SaveGoalWeightImageButton" />
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
+
+                <Grid Grid.Row="1" BackgroundColor="Gray" Margin="5,0"/>
+
+                <Grid Margin="10,0" Grid.Row="2" x:Name="PeriodPickerGrid" HorizontalOptions="FillAndExpand" >
+                    <controls:CustomPicker SelectedIndex="{Binding WeightChartPeriod}" Title="{services:Translate ChousePeriodString}" HorizontalOptions="FillAndExpand" x:Name="PeriodPicker">
+                        <Picker.Behaviors>
+                            <services:EventToCommandBehavior EventName="SelectedIndexChanged" Command="{Binding WeightPeriodChangedCommand}"/>
+                        </Picker.Behaviors>
+                    </controls:CustomPicker>
+                </Grid>
+
+                <plot:PlotView Model="{Binding PlotView}" Grid.Row="3" Margin="10" x:Name="PlotView"/>
+            </Grid>
+
+            <Grid x:Name="WeightItemsList" IsVisible="False" >
+                <CollectionView ItemsSource="{Binding WeightNotes}" BackgroundColor="{DynamicResource ContentPageBackgroundColor}" >
+                    <CollectionView.EmptyView>
+                        <Label HorizontalTextAlignment="Center" VerticalOptions="Center" Text="{services:Translate NoWeightHistory}" FontSize="Medium"/>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Style="{DynamicResource FrameCellStyle}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="{Binding Date}"/>
+                                        <Label Text="{Binding Weight}"/>
+                                    </StackLayout>
+
+                                    <Image Grid.Row="0" Source="clear.png" Grid.Column="1">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference WeightItemsList}, Path=BindingContext.DeleteWeightNoteCommand}" CommandParameter="{Binding }" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

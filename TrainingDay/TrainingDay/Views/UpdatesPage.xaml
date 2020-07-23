@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             mc:Ignorable="d"
+             x:Class="TrainingDay.Views.UpdatesPage">
+    <ContentPage.BindingContext>
+        <viewModels:UpdatesPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+            <StackLayout>
+                <Label Text="{services:Translate WhatNewString}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large"/>
+                <!--<Picker ItemsSource="{Binding UpdatesVersionList}" SelectedItem="{Binding VersionSelected}" SelectedIndex="0" x:Name="PickerVersion">
+                    <Picker.Behaviors>
+                        <services:EventToCommandBehavior EventName="SelectedIndexChanged" Command="{Binding VersionChangedCommand}" />
+                    </Picker.Behaviors>
+                </Picker>-->
+            </StackLayout>
+            <CarouselView ItemsSource="{Binding UpdatesCollection}" IndicatorView="indicatorView">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="Gray" CornerRadius="4" BackgroundColor="Transparent">
+                            <WebView Source="{Binding WebViewData}" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Transparent" />
+                        </Frame>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView x:Name="indicatorView" IndicatorColor="DimGray" SelectedIndicatorColor="Green" HorizontalOptions="Center" />
+            <Button Text="{services:Translate CloseString}" Command="{Binding CloseCommand}" CornerRadius="5"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             x:Class="TrainingDay.Views.SettingsPage" IconImageSource = "settings.png" Title="{services:Translate SettingsString}">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame Style="{StaticResource FrameCellStyle}">
+                <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Switch Toggled="Switch_OnToggled" x:Name="ThemeSwitch"/>
+                        <Label Text="{services:Translate LightThemeString}" FontSize="Medium"/>
+                    </StackLayout>
+                    <Label Text="{services:Translate ChangesAcceptAfterReboot}" FontSize="Medium" TextColor="Green" x:Name="ChangesHideLabel" IsVisible="False"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource FrameCellStyle}">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Switch Toggled="ScreenOnImplementedSwitch_OnToggled" x:Name="ScreenOnImplementedSwitch"/>
+                        <Label Text="{services:Translate ScreenOnWhenImplementing}" FontSize="Medium"/>
+                    </StackLayout>
+                    <Label Text="{services:Translate ScreenOnWhenImplementingTip}" FontSize="Small" TextColor="Gray" />
+                </StackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource FrameCellStyle}">
+                <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Switch x:Name="WeightNotifyCheckBox" IsToggled="True" Toggled="WeightNotifyCheckBox_OnToggled"/>
+                        <Label Text="{services:Translate WeightNotifyString}" VerticalTextAlignment="Center" FontSize="Medium" HorizontalOptions="StartAndExpand"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                        <Label Text="{services:Translate DayFreqString}" IsEnabled="{Binding Path=IsToggled,Source={x:Reference WeightNotifyCheckBox}}" HorizontalOptions="Start" VerticalTextAlignment="Center" FontSize="Medium" />
+                        <Entry Keyboard="Numeric" x:Name="FreqWeightNotify" IsEnabled="{Binding Path=IsToggled,Source={x:Reference WeightNotifyCheckBox}}" Text="1" HorizontalOptions="Start" FontSize="Medium" WidthRequest="40" MaxLength="3" Unfocused="FreqWeightNotify_OnUnfocused" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

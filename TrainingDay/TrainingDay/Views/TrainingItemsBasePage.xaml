@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
+             xmlns:controls1="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             x:Class="TrainingDay.Views.TrainingItemsBasePage" Title="{services:Translate TrainingsBaseString}" IconImageSource="main.png" x:Name="Page">
+    <ContentPage.BindingContext>
+        <viewModels:TrainingItemsBasePageViewModel/>
+    </ContentPage.BindingContext>
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="add.png" Command="{Binding AddNewTrainingCommand}" />
+    </ContentPage.ToolbarItems>-->
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <controls1:StateContainer State="{Binding State}">
+                <controls1:StateCondition State="Loading">
+                    <StackLayout HeightRequest="50" WidthRequest="50" HorizontalOptions="Center" VerticalOptions="Center">
+                        <ActivityIndicator IsRunning="True" Color="Black"/>
+                    </StackLayout>
+                </controls1:StateCondition>
+
+                <controls1:StateCondition State="NoData">
+                    <Grid>
+                        <StackLayout Orientation="Vertical" VerticalOptions="Center">
+                            <Label Text="{services:Translate NoTrainingsNeedAddNewString}" FontSize="20" HorizontalTextAlignment="Center" VerticalOptions="Start" HorizontalOptions="Center" />
+                        </StackLayout>
+                    </Grid>
+                </controls1:StateCondition>
+
+                <controls1:StateCondition State="Normal">
+                    <ListView ItemsSource="{Binding ItemsGrouped}" HorizontalOptions="FillAndExpand" x:Name="ItemsListView" HasUnevenRows="True" RowHeight="-1" BackgroundColor="Transparent" SeparatorVisibility="None"
+                              GroupDisplayBinding="{Binding Key}" GroupShortNameBinding="{Binding Key}" IsGroupingEnabled="True">
+                        <ListView.GroupHeaderTemplate>
+                            <DataTemplate>
+                                <ViewCell Height="50">
+                                    <Frame Padding="5">
+                                        <StackLayout VerticalOptions="FillAndExpand" Padding="5" BackgroundColor="DarkGray" Orientation="Horizontal">
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference Page}, Path=BindingContext.ToggleExpandGroupCommand}"  NumberOfTapsRequired="1" CommandParameter="{Binding .}"/>
+                                            </StackLayout.GestureRecognizers>
+                                            <Label Text="{Binding Key}" TextColor="White" VerticalOptions="Center" FontSize="Medium"/>
+
+                                            <Label HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Medium" Margin="0,0,10,0">
+                                                <Label.Style>
+                                                    <Style TargetType="Label">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Expanded}" Value="True" TargetType="Label">
+                                                                <Setter Property="Text" Value="-"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Expanded}" Value="False" TargetType="Label">
+                                                                <Setter Property="Text" Value="+"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Label.Style>
+                                            </Label>
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.GroupHeaderTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell x:Name="viewCell">
+                                    <ViewCell.ContextActions>
+                                        <MenuItem IsDestructive="true" IconImageSource="remove.png" Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.DeleteSelectedTrainingsCommand}" 
+                                                  CommandParameter="{Binding Source={x:Reference viewCell}}"/>
+
+                                        <MenuItem IsDestructive="true" Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.DeleteFromGroupCommand}" 
+                                                  CommandParameter="{Binding Source={x:Reference viewCell}}" IconImageSource="union_del.png"/>
+                                        <MenuItem IsDestructive="true" Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.AddToGroupCommand}" 
+                                                  CommandParameter="{Binding Source={x:Reference viewCell}}" IconImageSource="union_add.png"/>
+                                    </ViewCell.ContextActions>
+                                    <Frame BackgroundColor="{DynamicResource ListItemBackgroundColor}" Style="{StaticResource FrameCellStyle}" Padding="20">
+                                        <Grid VerticalOptions="Fill" HorizontalOptions="Fill">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold" VerticalOptions="Center"/>
+                                        </Grid>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Behaviors>
+                            <services:EventToCommandBehavior EventName="ItemSelected" Command="{Binding ItemSelectedCommand}" />
+                        </ListView.Behaviors>
+                    </ListView>
+                </controls1:StateCondition>
+            </controls1:StateContainer>
+            <controls1:AdMobView AdUnitId="ca-app-pub-8728883017081055/2677919170" VerticalOptions="End" BackgroundColor="Transparent" Grid.Row="2" />
+
+            <Image Source="add.png" HorizontalOptions="Center" VerticalOptions="End" HeightRequest="60" WidthRequest="60" x:Name="AddImage" Grid.Row="1">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AddNewTrainingCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <StackLayout IsVisible="{Binding IsVisibleGroups}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="2" 
+                  BackgroundColor="{DynamicResource ContentPageBackgroundColor}">
+                <Label Text="{services:Translate ChooseGroupOrNewString}" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Start" FontSize="Medium"/>
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Picker Grid.Column="0" ItemsSource="{Binding GroupsNamesToNewGroup}" VerticalOptions="Start" HorizontalOptions="FillAndExpand" ItemDisplayBinding="{Binding Key}"
+                            SelectedItem="{Binding SelectedGroupToTraining, Mode=TwoWay}">
+                        <Picker.Behaviors>
+                            <services:EventToCommandBehavior EventName="SelectedIndexChanged" Command="{Binding GroupPickerChangedCommand}" />
+                        </Picker.Behaviors>
+                    </Picker>
+                    <Entry Grid.Column="1" IsVisible="{Binding NewGroupEntryIsVisible}" Text="{Binding NewGroupName}" Placeholder="{services:Translate NameString1}" FontSize="Medium"/>
+                </Grid>
+
+                <Grid VerticalOptions="Start" HeightRequest="80" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton Source="clear.png" Command="{Binding CancelGroupCommand}" VerticalOptions="Center" WidthRequest="40" HeightRequest="40" HorizontalOptions="Center" Grid.Column="0" BackgroundColor="Transparent" BorderColor="Black" BorderWidth="2" CornerRadius="5"/>
+                    <ImageButton Source="accept.png" Command="{Binding AcceptGroupCommand}" VerticalOptions="Center" WidthRequest="40" HeightRequest="40" HorizontalOptions="Center" Grid.Column="1" BackgroundColor="Transparent" BorderColor="Black" BorderWidth="2" CornerRadius="5"/>
+                </Grid>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

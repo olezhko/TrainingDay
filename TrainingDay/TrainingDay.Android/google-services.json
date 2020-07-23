@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "182192482393",
+    "firebase_url": "https://trainingday-258c3.firebaseio.com",
+    "project_id": "trainingday-258c3",
+    "storage_bucket": "trainingday-258c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182192482393:android:f79c53c4d647317a",
+        "android_client_info": {
+          "package_name": "com.OLASoft.TrainingDay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182192482393-btq5881t1kmuhv3ag0pq925pmn06dgqj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDxiDJf9BcygNESd7skxprJsCR9YiJmuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182192482393-btq5881t1kmuhv3ag0pq925pmn06dgqj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-8728883017081055~6404858576"
+    }
+  ],
+  "configuration_version": "1"
+}

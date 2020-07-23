@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <style name="MainTheme" parent="MainTheme.Base"/>
+
+  <style name="MyCustomTheme" parent="Theme.AppCompat.Light">
+    <item name="android:colorPrimaryDark">@color/windowBackgroundInverse</item>
+    <item name="android:colorPrimary">@color/windowBackgroundInverse</item>
+    <item name="colorPrimaryDark">@color/windowBackgroundInverse</item>
+    <item name="colorPrimary">@color/windowBackgroundInverse</item>
+    <item name="windowNoTitle">true</item>
+    <item name="windowActionBar">false</item>
+    <item name="colorAccent">#FF4081</item>
+    <item name="android:actionModeBackground">@color/actionModeBackgroundInverse</item>
+    <item name="windowActionModeOverlay">true</item>
+    <item name="android:windowBackground">@color/actionModeBackgroundInverse</item>
+    <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+    <item name="android:alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert</item>
+    <item name="android:colorActivatedHighlight">@color/ListViewSelectedInverse</item>
+    <item name="android:colorPressedHighlight">@color/ListViewSelectedInverse</item>
+    <item name="android:colorLongPressedHighlight">@color/ListViewHighlightedInverse</item>
+    <item name="android:colorFocusedHighlight">@color/ListViewSelectedInverse</item>
+    <item name="android:activatedBackgroundIndicator">@color/ListViewSelectedInverse</item>
+    <item name="android:textColorSecondary">@color/launcher_background</item>
+  </style> 
+  <!-- Base theme applied no matter what API -->
+  <style name="MainTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="windowNoTitle">true</item>
+    <item name="windowActionBar">false</item>
+    <item name="colorPrimary">#1F2230</item>
+    <item name="colorPrimaryDark">#1F2230</item>
+    <item name="colorAccent">#FF4081</item>
+    <item name="android:actionModeBackground">@color/actionModeBackground</item>
+    <item name="windowActionModeOverlay">true</item>
+    <item name="android:windowBackground">@color/actionModeBackground</item>
+    <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+    <item name="android:alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert</item>
+    <item name="android:colorActivatedHighlight">@color/ListViewSelected</item>
+    <item name="android:colorPressedHighlight">@color/ListViewSelected</item>
+    <item name="android:colorLongPressedHighlight">@color/ListViewHighlighted</item>
+    <item name="android:colorFocusedHighlight">@color/ListViewSelected</item>
+    <item name="android:activatedBackgroundIndicator">@color/ListViewSelected</item>
+    <item name="android:textColorSecondary">@color/launcher_background</item>
+  </style>
+
+
+
+
+  <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+    <item name="colorAccent">#FF4081</item>
+  </style>
+
+  <style name="splashscreen" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowBackground">@drawable/splash_screen</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:backgroundDimEnabled">true</item>
+    <item name="android:windowFullscreen">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowActionBar">true</item>
+  </style>
+</resources>

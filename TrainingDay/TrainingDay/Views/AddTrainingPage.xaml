@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:controls1="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             x:Class="TrainingDay.Views.AddTrainingPage" Title="{services:Translate AddTrainingString}">
+    <ContentPage.BindingContext>
+        <viewModels:AddTrainingViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="accept.png" Command="{Binding AddTrainingItemCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout>
+                <Entry Keyboard="Text" Text="{Binding Title}" FontSize="Medium" HorizontalOptions="FillAndExpand" Placeholder="{services:Translate NameString1}"/>
+
+                <Button Text="{services:Translate ChouseExerciseString}" Command="{Binding SelectExercisesCommand}" />
+                <xForms:SfListView ItemsSource="{Binding ExerciseItems}" x:Name="ItemsListView"  AutoFitMode="Height"  DragStartMode="OnHold" >
+                    <xForms:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Style="{StaticResource FrameCellStyle}" BackgroundColor="{DynamicResource ListItemBackgroundColor}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="20"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Orientation="Vertical" Grid.Column="0" Padding="0" Margin="0">
+                                        <Label Text="{Binding ExerciseItemName}" FontSize="20" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0"/>
+                                        <controls1:WrapPanel ItemsSource="{Binding Muscles}" Orientation="Horizontal" IsEditableItems="False" HorizontalOptions="Center" VerticalOptions="FillAndExpand">
+                                            <controls1:WrapPanel.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Frame CornerRadius="3" BackgroundColor="{Binding Color}" BorderColor="Gray" Padding="2,5">
+                                                        <Label Text="{Binding Name}" FontSize="Micro" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                                                    </Frame>
+                                                </DataTemplate>
+                                            </controls1:WrapPanel.ItemTemplate>
+                                        </controls1:WrapPanel>
+                                    </StackLayout>
+                                    <!--<Label Text="{Binding ExerciseItemName}" FontSize="Medium" FontAttributes="Bold" />-->
+                                    <Image Source="clear.png" HorizontalOptions="FillAndExpand" Grid.Column="1" >
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.DeleteExerciseCommand}" BindingContext="{Binding .}" CommandParameter="{Binding .}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </xForms:SfListView.ItemTemplate>
+                </xForms:SfListView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

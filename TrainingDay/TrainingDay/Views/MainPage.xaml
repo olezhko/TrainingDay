@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:controls="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             x:Class="TrainingDay.Views.MainPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ShowTrainingsItemsPage_Click"/>
+                    </StackLayout.GestureRecognizers>
+                    <ImageButton Source="main.png" CornerRadius="5" HeightRequest="80" WidthRequest="80" BorderColor="Gray" BorderWidth="1" 
+                             BackgroundColor="Transparent" HorizontalOptions="Center" Clicked="ShowTrainingsItemsPage_Click"/>
+                    <Label Text="{services:Translate StartWorkoutString}" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="Large">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShowTrainingsItemsPage_Click"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="1">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ShowHistoryItemsPage_Click"/>
+                    </StackLayout.GestureRecognizers>
+                    <ImageButton Source="train_hist.png" CornerRadius="5" HeightRequest="80" WidthRequest="80" BorderColor="Gray" BorderWidth="1" 
+                             BackgroundColor="Transparent" HorizontalOptions="Center" Clicked="ShowHistoryItemsPage_Click"/>
+                    <Label Text="{services:Translate HistoryTrainings}" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="Large">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShowHistoryItemsPage_Click"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="2">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ShowWeightControlPage_Click"/>
+                    </StackLayout.GestureRecognizers>
+                    <ImageButton Source="weight.png" CornerRadius="5" HeightRequest="80" WidthRequest="80" BorderColor="Gray" BorderWidth="1" 
+                             BackgroundColor="Transparent" HorizontalOptions="Center" Clicked="ShowWeightControlPage_Click"/>
+                    <Label Text="{services:Translate WeightControlString}" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="Large">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShowWeightControlPage_Click"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="3">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ShowSettingsPage_Click"/>
+                    </StackLayout.GestureRecognizers>
+                    <ImageButton Source="settings.png" CornerRadius="5" HeightRequest="80" WidthRequest="80" BorderColor="Gray" BorderWidth="1" 
+                             BackgroundColor="Transparent" HorizontalOptions="Center" Clicked="ShowSettingsPage_Click"/>
+                    <Label Text="{services:Translate SettingsString}" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="Large">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShowSettingsPage_Click"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+            </Grid>
+
+            <controls:AdMobView AdUnitId="ca-app-pub-8728883017081055/2677919170" VerticalOptions="End" BackgroundColor="Transparent" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

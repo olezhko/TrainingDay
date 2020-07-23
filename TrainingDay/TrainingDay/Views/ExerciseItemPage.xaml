@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:controls1="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             x:Class="TrainingDay.View.ExerciseItemPage" Title="{services:Translate ExerciseInformationString}" >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="accept.png" Clicked="Save_clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Frame BorderColor="Black" CornerRadius="2" HeightRequest="120" WidthRequest="120" HorizontalOptions="Center" Padding="0">
+                    <controls1:ImageCache ImageUrl="{Binding ExerciseImageUrl, Mode=TwoWay}"/>
+                </Frame>
+
+                <Editor Keyboard="Text" Text="{Binding ExerciseItemName, Mode=TwoWay}" FontSize="Large" Grid.Row="1" x:Name="NameEditor" AutoSize="TextChanges" Placeholder="{services:Translate NameString1}"/>
+                <Label Text="{Binding ExerciseItemName}" FontSize="Large" Grid.Row="1" x:Name="NameLabel" VerticalOptions="Start" IsVisible="False"/>
+
+
+                <controls1:WrapPanel x:Name="MusclesWrapPanel" Orientation="Horizontal" ItemsSource="{Binding Muscles, Mode=TwoWay}" Grid.Row="3" AddContent="{services:Translate MusclesString}">
+                    <controls1:WrapPanel.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="3" BackgroundColor="{Binding Color}" BorderColor="Gray" Padding="2,5">
+                                <Label Text="{Binding Name}" FontSize="Small"/>
+                            </Frame>
+                        </DataTemplate>
+                    </controls1:WrapPanel.ItemTemplate>
+                </controls1:WrapPanel>
+
+                <StackLayout Grid.Row="4">
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox x:Name="ExerciseByRepsAndWeightCheckBox"/>
+                        <Label FontSize="Medium" Text="{services:Translate ExerciseForTypeString}"/>
+                        <Label FontSize="Medium" Text="{services:Translate RepsAndWeightString}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox x:Name="ExerciseByTimeCheckBox"/>
+                        <Label FontSize="Medium" Text="{services:Translate ExerciseForTypeString}"/>
+                        <Label FontSize="Medium" Text="{services:Translate TimeString}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox x:Name="ExerciseByDistanceCheckBox"/>
+                        <Label FontSize="Medium" Text="{services:Translate ExerciseForTypeString}"/>
+                        <Label FontSize="Medium" Text="{services:Translate DistanceString}"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <Label Text="{services:Translate ShortDescriptionString1}" Grid.Row="5" FontSize="12" VerticalTextAlignment="Start" HorizontalOptions="StartAndExpand" FontAttributes="Bold"/>
+                <Editor Keyboard="Text" Text="{Binding ShortDescription, Mode=TwoWay}" FontSize="Small" Margin="0" AutoSize="TextChanges" Grid.Row="5" x:Name="DescriptionEditor"/>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

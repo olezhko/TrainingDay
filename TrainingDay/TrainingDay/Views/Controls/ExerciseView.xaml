@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
+             xmlns:controls1="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             xmlns:controls="clr-namespace:TrainingDay.Controls;assembly=TrainingDay"
+             xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
+             x:Class="TrainingDay.Views.Controls.ExerciseView"
+             x:Name="View">
+    <ContentView.BindingContext>
+        <viewModels:TrainingExerciseViewModel/>
+    </ContentView.BindingContext>
+    <ContentView.Content>
+        <ScrollView Orientation = "Vertical" VerticalOptions="FillAndExpand" Margin="5,0">
+            <Grid x:Name="MainGrid" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition Height="Auto"/>
+
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1" Margin="1" BackgroundColor="Gray" />
+                <Grid Grid.Row="3" Margin="1" BackgroundColor="Gray" />
+                <Grid Grid.Row="5" Margin="1" BackgroundColor="Gray" />
+                <Grid Grid.Row="7" Margin="1" BackgroundColor="Gray" />
+
+
+                <Frame Grid.Row="0" BorderColor="Black" CornerRadius="2" Grid.Column="0" HorizontalOptions="Center" Padding="0" VerticalOptions="Center">
+                    <controls1:ImageCache HeightRequest="100" WidthRequest="100" x:Name="ImageControl" ImageUrl="{Binding ExerciseImageUrl}">
+                        <controls1:ImageCache.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ImageTapped"/>
+                        </controls1:ImageCache.GestureRecognizers>
+                    </controls1:ImageCache>
+                </Frame>
+
+                <!--<Label Text="{services:Translate NameString1}" Grid.Row="1" FontSize="12" VerticalTextAlignment="Start" HorizontalOptions="StartAndExpand" FontAttributes="Bold"/>-->
+                <Editor Keyboard="Text" Text="{Binding ExerciseItemName}" FontSize="Large" Grid.Row="2" x:Name="NameEditor" AutoSize="TextChanges" VerticalOptions="Start"/>
+                <Label Text="{Binding ExerciseItemName}" FontSize="Large" Grid.Row="2" x:Name="NameLabel" VerticalOptions="Start" IsVisible="False"/>
+
+
+
+                <controls1:WrapPanel Grid.Row="4" x:Name="MusclesWrapPanel" Orientation="Horizontal" ItemsSource="{Binding Muscles}" IsEditableItems="True" Spacing="2" AddContent="{services:Translate MusclesString}">
+                    <controls1:WrapPanel.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="3" BackgroundColor="{Binding Color}" BorderColor="Gray" Padding="2,5">
+                                <Label Text="{Binding Name}" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                            </Frame>
+                        </DataTemplate>
+                    </controls1:WrapPanel.ItemTemplate>
+                </controls1:WrapPanel>
+
+                <StackLayout Orientation="Vertical" Grid.Row="6">
+                    <StackLayout Padding="0" Margin="5" Orientation="Vertical" IsVisible="{Binding Tags, Converter={StaticResource ExerciseTagExistsConverter},ConverterParameter={x:Static model:ExerciseTags.ExerciseByRepsAndWeight}}">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{services:Translate RepsAndWeightString}" FontSize="Medium" VerticalTextAlignment="Center" HorizontalOptions="Start" FontAttributes="Bold" />
+                            <ImageButton Source="add.png" HorizontalOptions="StartAndExpand" HeightRequest="40" WidthRequest="40" VerticalOptions="Fill" Padding="0" BackgroundColor="Transparent" Clicked="AddWeightAndRepsItem_Clicked"/>
+                        </StackLayout>
+
+                        <CollectionView ItemsSource="{Binding WeightAndRepsItems}" VerticalOptions="Start" x:Name="CollectionView" Margin="0">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" Span="2" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <controls1:RepsAndWeightControl Value="{Binding }" Margin="0" Padding="0" HorizontalOptions="Start" VerticalOptions="Start" DeleteRequestCommand="{Binding Source={x:Reference View}, Path=BindingContext.DeleteRequestCommand}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+
+                    <StackLayout Padding="0"  Margin="5" Orientation="Horizontal" IsVisible="{Binding Tags,Converter={StaticResource ExerciseTagExistsConverter},ConverterParameter={x:Static model:ExerciseTags.ExerciseByTime}}">
+                        <Label FontSize="Medium" Text="{services:Translate TimeString}" VerticalOptions="Center" FontAttributes="Bold" Margin="10,0,0,0"/>
+                        <Grid HorizontalOptions="Start">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label HorizontalOptions="Center" Grid.Row="0" Grid.Column="0" x:Name="HourPicker" Text="{Binding TimeHours,StringFormat='{0:D2}'}" WidthRequest="50" FontSize="Medium" HorizontalTextAlignment="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="HourGestureRecognizer_OnTapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                            <Label HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{services:Translate HourString}" Grid.Row="1" Grid.Column="0" Padding="0"/>
+                        </Grid>
+
+                        <Label HorizontalOptions="Start" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text=":" FontSize="Medium" Padding="0"/>
+                        <Grid HorizontalOptions="Start">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label HorizontalOptions="Center" Grid.Row="0" x:Name="MinutesPicker" Text="{Binding TimeMinutes,StringFormat='{0:D2}'}" WidthRequest="50" FontSize="Medium" HorizontalTextAlignment="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="MinuteGestureRecognizer_OnTapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                            <Label HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{services:Translate MinuteString}" Grid.Row="1" Padding="0"/>
+                        </Grid>
+
+                        <Label HorizontalOptions="Start" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text=":" FontSize="Medium" Padding="0"/>
+                        <Grid HorizontalOptions="Start">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label HorizontalOptions="Center" Grid.Row="0" x:Name="SecondsPicker" Text="{Binding TimeSeconds,StringFormat='{0:D2}'}" WidthRequest="50" FontSize="Medium" HorizontalTextAlignment="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="SecondGestureRecognizer_OnTapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{services:Translate SecondString}" Grid.Row="1" Padding="0"/>
+                        </Grid>
+                    </StackLayout>
+
+                    <StackLayout Padding="0" Margin="5" Orientation="Horizontal" IsVisible="{Binding Tags,Converter={StaticResource ExerciseTagExistsConverter},ConverterParameter={x:Static model:ExerciseTags.ExerciseByDistance}}">
+                        <Label FontSize="Medium" Text="{services:Translate DistanceString}" VerticalOptions="Center" FontAttributes="Bold" Margin="10,0,0,0"/>
+                        <controls:EntryWithDot HorizontalOptions="Start" HorizontalTextAlignment="Center" WidthRequest="50" Text="{Binding Distance}" Keyboard="Numeric"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <Frame Grid.Row="8" Style="{StaticResource FrameCellStyle}" Padding="0" Margin="0" x:Name="DescriptionFrame" VerticalOptions="FillAndExpand">
+                    <StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{services:Translate ShortDescriptionString1}" Padding="10" x:Name="DesctiptionLabel" BackgroundColor="green">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Description_Click"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Text="{services:Translate VideoString}" Padding="10" Grid.Column="1" x:Name="VideoLabel" BackgroundColor="DarkGray">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Video_Click"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+
+                        <Editor Text="{Binding ShortDescription}" x:Name="DescriptionEditor" IsReadOnly="False" />
+
+
+                        <Grid WidthRequest="300" HeightRequest="300"  IsVisible="False" x:Name="VideoActivityIndicatorGrid">
+                            <ActivityIndicator x:Name="VideoActivityIndicator" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        </Grid>
+
+                        <CarouselView x:Name="VideoCollectionView" IsVisible="False" IndicatorView="indicatorView" WidthRequest="300" HeightRequest="370">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Padding="10">
+                                        <Label Text="{Binding VideoTitle}" LineBreakMode="WordWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="Small"/>
+                                        <Label Text="{Binding VideoAuthor,StringFormat={services:Translate AuthorString}}" LineBreakMode="WordWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="Small"/>
+                                        <controls:FullScreenVideoWebView Source="{Binding WebViewData}" WidthRequest="300" HeightRequest="300" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                        <IndicatorView x:Name="indicatorView" IndicatorColor="DimGray" SelectedIndicatorColor="Green" HorizontalOptions="Center" IsVisible="{Binding Source={x:Reference VideoCollectionView}, Path=IsVisible}" Margin="10"/>
+                    </StackLayout>
+
+
+
+                </Frame>
+            </Grid>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:controls1="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             x:Name="Page" x:Class="TrainingDay.View.TrainingImplementPage" BindingContext="{x:Reference Name=Page}" NavigationPage.HasBackButton="False" >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding CurrentTime,StringFormat={services:Translate CurrentTimeString}}" Command="{Binding ViewFullScreenTimeCommand}"/>
+        <ToolbarItem IconImageSource="add.png" Command="{Binding AddExercisesCommand}" Order="Primary" Text="{services:Translate AddExercisesToTrainingString}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <controls1:StepProgressBar SteppedColor="{DynamicResource SubtitleColor}" StepColor="{DynamicResource SeparatorColor}" ItemsSource="{Binding Items}" x:Name="StepProgressBarControl">
+                <controls1:StepProgressBar.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label IsVisible="{Binding IsSuperSet}" Text="{services:Translate SuperSetString}" FontSize="Large" HorizontalTextAlignment="Center" TextColor="Orange"/>
+                            <ListView HasUnevenRows="True" ItemsSource="{Binding SuperSetItems}" SeparatorColor="{DynamicResource SeparatorColor}" SeparatorVisibility="None" SelectionMode="None">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <controls1:ExerciseView BindingContext="{Binding }" Margin="5"/>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </DataTemplate>
+                </controls1:StepProgressBar.ItemTemplate>
+            </controls1:StepProgressBar>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="CancelTrainingClicked"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image VerticalOptions="Center" Source="stop.png" HorizontalOptions="Center" HeightRequest="40" WidthRequest="40"/>
+                </StackLayout>
+                <StackLayout Grid.Row="0" Grid.Column="1">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="FinishButtonClicked"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image VerticalOptions="Center" x:Name="FinishButton" Source="done.png" HorizontalOptions="Center" HeightRequest="40" WidthRequest="40"/>
+                </StackLayout>
+            </Grid>
+
+            <Label IsVisible="{Binding IsViewFullScreenTime}" Text="{Binding CurrentTime,StringFormat={services:Translate CurrentTimeString}}" 
+                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="40" Grid.Row="0" Grid.RowSpan="2" BackgroundColor="{DynamicResource ContentPageBackgroundColor}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ViewFullScreenTimeCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <controls1:AdMobView BackgroundColor="Transparent" Grid.Row="2" x:Name="PromoView"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

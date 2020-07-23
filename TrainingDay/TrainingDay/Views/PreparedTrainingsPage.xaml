@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
+             xmlns:controls1="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             x:Class="TrainingDay.Views.PreparedTrainingsPage" Title="{services:Translate AddTrainingString}">
+    <ContentPage.BindingContext>
+        <viewModels:PreparedTrainingsPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ListView x:Name="Carosel" ItemsSource="{Binding PreparedTrainingsCollection}" HasUnevenRows="True" BackgroundColor="Transparent" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell x:Name="viewCell">
+                            <Frame Style="{StaticResource FrameCellStyle}"  BackgroundColor="{DynamicResource ListItemBackgroundColor}" VerticalOptions="Fill">
+                                <StackLayout Orientation="Vertical" VerticalOptions="Fill" Padding="10">
+                                    <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    <Image Source="{Binding TrainingImageUrl}" HorizontalOptions="Fill" VerticalOptions="Start" HeightRequest="150" WidthRequest="150" Aspect="AspectFit"/>
+
+                                    <!--<controls1:WrapPanel Orientation="Horizontal" ItemsSource="{Binding MainMuscles}" IsEditableItems="False" VerticalOptions="StartAndExpand" HorizontalOptions="Center">
+                                        <controls1:WrapPanel.ItemTemplate>
+                                            <DataTemplate>
+                                                <Frame CornerRadius="3" BackgroundColor="{Binding Color}" BorderColor="Gray" Padding="5">
+                                                    <Label Text="{Binding Name}" FontSize="Small" TextColor="Black"/>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </controls1:WrapPanel.ItemTemplate>
+                                    </controls1:WrapPanel>-->
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Behaviors>
+                    <services:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemSelectedCommand}"/>
+                </ListView.Behaviors>
+            </ListView>
+
+            <!--<CollectionView ItemsSource="{Binding PreparedTrainingsCollection}" BackgroundColor="Transparent">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource FrameCellStyle}" BackgroundColor="Transparent" VerticalOptions="Fill" Padding="10">
+                            <StackLayout Orientation="Vertical" VerticalOptions="Fill" >
+                                <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Start"/>
+                                <Image Source="{Binding TrainingImageUrl}" HorizontalOptions="Fill" VerticalOptions="Start" HeightRequest="150" WidthRequest="150" Aspect="AspectFit"/>
+                                --><!--<controls1:WrapPanel Orientation="Horizontal" ItemsSource="{Binding MainMuscles}" IsEditableItems="False" VerticalOptions="StartAndExpand" HorizontalOptions="Center">
+                                    <controls1:WrapPanel.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame CornerRadius="3" BackgroundColor="{Binding Color}" BorderColor="Gray" Padding="5">
+                                                <Label Text="{Binding Name}" FontSize="Small" TextColor="Black"/>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </controls1:WrapPanel.ItemTemplate>
+                                </controls1:WrapPanel>--><!--
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.Behaviors>
+                    <services:EventToCommandBehavior EventName="SelectionChanged" Command="{Binding ItemSelectedCommand}"/>
+                </CollectionView.Behaviors>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" />
+                </CollectionView.ItemsLayout>
+            </CollectionView>-->
+
+            <Button Grid.Row="1" Command="{Binding CreateNewTrainingCommand}" Text="{services:Translate CreateNewString}" CornerRadius="5" VerticalOptions="End"  Margin="5"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

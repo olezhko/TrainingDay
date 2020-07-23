@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             x:Class="TrainingDay.Old.FilterPage"
+             Title="{services:Translate FilterString}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="accept.png" Clicked="AcceptFilter_Click"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout HorizontalOptions="Fill" >
+                <Grid VerticalOptions="Fill" HorizontalOptions="Fill" x:Name="ImageGrid">
+                    <Image Source="muscle.jpg" x:Name="MuscleImage" Aspect="AspectFit" HeightRequest="514" WidthRequest="496" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <forms:SKCanvasView x:Name="skiaView" PaintSurface="OnPaintSurface"/>
+                </Grid>
+            </StackLayout>
+
+            <ListView x:Name="MusclesListView" VerticalOptions="FillAndExpand" 
+                      SeparatorVisibility="None" SelectionMode="None" BackgroundColor="{DynamicResource FilterBackground}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Switch IsToggled="{Binding IsChecked}" />
+                                <Label Text="{Binding Text}" VerticalTextAlignment="Center"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

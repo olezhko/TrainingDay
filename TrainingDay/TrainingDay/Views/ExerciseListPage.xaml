@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
+             xmlns:controls2="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             xmlns:androidSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             x:Class="TrainingDay.Views.ExerciseListPage" Title="{services:Translate ExercisesString}" IconImageSource="main.png">
+    <ContentPage.BindingContext>
+        <viewModels:ExerciseListPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="remove.png" Command="{Binding DeleteExerciseCommand}" Order="Primary" Text="{services:Translate RemoveSelectedString}" x:Name="RemoveFromBaseMenu"/>
+        <ToolbarItem IconImageSource="accept.png" Command="{Binding ChoseExercisesCommand}" Order="Primary" Text="{services:Translate AddSelectedExercisesString}" CommandParameter="{Binding}" x:Name="AcceptChouseMenu"/>
+        <ToolbarItem IconImageSource="filter.png" Command="{Binding ViewFilterWindowCommand}" Order="Primary" Text="{services:Translate FilterString}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar Placeholder="{services:Translate SearchByNameString}" TextChanged="SearchBar_OnTextChanged" x:Name="SearchBar" HeightRequest="46" Text="{Binding NameFilter}" />
+            <controls2:StateContainer State="{Binding State}">
+                <controls2:StateCondition State="Loading">
+                    <StackLayout WidthRequest="100" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Center">
+                        <ActivityIndicator IsRunning="True" />
+                    </StackLayout>
+                </controls2:StateCondition>
+
+                <controls2:StateCondition State="NoData">
+                    <StackLayout VerticalOptions="FillAndExpand">
+                        <Label Text="{services:Translate NoExercisesNeedAddNewString}" FontSize="20" HorizontalTextAlignment="Center" VerticalOptions="FillAndExpand"/>
+                        <Image Source="add.png" HorizontalOptions="Center" VerticalOptions="End" HeightRequest="80" WidthRequest="80">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AddExercisesButton_Clicked"  />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                </controls2:StateCondition>
+
+                <controls2:StateCondition State="Normal">
+                    <Grid VerticalOptions="FillAndExpand">
+                        <StackLayout Orientation="Vertical">
+                            <ListView ItemsSource="{Binding Items}" SeparatorVisibility="None" HasUnevenRows="True" ItemTapped="ListView_OnItemTapped" CachingStrategy="RecycleElementAndDataTemplate" x:Name="ExercisesListView" 
+                                      androidSpecific:ListView.IsFastScrollEnabled="True">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Frame Style="{StaticResource FrameCellStyle}"  BackgroundColor="{DynamicResource ListItemBackgroundColor}">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <CheckBox IsChecked="{Binding IsSelected}" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                                    <Frame VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="60" WidthRequest="60" Grid.Row="0" Grid.Column="1" Padding="0" Margin="0">
+                                                        <controls2:ImageCache ImageUrl="{Binding ExerciseImageUrl}" HeightRequest="60" WidthRequest="60"/>
+                                                    </Frame>
+
+                                                    <StackLayout Orientation="Vertical" Grid.Column="2" >
+                                                        <Label Text="{Binding ExerciseItemName}" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                                                        <controls2:WrapLayout ItemsSource="{Binding Muscles}" Orientation="Horizontal" HorizontalOptions="Center">
+                                                            <controls2:WrapLayout.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <Frame CornerRadius="3" BackgroundColor="{Binding Color}" BorderColor="Gray" Padding="2,5">
+                                                                        <Label Text="{Binding Name}" FontSize="Micro" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                                                                    </Frame>
+                                                                </DataTemplate>
+                                                            </controls2:WrapLayout.ItemTemplate>
+                                                        </controls2:WrapLayout>
+                                                    </StackLayout>
+                                                </Grid>
+                                            </Frame>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            <controls2:AdMobView AdUnitId="ca-app-pub-8728883017081055/2677919170" VerticalOptions="End" BackgroundColor="Transparent" />
+                        </StackLayout>
+                        <Image Source="add.png" Margin="0,0,20,20" HorizontalOptions="End" VerticalOptions="End" HeightRequest="80" WidthRequest="80" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AddExercisesButton_Clicked"  />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </controls2:StateCondition>
+            </controls2:StateContainer>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

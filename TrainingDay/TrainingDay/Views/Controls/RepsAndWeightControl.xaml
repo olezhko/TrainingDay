@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:TrainingDay.Controls;assembly=TrainingDay"
+             xmlns:controls1="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             mc:Ignorable="d"
+             x:Class="TrainingDay.Views.Controls.RepsAndWeightControl" x:Name="ContentView">
+    <ContentView.BindingContext>
+        <controls1:WeightAndReps/>
+    </ContentView.BindingContext>
+    <ContentView.Content>
+        <Grid Padding="0" Margin="0">
+            <Frame Style="{StaticResource FrameCellStyle}" Padding="0">
+                <Grid  Margin="0" Padding="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Entry Text="{Binding Repetitions,Mode=TwoWay}" Keyboard="Numeric" MaxLength="3" Margin="0" FontSize="Medium" HorizontalTextAlignment="Center" />
+                    <controls:EntryWithDot Text="{Binding WeightString,Mode=TwoWay}" Grid.Column="2" Keyboard="Numeric" MaxLength="4" Margin="0" FontSize="Medium" HorizontalTextAlignment="Center"/>
+
+                    <BoxView Grid.Column="1" Color="{DynamicResource SeparatorColor}" HeightRequest="40" VerticalOptions="Center" WidthRequest="2"/>
+
+                    <ImageButton Source="clear.png" BackgroundColor="Gray" HorizontalOptions="Center" HeightRequest="40" WidthRequest="40"
+                                 VerticalOptions="Fill" Grid.Column="3" Clicked="DeleteButton_Clicked" Margin="0">
+                    </ImageButton>
+                </Grid>
+            </Frame>
+        </Grid>
+
+    </ContentView.Content>
+</ContentView>
