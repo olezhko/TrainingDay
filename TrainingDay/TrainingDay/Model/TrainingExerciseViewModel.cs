@@ -1,15 +1,12 @@
-﻿using System;
+﻿using Microsoft.AppCenter.Crashes;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
-using System.Windows.Input;
-using Microsoft.AppCenter.Crashes;
-using Newtonsoft.Json;
 using TrainingDay.Model;
 using TrainingDay.Services;
 using TrainingDay.Views.Controls;
-using Xamarin.Forms;
 
 namespace TrainingDay.ViewModels
 {
@@ -17,6 +14,28 @@ namespace TrainingDay.ViewModels
     public class TrainingExerciseViewModel : BaseViewModel
     {
         #region Prop
+        private bool isSelected;
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool notFinished = true;
+        public bool IsNotFinished
+        {
+            get => notFinished;
+            set
+            {
+                notFinished = value;
+                OnPropertyChanged();
+            }
+        }
+
         public int TrainingExerciseId { get; set; }
         public int ExerciseId { get; set; }
         public int TrainingId { get; set; }
@@ -157,16 +176,14 @@ namespace TrainingDay.ViewModels
             } }
         #endregion
 
+        public TrainingExerciseViewModel() { }
+
         public TrainingExerciseViewModel(Exercise exercise, TrainingExerciseComm comm)
         {
             try
             {
                 ExerciseId = exercise.Id;
-                if (!string.IsNullOrEmpty(exercise.MusclesString))
-                    Muscles = new ObservableCollection<MuscleViewModel>(MusclesConverter.ConvertFromStringToList(exercise.MusclesString));
-                else
-                    Muscles = new ObservableCollection<MuscleViewModel>(MusclesConverter.ConvertFromStringToList(MusclesConverter.ConvertToString(exercise.Muscles)));
-                
+                Muscles = new ObservableCollection<MuscleViewModel>(MusclesConverter.ConvertFromStringToList(exercise.MusclesString));
                 ShortDescription = exercise.Description;
                 ExerciseItemName = exercise.ExerciseItemName;
                 ExerciseImageUrl = exercise.ExerciseImageUrl;
@@ -175,45 +192,12 @@ namespace TrainingDay.ViewModels
                 TrainingExerciseId = comm.Id;
                 SuperSetId = comm.SuperSetId;
                 Tags = ExerciseTagExtension.ConvertFromIntToList(exercise.TagsValue);
-
-                if (!string.IsNullOrEmpty(comm.WeightAndRepsString) && !string.IsNullOrWhiteSpace(comm.WeightAndRepsString) && comm.WeightAndRepsString.Length > 0)
-                {
-                    if (Tags.Contains(ExerciseTags.ExerciseByRepsAndWeight))
-                        WeightAndRepsItems = JsonConvert.DeserializeObject<ObservableCollection<WeightAndReps>>(comm.WeightAndRepsString);
-
-                    if ((Tags.Contains(ExerciseTags.ExerciseByTime) || Tags.Contains(ExerciseTags.ExerciseByDistance)))
-                    {
-                        var obj = JsonConvert.DeserializeObject<(TimeSpan, double)>(comm.WeightAndRepsString);
-                        Distance = obj.Item2;
-                        Time = obj.Item1;
-                    }
-                }
+                
+                ExerciseTagExtension.ConvertJsonBack(this, comm.WeightAndRepsString);
             }
             catch (Exception e)
             {
                 Crashes.TrackError(e);
-            }
-        }
-
-        private bool isSelected;
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set
-            {
-                isSelected = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private bool notFinished = true;
-        public bool IsNotFinished
-        {
-            get => notFinished;
-            set
-            {
-                notFinished = value;
-                OnPropertyChanged();
             }
         }
 
@@ -245,26 +229,9 @@ namespace TrainingDay.ViewModels
             };
         }
 
-
-
-
-
-
-
-
         public TrainingExerciseViewModel Clone()
         {
             return new TrainingExerciseViewModel(GetExercise(),GetTrainingExerciseComm());
-        }
-
-        public TrainingExerciseViewModel()
-        {
-        }
-
-        public ICommand DeleteRequestCommand => new Command<WeightAndReps>(DeleteRequestWeightAndReps);
-        private void DeleteRequestWeightAndReps(WeightAndReps sender)
-        {
-            WeightAndRepsItems.Remove(sender);
         }
     }
 }

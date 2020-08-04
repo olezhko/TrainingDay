@@ -70,7 +70,7 @@
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <controls1:RepsAndWeightControl Value="{Binding }" Margin="0" Padding="0" HorizontalOptions="Start" VerticalOptions="Start" DeleteRequestCommand="{Binding Source={x:Reference View}, Path=BindingContext.DeleteRequestCommand}" />
+                                    <controls1:RepsAndWeightControl Value="{Binding }" Margin="0" Padding="0" HorizontalOptions="Start" VerticalOptions="Start" DeleteRequestCommand="{Binding Source={x:Reference View}, Path=DeleteRequestCommand}" />
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
@@ -149,8 +149,7 @@
                             </Label>
                         </Grid>
 
-                        <Editor Text="{Binding ShortDescription}" x:Name="DescriptionEditor" IsReadOnly="False" />
-
+                        <Editor Text="{Binding ShortDescription}" x:Name="DescriptionEditor" IsReadOnly="False"/>
 
                         <Grid WidthRequest="300" HeightRequest="300"  IsVisible="False" x:Name="VideoActivityIndicatorGrid">
                             <ActivityIndicator x:Name="VideoActivityIndicator" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" HorizontalOptions="Center"/>

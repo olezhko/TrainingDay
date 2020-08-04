@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
              xmlns:controls1="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
-             x:Class="TrainingDay.Views.TrainingExerciseItemPage" Title="{services:Translate ExerciseInformationString}" >
+             x:Class="TrainingDay.Views.TrainingExerciseItemPage" >
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="accept.png" Clicked="Save_clicked" />
     </ContentPage.ToolbarItems>

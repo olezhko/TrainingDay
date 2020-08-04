@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TrainingDay.Resources;
 using TrainingDay.Services;
 using TrainingDay.ViewModels;
@@ -223,6 +224,14 @@ namespace TrainingDay.Views.Controls
             {
                 Debug.WriteLine(ex);
             }
+        }
+
+
+        public ICommand DeleteRequestCommand => new Command<WeightAndReps>(DeleteRequestWeightAndReps);
+        private void DeleteRequestWeightAndReps(WeightAndReps sender)
+        {
+            var item = ((TrainingExerciseViewModel)BindingContext);
+            item.WeightAndRepsItems.Remove(sender);
         }
     }
 }

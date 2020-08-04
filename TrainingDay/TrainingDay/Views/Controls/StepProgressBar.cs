@@ -222,7 +222,7 @@ namespace TrainingDay.Views.Controls
             var children = headersStackLayout.Children.FirstOrDefault(p => (Convert.ToInt32(p.ClassId) == StepSelected + 1)) as Button;
             if (children != null)
             {
-                children.BackgroundColor = Color.Green;
+                children.BackgroundColor = Color.LightGreen;
             }
         }
 

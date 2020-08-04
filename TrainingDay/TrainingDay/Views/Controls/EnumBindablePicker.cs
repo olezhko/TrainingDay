@@ -63,7 +63,7 @@ namespace TrainingDay.Views.Controls
             {
                 var enumMember = value.GetType().GetMember(value.ToString()).FirstOrDefault();
                 var c2 = enumMember.GetCustomAttributes().First();
-                var attr = c2 as TrainingDay.ViewModels.DescriptionAttribute;
+                var attr = c2 as TrainingDay.Model.DescriptionAttribute;
                 var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
 
                 string res =  ci.Name == "ru" || ci.Name == "ru-RU" ? 

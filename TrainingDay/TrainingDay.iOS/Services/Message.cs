@@ -43,6 +43,16 @@ namespace TrainingDay.iOS.Services
             ShowAlert(message, SHORT_DELAY);
         }
 
+        public void ShowNotification(int id, string title, string message, int openedPage)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CancelNotification(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void ShowNotification(string title, string message, int openedPage)
         {
         }

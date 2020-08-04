@@ -61,6 +61,7 @@ namespace TrainingDay.Views
         public void LoadExercise(TrainingExerciseViewModel item)
         {
             _itemClone = item.Clone();
+            Title = item.ExerciseItemName;
             ExerciseView.BindingContext = item;
         }
 

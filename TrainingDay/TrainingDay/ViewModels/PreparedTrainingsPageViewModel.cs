@@ -147,7 +147,7 @@ namespace TrainingDay.ViewModels
             {
                 try
                 {
-                    var exMuscles = MusclesConverter.ConvertFromStringToList(baseExercise.MusclesString, baseExercise.Muscles);
+                    var exMuscles = MusclesConverter.ConvertFromStringToList(baseExercise.MusclesString);
                     //var sub = exMuscles.Where(a=>muscles.Contains(a));
                     var sub = new List<MuscleViewModel>();
                     foreach (var muscleViewModel in exMuscles)

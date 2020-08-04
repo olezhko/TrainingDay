@@ -49,15 +49,16 @@
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="CancelTrainingClicked"/>
                     </StackLayout.GestureRecognizers>
-                    <Image VerticalOptions="Center" Source="stop.png" HorizontalOptions="Center" HeightRequest="40" WidthRequest="40"/>
+                    <Image VerticalOptions="Center" Source="clear.png" HorizontalOptions="Center" HeightRequest="40" WidthRequest="40" BackgroundColor="Red"/>
                 </StackLayout>
                 <StackLayout Grid.Row="0" Grid.Column="1">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="FinishButtonClicked"/>
                     </StackLayout.GestureRecognizers>
-                    <Image VerticalOptions="Center" x:Name="FinishButton" Source="done.png" HorizontalOptions="Center" HeightRequest="40" WidthRequest="40"/>
+                    <Image VerticalOptions="Center" x:Name="FinishButton" Source="accept.png" HorizontalOptions="Center" HeightRequest="40" WidthRequest="40" BackgroundColor="LightGreen"/>
                 </StackLayout>
             </Grid>
+
 
             <Label IsVisible="{Binding IsViewFullScreenTime}" Text="{Binding CurrentTime,StringFormat={services:Translate CurrentTimeString}}" 
                    VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="40" Grid.Row="0" Grid.RowSpan="2" BackgroundColor="{DynamicResource ContentPageBackgroundColor}">

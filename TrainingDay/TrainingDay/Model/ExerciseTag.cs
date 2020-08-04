@@ -141,7 +141,7 @@ namespace TrainingDay.Model
 
         public static void ConvertJsonBack(TrainingExerciseViewModel viewmodel,string value)
         {
-            if (string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value) || value.Length < 0)
             {
                 return;
             }

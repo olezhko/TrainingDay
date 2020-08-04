@@ -21,7 +21,7 @@ namespace TrainingDay.ViewModels
     {
         public UpdatesPageViewModel()
         {
-            VersionSelected = "1.0.4.15";
+            VersionSelected = "1.0.5.0";
             UpdatesVersionList = new ObservableCollection<string>();
             UpdatesCollection = new ObservableCollection<UpdateViewModel>();
             LoadAllUpdates();
@@ -77,6 +77,7 @@ namespace TrainingDay.ViewModels
                         UpdatesVersionList.Add(baseUpdate.Version);
                     }
                 }
+
                 OnPropertyChanged(nameof(UpdatesVersionList));
             }
             catch (Exception e)
@@ -85,10 +86,8 @@ namespace TrainingDay.ViewModels
             }
         }
 
-
         private void ConvertFromResource(List<UpdateItem> items)
         {
-           
             foreach (var updateItem in items)
             {
                 try
@@ -137,6 +136,11 @@ namespace TrainingDay.ViewModels
         private void VersionChanged()
         {
             UpdatesCollection = new ObservableCollection<UpdateViewModel>(_baseUpdatesCollection.Where(item => item.Model.Version == VersionSelected));
+
+            if (UpdatesCollection.Count == 0)
+            {
+                Application.Current.MainPage = new NavigationPage(new MainPage());
+            }
             OnPropertyChanged(nameof(UpdatesCollection));
         }
 

@@ -33,7 +33,7 @@ namespace TrainingDay.Droid
 
             base.OnCreate(savedInstanceState);
             Xamarin.Forms.Forms.SetFlags(new string[]
-                {"CarouselView_Experimental", "IndicatorView_Experimental", "Expander_Experimental"});
+                {"CarouselView_Experimental", "IndicatorView_Experimental", "Expander_Experimental","SwipeView_Experimental"});
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Android.Glide.Forms.Init(this, debug: true);
@@ -83,10 +83,8 @@ namespace TrainingDay.Droid
             }
             else
             {
-                if (PackageManager.CheckPermission(Manifest.Permission.ReadExternalStorage, PackageName) !=
-                    Permission.Granted
-                    && PackageManager.CheckPermission(Manifest.Permission.WriteExternalStorage, PackageName) !=
-                    Permission.Granted)
+                if (PackageManager.CheckPermission(Manifest.Permission.ReadExternalStorage, PackageName) != Permission.Granted
+                    && PackageManager.CheckPermission(Manifest.Permission.WriteExternalStorage, PackageName) != Permission.Granted)
                 {
                     var permissions = new string[]
                         {Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage};

@@ -17,7 +17,7 @@ namespace TrainingDay
     public partial class App : Application
     {
         public const string DATABASE_NAME = "exercise.db";
-        public const string Version = "1.0.4.15";
+        public const string Version = "1.0.5.0";
         private static Repository database;
 
         private static object lockBase = new object();
@@ -62,12 +62,12 @@ namespace TrainingDay
                 Crashes.TrackError(ex);
             };
 
-            var last = Database.GetUpdates();
-            if (last == null || Version.CompareTo(last.Version) > 0)
-            {
-                MainPage = new UpdatesPage();
-            }
-            else
+            //var last = Database.GetUpdates();
+            //if (last == null || Version.CompareTo(last.Version) > 0)
+            //{
+            //    MainPage = new UpdatesPage();
+            //}
+            //else
             {
                 //MainPage = new MainPage();
                 MainPage = new NavigationPage(new MainPage());

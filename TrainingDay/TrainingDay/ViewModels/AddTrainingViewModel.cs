@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Newtonsoft.Json;
 using TrainingDay.Resources;
 using TrainingDay.Services;
-using TrainingDay.View;
 using TrainingDay.Views;
-using TrainingDay.Views.Controls;
 using Xamarin.Forms;
 
 namespace TrainingDay.ViewModels

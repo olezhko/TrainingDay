@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.AppCenter.Crashes;
+using TrainingDay.Model;
 using TrainingDay.Old;
 using TrainingDay.Resources;
 using TrainingDay.Services;

@@ -65,9 +65,7 @@ namespace TrainingDay.ViewModels
                             var ex = new TrainingExerciseViewModel()
                             {
                                 ExerciseItemName = trainingExercise.ExerciseName,
-                                Muscles = new ObservableCollection<MuscleViewModel>(!string.IsNullOrWhiteSpace(trainingExercise.MusclesString)
-                                        ? MusclesConverter.ConvertFromStringToList(trainingExercise.MusclesString)
-                                        : MusclesConverter.ConvertFromStringToList(MusclesConverter.ConvertToString(trainingExercise.Muscles))),
+                                Muscles = new ObservableCollection<MuscleViewModel>(MusclesConverter.ConvertFromStringToList(trainingExercise.MusclesString)),
                                 ExerciseImageUrl = trainingExercise.ExerciseImageUrl,
                                 OrderNumber = trainingExercise.OrderNumber,
                                 ShortDescription = trainingExercise.Description,

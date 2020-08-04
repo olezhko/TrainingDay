@@ -72,7 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="glidex.forms">
-      <Version>2.0.1.394</Version>
+      <Version>2.1.0.470</Version>
     </PackageReference>
     <PackageReference Include="OxyPlot.Xamarin.Android">
       <Version>1.0.0</Version>
@@ -81,10 +81,10 @@
       <Version>1.0.0</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>1.68.0</Version>
+      <Version>2.80.1</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>1.68.0</Version>
+      <Version>2.80.1</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.5.231</Version>
@@ -102,7 +102,7 @@
       <Version>1.1.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
-      <Version>1.3.1</Version>
+      <Version>1.5.3.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Facebook.Android">
       <Version>5.11.2</Version>
@@ -110,23 +110,23 @@
     <PackageReference Include="Xamarin.Firebase.Messaging">
       <Version>71.1740.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1239" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.GooglePlayServices.Ads">
-      <Version>71.1720.1</Version>
+      <Version>71.1720.4</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Ads.Lite">
-      <Version>71.1720.1</Version>
+      <Version>71.1720.4</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Base">
-      <Version>71.1610.1</Version>
+      <Version>71.1610.4</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Tasks">
-      <Version>71.1601.0</Version>
+      <Version>71.1601.4</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

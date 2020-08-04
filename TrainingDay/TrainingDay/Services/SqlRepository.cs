@@ -53,12 +53,7 @@ namespace TrainingDay.Services
 
         public int TrainingId { get; set; }
         public int ExerciseId { get; set; }
-
         public int OrderNumber { get; set; }
-        //[Obsolete] public double Weight { get; set; } // in kilograms
-        //[Obsolete] public int CountOfApproches { get; set; }
-        //[Obsolete] public int CountOfTimes { get; set; }
-
         public int SuperSetId { get; set; }
         public string WeightAndRepsString { get; set; }
     }
@@ -71,7 +66,6 @@ namespace TrainingDay.Services
 
         public string ExerciseItemName { get; set; }
         public string Description { get; set; }
-        public int Muscles { get; set; }
         public string ExerciseImageUrl { get; set; }
         public string Version { get; set; }
         public string MusclesString { get; set; } // text, by "," enum collection
@@ -105,13 +99,9 @@ namespace TrainingDay.Services
         public int LastTrainingId { get; set; }
         public string ExerciseName { get; set; }
         public string Description { get; set; }
-        public int Muscles { get; set; }
         public string ExerciseImageUrl { get; set; }
 
         public int OrderNumber { get; set; }
-        [Obsolete] public double Weight { get; set; }
-        [Obsolete] public int CountOfApproches { get; set; }
-        [Obsolete] public int CountOfTimes { get; set; }
         public int SuperSetId { get; set; }
 
         public string MusclesString { get; set; }
@@ -197,8 +187,6 @@ namespace TrainingDay.Services
                 }
                 else
                 {
-                    CorrectExercises();
-
                     foreach (var exercise in exer)
                     {
                         var versionSync = new Version(MaxVersion);
@@ -262,78 +250,6 @@ namespace TrainingDay.Services
                 return new ObservableCollection<Exercise>();
             }
         }
-
-        #region CorrectBaseMethods
-        private void CorrectExercises()
-        {
-            Exception ex = null;
-            var preInstallExercises = InitExercises(); // get all based installed exercises
-            var baseExercises = GetExerciseItems(); // get all own exercises from sql
-            foreach (var baseExercise in baseExercises)
-            {
-                try
-                {
-                    var init = preInstallExercises.First(a => a.ExerciseImageUrl == baseExercise.ExerciseImageUrl || a.ExerciseItemName == baseExercise.ExerciseItemName);
-
-                    if (string.IsNullOrEmpty(baseExercise.MusclesString))
-                    {
-                        if (string.IsNullOrEmpty(baseExercise.ExerciseImageUrl)) // new created exercise
-                        {
-                            baseExercise.MusclesString = MusclesConverter.ConvertToString(baseExercise.Muscles);
-                        }
-                        else
-                        {
-                            try
-                            {
-                                baseExercise.MusclesString = init.MusclesString;
-                            }
-                            catch (Exception e)
-                            {
-                                // ignored
-                            }
-                        }
-
-                        SaveExerciseItem(baseExercise);
-                    }
-
-                    if (baseExercise.TagsValue == 0)
-                    {
-                        try
-                        {
-                            baseExercise.TagsValue = init.TagsValue;
-                            SaveExerciseItem(baseExercise);
-                        }
-                        catch (Exception e)
-                        {
-
-                        }
-                    }
-
-                    FillCodeNum(baseExercise, init);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    ex = e;
-                }
-            }
-
-            if (ex != null)
-            {
-                Crashes.TrackError(ex);
-            }
-        }
-
-        private void FillCodeNum(Exercise ex, Exercise prepared)
-        {
-            var tags = ExerciseTagExtension.ConvertFromIntToList(ex.TagsValue);
-            if (tags.Contains(ExerciseTags.DatabaseExercise) && ex.CodeNum == 0)
-            {
-                ex.CodeNum = prepared.CodeNum;
-                SaveExerciseItem(ex);
-            }
-        }
-        #endregion
 
         public int GetLastInsertId()
         {

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using TrainingDay.Model;
 using TrainingDay.Services;
 using TrainingDay.ViewModels;
 using Xamarin.Forms;
@@ -315,12 +316,7 @@ namespace TrainingDay.Views.Controls
         {
             if (picker.SelectedIndex >= 0)
             {
-                var newMuscle = new MuscleViewModel()
-                {
-                    Id = picker.SelectedIndex,
-                    Color = MusclesConverter.Colors[picker.SelectedIndex],
-                    Name = EnumBindablePicker<MusclesEnum>.GetEnumDescription(picker.SelectedItem)
-                };
+                var newMuscle = new MuscleViewModel((MusclesEnum)picker.SelectedIndex);
 
                 var items = (ObservableCollection<MuscleViewModel>)(ItemsSource as IList);
                 if (!items.Any(a => a.Id == newMuscle.Id))

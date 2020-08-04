@@ -3,6 +3,7 @@ using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using TrainingDay.Model;
 using TrainingDay.ViewModels;
 using TrainingDay.Views.Controls;
 using Xamarin.Forms;

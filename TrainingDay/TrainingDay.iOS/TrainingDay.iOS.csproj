@@ -72,7 +72,6 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Services\AdInterstitial_iOS.cs" />
     <Compile Include="Services\AdMobViewRenderer.cs" />
-    <Compile Include="Services\DragAndDropViewCellRenderer.cs" />
     <Compile Include="Services\Localize.cs" />
     <Compile Include="Services\Message.cs" />
     <Compile Include="Services\Sqlite.cs" />
@@ -151,24 +150,30 @@
       <Version>1.0.0</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>1.68.0</Version>
+      <Version>2.80.1</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>1.68.0</Version>
+      <Version>2.80.1</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.5.231</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfListView">
+      <Version>17.4.0.47</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugins.Settings">
       <Version>3.1.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
-      <Version>1.3.1</Version>
+      <Version>1.5.3.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Facebook.iOS">
+      <Version>5.12.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.iOS.AdMob">
-      <Version>7.38.0</Version>
+      <Version>7.47.0</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991477" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1239" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

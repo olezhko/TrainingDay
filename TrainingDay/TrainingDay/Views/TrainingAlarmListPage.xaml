@@ -27,7 +27,7 @@
                     <DataTemplate>
                         <controls1:AlarmListCell x:Name="viewCell" >
                             <controls1:AlarmListCell.ContextActions>
-                                <MenuItem Icon="remove.png" Command="{Binding Source={x:Reference listView}, Path=BindingContext.DeleteAlarmCommand}" 
+                                <MenuItem IconImageSource="remove.png" Command="{Binding Source={x:Reference listView}, Path=BindingContext.DeleteAlarmCommand}" 
                                           CommandParameter="{Binding Source={x:Reference viewCell}}" IsDestructive="true"/>
                             </controls1:AlarmListCell.ContextActions>
                         </controls1:AlarmListCell>
@@ -53,6 +53,6 @@
                     </Image.GestureRecognizers>
                 </Image>
             </StackLayout>
-           </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

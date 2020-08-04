@@ -1,18 +1,24 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using TrainingDay.Services;
+using TrainingDay.ViewModels;
 using TrainingDay.Views.Controls;
 using Xamarin.Forms;
 
-namespace TrainingDay.ViewModels
+namespace TrainingDay.Model
 {
     public class MuscleViewModel : BaseViewModel
     {
+        private static List<Color> _colors = new List<Color>(){
+            Color.Red,Color.Green,Color.Gold,
+            Color.SlateBlue,Color.Teal,Color.Gray,
+            Color.DodgerBlue,Color.Orange,Color.Purple,
+            Color.Olive,Color.SandyBrown,Color.SeaGreen,
+            Color.DarkSlateGray,Color.MediumTurquoise,Color.Sienna,
+            Color.CornflowerBlue,Color.Crimson,Color.DarkRed,
+            Color.MediumPurple,Color.Firebrick};
+
         public int Id { get; set; }
 
         private string name;
@@ -24,6 +30,13 @@ namespace TrainingDay.ViewModels
                 name = value;
                 OnPropertyChanged();
             }
+        }
+
+        public MuscleViewModel(MusclesEnum muscle)
+        {
+            Id = (int)muscle;
+            Color = _colors[Id];
+            Name = EnumBindablePicker<MusclesEnum>.GetEnumDescription(muscle);
         }
 
         private Color color;
@@ -67,63 +80,22 @@ namespace TrainingDay.ViewModels
 
     public class MusclesConverter
     {
-        public static List<Color> Colors = new List<Color>(){
-            Color.Red,Color.Green,Color.Gold,
-            Color.SlateBlue,Color.Teal,Color.Gray,
-            Color.DodgerBlue,Color.Orange,Color.Purple,
-            Color.Olive,Color.SandyBrown,Color.SeaGreen,
-            Color.DarkSlateGray,Color.MediumTurquoise,Color.Sienna,
-            Color.CornflowerBlue,Color.Crimson,Color.DarkRed,
-            Color.MediumPurple,Color.Firebrick};
-
         public static List<MuscleViewModel> SetMuscles(params MusclesEnum[] muscles)
         {
             List<MuscleViewModel> result = new List<MuscleViewModel>();
             for (int i = 0; i < muscles.Length; i++)
             {
-                result.Add(ConvertFromEnumToViewModel(muscles[i]));
+                var muscle = new MuscleViewModel(muscles[i]);
+                if (result.All(item => item.Id != muscle.Id))
+                {
+                    result.Add(muscle);
+                }
             }
 
             return result;
         }
 
-        private static MuscleViewModel ConvertFromEnumToViewModel(MusclesEnum muscle)
-        {
-            var index = (int) muscle;
-            return new MuscleViewModel()
-            {
-                Id = index,
-                Color = Colors[index],
-                Name = EnumBindablePicker<MusclesEnum>.GetEnumDescription(muscle)
-            };
-        }
-
-        public static string ConvertToString(int muscles)
-        {
-            if (muscles == 0)
-            {
-                return "";
-            }
-            StringBuilder res = new StringBuilder();
-            BitArray arr = new BitArray(new[] { muscles });
-            for (int i = 0; i < 32; i++)
-            {
-                if (arr.Get(i))
-                {
-                    res.Append((MusclesEnum)i);
-                    res.Append(",");
-                }
-            }
-
-            if (res.Length == 0)
-            {
-                return "";
-            }
-            res.Remove(res.Length - 1, 1);
-            return res.ToString();
-        }
-
-        public static List<MuscleViewModel> ConvertFromStringToList(string value, int oldvalue = 0) // separator
+        public static List<MuscleViewModel> ConvertFromStringToList(string value) // separator
         {
             List<MuscleViewModel> muscle = new List<MuscleViewModel>();
 
@@ -135,7 +107,7 @@ namespace TrainingDay.ViewModels
                     for (int i = 0; i < enums.Length; i++)
                     {
                         var res = Enum.Parse(typeof(MusclesEnum), enums[i]);
-                        muscle.Add(ConvertFromEnumToViewModel((MusclesEnum)res));
+                        muscle.Add(new MuscleViewModel((MusclesEnum)res));
                     }
                 }
                 catch (Exception e)
@@ -143,13 +115,7 @@ namespace TrainingDay.ViewModels
                     Console.WriteLine(e);
                 }
             }
-            else
-            {
-                var res = ConvertToString(oldvalue);
-                if (!string.IsNullOrEmpty(res))
-                    muscle = ConvertFromStringToList(res);
-            }
-            
+
             return muscle;
         }
 

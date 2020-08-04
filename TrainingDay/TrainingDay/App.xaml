@@ -98,12 +98,8 @@
                         <Setter Property="TextColor" Value="#757B96"/>
                         <Setter Property="FontSize" Value="14"/>
                     </Style>
-                    <code:InverseBoolConverter x:Key="InverseBoolConverter"/>
-                    <code:StringIsNotNullConverter x:Key="StringIsNotNullConverter"/>
                     <code:SuperSetMenuConverter x:Key="SuperSetMenuConverter"/>
-                    <code:NumberSuperSetInTrainingConverter x:Key="NumberSuperSetInTrainingConverter"/>
                     <model:ExerciseTagExistsConverter x:Key="ExerciseTagExistsConverter"/>
-                    <code:TrainingGroupNameConverter x:Key="TrainingGroupNameConverter"/>
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="LightTheme">
@@ -201,12 +197,8 @@
                         <Setter Property="TextColor" Value="DarkSlateGray"/>
                         <Setter Property="FontSize" Value="14"/>
                     </Style>
-                    <code:InverseBoolConverter x:Key="InverseBoolConverter"/>
-                    <code:StringIsNotNullConverter x:Key="StringIsNotNullConverter"/>
                     <code:SuperSetMenuConverter x:Key="SuperSetMenuConverter"/>
-                    <code:NumberSuperSetInTrainingConverter x:Key="NumberSuperSetInTrainingConverter"/>
                     <model:ExerciseTagExistsConverter x:Key="ExerciseTagExistsConverter"/>
-                    <code:TrainingGroupNameConverter x:Key="TrainingGroupNameConverter"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 
