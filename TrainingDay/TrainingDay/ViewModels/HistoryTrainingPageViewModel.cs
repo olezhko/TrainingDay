@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using TrainingDay.Model;
 using TrainingDay.Services;
@@ -65,7 +66,8 @@ namespace TrainingDay.ViewModels
                             var ex = new TrainingExerciseViewModel()
                             {
                                 ExerciseItemName = trainingExercise.ExerciseName,
-                                Muscles = new ObservableCollection<MuscleViewModel>(MusclesConverter.ConvertFromStringToList(trainingExercise.MusclesString)),
+                                Muscles = new ObservableCollection<MuscleViewModel>(
+                                    MusclesConverter.ConvertFromStringToList(trainingExercise.MusclesString)),
                                 ExerciseImageUrl = trainingExercise.ExerciseImageUrl,
                                 OrderNumber = trainingExercise.OrderNumber,
                                 ShortDescription = trainingExercise.Description,
@@ -74,16 +76,7 @@ namespace TrainingDay.ViewModels
                             };
 
                             ex.Tags = ExerciseTagExtension.ConvertFromIntToList(trainingExercise.TagsValue);
-
-                            if (trainingExercise.WeightAndRepsString != null && ex.Tags.Contains(ExerciseTags.ExerciseByRepsAndWeight))
-                                ex.WeightAndRepsItems = JsonConvert.DeserializeObject<ObservableCollection<WeightAndReps>>(trainingExercise.WeightAndRepsString);
-
-                            if (ex.Tags.Contains(ExerciseTags.ExerciseByTime) || ex.Tags.Contains(ExerciseTags.ExerciseByDistance))
-                            {
-                                var obj = JsonConvert.DeserializeObject<(TimeSpan, double)>(trainingExercise.WeightAndRepsString);
-                                ex.Distance = obj.Item2;
-                                ex.Time = obj.Item1;
-                            }
+                            ExerciseTagExtension.ConvertJsonBack(ex, trainingExercise.WeightAndRepsString);
 
                             newItem.Items.Add(ex);
                         }
@@ -91,7 +84,10 @@ namespace TrainingDay.ViewModels
 
                     PutItemToListByDate(newItem);
                 }
-                catch{}
+                catch(Exception ex)
+                {
+                    Crashes.TrackError(ex);
+                }
             }
 
             OnPropertyChanged(nameof(LastTrainings));

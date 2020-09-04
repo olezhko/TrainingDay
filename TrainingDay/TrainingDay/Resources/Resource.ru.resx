@@ -511,7 +511,7 @@
     <value>Основные</value>
   </data>
   <data name="ChooseGroupOrNewString" xml:space="preserve">
-    <value>Выберите группу или &lt;Создать новую&gt;</value>
+    <value>Выберите группу или Создайте новую</value>
   </data>
   <data name="ScreenOnWhenImplementingTip" xml:space="preserve">
     <value>Выключить для экономии батареи</value>
@@ -539,5 +539,17 @@
   </data>
   <data name="VideoString" xml:space="preserve">
     <value>Видео</value>
+  </data>
+  <data name="Advice" xml:space="preserve">
+    <value>Советы</value>
+  </data>
+  <data name="Execution" xml:space="preserve">
+    <value>Выполнение</value>
+  </data>
+  <data name="StartPosition" xml:space="preserve">
+    <value>Начальная позиция</value>
+  </data>
+  <data name="DeleteTraining" xml:space="preserve">
+    <value>Удаление тренировки</value>
   </data>
 </root>

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:code="clr-namespace:TrainingDay.Services"
              xmlns:model="clr-namespace:TrainingDay.Model;assembly=TrainingDay"
+             xmlns:controls="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
              x:Class="TrainingDay.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -28,8 +29,6 @@
                     <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
                         <Setter Property="BarTextColor" Value="#FFFFFF"/>
                     </Style>
-
-
                     <Style TargetType="SearchBar" ApplyToDerivedTypes="True">
                         <Setter Property="BackgroundColor" Value="#FFFFFF"/>
                         <Setter Property="TextColor" Value="DimGray"/>
@@ -37,6 +36,9 @@
                         <Setter Property="PlaceholderColor" Value="DimGray"/>
                     </Style>
                     <Style TargetType="Label" ApplyToDerivedTypes="True">
+                        <Setter Property="TextColor" Value="#FFFFFF"/>
+                    </Style>
+                    <Style TargetType="RadioButton" ApplyToDerivedTypes="True">
                         <Setter Property="TextColor" Value="#FFFFFF"/>
                     </Style>
                     <Style TargetType="Editor" ApplyToDerivedTypes="True">
@@ -100,6 +102,8 @@
                     </Style>
                     <code:SuperSetMenuConverter x:Key="SuperSetMenuConverter"/>
                     <model:ExerciseTagExistsConverter x:Key="ExerciseTagExistsConverter"/>
+                    <controls:StateToVisibilityConverter x:Key="StateToVisibilityConverter"/>
+
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="LightTheme">
@@ -139,6 +143,9 @@
                         <Setter Property="PlaceholderColor" Value="Black"/>
                     </Style>
                     <Style TargetType="Label" ApplyToDerivedTypes="True">
+                        <Setter Property="TextColor" Value="Black"/>
+                    </Style>
+                    <Style TargetType="RadioButton" ApplyToDerivedTypes="True">
                         <Setter Property="TextColor" Value="Black"/>
                     </Style>
                     <Style TargetType="Frame" ApplyToDerivedTypes="True" x:Key="FrameCellStyle">
@@ -199,6 +206,7 @@
                     </Style>
                     <code:SuperSetMenuConverter x:Key="SuperSetMenuConverter"/>
                     <model:ExerciseTagExistsConverter x:Key="ExerciseTagExistsConverter"/>
+                    <controls:StateToVisibilityConverter x:Key="StateToVisibilityConverter"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 

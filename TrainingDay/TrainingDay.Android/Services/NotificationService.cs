@@ -1,16 +1,12 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.Graphics;
 using Android.OS;
-using Android.Support.V4.Content;
+using Android.Support.V4.App;
 using Android.Util;
+using Firebase.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Android.Support.V4.App;
-using Firebase.Iid;
-using Firebase.Messaging;
-using Microsoft.AppCenter.Crashes;
 using TrainingDay.Services;
 using Xamarin.Forms;
 using Application = Android.App.Application;
@@ -86,31 +82,19 @@ namespace TrainingDay.Droid.Services
         }
     }
 
-
-
-
-    [Service]
-    [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
-    public class MyFirebaseIIDService : FirebaseInstanceIdService
-    {
-        const string TAG = "MyFirebaseIIDService";
-
-        public override void OnTokenRefresh()
-        {
-            var refreshedToken = FirebaseInstanceId.Instance.Token;
-            Log.Debug(TAG, "Refreshed token: " + refreshedToken);
-            App.SendRegistrationToServer(refreshedToken);
-            Settings.Token = refreshedToken;
-        }
-    }
-
-
     [Service]
     [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
     public class MyFirebaseMessagingService : FirebaseMessagingService
     {
-        //80297055781 яков михайлович от Дмитрия
         const string TAG = "MyFirebaseMsgService";
+        public override void OnNewToken(string p0)
+        {
+            base.OnNewToken(p0);
+            Log.Debug(TAG, "Refreshed token: " + p0);
+            App.SendRegistrationToServer(p0);
+            Settings.Token = p0;
+        }
+
 
         public override void OnMessageReceived(RemoteMessage message)
         {

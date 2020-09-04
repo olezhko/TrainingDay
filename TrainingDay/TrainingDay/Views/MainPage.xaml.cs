@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Linq;
 using TrainingDay.Resources;
-using TrainingDay.View;
-using TrainingDay.Views.Controls;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace TrainingDay.Views
@@ -15,14 +11,6 @@ namespace TrainingDay.Views
         public MainPage()
         {
             InitializeComponent();
-            //var navigationPage = new NavigationPage(new TrainingItemsBasePage()) { IconImageSource = "main.png"};
-            ////navigationPage.PopRequested += NavigationPageOnPopRequested;
-            //Children.Add(navigationPage);
-            //Children.Add(new NavigationPage(new HistoryTrainingPage()){ IconImageSource = "train_hist.png" });
-            //Children.Add(new NavigationPage(new ExerciseListPage()) { IconImageSource = "exercise.png" });
-            //Children.Add(new NavigationPage(new WeightViewAndSetPage()) { IconImageSource = "weight.png" });
-            //Children.Add(new NavigationPage(new TrainingAlarmListPage()) { IconImageSource = "alarm.png" });
-            //Children.Add(new NavigationPage(new SettingsPage()) { IconImageSource = "settings.png" });
         }
 
         private void ShowTrainingsItemsPage_Click(object sender, EventArgs e)

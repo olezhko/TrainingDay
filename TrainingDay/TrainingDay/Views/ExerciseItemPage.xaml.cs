@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.AppCenter.Crashes;
+using Newtonsoft.Json;
 using TrainingDay.Model;
 using TrainingDay.Resources;
 using TrainingDay.Services;
@@ -28,13 +29,17 @@ namespace TrainingDay.View
             ExerciseViewModel item = BindingContext as ExerciseViewModel;
             if (item.ExerciseImageUrl != null)
             {
-                DescriptionEditor.IsReadOnly = true;
+                AdviceDescEditor.IsReadOnly = true;
+                StartingDescEditor.IsReadOnly = true;
+                ExecDescEditor.IsReadOnly = true;
                 NameEditor.IsReadOnly = true;
                 MusclesWrapPanel.IsEditableItems = false;
             }
             else
             {
-                DescriptionEditor.IsReadOnly = false;
+                AdviceDescEditor.IsReadOnly = false;
+                StartingDescEditor.IsReadOnly = false;
+                ExecDescEditor.IsReadOnly = false;
                 NameEditor.IsReadOnly = false;
                 MusclesWrapPanel.IsEditableItems = true;
             }
@@ -129,6 +134,39 @@ namespace TrainingDay.View
             }
         }
 
+        private string startingPositionDescription;
+        public string StartingPositionDescription
+        {
+            get => startingPositionDescription;
+            set
+            {
+                startingPositionDescription = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string executionDescription;
+        public string ExecutionDescription
+        {
+            get => executionDescription;
+            set
+            {
+                executionDescription = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string adviceDescription;
+        public string AdviceDescription
+        {
+            get => adviceDescription;
+            set
+            {
+                adviceDescription = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<MuscleViewModel> Muscles { get; set; }
         public ExerciseViewModel()
         {
@@ -144,6 +182,17 @@ namespace TrainingDay.View
             Id = exercise.Id;
             ExerciseImageUrl = exercise.ExerciseImageUrl;
             Muscles = new ObservableCollection<MuscleViewModel>(MusclesConverter.ConvertFromStringToList(exercise.MusclesString));
+            try
+            {
+                TrainingExerciseViewModel.Description descriptionsStrings = JsonConvert.DeserializeObject<TrainingExerciseViewModel.Description>(exercise.Description);
+                AdviceDescription = descriptionsStrings.advice;
+                ExecutionDescription = descriptionsStrings.exec;
+                StartingPositionDescription = descriptionsStrings.start;
+            }
+            catch (Exception e)
+            {
+                ExecutionDescription = exercise.Description;
+            }
         }
 
         public Exercise GetExercise()

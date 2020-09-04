@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrainingDay.Views.Controls.ExerciseDescriptionControl">
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" Orientation="Horizontal">
+                <Frame CornerRadius="20" BorderColor="DodgerBlue" WidthRequest="40" HeightRequest="40" Padding="0" BackgroundColor="DodgerBlue" >
+                    <Label Text="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontAttributes="Bold" FontSize="Medium"/>
+                </Frame>
+                <Label Text="Начальная позиция" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="DodgerBlue" FontSize="Medium"/>
+            </StackLayout>
+            <Editor Grid.Row="1" Text="{Binding StartingDescription}" IsReadOnly="{Binding IsReadOnly}"/>
+
+
+
+            <StackLayout Grid.Row="2" Orientation="Horizontal">
+                <Frame CornerRadius="20" BorderColor="LimeGreen" WidthRequest="40" HeightRequest="40" Padding="0" BackgroundColor="LimeGreen" >
+                    <Label Text="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontAttributes="Bold" FontSize="Medium"/>
+                </Frame>
+                <Label Text="Выполнение" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="LimeGreen" FontSize="Medium"/>
+            </StackLayout>
+            <Editor Grid.Row="3" Text="{Binding ExecutingDescription}" IsReadOnly="{Binding IsReadOnly}"/>
+
+            <StackLayout Grid.Row="4" Orientation="Horizontal">
+                <Frame CornerRadius="20" BorderColor="Orange" WidthRequest="40" HeightRequest="40" Padding="0" BackgroundColor="Orange" >
+                    <Label Text="3" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontAttributes="Bold" FontSize="Medium"/>
+                </Frame>
+                <Label Text="Советы" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Orange" FontSize="Medium"/>
+            </StackLayout>
+            <Editor Grid.Row="5" Text="{Binding AdviceDescription}" IsReadOnly="{Binding IsReadOnly}"/>
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

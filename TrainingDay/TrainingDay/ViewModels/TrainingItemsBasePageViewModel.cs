@@ -19,7 +19,6 @@ namespace TrainingDay.ViewModels
     public class TrainingItemsBasePageViewModel:BaseViewModel
     {
         public ObservableCollection<Grouping<string, TrainingViewModel>> ItemsGrouped { get; set; }
-        //public ObservableCollection<TrainingViewModel> Items { get; set; }
         public States State { get; set; } = States.NoData;
         public INavigation Navigation { get; set; }
         public TrainingItemsBasePageViewModel()
@@ -35,22 +34,18 @@ namespace TrainingDay.ViewModels
         {
             State = States.Loading;
             OnPropertyChanged(nameof(State));
-            Debug.WriteLine($"TrainingItemsBasePageViewModel State {State}");
 
             //Items.Clear();
             ItemsGrouped.Clear();
             var trainingsItems = App.Database.GetTrainingItems(); // get list of trainings
             var trainingsGroups = App.Database.GetTrainingsGroups();
+            Debug.WriteLine($"TrainingItemsBasePageViewModel Groups {trainingsGroups.Count()}");
+
             if (trainingsItems != null && trainingsItems.Any())
             {
                 foreach (var training in trainingsItems)
                 {
                     FillGroupedTraining(training, trainingsGroups);
-                    //if (!Items.Any(a => a.Id == training.Id))
-                    //{
-                    //    Items.Add(new TrainingViewModel(training));
-                    //    FillGroupedTraining(training, trainingsGroups);
-                    //}
                 }
             }
 
@@ -59,12 +54,10 @@ namespace TrainingDay.ViewModels
                 group.Expanded = group.Expanded;
             }
 
-            //OnPropertyChanged(nameof(Items));
             OnPropertyChanged(nameof(ItemsGrouped));
 
             State = ItemsGrouped.Any() ? States.Normal : States.NoData;
             OnPropertyChanged(nameof(State));
-            Debug.WriteLine($"TrainingItemsBasePageViewModel State {State}");
         }
 
         public ICommand AddNewTrainingCommand { get; set; }
@@ -81,29 +74,39 @@ namespace TrainingDay.ViewModels
             {
                 viewCell.ContextActions.Clear();
                 var item = (TrainingViewModel)viewCell.BindingContext;
-                App.Database.DeleteTrainingItem(item.Id);
-                item.DeleteTrainingsItemsFromBase();
 
-                DeleteTrainingAlarms(item);
-                //Items.Remove(item);
-                var group = ItemsGrouped.FirstOrDefault(gr => gr.Contains(item));
-                group.Remove(item);
-                if (group.Count == 0)
+
+                QuestionPopup popup = new QuestionPopup(Resource.DeleteTraining, Resource.AreYouSerious + "\n" + item.Title);
+                popup.PopupClosed += (o, closedArgs) =>
                 {
-                    ItemsGrouped.Remove(group);
-                    var groups = App.Database.GetTrainingsGroups();
-                    var gr = groups.First(a => a.Name == group.Key);
-                    App.Database.DeleteTrainingGroup(gr.Id);
-                }
+                    if (closedArgs.Button == Resource.OkString)
+                    {
+                        App.Database.DeleteTrainingItem(item.Id);
+                        item.DeleteTrainingsItemsFromBase();
+
+                        DeleteTrainingAlarms(item);
+                        //Items.Remove(item);
+                        var group = ItemsGrouped.FirstOrDefault(gr => gr.Contains(item));
+                        group.Remove(item);
+                        if (group.Count == 0)
+                        {
+                            ItemsGrouped.Remove(group);
+                            var groups = App.Database.GetTrainingsGroups();
+                            var gr = groups.First(a => a.Name == group.Key);
+                            App.Database.DeleteTrainingGroup(gr.Id);
+                        }
+
+                        DependencyService.Get<IMessage>().ShortAlert(Resource.DeletedString);
+                        State = ItemsGrouped.Any() ? States.Normal : States.NoData;
+                        OnPropertyChanged(nameof(State));
+                    }
+                };
+                popup.Show(Resource.OkString, Resource.CancelString);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-
-            DependencyService.Get<IMessage>().ShortAlert(Resource.DeletedString);
-            State = ItemsGrouped.Any() ? States.Normal : States.NoData;
-            OnPropertyChanged(nameof(State));
         }
 
         private void DeleteTrainingAlarms(TrainingViewModel item)
@@ -236,7 +239,14 @@ namespace TrainingDay.ViewModels
                 var viewModel = new TrainingUnionViewModel(union);
                 viewModel.TrainingIDs.Remove(item.Id);
 
-                App.Database.SaveTrainingGroup(viewModel.Model);
+                if (viewModel.TrainingIDs.Count == 0)
+                {
+                    App.Database.DeleteTrainingGroup(viewModel.Model.Id);
+                }
+                else
+                {
+                    App.Database.SaveTrainingGroup(viewModel.Model);
+                }
                 item.GroupName = null;
                 LoadItems();
                 DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
@@ -248,16 +258,7 @@ namespace TrainingDay.ViewModels
         {
             viewCell.ContextActions.Clear();
             var item = (TrainingViewModel)viewCell.BindingContext;
-
             GroupsNamesToNewGroup.Clear();
-            var defaultItem = new Grouping<string, TrainingViewModel>("<" + Resource.CreateNewString + ">", new List<TrainingViewModel>())
-            {
-                Id = 0
-            };
-            GroupsNamesToNewGroup.Add(defaultItem);
-
-            SelectedGroupToTraining = defaultItem;
-            OnPropertyChanged(nameof(SelectedGroupToTraining));
 
             foreach (var group in ItemsGrouped)
             {
@@ -274,7 +275,7 @@ namespace TrainingDay.ViewModels
 
             IsVisibleGroups = true;
             OnPropertyChanged(nameof(IsVisibleGroups));
-            groupSelectedTraining = item;
+            trainingMoveToGroup = item;
         }
 
         public Command<object> ToggleExpandGroupCommand => new Command<object>(ToggleExpandGroup);
@@ -294,36 +295,37 @@ namespace TrainingDay.ViewModels
         }
 
         public bool IsVisibleGroups { get; set; }
-        private TrainingViewModel groupSelectedTraining { get; set; }
+        private TrainingViewModel trainingMoveToGroup { get; set; }
 
         public Grouping<string,TrainingViewModel> SelectedGroupToTraining { get; set; }
-        public ICommand AcceptGroupCommand => new Command(AcceptGroup);
-        private async void AcceptGroup()
+        public void AcceptGroup()
         {
             IsVisibleGroups = false;
             OnPropertyChanged(nameof(IsVisibleGroups));
             
-            GroupSelected(SelectedGroupToTraining.Id);
+            GroupSelected(SelectedGroupToTraining?.Id ?? 0);
         }
 
-
-        public bool NewGroupEntryIsVisible { get; set; } = true;
         public string NewGroupName { get; set; }
         public ICommand GroupPickerChangedCommand => new Command(GroupPickerChanged);
-        private void GroupPickerChanged()
+        private void GroupPickerChanged(object args)
         {
-            NewGroupEntryIsVisible = SelectedGroupToTraining == null || SelectedGroupToTraining.Id == 0;
-            OnPropertyChanged(nameof(NewGroupEntryIsVisible));
+            SelectedGroupToTraining = args as Grouping<string, TrainingViewModel>;
+            AcceptGroup();
         }
 
-        private async void GroupSelected(int id)
+        public void GroupSelected(int id)
         {
-            var unions = App.Database.GetTrainingsGroups();
-            if (groupSelectedTraining.GroupName != null && groupSelectedTraining.GroupName.Id != 0)
+            if (trainingMoveToGroup.GroupName!=null && id == trainingMoveToGroup.GroupName.Id)
             {
-                var unionToEdit = unions.First(u => u.Id == groupSelectedTraining.GroupName.Id);
+                return;
+            }
+            var unions = App.Database.GetTrainingsGroups();
+            if (trainingMoveToGroup.GroupName != null && trainingMoveToGroup.GroupName.Id != 0  )
+            {
+                var unionToEdit = unions.First(u => u.Id == trainingMoveToGroup.GroupName.Id);
                 var vm = new TrainingUnionViewModel(unionToEdit);
-                vm.TrainingIDs.Remove(groupSelectedTraining.Id);
+                vm.TrainingIDs.Remove(trainingMoveToGroup.Id);
                 if (vm.TrainingIDs.Count != 0)
                     App.Database.SaveTrainingGroup(vm.Model);
                 else
@@ -339,16 +341,16 @@ namespace TrainingDay.ViewModels
                     if (union != null)
                     {
                         var viewModel = new TrainingUnionViewModel(union);
-                        viewModel.TrainingIDs.Add(groupSelectedTraining.Id);
-                        groupSelectedTraining.GroupName = viewModel;
+                        viewModel.TrainingIDs.Add(trainingMoveToGroup.Id);
+                        trainingMoveToGroup.GroupName = viewModel;
                         App.Database.SaveTrainingGroup(viewModel.Model);
                     }
                     else
                     {
                         var viewModel = new TrainingUnionViewModel();
                         viewModel.Name = name;
-                        viewModel.TrainingIDs.Add(groupSelectedTraining.Id);
-                        groupSelectedTraining.GroupName = viewModel;
+                        viewModel.TrainingIDs.Add(trainingMoveToGroup.Id);
+                        trainingMoveToGroup.GroupName = viewModel;
                         App.Database.SaveTrainingGroup(viewModel.Model);
                     }
                 }
@@ -359,23 +361,18 @@ namespace TrainingDay.ViewModels
                 if (union != null)
                 {
                     var viewModel = new TrainingUnionViewModel(union);
-                    viewModel.TrainingIDs.Add(groupSelectedTraining.Id);
-                    groupSelectedTraining.GroupName = viewModel;
+                    viewModel.TrainingIDs.Add(trainingMoveToGroup.Id);
+                    trainingMoveToGroup.GroupName = viewModel;
                     App.Database.SaveTrainingGroup(viewModel.Model);
                 }
             }
 
 
             LoadItems();
+            SelectedGroupToTraining = null;
             DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
         }
 
-        public ICommand CancelGroupCommand => new Command(CancelGroup);
-        private void CancelGroup()
-        {
-            IsVisibleGroups = false;
-            OnPropertyChanged(nameof(IsVisibleGroups));
-        }
         public ObservableCollection<Grouping<string, TrainingViewModel>> GroupsNamesToNewGroup { get; set; } = new ObservableCollection<Grouping<string, TrainingViewModel>>();
         #endregion
     }

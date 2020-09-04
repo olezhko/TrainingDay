@@ -32,10 +32,7 @@ namespace TrainingDay.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (_viewModel.MuscleFilter.Count!=0)
-            {
-                _viewModel.UpdateItems();
-            }
+            _viewModel.UpdateItems();
         }
 
         private async void AddExercisesButton_Clicked(object sender, EventArgs e)

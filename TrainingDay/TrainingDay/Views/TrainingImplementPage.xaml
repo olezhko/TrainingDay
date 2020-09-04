@@ -21,7 +21,25 @@
                     <DataTemplate>
                         <StackLayout>
                             <Label IsVisible="{Binding IsSuperSet}" Text="{services:Translate SuperSetString}" FontSize="Large" HorizontalTextAlignment="Center" TextColor="Orange"/>
-                            <ListView HasUnevenRows="True" ItemsSource="{Binding SuperSetItems}" SeparatorColor="{DynamicResource SeparatorColor}" SeparatorVisibility="None" SelectionMode="None">
+
+                            <IndicatorView x:Name="indicatorView"
+                                           IndicatorColor="LightGray"
+                                           SelectedIndicatorColor="Orange"
+                                           HorizontalOptions="Center" />
+                            <CarouselView ItemsSource="{Binding SuperSetItems}" HorizontalOptions="Center" x:Name="ImageCollectionView" IndicatorView="indicatorView">
+                                <CarouselView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal" />
+                                </CarouselView.ItemsLayout>
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <controls1:ExerciseView BindingContext="{Binding }" Margin="5"/>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+
+
+
+                            <!--<ListView HasUnevenRows="True" ItemsSource="{Binding SuperSetItems}" SeparatorColor="{DynamicResource SeparatorColor}" SeparatorVisibility="None" SelectionMode="None">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
@@ -29,7 +47,9 @@
                                         </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
-                            </ListView>
+                            </ListView>-->
+
+
                         </StackLayout>
                     </DataTemplate>
                 </controls1:StepProgressBar.ItemTemplate>

@@ -77,7 +77,7 @@ namespace TrainingDay
             Resources = !IsLightTheme ? Resources.MergedDictionaries.First() : Resources.MergedDictionaries.Last();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjA3MzYyQDMxMzcyZTM0MmUzMFJnOEZnSm9wNmwzdU1MSEpiMmtjR2w0THgvTkpmSFRvaktXaUc0aTM5VUU9");
         }
-
+        
         protected override void OnStart()
         {
             SendRegistrationToServer(Settings.Token);
@@ -256,15 +256,15 @@ namespace TrainingDay
             try
             {
                 // send token and language
-                //if (Settings.IsTokenSavedOnServer)
-                //{
-                //    return;
-                //}
+                if (/*Settings.IsTokenSavedOnServer ||*/ string.IsNullOrEmpty(token))
+                {
+                    return;
+                }
                 Settings.IsTokenSavedOnServer = false;
 
                 var language = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
                 var zone = DependencyService.Get<ILocalize>().GetTimeZone();
-                var res = await NotifyServices.SendTokenToServer(token, language.Name, zone);
+                var res = await NotifyServices.SendTokenToServer(token, language.Name, zone,Settings.WeightNotifyFreq);
                 Settings.IsTokenSavedOnServer = res;
             }
             catch (Exception e)

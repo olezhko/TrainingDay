@@ -18,8 +18,8 @@
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ShowTrainingsItemsPage_Click"/>
                     </StackLayout.GestureRecognizers>
-                    <ImageButton Source="main.png" CornerRadius="5" HeightRequest="80" WidthRequest="80" BorderColor="Gray" BorderWidth="1" 
-                             BackgroundColor="Transparent" HorizontalOptions="Center" Clicked="ShowTrainingsItemsPage_Click"/>
+                    <ImageButton Source="main.png" CornerRadius="5" HeightRequest="80" WidthRequest="80" BorderColor="Gray" BorderWidth="1" x:Name="TrainingsItemsButton" 
+                             BackgroundColor="Transparent" HorizontalOptions="Center" Clicked="ShowTrainingsItemsPage_Click" />
                     <Label Text="{services:Translate StartWorkoutString}" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="Large">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="ShowTrainingsItemsPage_Click"/>

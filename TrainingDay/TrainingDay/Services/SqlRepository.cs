@@ -169,6 +169,7 @@ namespace TrainingDay.Services
                 }
 
                 var exer = InitExercises();
+
                 string MaxVersion = "1.0.0.0";
 
                 if (Settings.IsFirstTime)
@@ -203,10 +204,31 @@ namespace TrainingDay.Services
                     }
                     Settings.LastSyncVersion = MaxVersion;
                 }
+
+                CorrectExercise(exer, GetExerciseItems());
             }
             catch (Exception e)
             {
                 Crashes.TrackError(e);
+            }
+        }
+
+        private void CorrectExercise(ObservableCollection<Exercise> srcExercises, IEnumerable<Exercise> baseExercises)
+        {
+            foreach (var exercise in srcExercises)
+            {
+                try
+                {
+                    var fromBase = baseExercises.First(item => item.ExerciseImageUrl == exercise.ExerciseImageUrl);
+                    
+                    fromBase.Description = exercise.Description;
+                    fromBase.CodeNum = exercise.CodeNum;
+                    SaveExerciseItem(fromBase);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
         }
 
@@ -597,6 +619,12 @@ namespace TrainingDay.Services
             {
                 return null;
             }
+        }
+
+
+        public void DeleteAll<T>()
+        {
+            database.DeleteAll<T>();
         }
     }
 }

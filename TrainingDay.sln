@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingDay.iOS", "Training
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingDay", "TrainingDay\TrainingDay\TrainingDay.csproj", "{148F462C-B448-438B-AFDE-A908B0AFDAC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingDayTests", "TrainingDay\TrainingDayTests\TrainingDayTests.csproj", "{75774BEC-5306-4D07-AD78-C44A26124D99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingDayTests", "TrainingDay\TrainingDayTests\TrainingDayTests.csproj", "{75774BEC-5306-4D07-AD78-C44A26124D99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

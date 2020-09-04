@@ -38,6 +38,15 @@
                     </StackLayout>
                 </StackLayout>
             </Frame>
+
+            <Editor x:Name="TokenEditor"/>
+
+            <Frame Style="{StaticResource FrameCellStyle}">
+                <StackLayout Orientation="Vertical">
+                    <Label Text="{services:Translate ClearBase}" VerticalTextAlignment="Center" FontSize="Medium" HorizontalOptions="FillAndExpand"/>
+                    <Button Text="{services:Translate HistoryTrainings}" Clicked="ClearHistoryTrainings_Click"/>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -190,7 +190,7 @@ namespace TrainingDay.View
             });
 
             var id = App.Database.GetLastInsertId();
-            foreach (var superSet in TrainingItem.ExercisesBySuperSet)
+            foreach (var superSet in Items)
             {
                 foreach (var item in superSet)
                 {

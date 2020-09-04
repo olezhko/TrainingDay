@@ -1,13 +1,10 @@
-﻿using System;
-using Android;
+﻿using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Gms.Common;
 using Android.OS;
-using Android.Util;
 using Newtonsoft.Json;
-using TrainingDay.Services;
 
 namespace TrainingDay.Droid
 {
@@ -42,10 +39,10 @@ namespace TrainingDay.Droid
 
             LoadApplication(new App(local.IsLightTheme));
 
-
             IsPlayServicesAvailable();
             CreateNotificationChannel();
         }
+
         SettingsLocal local = new SettingsLocal();
         private void LoadSettings()
         {

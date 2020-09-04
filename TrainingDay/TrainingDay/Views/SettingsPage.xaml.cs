@@ -20,7 +20,8 @@ namespace TrainingDay.Views
             FreqWeightNotify.Text = Settings.WeightNotifyFreq.ToString();
 
 		    ScreenOnImplementedSwitch.IsToggled = Settings.IsDisplayOnImplement;
-		}
+            TokenEditor.Text = Settings.Token;
+        }
 
         private void Switch_OnToggled(object sender, ToggledEventArgs e)
         {
@@ -64,6 +65,12 @@ namespace TrainingDay.Views
         private void ScreenOnImplementedSwitch_OnToggled(object sender, ToggledEventArgs e)
         {
             Settings.IsDisplayOnImplement = ScreenOnImplementedSwitch.IsToggled;
+        }
+
+        private void ClearHistoryTrainings_Click(object sender, EventArgs e)
+        {
+            App.Database.DeleteAll<LastTraining>();
+            App.Database.DeleteAll<LastTrainingExercise>();
         }
     }
 }

@@ -124,6 +124,15 @@ namespace TrainingDay.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advice and Tips.
+        /// </summary>
+        internal static string Advice {
+            get {
+                return ResourceManager.GetString("Advice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to After workout, the post-workout routine is useful, the post-workout routine allows smoothing the transition from high-intensity work to a state of rest. You thereby reduce the burden on the heart muscle, which has to pump blood intensively, to remove its stagnation from the muscles and provide it with internal organs. Suitable: Easy running, smoothly turning into walking (you can in place). Easy work on a bicycle or elliptical simulator, a stepper with a smooth decrease in intensity up to a stop. Jumping on [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AdviceAfterTrainingMessage {
@@ -250,7 +259,7 @@ namespace TrainingDay.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose a workout or &lt;Create new&gt;.
+        ///   Looks up a localized string similar to Choose a workout or Create new.
         /// </summary>
         internal static string ChooseTrainingOrNewString {
             get {
@@ -475,6 +484,15 @@ namespace TrainingDay.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete training.
+        /// </summary>
+        internal static string DeleteTraining {
+            get {
+                return ResourceManager.GetString("DeleteTraining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Denied.
         /// </summary>
         internal static string Denied {
@@ -525,6 +543,15 @@ namespace TrainingDay.Resources {
         internal static string EnterImageUrlString {
             get {
                 return ResourceManager.GetString("EnterImageUrlString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Execution.
+        /// </summary>
+        internal static string Execution {
+            get {
+                return ResourceManager.GetString("Execution", resourceCulture);
             }
         }
         
@@ -1146,6 +1173,15 @@ namespace TrainingDay.Resources {
         internal static string SkipString {
             get {
                 return ResourceManager.GetString("SkipString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting Position.
+        /// </summary>
+        internal static string StartPosition {
+            get {
+                return ResourceManager.GetString("StartPosition", resourceCulture);
             }
         }
         

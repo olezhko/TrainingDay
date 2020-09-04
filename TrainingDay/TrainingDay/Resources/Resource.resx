@@ -460,7 +460,7 @@
     <value>You have not entered your weight</value>
   </data>
   <data name="ChooseTrainingOrNewString" xml:space="preserve">
-    <value>Choose a workout or &lt;Create new&gt;</value>
+    <value>Choose a workout or Create new</value>
   </data>
   <data name="ContinueLastTrainingQuestion" xml:space="preserve">
     <value>Continue with your last performing workout?</value>
@@ -539,5 +539,17 @@
   </data>
   <data name="VideoString" xml:space="preserve">
     <value>Video</value>
+  </data>
+  <data name="Advice" xml:space="preserve">
+    <value>Advice and Tips</value>
+  </data>
+  <data name="Execution" xml:space="preserve">
+    <value>Execution</value>
+  </data>
+  <data name="StartPosition" xml:space="preserve">
+    <value>Starting Position</value>
+  </data>
+  <data name="DeleteTraining" xml:space="preserve">
+    <value>Delete training</value>
   </data>
 </root>

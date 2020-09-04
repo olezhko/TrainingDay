@@ -24,7 +24,6 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="3"/>
                     <RowDefinition Height="Auto"/>
-
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="1" Margin="1" BackgroundColor="Gray" />
@@ -149,7 +148,43 @@
                             </Label>
                         </Grid>
 
-                        <Editor Text="{Binding ShortDescription}" x:Name="DescriptionEditor" IsReadOnly="False"/>
+                        <Grid x:Name="DescriptionGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackLayout Grid.Row="0" Orientation="Horizontal">
+                                <Frame CornerRadius="20" BorderColor="DodgerBlue" WidthRequest="40" HeightRequest="40" Padding="0" BackgroundColor="DodgerBlue" >
+                                    <Label Text="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontAttributes="Bold" FontSize="Medium"/>
+                                </Frame>
+                                <Label Text="{services:Translate StartPosition}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="DodgerBlue" FontSize="Medium"/>
+                            </StackLayout>
+                            <Editor Grid.Row="1" Text="{Binding StartingPositionDescription}" IsReadOnly="False" x:Name="StartingDescEditor"/>
+
+
+
+                            <StackLayout Grid.Row="2" Orientation="Horizontal">
+                                <Frame CornerRadius="20" BorderColor="LimeGreen" WidthRequest="40" HeightRequest="40" Padding="0" BackgroundColor="LimeGreen" >
+                                    <Label Text="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontAttributes="Bold" FontSize="Medium"/>
+                                </Frame>
+                                <Label Text="{services:Translate Execution}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="LimeGreen" FontSize="Medium"/>
+                            </StackLayout>
+                            <Editor Grid.Row="3" Text="{Binding ExecutionDescription}" IsReadOnly="False" x:Name="ExecDescEditor"/>
+
+                            <StackLayout Grid.Row="4" Orientation="Horizontal">
+                                <Frame CornerRadius="20" BorderColor="Orange" WidthRequest="40" HeightRequest="40" Padding="0" BackgroundColor="Orange" >
+                                    <Label Text="3" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontAttributes="Bold" FontSize="Medium"/>
+                                </Frame>
+                                <Label Text="{services:Translate Advice}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Orange" FontSize="Medium"/>
+                            </StackLayout>
+                            <Editor Grid.Row="5" Text="{Binding AdviceDescription}" IsReadOnly="False" x:Name="AdviceDescEditor"/>
+                        </Grid>
+
 
                         <Grid WidthRequest="300" HeightRequest="300"  IsVisible="False" x:Name="VideoActivityIndicatorGrid">
                             <ActivityIndicator x:Name="VideoActivityIndicator" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" HorizontalOptions="Center"/>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using Newtonsoft.Json;
 using TrainingDay.Model;
 using TrainingDay.Services;
 using TrainingDay.Views.Controls;
@@ -174,6 +175,45 @@ namespace TrainingDay.ViewModels
                 distance = value;
                 OnPropertyChanged();
             } }
+
+        private string startingPositionDescription;
+        public string StartingPositionDescription
+        {
+            get => startingPositionDescription;
+            set
+            {
+                startingPositionDescription = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string executionDescription;
+        public string ExecutionDescription
+        {
+            get => executionDescription;
+            set
+            {
+                executionDescription = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string adviceDescription;
+        public string AdviceDescription
+        {
+            get => adviceDescription;
+            set
+            {
+                adviceDescription = value;
+                OnPropertyChanged();
+            }
+        }
+        public struct Description
+        {
+            public string start { get; set; }
+            public string exec { get; set; }
+            public string advice { get; set; }
+        }
         #endregion
 
         public TrainingExerciseViewModel() { }
@@ -194,6 +234,17 @@ namespace TrainingDay.ViewModels
                 Tags = ExerciseTagExtension.ConvertFromIntToList(exercise.TagsValue);
                 
                 ExerciseTagExtension.ConvertJsonBack(this, comm.WeightAndRepsString);
+                try
+                {
+                    Description descriptionsStrings = JsonConvert.DeserializeObject<Description>(exercise.Description);
+                    AdviceDescription = descriptionsStrings.advice;
+                    ExecutionDescription = descriptionsStrings.exec;
+                    StartingPositionDescription = descriptionsStrings.start;
+                }
+                catch (Exception e)
+                {
+                    ExecutionDescription = exercise.Description;
+                }
             }
             catch (Exception e)
             {

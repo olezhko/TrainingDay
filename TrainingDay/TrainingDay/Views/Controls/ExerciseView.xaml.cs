@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using TrainingDay.Resources;
 using TrainingDay.Services;
 using TrainingDay.ViewModels;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace TrainingDay.Views.Controls
@@ -41,7 +38,9 @@ namespace TrainingDay.Views.Controls
                 MusclesWrapPanel.ItemsSource = item.Muscles;
                 if (item.ExerciseImageUrl != null)
                 {
-                    DescriptionEditor.IsReadOnly = true;
+                    AdviceDescEditor.IsReadOnly = true;
+                    StartingDescEditor.IsReadOnly = true;
+                    ExecDescEditor.IsReadOnly = true;
                     NameEditor.IsReadOnly = true;
                     MusclesWrapPanel.IsEditableItems = false;
                 }
@@ -183,7 +182,7 @@ namespace TrainingDay.Views.Controls
             VideoLabel.BackgroundColor = Color.DarkGray;
 
             VideoCollectionView.IsVisible = false;
-            DescriptionEditor.IsVisible = true;
+            DescriptionGrid.IsVisible = true;
             VideoActivityIndicatorGrid.IsVisible = false;
         }
 
@@ -191,7 +190,7 @@ namespace TrainingDay.Views.Controls
         {
             DesctiptionLabel.BackgroundColor = Color.DarkGray;
             VideoLabel.BackgroundColor = Color.Green;
-            DescriptionEditor.IsVisible = false;
+            DescriptionGrid.IsVisible = false;
 
             VideoActivityIndicatorGrid.IsVisible = true;
             VideoActivityIndicator.IsRunning = true;
@@ -228,6 +227,13 @@ namespace TrainingDay.Views.Controls
 
 
         public ICommand DeleteRequestCommand => new Command<WeightAndReps>(DeleteRequestWeightAndReps);
+
+        public bool IsViewImage
+        {
+            get { return ImageControl.IsVisible;}
+            set { ImageControl.IsVisible = false; }
+        }
+
         private void DeleteRequestWeightAndReps(WeightAndReps sender)
         {
             var item = ((TrainingExerciseViewModel)BindingContext);
