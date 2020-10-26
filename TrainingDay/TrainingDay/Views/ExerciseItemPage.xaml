@@ -71,7 +71,7 @@
                         </Frame>
                         <Label Text="{services:Translate StartPosition}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="DodgerBlue" FontSize="Medium"/>
                     </StackLayout>
-                    <Editor Grid.Row="1" Text="{Binding StartingPositionDescription}" IsReadOnly="False" x:Name="StartingDescEditor"/>
+                    <Editor Grid.Row="1" Text="{Binding StartingPositionDescription}" IsReadOnly="False" x:Name="StartingDescEditor" AutoSize="TextChanges"/>
 
 
 
@@ -81,7 +81,7 @@
                         </Frame>
                         <Label Text="{services:Translate Execution}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="LimeGreen" FontSize="Medium"/>
                     </StackLayout>
-                    <Editor Grid.Row="3" Text="{Binding ExecutionDescription}" IsReadOnly="False" x:Name="ExecDescEditor"/>
+                    <Editor Grid.Row="3" Text="{Binding ExecutionDescription}" IsReadOnly="False" x:Name="ExecDescEditor" AutoSize="TextChanges"/>
 
                     <StackLayout Grid.Row="4" Orientation="Horizontal">
                         <Frame CornerRadius="20" BorderColor="Orange" WidthRequest="40" HeightRequest="40" Padding="0" BackgroundColor="Orange" >
@@ -89,7 +89,7 @@
                         </Frame>
                         <Label Text="{services:Translate Advice}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Orange" FontSize="Medium"/>
                     </StackLayout>
-                    <Editor Grid.Row="5" Text="{Binding AdviceDescription}" IsReadOnly="False" x:Name="AdviceDescEditor"/>
+                    <Editor Grid.Row="5" Text="{Binding AdviceDescription}" IsReadOnly="False" x:Name="AdviceDescEditor" AutoSize="TextChanges"/>
 
                 </Grid>
 

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using OxyPlot;
 using TrainingDay.Resources;
 using TrainingDay.Services;
 using TrainingDay.ViewModels;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -30,10 +32,9 @@ namespace TrainingDay.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            vm?.WeightPeriodChanged();
-            PlotView.Controller = new PlotController();
-            PlotView.Controller.UnbindAll();
-            PlotView.Controller.BindTouchDown(PlotCommands.PointsOnlyTrackTouch);
+            vm?.LoadWeightPlot();
+            vm?.LoadWaistPlot();
+            vm?.LoadHipsPlot();
         }
 
         private bool _isVisibleWeightHistory;
@@ -41,14 +42,21 @@ namespace TrainingDay.Views
         {
             _isVisibleWeightHistory = !_isVisibleWeightHistory;
             WeightGrid.IsVisible = !_isVisibleWeightHistory;
-            WeightItemsList.IsVisible = _isVisibleWeightHistory;
-            ShowWeightHistoryMenu.Text = _isVisibleWeightHistory ? Resource.WeightString : Resource.HistoryString;
+            //WeightItemsList.IsVisible = _isVisibleWeightHistory;
+            //ShowWeightHistoryMenu.Text = _isVisibleWeightHistory ? Resource.WeightString : Resource.HistoryString;
         }
 
-        protected override bool OnBackButtonPressed()
+        private async void ShowInfo_Click(object sender, EventArgs e)
         {
-            return base.OnBackButtonPressed();
+            var coef = vm.CurrentWaistValue / vm.CurrentHipsValue;
+            StringBuilder sb = new StringBuilder();
+            sb.Append(string.Format(Resource.WaistHipMessage.Replace("_", "\n"), coef));
 
+            var result = await DisplayAlert(Resource.HelperString, sb.ToString(), Resource.OkString,Resource.CancelString);
+            if (result)
+            {
+                await Browser.OpenAsync(@"http://trainingday.tk/waist-hip?year=2020&Month=10", BrowserLaunchMode.SystemPreferred);
+            }
         }
     }
 }

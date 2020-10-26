@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
 using TrainingDay.Model;
 using TrainingDay.Services;
 using TrainingDay.ViewModels;
@@ -412,8 +413,6 @@ namespace TrainingDay.Views.Controls
         #endregion
     }
 
-
-
     //https://github.com/conceptdev/xamarin-forms-samples/blob/145a43fb6153fc069eeb99d86f0e219ad6d8fcac/Evolve13/Evolve13/Controls/WrapLayout.cs
     public class WrapLayout : Layout<Xamarin.Forms.View>
     {
@@ -577,12 +576,12 @@ namespace TrainingDay.Views.Controls
             {
                 width = Math.Max(width, widthUsed);
                 //height *= rowCount;  // take max height
-                height = (height + Spacing) * rowCount - Spacing; 
+                height = (height + Spacing) * rowCount - Spacing;
             }
-
+            heightList.Add($"Count: {Children.Count} Height: {height} Rows {rowCount}");
             return new SizeRequest(new Size(width, height), new Size(minWidth, minHeight));
         }
-
+        static List<string> heightList = new List<string>();
         /// <summary>
         /// Positions and sizes the children of a Layout.
         /// </summary>

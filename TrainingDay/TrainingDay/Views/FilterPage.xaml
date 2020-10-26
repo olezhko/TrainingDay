@@ -12,7 +12,7 @@
         <Grid>
             <StackLayout HorizontalOptions="Fill" >
                 <Grid VerticalOptions="Fill" HorizontalOptions="Fill" x:Name="ImageGrid">
-                    <Image Source="muscle.jpg" x:Name="MuscleImage" Aspect="AspectFit" HeightRequest="514" WidthRequest="496" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Image Source="muscle.png" x:Name="MuscleImage" Aspect="AspectFit" HeightRequest="514" WidthRequest="496" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
                     <forms:SKCanvasView x:Name="skiaView" PaintSurface="OnPaintSurface"/>
                 </Grid>
             </StackLayout>

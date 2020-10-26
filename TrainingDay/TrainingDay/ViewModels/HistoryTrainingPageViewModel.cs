@@ -30,13 +30,15 @@ namespace TrainingDay.ViewModels
         public ICommand ItemSelectedCommand { get; set; }
         private void ViewLastTrainingExercisesPage(object sender)
         {
-            State = States.View2;
-            OnPropertyChanged(nameof(State));
             var args = sender as ItemTappedEventArgs;
             LastTrainingViewModel item = args.Item as LastTrainingViewModel;
             TrainingItems.Clear();
             TrainingItems = new ObservableCollection<TrainingExerciseViewModel>(item.Items);
             OnPropertyChanged(nameof(TrainingItems));
+
+
+            HistoryTrainingExercisesPage page = new HistoryTrainingExercisesPage(){BindingContext =  this};
+            Navigation.PushAsync(page);
         }
 
         public void LoadItems()

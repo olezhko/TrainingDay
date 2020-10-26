@@ -141,23 +141,29 @@ namespace TrainingDay.Model
 
         public static void ConvertJsonBack(TrainingExerciseViewModel viewmodel,string value)
         {
-            if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value) || value.Length < 0)
+            try
             {
-                return;
-            }
-            List<ExerciseTags> tagsList = viewmodel.Tags;
+                if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value) || value.Length < 0)
+                {
+                    return;
+                }
+                List<ExerciseTags> tagsList = viewmodel.Tags;
 
-            if (tagsList.Contains(ExerciseTags.ExerciseByRepsAndWeight))
-            {
-                viewmodel.WeightAndRepsItems = JsonConvert.DeserializeObject<ObservableCollection<WeightAndReps>>(value);
+                if (tagsList.Contains(ExerciseTags.ExerciseByRepsAndWeight))
+                {
+                    viewmodel.WeightAndRepsItems = JsonConvert.DeserializeObject<ObservableCollection<WeightAndReps>>(value);
+                }
+                if (tagsList.Contains(ExerciseTags.ExerciseByTime) || tagsList.Contains(ExerciseTags.ExerciseByDistance))
+                {
+                    var obj = JsonConvert.DeserializeObject<(TimeSpan, double)>(value);
+                    viewmodel.Distance = obj.Item2;
+                    viewmodel.Time = obj.Item1;
+                }
             }
-            if (tagsList.Contains(ExerciseTags.ExerciseByTime) || tagsList.Contains(ExerciseTags.ExerciseByDistance))
+            catch (Exception e)
             {
-                var obj = JsonConvert.DeserializeObject<(TimeSpan, double)>(value);
-                viewmodel.Distance = obj.Item2;
-                viewmodel.Time = obj.Item1;
+                Console.WriteLine(e);
             }
         }
-
     }
 }

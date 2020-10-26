@@ -11,7 +11,7 @@
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
         <!--<ToolbarItem Icon="add_alarm.png" Command="{Binding MakeNotifyCommand}" Order="Secondary" x:Name="AddAlarmToolbarItem" Text="{services:Translate Notification}"/>-->
-        <ToolbarItem IconImageSource="add.png" Command="{Binding AddExercisesCommand}" Order="Primary" Text="{services:Translate AddExercisesToTrainingString}"/>
+        <ToolbarItem IconImageSource="add.png" Command="{Binding AddExercisesCommand}" Order="Primary" />
         <ToolbarItem IconImageSource="accept.png" Command="{Binding SaveChangesCommand}" Order="Primary" Text="{services:Translate SaveTrainingString}"/>
 
 
@@ -37,7 +37,7 @@
                 </xForms:SfListView.Behaviors>
                 <xForms:SfListView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Style="{StaticResource FrameCellStyle}" BackgroundColor="{DynamicResource ListItemBackgroundColor}">
+                        <Frame Style="{StaticResource FrameCellStyle}" BackgroundColor="{DynamicResource ListItemBackgroundColor}" HeightRequest="80">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>

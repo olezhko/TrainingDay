@@ -123,7 +123,22 @@ namespace TrainingDay.ViewModels
         }
 
 
-        public TimeSpan Time { get; set; }
+        public DateTime StartCalculateDateTime;
+        public bool IsTimeCalculating = false;
+        private TimeSpan _time;
+        public TimeSpan Time
+        {
+            get => _time;
+            set
+            {
+                _time = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(TimeHours));
+                OnPropertyChanged(nameof(TimeMinutes));
+                OnPropertyChanged(nameof(TimeSeconds));
+            }
+        }
+
         public int TimeHours
         {
             get { return (int)Time.TotalHours; }

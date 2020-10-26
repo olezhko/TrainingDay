@@ -29,10 +29,12 @@ namespace TrainingDay.Droid
             LoadSettings();
 
             base.OnCreate(savedInstanceState);
+            
             Xamarin.Forms.Forms.SetFlags(new string[]
-                {"CarouselView_Experimental", "IndicatorView_Experimental", "Expander_Experimental","SwipeView_Experimental"});
+                {"CarouselView_Experimental", "IndicatorView_Experimental", "Expander_Experimental","Shapes_Experimental"});
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
             Android.Glide.Forms.Init(this, debug: true);
             OxyPlot.Xamarin.Forms.Platform.Android.PlotViewRenderer.Init();
             CheckAppPermissions();

@@ -39,9 +39,9 @@
                 </StackLayout>
             </Frame>
 
-            <Editor x:Name="TokenEditor"/>
+            <Editor x:Name="TokenEditor" IsVisible="True"/>
 
-            <Frame Style="{StaticResource FrameCellStyle}">
+            <Frame Style="{StaticResource FrameCellStyle}" IsVisible="False">
                 <StackLayout Orientation="Vertical">
                     <Label Text="{services:Translate ClearBase}" VerticalTextAlignment="Center" FontSize="Medium" HorizontalOptions="FillAndExpand"/>
                     <Button Text="{services:Translate HistoryTrainings}" Clicked="ClearHistoryTrainings_Click"/>

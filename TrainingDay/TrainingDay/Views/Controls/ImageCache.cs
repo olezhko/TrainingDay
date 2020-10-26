@@ -41,7 +41,8 @@ namespace TrainingDay.Views.Controls
                     {
                         var uriSource = new UriImageSource()
                         {
-                            Uri = new Uri(ImageUrl)
+                            Uri = new Uri(ImageUrl),
+                            CachingEnabled = false,
                         };
                         Source = uriSource;
 
@@ -51,6 +52,10 @@ namespace TrainingDay.Views.Controls
                     {
                         Source = ImageSource.FromStream(() => Stream(imageSource));
                     }
+                }
+                else
+                {
+                    Source = "main.png";
                 }
             }
             catch (Exception e)

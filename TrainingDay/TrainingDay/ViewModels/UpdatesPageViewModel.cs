@@ -19,9 +19,10 @@ namespace TrainingDay.ViewModels
 {
     public class UpdatesPageViewModel:BaseViewModel
     {
+        public ObservableCollection<UpdateViewModel> UpdatesCollection { get; set; }
         public UpdatesPageViewModel()
         {
-            VersionSelected = "1.0.5.0";
+            VersionSelected = App.Version;
             UpdatesVersionList = new ObservableCollection<string>();
             UpdatesCollection = new ObservableCollection<UpdateViewModel>();
             LoadAllUpdates();
@@ -29,10 +30,9 @@ namespace TrainingDay.ViewModels
             VersionChanged();// to show last version
         }
 
-        private ObservableCollection<UpdateViewModel> _baseUpdatesCollection = new ObservableCollection<UpdateViewModel>();
-        private string text;
-        public ObservableCollection<UpdateViewModel> UpdatesCollection { get; set; }
-        public ObservableCollection<string> UpdatesVersionList { get; set; }
+        ObservableCollection<UpdateViewModel> _baseUpdatesCollection = new ObservableCollection<UpdateViewModel>();
+        string text;
+        ObservableCollection<string> UpdatesVersionList { get; set; }
 
         private void LoadAllUpdates()
         {

@@ -88,9 +88,6 @@
                 </ListView.Behaviors>
             </ListView>
 
-
-
-
             <controls1:AdMobView AdUnitId="ca-app-pub-8728883017081055/2677919170" VerticalOptions="End" BackgroundColor="Transparent" Grid.Row="2" />
 
             <Image Source="add.png" HorizontalOptions="Center" VerticalOptions="End" HeightRequest="60" WidthRequest="60" x:Name="AddImage" Grid.Row="1">
@@ -98,36 +95,6 @@
                     <TapGestureRecognizer Command="{Binding AddNewTrainingCommand}"/>
                 </Image.GestureRecognizers>
             </Image>
-
-            <StackLayout IsVisible="{Binding IsVisibleGroups}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.RowSpan="2" 
-                  BackgroundColor="{DynamicResource ContentPageBackgroundColor}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Label Text="{services:Translate ChooseGroupOrNewString}" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Start" FontSize="Medium"/>
-                        <ImageButton Grid.Column="1" WidthRequest="40" HeightRequest="40" Source="add.png" Clicked="ShowNewGroupWnd_Click" BackgroundColor="Transparent"/>
-                    </Grid>
-
-                    <ListView Grid.Row="1" ItemsSource="{Binding GroupsNamesToNewGroup}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand" SelectedItem="{Binding SelectedGroupToTraining,Mode=TwoWay}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <RadioButton Text="{Binding Key}" FontSize="Medium" Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.GroupPickerChangedCommand}" CommandParameter="{Binding }"/>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
-
-            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

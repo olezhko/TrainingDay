@@ -20,7 +20,7 @@ namespace TrainingDay.Views
 
         private void ShowWeightControlPage_Click(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new WeightViewAndSetPage() { Title = Resource.WeightString }, true);
+            Navigation.PushAsync(new WeightViewAndSetPage() { Title = Resource.WeightControlString }, true);
         }
 
         private void ShowSettingsPage_Click(object sender, EventArgs e)
@@ -31,6 +31,11 @@ namespace TrainingDay.Views
         private void ShowHistoryItemsPage_Click(object sender, EventArgs e)
         {
             Navigation.PushAsync(new HistoryTrainingPage() { Title = Resource.HistoryTrainings }, true);
+        }
+
+        private void ShowNotesPage_Click(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new BlogsPage() { Title = "Новости" }, true);
         }
     }
 }

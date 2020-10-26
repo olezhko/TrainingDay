@@ -129,7 +129,7 @@ namespace TrainingDay.Droid.Services
             {
                 case "Weight":
                 case "weight":
-                    if (app.IsShowWeightNotify())
+                    //if (app.IsShowWeightNotify())
                     {
                         SendNotification(app.WeightMessageTitle, app.WeightMessage, message.Data, App.WeightNotificationId);
                         App.WeightNotificationState = true;
@@ -173,12 +173,13 @@ namespace TrainingDay.Droid.Services
             var pendingIntent = stackBuilder.GetPendingIntent(0, (int)PendingIntentFlags.UpdateCurrent);
 
 
-
             var notificationBuilder = new NotificationCompat.Builder(Application.Context, MainActivity.CHANNEL_ID)
                 .SetSmallIcon(Resource.Drawable.main)
                 .SetContentTitle(title)
                 .SetContentText(messageBody)
                 .SetAutoCancel(true)
+                .SetPriority((int)NotificationPriority.Max)
+                .SetCategory(Notification.CategoryMessage)
                 .SetContentIntent(pendingIntent);
 
             var notificationManager = NotificationManagerCompat.From(Application.Context);

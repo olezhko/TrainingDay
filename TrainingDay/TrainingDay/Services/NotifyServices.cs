@@ -1,10 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AppCenter.Crashes;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Xamarin.Forms;
+using TrainingDay.Model;
 
 namespace TrainingDay.Services
 {
@@ -16,9 +17,10 @@ namespace TrainingDay.Services
         public int Frequency { get; set; }
     }
 
-    public class NotifyServices
+    public class SiteService
     {
-        private static string domain = @"https://www.traningday.tk/api";
+        private static string domain = @"https://www.trainingday.tk/api";
+        //private static string domain = @"http://localhost:59734/api";
         private static string _sendTokenUrl = domain + @"/MobileTokens";
         public static async Task<bool> SendTokenToServer(string tokenString, string language, TimeSpan zone, int freq)
         {
@@ -42,61 +44,38 @@ namespace TrainingDay.Services
                 }
                 catch (Exception e)
                 {
-                    Debug.WriteLine($"Error: {e.Message}");
+                    Crashes.TrackError(e);
                 }
                 return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Crashes.TrackError(e);
                 return false;
             }
         }
 
 
-
-
-        //private static string _sendAlarmAddUrl = domain + @"/alarm/add/?token={0}{1}";
-        //public static async Task<bool> SendAlarmToServer(string token, Alarm alarm)
-        //{
-        //    try
-        //    {
-        //        var days = DaysOfWeek.Parse(alarm.Days).AllDays.Select(item => item ? 1 : 0);
-        //        string alarmString = $"&id={alarm.Id}&days={string.Join("", days)}&time={alarm.TimeOffset}";
-
-        //        HttpClient client = new HttpClient();
-        //        var uri = new Uri(string.Format(_sendAlarmAddUrl, token, alarm));
-        //        var content = new StringContent($"token={token}{alarmString}", 
-        //            Encoding.UTF8, "application/json");
-        //        var response = await client.PostAsync(uri, content);
-        //        var res = await response.Content.ReadAsStringAsync();
-        //        return res.Contains(token); // fix to check to success"
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //        return false;
-        //    }
-        //}
-
-        //private static string _sendAlarmDelUrl = domain + @"/alarm/del/?token={0}&alarmId={1}";
-        //public static async Task<bool> RemoveAlarmOnServer(string token, int alarmId)
-        //{
-        //    try
-        //    {
-        //        HttpClient client = new HttpClient();
-        //        var uri = new Uri(string.Format(_sendAlarmDelUrl, token, alarmId));
-        //        var content = new StringContent($"token={token}&alarmId={alarmId}",
-        //            Encoding.UTF8, "application/json");
-        //        var response = await client.PostAsync(uri, content);
-        //        var res = await response.Content.ReadAsStringAsync();
-        //        return res.Contains(token); // fix to check to success"
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //        return false;
-        //    }
-        //}
+        private static string _getBlogsUrl = domain + @"/MobileBlogs";
+        public static async Task<ObservableCollection<MobileBlog>> GetBlogsFromServer()
+        {
+            var client = new RestClient(_getBlogsUrl);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", "", ParameterType.RequestBody);
+            try
+            {
+                var result = await client.ExecuteAsync(request);
+                Debug.WriteLine($"Result Status Code: {result.StatusCode} - {result.Content}");
+                return JsonConvert.DeserializeObject<ObservableCollection<MobileBlog>>(result.Content);
+            }
+            catch (Exception e)
+            {
+                Crashes.TrackError(e);
+                Debug.WriteLine($"Error: {e.Message}");
+                return new ObservableCollection<MobileBlog>();
+            }
+        }
     }
 }

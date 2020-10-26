@@ -1,59 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+
 using Xamarin.Forms;
 
 namespace TrainingDay.Services
 {
-    public enum TooltipPosition
+    public static class ToolTipEffect
     {
-        Top,
-        Bottom,
-        Left,
-        Right,
-        AlignCenter,
-        AlignLeft,
-        AlignRight,
-        GravityCenter,
-        GravityLeft,
-        GravityRight,
-    }
-    //https://www.xamboy.com/2019/03/01/showing-tooltips-in-xamarin-forms/
-    public static class TooltipEffect
-    {
-        public static readonly BindableProperty HasTooltipProperty =
-          BindableProperty.CreateAttached("HasTooltip", typeof(bool), typeof(TooltipEffect), false, propertyChanged: OnHasTooltipChanged);
-        public static readonly BindableProperty TextColorProperty =
-          BindableProperty.CreateAttached("TextColor", typeof(Color), typeof(TooltipEffect), Color.White);
-        public static readonly BindableProperty BackgroundColorProperty =
-          BindableProperty.CreateAttached("BackgroundColor", typeof(Color), typeof(TooltipEffect), Color.Black);
-        public static readonly BindableProperty TextProperty =
-          BindableProperty.CreateAttached("Text", typeof(string), typeof(TooltipEffect), string.Empty);
-        public static readonly BindableProperty PositionProperty =
-          BindableProperty.CreateAttached("Position", typeof(TooltipPosition), typeof(TooltipEffect), TooltipPosition.Bottom);
 
-        public static BindableObject GetView(BindableObject view)
-        {
-            return view;
-        }
+        public static readonly BindableProperty TextProperty = BindableProperty.CreateAttached("Text", typeof(string), typeof(ToolTipEffect), string.Empty);
 
-        public static bool GetHasTooltip(BindableObject view)
-        {
-            return (bool)view.GetValue(HasTooltipProperty);
-        }
+        public static readonly BindableProperty PositionProperty = BindableProperty.CreateAttached("Position", typeof(ToolTipPosition), typeof(ToolTipEffect), ToolTipPosition.Bottom);
 
-        public static void SetHasTooltip(BindableObject bindable, bool value)
+        public static readonly BindableProperty IsTapAttachedProperty = BindableProperty.CreateAttached("IsTapAttached", typeof(bool), typeof(ToolTipEffect), false, propertyChanged: OnIsTapAttachedChanged);
+
+        public static readonly BindableProperty TextColorProperty = BindableProperty.CreateAttached("TextColor", typeof(Color), typeof(ToolTipEffect), Color.Black);
+
+        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.CreateAttached("BackgroundColor", typeof(Color), typeof(ToolTipEffect), Color.White);
+
+        public static readonly BindableProperty IsOpenProperty = BindableProperty.CreateAttached("IsOpen", typeof(bool), typeof(ToolTipEffect), false, propertyChanged: IsOpenChanged);
+
+        private static void IsOpenChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            //view.SetValue(HasTooltipProperty, value);
             var view = bindable as Xamarin.Forms.View;
             if (view == null)
             {
                 return;
             }
 
-            bool hasTooltip = (bool)value;
-            if (hasTooltip)
+            bool isOpen = (bool)newValue;
+            if (isOpen)
             {
                 view.Effects.Add(new ControlTooltipEffect());
             }
@@ -65,6 +41,183 @@ namespace TrainingDay.Services
                     view.Effects.Remove(toRemove);
                 }
             }
+        }
+
+        public static bool GetIsOpen(BindableObject view)
+        {
+            return (bool)view.GetValue(IsOpenProperty);
+        }
+
+        public static void SetIsOpen(BindableObject view, bool value)
+        {
+            view.SetValue(IsOpenProperty, value);
+        }
+
+
+        #region AndroidIOSOnly
+
+        /// <summary>
+        /// Android Only
+        /// </summary>
+        public static readonly BindableProperty PaddingProperty = BindableProperty.CreateAttached("Padding", typeof(int), typeof(ToolTipEffect), default);
+
+        /// <summary>
+        /// Android, IOS
+        /// </summary>
+        public static readonly BindableProperty ArrowHeightProperty = BindableProperty.CreateAttached("ArrowHeight", typeof(double), typeof(ToolTipEffect), default);
+
+        /// <summary>
+        /// Android, IOS
+        /// </summary>
+        public static readonly BindableProperty ArrowWidthProperty = BindableProperty.CreateAttached("ArrowWidth", typeof(double), typeof(ToolTipEffect), default);
+        #endregion
+
+        #region AndroidOnly
+
+        /// <summary>
+        /// Android Only
+        /// </summary>
+        public static readonly BindableProperty TextSizeProperty = BindableProperty.CreateAttached("TextSize", typeof(double), typeof(ToolTipEffect), default);
+
+        /// <summary>
+        /// Android Only
+        /// </summary>
+        public static readonly BindableProperty CornerRadiusProperty = BindableProperty.CreateAttached("CornerRadius", typeof(double), typeof(ToolTipEffect), default);
+
+        /// <summary>
+        /// Android Only
+        /// </summary>
+        public static readonly BindableProperty MarginProperty = BindableProperty.CreateAttached("Margin", typeof(double), typeof(ToolTipEffect), default);
+        #endregion
+
+        #region UWPOnly
+        /// <summary>
+        /// Overrides TextProperty when it is set. UWP only, IOS and Android not implemented yet
+        /// </summary>
+        public static readonly BindableProperty ContentProperty = BindableProperty.Create("Content", typeof(Xamarin.Forms.View), typeof(ToolTipEffect), (object)null, (BindingMode)0, (BindableProperty.ValidateValueDelegate)null, (BindableProperty.BindingPropertyChangedDelegate)null, (BindableProperty.BindingPropertyChangingDelegate)null, (BindableProperty.CoerceValueDelegate)null, (BindableProperty.CreateDefaultValueDelegate)null);
+
+
+        /// <summary>
+        /// Sets the Height of the toolTip. UWP only, IOS and Android not implemented yet
+        /// </summary>
+        public static readonly BindableProperty HeightProperty = BindableProperty.CreateAttached("Height", typeof(double), typeof(ToolTipEffect), default);
+
+        /// <summary>
+        /// Sets the Width of the toolTip. UWP only, IOS and Android not implemented yet
+        /// </summary>
+        public static readonly BindableProperty WidthProperty = BindableProperty.CreateAttached("Width", typeof(double), typeof(ToolTipEffect), default);
+
+        #endregion
+
+        public static double GetHeight(BindableObject view)
+        {
+            return (double)view.GetValue(HeightProperty);
+        }
+        public static double GetWidth(BindableObject view)
+        {
+            return (double)view.GetValue(WidthProperty);
+        }
+
+        public static void SetHeight(BindableObject view, double value)
+        {
+            view.SetValue(HeightProperty, value);
+        }
+
+        public static void SetWidth(BindableObject view, double value)
+        {
+            view.SetValue(WidthProperty, value);
+        }
+
+        public static double GetTextSize(BindableObject view)
+        {
+            return (double)view.GetValue(TextSizeProperty);
+        }
+
+        public static void SetTextSize(BindableObject view, double value)
+        {
+            view.SetValue(TextSizeProperty, value);
+        }
+
+        public static double GetArrowHeight(BindableObject view)
+        {
+            return (double)view.GetValue(ArrowHeightProperty);
+        }
+
+        public static void SetArrowHeight(BindableObject view, double value)
+        {
+            view.SetValue(ArrowHeightProperty, value);
+        }
+
+        public static double GetArrowWidth(BindableObject view)
+        {
+            return (double)view.GetValue(ArrowWidthProperty);
+        }
+
+        public static void SetArrowWidth(BindableObject view, double value)
+        {
+            view.SetValue(ArrowWidthProperty, value);
+        }
+
+
+        //public static readonly BindableProperty ActionProperty = BindableProperty.CreateAttached("Action", typeof(Action), typeof(ToolTipEffect), Action.OnHover);
+
+        /// <summary>
+        /// Gets or sets the value of the Content. This property can be used to change the content in a tab header.
+        /// </summary>
+
+        public static Xamarin.Forms.View GetContent(BindableObject view)
+        {
+            return (Xamarin.Forms.View)view.GetValue(ContentProperty);
+        }
+
+        public static double GetCornerRadius(BindableObject view)
+        {
+            return (double)view.GetValue(CornerRadiusProperty);
+        }
+
+        public static double GetMargin(BindableObject view)
+        {
+            return (double)view.GetValue(MarginProperty);
+        }
+
+        public static int GetPadding(BindableObject view)
+        {
+            return (int)view.GetValue(PaddingProperty);
+        }
+
+        public static void SetPadding(BindableObject view, int value)
+        {
+            view.SetValue(PaddingProperty, value);
+        }
+
+        internal static float GetLineSpacing(Element element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void SetCornerRadius(BindableObject view, float value)
+        {
+            view.SetValue(CornerRadiusProperty, value);
+        }
+
+        public static void SetContent(BindableObject view, Xamarin.Forms.View value)
+        {
+            view.SetValue(ContentProperty, value);
+        }
+
+        public static bool GetIsTapAttached(BindableObject view)
+        {
+            return (bool)view.GetValue(IsTapAttachedProperty);
+        }
+
+        public static void SetIsTapAttached(BindableObject view, bool value)
+        {
+            view.SetValue(IsTapAttachedProperty, value);
+        }
+
+        public static string GetText(BindableObject view)
+        {
+            return (string)view.GetValue(TextProperty);
         }
 
         public static Color GetTextColor(BindableObject view)
@@ -87,28 +240,33 @@ namespace TrainingDay.Services
             view.SetValue(BackgroundColorProperty, value);
         }
 
-        public static string GetText(BindableObject view)
-        {
-            return (string)view.GetValue(TextProperty);
-        }
 
         public static void SetText(BindableObject view, string value)
         {
             view.SetValue(TextProperty, value);
         }
 
-        public static TooltipPosition GetPosition(BindableObject view)
+        public static ToolTipPosition GetPosition(BindableObject view)
         {
-            return (TooltipPosition)view.GetValue(PositionProperty);
+            return (ToolTipPosition)view.GetValue(PositionProperty);
         }
 
-        public static void SetPosition(BindableObject view, TooltipPosition value)
+        public static void SetPosition(BindableObject view, ToolTipPosition value)
         {
             view.SetValue(PositionProperty, value);
         }
 
+        //public static Action GetAction(BindableObject view)
+        //{
+        //    return (Action)view.GetValue(ActionProperty);
+        //}
 
-        static void OnHasTooltipChanged(BindableObject bindable, object oldValue, object newValue)
+        //public static void SetAction(BindableObject view, Action value)
+        //{
+        //    view.SetValue(ActionProperty, value);
+        //}
+
+        static void OnIsTapAttachedChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var view = bindable as Xamarin.Forms.View;
             if (view == null)
@@ -116,8 +274,8 @@ namespace TrainingDay.Services
                 return;
             }
 
-            bool hasTooltip = (bool)newValue;
-            if (hasTooltip)
+            bool isVisible = (bool)newValue;
+            if (isVisible)
             {
                 view.Effects.Add(new ControlTooltipEffect());
             }
@@ -130,12 +288,29 @@ namespace TrainingDay.Services
                 }
             }
         }
-
     }
 
-    public class ControlTooltipEffect : RoutingEffect
+    public enum ToolTipPosition
     {
-        public ControlTooltipEffect() : base("CrossGeeks.TooltipEffect")
+        Bottom,
+
+        Right,
+
+        Left,
+
+        Top
+    }
+
+    public enum Action
+    {
+        OnHover,
+
+        OnClick,
+    }
+
+    class ControlTooltipEffect : RoutingEffect
+    {
+        public ControlTooltipEffect() : base($"Plugin.{nameof(ToolTipEffect)}")
         {
 
         }

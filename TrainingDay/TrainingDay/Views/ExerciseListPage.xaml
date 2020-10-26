@@ -11,7 +11,7 @@
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="remove.png" Command="{Binding DeleteExerciseCommand}" Order="Primary" Text="{services:Translate RemoveSelectedString}" x:Name="RemoveFromBaseMenu"/>
-        <ToolbarItem IconImageSource="accept.png" Command="{Binding ChoseExercisesCommand}" Order="Primary" Text="{services:Translate AddSelectedExercisesString}" CommandParameter="{Binding}" x:Name="AcceptChouseMenu"/>
+        <ToolbarItem IconImageSource="accept.png" Command="{Binding ChoseExercisesCommand}" Order="Primary" CommandParameter="{Binding}" x:Name="AcceptChouseMenu"/>
         <ToolbarItem IconImageSource="filter.png" Command="{Binding ViewFilterWindowCommand}" Order="Primary" Text="{services:Translate FilterString}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
@@ -37,9 +37,17 @@
                                       androidSpecific:ListView.IsFastScrollEnabled="True" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <ViewCell>
+                                <ViewCell x:Name="viewCell">
+                                    <ViewCell.ContextActions>
+                                        <MenuItem IsDestructive="true" IconImageSource="remove.png" Command="{Binding Source={x:Reference ExercisesListView}, Path=BindingContext.DeleteExerciseCommand}" 
+                                                  CommandParameter="{Binding Source={x:Reference viewCell}}"/>
+                                    </ViewCell.ContextActions>
                                     <Frame Style="{StaticResource FrameCellStyle}"  BackgroundColor="{DynamicResource ListItemBackgroundColor}">
                                         <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="Auto"/>
@@ -51,18 +59,17 @@
                                                 <controls2:ImageCache ImageUrl="{Binding ExerciseImageUrl}" HeightRequest="60" WidthRequest="60"/>
                                             </Frame>
 
-                                            <StackLayout Orientation="Vertical" Grid.Column="2" >
-                                                <Label Text="{Binding ExerciseItemName}" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
-                                                <controls2:WrapLayout ItemsSource="{Binding Muscles}" Orientation="Horizontal" HorizontalOptions="Center">
-                                                    <controls2:WrapLayout.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <Frame CornerRadius="3" BackgroundColor="{Binding Color}" BorderColor="Gray" Padding="2,5">
-                                                                <Label Text="{Binding Name}" FontSize="Micro" VerticalTextAlignment="Center" VerticalOptions="Center"/>
-                                                            </Frame>
-                                                        </DataTemplate>
-                                                    </controls2:WrapLayout.ItemTemplate>
-                                                </controls2:WrapLayout>
-                                            </StackLayout>
+                                            <Label Grid.Column="2" Text="{Binding ExerciseItemName}" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+
+                                            <controls2:WrapLayout Orientation="Horizontal" ItemsSource="{Binding Muscles}" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand">
+                                                <controls2:WrapLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Frame CornerRadius="3" BackgroundColor="{Binding Color}" BorderColor="Gray" Padding="2,5">
+                                                            <Label Text="{Binding Name}" FontSize="Small"/>
+                                                        </Frame>
+                                                    </DataTemplate>
+                                                </controls2:WrapLayout.ItemTemplate>
+                                            </controls2:WrapLayout>
                                         </Grid>
                                     </Frame>
                                 </ViewCell>

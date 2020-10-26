@@ -96,8 +96,10 @@ namespace TrainingDay.View
             CurrentTime = (DateTime.Now - _startTrainingDateTime + StartTime).ToString(@"hh\:mm\:ss");
             OnPropertyChanged(nameof(CurrentTime));
 
+            UpdateTime();
+
             //save to restore if not finish
-            SaveNotFinishedTraining(Items, TrainingItem.Title, TrainingItem.Id);
+            //SaveNotFinishedTraining(Items, TrainingItem.Title, TrainingItem.Id);
 
             return _enabledTimer;
         }
@@ -159,6 +161,18 @@ namespace TrainingDay.View
             {
                 Crashes.TrackError(ex);
                 Application.Current.MainPage = new NavigationPage(new MainPage());
+            }
+        }
+
+        private void UpdateTime()
+        {
+            var exercises = Items[StepProgressBarControl.StepSelected];
+            foreach (var item in exercises)
+            {
+                if (item.Tags.Contains(ExerciseTags.ExerciseByTime) && item.IsTimeCalculating && item.IsNotFinished)
+                {
+                    item.Time = DateTime.Now - item.StartCalculateDateTime;
+                }
             }
         }
 
@@ -280,11 +294,11 @@ namespace TrainingDay.View
                     DeviceDisplay.KeepScreenOn = false;
                     Settings.IsTrainingNotFinished = false;
                     Application.Current.MainPage = new NavigationPage(new MainPage());
+                    Application.Current.MainPage.Navigation.PushAsync(new TrainingItemsBasePage() { Title = Resource.TrainingsBaseString }, true);
                 }
             };
             popup.Show(Resource.OkString, Resource.CancelString);
         }
-
 
 
         public ICommand ViewFullScreenTimeCommand => new Command(ViewFullScreenTime);

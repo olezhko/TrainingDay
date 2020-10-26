@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using CarouselView.FormsPlugin.iOS;
 using Foundation;
 using UIKit;
 
@@ -22,8 +22,9 @@ namespace TrainingDay.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            CarouselViewRenderer.Init();
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+            LoadApplication(new App(false));
             App.ScreenWidth = UIScreen.MainScreen.Bounds.Width;
             App.ScreenHeight = UIScreen.MainScreen.Bounds.Height;
             OxyPlot.Xamarin.Forms.Platform.iOS.PlotViewRenderer.Init();

@@ -33,7 +33,7 @@
 
 
                 <Frame Grid.Row="0" BorderColor="Black" CornerRadius="2" Grid.Column="0" HorizontalOptions="Center" Padding="0" VerticalOptions="Center">
-                    <controls1:ImageCache HeightRequest="100" WidthRequest="100" x:Name="ImageControl" ImageUrl="{Binding ExerciseImageUrl}">
+                    <controls1:ImageCache HeightRequest="100" WidthRequest="100" x:Name="ImageControl" ImageUrl="{Binding ExerciseImageUrl}" >
                         <controls1:ImageCache.GestureRecognizers>
                             <TapGestureRecognizer Tapped="ImageTapped"/>
                         </controls1:ImageCache.GestureRecognizers>
@@ -44,8 +44,7 @@
                 <Editor Keyboard="Text" Text="{Binding ExerciseItemName}" FontSize="Large" Grid.Row="2" x:Name="NameEditor" AutoSize="TextChanges" VerticalOptions="Start"/>
                 <Label Text="{Binding ExerciseItemName}" FontSize="Large" Grid.Row="2" x:Name="NameLabel" VerticalOptions="Start" IsVisible="False"/>
 
-
-
+ 
                 <controls1:WrapPanel Grid.Row="4" x:Name="MusclesWrapPanel" Orientation="Horizontal" ItemsSource="{Binding Muscles}" IsEditableItems="True" Spacing="2" AddContent="{services:Translate MusclesString}">
                     <controls1:WrapPanel.ItemTemplate>
                         <DataTemplate>
@@ -69,14 +68,23 @@
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
+                                    <!--<Grid>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Entry Text="{Binding Repetitions,Mode=TwoWay}" />
+                                        <controls:EntryWithDot Text="{Binding WeightString,Mode=TwoWay}" Grid.Column="1"/>
+                                    </Grid>-->
                                     <controls1:RepsAndWeightControl Value="{Binding }" Margin="0" Padding="0" HorizontalOptions="Start" VerticalOptions="Start" DeleteRequestCommand="{Binding Source={x:Reference View}, Path=DeleteRequestCommand}" />
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </StackLayout>
 
-                    <StackLayout Padding="0"  Margin="5" Orientation="Horizontal" IsVisible="{Binding Tags,Converter={StaticResource ExerciseTagExistsConverter},ConverterParameter={x:Static model:ExerciseTags.ExerciseByTime}}">
-                        <Label FontSize="Medium" Text="{services:Translate TimeString}" VerticalOptions="Center" FontAttributes="Bold" Margin="10,0,0,0"/>
+                    <StackLayout Padding="0"  Margin="0" Orientation="Horizontal" IsVisible="{Binding Tags,Converter={StaticResource ExerciseTagExistsConverter},ConverterParameter={x:Static model:ExerciseTags.ExerciseByTime}}">
+                        <Label FontSize="Medium" Text="{services:Translate TimeString}" VerticalOptions="Center" FontAttributes="Bold" Margin="0,0,0,0" HorizontalOptions="StartAndExpand"/>
                         <Grid HorizontalOptions="Start">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -120,10 +128,11 @@
                             </Label>
                             <Label HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{services:Translate SecondString}" Grid.Row="1" Padding="0"/>
                         </Grid>
+                        <Button Text="{services:Translate MakeTrainingString}" Clicked="StartCalculateTime_Clicked" IsVisible="{Binding IsNotFinished}"/>
                     </StackLayout>
 
-                    <StackLayout Padding="0" Margin="5" Orientation="Horizontal" IsVisible="{Binding Tags,Converter={StaticResource ExerciseTagExistsConverter},ConverterParameter={x:Static model:ExerciseTags.ExerciseByDistance}}">
-                        <Label FontSize="Medium" Text="{services:Translate DistanceString}" VerticalOptions="Center" FontAttributes="Bold" Margin="10,0,0,0"/>
+                    <StackLayout Padding="0" Margin="0" Orientation="Horizontal" IsVisible="{Binding Tags,Converter={StaticResource ExerciseTagExistsConverter},ConverterParameter={x:Static model:ExerciseTags.ExerciseByDistance}}">
+                        <Label FontSize="Medium" Text="{services:Translate DistanceString}" VerticalOptions="Center" FontAttributes="Bold" Margin="0,0,0,0"/>
                         <controls:EntryWithDot HorizontalOptions="Start" HorizontalTextAlignment="Center" WidthRequest="50" Text="{Binding Distance}" Keyboard="Numeric"/>
                     </StackLayout>
                 </StackLayout>
@@ -164,7 +173,7 @@
                                 </Frame>
                                 <Label Text="{services:Translate StartPosition}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="DodgerBlue" FontSize="Medium"/>
                             </StackLayout>
-                            <Editor Grid.Row="1" Text="{Binding StartingPositionDescription}" IsReadOnly="False" x:Name="StartingDescEditor"/>
+                            <Editor Grid.Row="1" Text="{Binding StartingPositionDescription}" IsReadOnly="False" x:Name="StartingDescEditor" AutoSize="TextChanges"/>
 
 
 
@@ -174,7 +183,7 @@
                                 </Frame>
                                 <Label Text="{services:Translate Execution}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="LimeGreen" FontSize="Medium"/>
                             </StackLayout>
-                            <Editor Grid.Row="3" Text="{Binding ExecutionDescription}" IsReadOnly="False" x:Name="ExecDescEditor"/>
+                            <Editor Grid.Row="3" Text="{Binding ExecutionDescription}" IsReadOnly="False" x:Name="ExecDescEditor" AutoSize="TextChanges"/>
 
                             <StackLayout Grid.Row="4" Orientation="Horizontal">
                                 <Frame CornerRadius="20" BorderColor="Orange" WidthRequest="40" HeightRequest="40" Padding="0" BackgroundColor="Orange" >
@@ -182,7 +191,7 @@
                                 </Frame>
                                 <Label Text="{services:Translate Advice}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Orange" FontSize="Medium"/>
                             </StackLayout>
-                            <Editor Grid.Row="5" Text="{Binding AdviceDescription}" IsReadOnly="False" x:Name="AdviceDescEditor"/>
+                            <Editor Grid.Row="5" Text="{Binding AdviceDescription}" IsReadOnly="False" x:Name="AdviceDescEditor" AutoSize="TextChanges"/>
                         </Grid>
 
 

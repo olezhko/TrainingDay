@@ -101,6 +101,7 @@ namespace TrainingDay.ViewModels
             }
 
             TrainingExerciseItemPage page = new TrainingExerciseItemPage();
+            viewModel.IsNotFinished = false;// --> for Time start button, to hide button
             page.LoadExercise(viewModel);
             await Navigation.PushAsync(page);
         }

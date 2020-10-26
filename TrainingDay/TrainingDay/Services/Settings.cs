@@ -51,7 +51,7 @@ namespace TrainingDay.Services
             set => AppSettings.AddOrUpdateValue(nameof(WeightGoal), value);
         }
 
-        private static readonly bool SettingsIsLightTheme = false;
+        private static readonly bool SettingsIsLightTheme = true;
         public static bool IsLightTheme
         {
             get => AppSettings.GetValueOrDefault(nameof(IsLightTheme), SettingsIsLightTheme);
@@ -120,6 +120,20 @@ namespace TrainingDay.Services
         {
             get => AppSettings.GetValueOrDefault(nameof(IsTokenSavedOnServer), SettingsIsTokenSavedOnServer);
             set => AppSettings.AddOrUpdateValue(nameof(IsTokenSavedOnServer), value);
+        }
+
+        private static readonly double SettingsWaistGoal = 0.0; 
+        public static double WaistGoal
+        {
+            get => AppSettings.GetValueOrDefault(nameof(WaistGoal), SettingsWaistGoal);
+            set => AppSettings.AddOrUpdateValue(nameof(WaistGoal), value);
+        }
+
+        private static readonly double SettingsHipGoal = 0.0;
+        public static double HipGoal
+        {
+            get => AppSettings.GetValueOrDefault(nameof(HipGoal), SettingsHipGoal);
+            set => AppSettings.AddOrUpdateValue(nameof(HipGoal), value);
         }
     }
 }

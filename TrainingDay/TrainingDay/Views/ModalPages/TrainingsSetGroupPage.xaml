@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             x:Class="TrainingDay.Views.ModalPages.TrainingsSetGroupPage" Title="{services:Translate ChooseGroupOrNewString}">
+    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{DynamicResource ContentPageBackgroundColor}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{services:Translate ChooseGroupOrNewString}" HorizontalTextAlignment="Center" FontSize="Medium" Margin="5"/>
+                <ImageButton Grid.Column="1" WidthRequest="40" HeightRequest="40" Source="add.png" Clicked="ShowNewGroupWnd_Click" BackgroundColor="Transparent" Margin="10"/>
+            </Grid>
+
+            <ListView Grid.Row="2" ItemsSource="{Binding GroupsNamesToNewGroup}" x:Name="ItemsListView" ItemTapped="ItemsListView_OnItemTapped" HasUnevenRows="True">
+                <ListView.Behaviors>
+                    <services:EventToCommandBehavior EventName="ItemSelected" Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.GroupPickerChangedCommand}" 
+                                                             CommandParameter="{Binding }" />
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Frame Style="{StaticResource FrameCellStyle}" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Name}" FontSize="Medium" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" Margin="5"/>
+                                    <!--<RadioButton Text="{Binding Name}" FontSize="Medium" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" Margin="5"/>-->
+                                </Frame>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </StackLayout>
+</ContentPage>

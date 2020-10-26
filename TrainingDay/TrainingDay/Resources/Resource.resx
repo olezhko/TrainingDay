@@ -120,20 +120,8 @@
   <data name="AbdominalString" xml:space="preserve">
     <value>Abdominal</value>
   </data>
-  <data name="AcceptString" xml:space="preserve">
-    <value>Accept</value>
-  </data>
   <data name="AddedString" xml:space="preserve">
     <value>Added</value>
-  </data>
-  <data name="AddExercisesToTrainingString" xml:space="preserve">
-    <value>Add exercises</value>
-  </data>
-  <data name="AddNewTrainingString" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="AddSelectedExercisesString" xml:space="preserve">
-    <value>Add selected exercises</value>
   </data>
   <data name="AddTrainingString" xml:space="preserve">
     <value>Add workout</value>
@@ -161,12 +149,6 @@
   </data>
   <data name="ChousePeriodString" xml:space="preserve">
     <value>Chouse period:</value>
-  </data>
-  <data name="CountOfApprochesString" xml:space="preserve">
-    <value>Repetitions:</value>
-  </data>
-  <data name="CountOfTimesString" xml:space="preserve">
-    <value>Times:</value>
   </data>
   <data name="CreateNewString" xml:space="preserve">
     <value>Create new</value>
@@ -493,7 +475,7 @@
     <value>Exercise for </value>
   </data>
   <data name="HomeString" xml:space="preserve">
-    <value>Home</value>
+    <value>Without Inventory</value>
   </data>
   <data name="Denied" xml:space="preserve">
     <value>Denied</value>
@@ -532,7 +514,7 @@
     <value>Start Workout</value>
   </data>
   <data name="WeightControlString" xml:space="preserve">
-    <value>Weight Control</value>
+    <value>Body Control</value>
   </data>
   <data name="SkipString" xml:space="preserve">
     <value>Skip</value>
@@ -551,5 +533,17 @@
   </data>
   <data name="DeleteTraining" xml:space="preserve">
     <value>Delete training</value>
+  </data>
+  <data name="HipsString" xml:space="preserve">
+    <value>Hips</value>
+  </data>
+  <data name="WaistString" xml:space="preserve">
+    <value>Waist</value>
+  </data>
+  <data name="WaistHipMessage" xml:space="preserve">
+    <value>Waist-Hip Index._Index value = {0}._Read more?</value>
+  </data>
+  <data name="NewsString" xml:space="preserve">
+    <value>News</value>
   </data>
 </root>

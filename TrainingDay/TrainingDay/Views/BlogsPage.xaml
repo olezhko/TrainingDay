@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
+             xmlns:controls="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             x:Class="TrainingDay.Views.BlogsPage" x:Name="Page" >
+    <ContentPage.BindingContext>
+        <viewModels:BlogsPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsLoadingItems}">
+                <CollectionView ItemsSource="{Binding BlogsCollection}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Style="{StaticResource FrameCellStyle}" >
+                                <StackLayout>
+                                    <Label Text="{Binding Title}" FontSize="Medium" FontAttributes="Bold" TextDecorations="Underline" HorizontalTextAlignment="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference Page}, Path=BindingContext.OpenBlogCommand}" CommandParameter="{Binding }"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <Label Text="{Binding DateTime}" FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            <controls:AdMobView AdUnitId="ca-app-pub-8728883017081055/2677919170" VerticalOptions="End" BackgroundColor="Transparent" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

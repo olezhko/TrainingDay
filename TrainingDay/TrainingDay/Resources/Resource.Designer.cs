@@ -70,47 +70,11 @@ namespace TrainingDay.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accept.
-        /// </summary>
-        internal static string AcceptString {
-            get {
-                return ResourceManager.GetString("AcceptString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Added.
         /// </summary>
         internal static string AddedString {
             get {
                 return ResourceManager.GetString("AddedString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add exercises.
-        /// </summary>
-        internal static string AddExercisesToTrainingString {
-            get {
-                return ResourceManager.GetString("AddExercisesToTrainingString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add.
-        /// </summary>
-        internal static string AddNewTrainingString {
-            get {
-                return ResourceManager.GetString("AddNewTrainingString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add selected exercises.
-        /// </summary>
-        internal static string AddSelectedExercisesString {
-            get {
-                return ResourceManager.GetString("AddSelectedExercisesString", resourceCulture);
             }
         }
         
@@ -318,24 +282,6 @@ namespace TrainingDay.Resources {
         internal static string CopyString {
             get {
                 return ResourceManager.GetString("CopyString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Repetitions:.
-        /// </summary>
-        internal static string CountOfApprochesString {
-            get {
-                return ResourceManager.GetString("CountOfApprochesString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Times:.
-        /// </summary>
-        internal static string CountOfTimesString {
-            get {
-                return ResourceManager.GetString("CountOfTimesString", resourceCulture);
             }
         }
         
@@ -691,6 +637,15 @@ namespace TrainingDay.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hips.
+        /// </summary>
+        internal static string HipsString {
+            get {
+                return ResourceManager.GetString("HipsString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to History.
         /// </summary>
         internal static string HistoryString {
@@ -709,7 +664,7 @@ namespace TrainingDay.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Home.
+        ///   Looks up a localized string similar to Without Inventory.
         /// </summary>
         internal static string HomeString {
             get {
@@ -840,6 +795,15 @@ namespace TrainingDay.Resources {
         internal static string NameString1 {
             get {
                 return ResourceManager.GetString("NameString1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to News.
+        /// </summary>
+        internal static string NewsString {
+            get {
+                return ResourceManager.GetString("NewsString", resourceCulture);
             }
         }
         
@@ -1303,6 +1267,24 @@ namespace TrainingDay.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Waist-Hip Index._Index value = {0}._Read more?.
+        /// </summary>
+        internal static string WaistHipMessage {
+            get {
+                return ResourceManager.GetString("WaistHipMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waist.
+        /// </summary>
+        internal static string WaistString {
+            get {
+                return ResourceManager.GetString("WaistString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Week.
         /// </summary>
         internal static string WeekString {
@@ -1312,7 +1294,7 @@ namespace TrainingDay.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Weight Control.
+        ///   Looks up a localized string similar to Body Control.
         /// </summary>
         internal static string WeightControlString {
             get {

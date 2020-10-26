@@ -10,6 +10,7 @@ using TrainingDay.Views;
 using TrainingDay.Views.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Device = Xamarin.Forms.Device;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TrainingDay
@@ -17,7 +18,7 @@ namespace TrainingDay
     public partial class App : Application
     {
         public const string DATABASE_NAME = "exercise.db";
-        public const string Version = "1.0.5.0";
+        public const string Version = "1.0.5.6";
         private static Repository database;
 
         private static object lockBase = new object();
@@ -61,15 +62,14 @@ namespace TrainingDay
                 System.Exception ex = (System.Exception) args.ExceptionObject;
                 Crashes.TrackError(ex);
             };
-
-            //var last = Database.GetUpdates();
-            //if (last == null || Version.CompareTo(last.Version) > 0)
-            //{
-            //    MainPage = new UpdatesPage();
-            //}
-            //else
+            var last = Database.GetUpdates();
+            if (last == null || Version.CompareTo(last.Version) > 0)
             {
-                //MainPage = new MainPage();
+                MainPage = new UpdatesPage();
+            }
+            else
+            {
+                //MainPage = new UpdatesPage();
                 MainPage = new NavigationPage(new MainPage());
             }
 
@@ -264,7 +264,7 @@ namespace TrainingDay
 
                 var language = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
                 var zone = DependencyService.Get<ILocalize>().GetTimeZone();
-                var res = await NotifyServices.SendTokenToServer(token, language.Name, zone,Settings.WeightNotifyFreq);
+                var res = await SiteService.SendTokenToServer(token, language.Name, zone,Settings.WeightNotifyFreq);
                 Settings.IsTokenSavedOnServer = res;
             }
             catch (Exception e)

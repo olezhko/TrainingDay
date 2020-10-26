@@ -197,10 +197,15 @@ namespace TrainingDay.View
 
         public Exercise GetExercise()
         {
+            TrainingExerciseViewModel.Description descriptionsStrings = new TrainingExerciseViewModel.Description();
+            descriptionsStrings.advice = AdviceDescription;
+            descriptionsStrings.exec = ExecutionDescription;
+            descriptionsStrings.start = StartingPositionDescription;
+
             return new Exercise()
             {
                 Id = Id,
-                Description = ShortDescription,
+                Description = JsonConvert.SerializeObject(descriptionsStrings),
                 ExerciseImageUrl = ExerciseImageUrl,
                 ExerciseItemName = _name,
                 MusclesString = MusclesConverter.ConvertFromListToString(Muscles.ToList()),

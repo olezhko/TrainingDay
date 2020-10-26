@@ -1,8 +1,8 @@
 ﻿[
 {
 "Id":"0",
-"Version":"1.0.4.15",
-"Title":"Exercise Technique",
-"Text":"<p>Video for exercises.</p> <ol><li>For you now, in addition to the text description of how to perform the exercise, a selection of YouTube videos has been added</li><li>Touch to the exercise.</li><li>Press the VIDEO button <img width=200 height=200 src=video_select.png />, 10 videos from YouTube will be offered.</li><li>Start watching the video.</li></ol>"
+"Version":"1.0.5.6",
+"Title":"Body Control",
+"Text":"<p>Waist-to-Hip Ratio.</p> <ol><li>Now, in addition to weight control, you now have the opportunity to control changes in the waist and hips.</li><li>Open the window through the main menu<b>Body Control</b></li><li>Enter your waist and hip measurements.</li><li>Press the INFO button <img width=30 height=30 src=info.png />, to see what this value means.</li></ol>"
 }
 ]

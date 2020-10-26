@@ -43,6 +43,7 @@ namespace TrainingDay.Services
         public int Id { get; set; }
         public double Weight { get; set; }
         public DateTime Date { get; set; }
+        public int Type { get; set; }
     }
 
     [Table("TrainingExerciseComm")]
@@ -158,15 +159,7 @@ namespace TrainingDay.Services
                 database.CreateTable<SuperSet>();
                 database.CreateTable<UpdateItem>();
                 database.CreateTable<TrainingUnion>();
-                try
-                {
-                    database.CreateTable<ImageData>();
-                }
-                catch (Exception e)
-                {
-                    database.DropTable<ImageData>();
-                    database.CreateTable<ImageData>();
-                }
+                database.CreateTable<ImageData>();
 
                 var exer = InitExercises();
 
@@ -257,9 +250,10 @@ namespace TrainingDay.Services
                     ExerciseItemName = n.Element("Name").Value,
                     Description = n.Element("Description").Value,
                     MusclesString = n.Element("Muscles").Value,
-                    ExerciseImageUrl = n.Element("ExerciseImageUrl").Value,
                     Version = n.Element("Version").Value,
                     CodeNum = Convert.ToInt32(n.Element("CodeNum").Value),
+                    //ExerciseImageUrl = n.Element("ExerciseImageUrl").Value,
+                    ExerciseImageUrl = $"http://trainingday.tk/app-images/{Convert.ToInt32(n.Element("CodeNum").Value)}.jpg",
                     TagsValue = ExerciseTagExtension.ConvertFromStringToInt(n.Element("Tag").Value)
                 });
 
@@ -625,6 +619,18 @@ namespace TrainingDay.Services
         public void DeleteAll<T>()
         {
             database.DeleteAll<T>();
+        }
+
+        public void DeleteTrainingExerciseItemByExerciseId(int itemExerciseId)
+        {
+            var allItems = GetTrainingExerciseItems();
+            foreach (var trainingExerciseComm in allItems)
+            {
+                if (trainingExerciseComm.ExerciseId == itemExerciseId)
+                {
+                    DeleteTrainingExerciseItem(trainingExerciseComm.Id);
+                }
+            }
         }
     }
 }

@@ -11,27 +11,27 @@
         <controls1:WeightAndReps/>
     </ContentView.BindingContext>
     <ContentView.Content>
-        <Grid Padding="0" Margin="0">
-            <Frame Style="{StaticResource FrameCellStyle}" Padding="0">
-                <Grid  Margin="0" Padding="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="2"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+        <Frame Style="{StaticResource FrameCellStyle}" Padding="0">
+            <Grid  Margin="0" Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-                    <Entry Text="{Binding Repetitions,Mode=TwoWay}" Keyboard="Numeric" MaxLength="3" Margin="0" FontSize="Medium" HorizontalTextAlignment="Center" />
-                    <controls:EntryWithDot Text="{Binding WeightString,Mode=TwoWay}" Grid.Column="2" Keyboard="Numeric" MaxLength="4" Margin="0" FontSize="Medium" HorizontalTextAlignment="Center"/>
+                <Entry Text="{Binding Repetitions,Mode=TwoWay}" Keyboard="Numeric" FontSize="Medium" Margin="0" MaxLength="3"/>
+                <controls:EntryWithDot Text="{Binding WeightString,Mode=TwoWay}" Grid.Column="2" Keyboard="Numeric" FontSize="Medium" Margin="0" MaxLength="4" />
 
-                    <BoxView Grid.Column="1" Color="{DynamicResource SeparatorColor}" HeightRequest="40" VerticalOptions="Center" WidthRequest="2"/>
+                <!--<Entry Text="{Binding Repetitions,Mode=TwoWay}" Keyboard="Numeric" MaxLength="3" Margin="0" FontSize="Medium" HorizontalTextAlignment="Center" />
+                <controls:EntryWithDot Text="{Binding WeightString,Mode=TwoWay}" Grid.Column="2" Keyboard="Numeric" MaxLength="4" Margin="0" FontSize="Medium" HorizontalTextAlignment="Center"/>-->
 
-                    <ImageButton Source="clear.png" BackgroundColor="Gray" HorizontalOptions="Center" HeightRequest="40" WidthRequest="40"
-                                 VerticalOptions="Fill" Grid.Column="3" Clicked="DeleteButton_Clicked" Margin="0">
-                    </ImageButton>
-                </Grid>
-            </Frame>
-        </Grid>
+                <BoxView Grid.Column="1" Color="{DynamicResource SeparatorColor}" HeightRequest="40" VerticalOptions="Center" WidthRequest="2"/>
 
+                <ImageButton Source="clear.png" BackgroundColor="Gray" HorizontalOptions="Center" HeightRequest="40" WidthRequest="40"
+                             VerticalOptions="Fill" Grid.Column="3" Clicked="DeleteButton_Clicked" Margin="0">
+                </ImageButton>
+            </Grid>
+        </Frame>
     </ContentView.Content>
 </ContentView>

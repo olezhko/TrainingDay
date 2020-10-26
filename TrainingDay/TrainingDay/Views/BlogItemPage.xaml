@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:model="clr-namespace:TrainingDay.Model"
+             xmlns:controls="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             x:Class="TrainingDay.Views.BlogItemPage">
+    <ContentPage.BindingContext>
+        <model:BlogViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Text="{Binding Title}" FontSize="Medium" HorizontalTextAlignment="Center" Grid.Row="0"/>
+            <WebView Source="{Binding WebViewDataText}" Grid.Row="1"/>
+            <Label Text="{Binding DateTime}" HorizontalOptions="End" TextColor="{DynamicResource SeparatorColor}" Grid.Row="2"/>
+            <controls:AdMobView AdUnitId="ca-app-pub-8728883017081055/3839299823" BackgroundColor="Transparent" VerticalOptions="Start" Grid.Row="3"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

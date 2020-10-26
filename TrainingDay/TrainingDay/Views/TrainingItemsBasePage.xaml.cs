@@ -90,15 +90,5 @@ namespace TrainingDay.Views
                 popup.Show(Resource.OkString, Resource.CancelString);
             }
         }
-
-        private async void ShowNewGroupWnd_Click(object sender, EventArgs e)
-        {
-            string result = await DisplayPromptAsync("", Resource.GroupingEnterNameofGroup);
-            if (result != null)
-            {
-                vm.NewGroupName = result;
-                vm.AcceptGroup();
-            }
-        }
     }
 }

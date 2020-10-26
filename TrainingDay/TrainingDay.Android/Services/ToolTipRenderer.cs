@@ -1,107 +1,111 @@
-﻿using System;
+﻿using Android.Views;
+
+using Com.Tooltip;
+
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using Android.Views;
-using Com.Tomergoldst.Tooltips;
-using TrainingDay.Droid.Services;
+using System.Text;
 using TrainingDay.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using static Com.Tomergoldst.Tooltips.ToolTipsManager;
 
 
-[assembly: ResolutionGroupName("CrossGeeks")]
-[assembly: ExportEffect(typeof(DroidTooltipEffect), nameof(TrainingDay.Services.TooltipEffect))]
+[assembly: ResolutionGroupName("Plugin")]
+[assembly: ExportEffect(typeof(TrainingDay.Droid.Services.DroidTooltipEffect), nameof(TrainingDay.Services.ToolTipEffect))]
 namespace TrainingDay.Droid.Services
 {
     public class DroidTooltipEffect : PlatformEffect
     {
-        ToolTip toolTipView;
-        ToolTipsManager _toolTipsManager;
-        ITipListener listener;
-
-        public DroidTooltipEffect()
-        {
-            listener = new TipListener();
-            _toolTipsManager = new ToolTipsManager(listener);
-        }
+        Tooltip.Builder builder;
 
         void OnTap(object sender, EventArgs e)
         {
+            GetToolTip();
+        }
+
+        private void GetToolTip()
+        {
             var control = Control ?? Container;
 
-            var text = TooltipEffect.GetText(Element);
+            var text = ToolTipEffect.GetText(Element);
 
             if (!string.IsNullOrEmpty(text))
             {
-                ToolTip.Builder builder;
-                var parentContent = control.RootView;
 
-                var position = TooltipEffect.GetPosition(Element);
+                var position = ToolTipEffect.GetPosition(Element);
+                builder = new Tooltip.Builder(control);
                 switch (position)
                 {
-                    case TooltipPosition.Bottom:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.PositionBelow);
+                    case ToolTipPosition.Top:
+                        builder.SetGravity((int)GravityFlags.Top);
                         break;
-                    case TooltipPosition.AlignCenter:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.AlignCenter);
+                    case ToolTipPosition.Left:
+                        builder.SetGravity((int)GravityFlags.Left);
                         break;
-                    case TooltipPosition.AlignLeft:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.AlignLeft);
+                    case ToolTipPosition.Right:
+                        builder.SetGravity((int)GravityFlags.Right);
                         break;
-                    case TooltipPosition.AlignRight:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.AlignRight);
-                        break;
-                    case TooltipPosition.GravityCenter:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.GravityCenter);
-                        break;
-                    case TooltipPosition.GravityLeft:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.GravityLeft);
-                        break;
-                    case TooltipPosition.GravityRight:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.GravityRight);
-                        break;
-                    case TooltipPosition.Top:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.PositionAbove);
-                        break;
-                    case TooltipPosition.Left:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.PositionLeftTo);
-                        break;
-                    case TooltipPosition.Right:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.PositionRightTo);
+                    case ToolTipPosition.Bottom:
+                        builder.SetGravity((int)GravityFlags.Bottom);
                         break;
                     default:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.PositionBelow);
+                        builder.SetGravity((int)GravityFlags.NoGravity);
                         break;
                 }
 
-                builder.SetAlign(ToolTip.AlignLeft);
-                builder.SetBackgroundColor(TooltipEffect.GetBackgroundColor(Element).ToAndroid());
-                builder.SetTextColor(TooltipEffect.GetTextColor(Element).ToAndroid());
+                builder.SetText(text);
+                builder.SetCornerRadius(Convert.ToSingle(ToolTipEffect.GetCornerRadius(Element)));
 
-                toolTipView = builder.Build();
-                _toolTipsManager?.Show(toolTipView);
+                builder.SetDismissOnClick(true);
+                builder.SetBackgroundColor(ToolTipEffect.GetBackgroundColor(Element).ToAndroid());
+                builder.SetTextColor(ToolTipEffect.GetTextColor(Element).ToAndroid());
+                var heightArrow = ToolTipEffect.GetArrowHeight(Element);
+                if (heightArrow > 0.0)
+                    builder.SetArrowHeight(Convert.ToSingle(heightArrow));
+                var widthArrow = ToolTipEffect.GetArrowWidth(Element);
+                if (widthArrow > 0.0)
+                    builder.SetArrowWidth(Convert.ToSingle(widthArrow));
+
+                var textSize = ToolTipEffect.GetTextSize(Element);
+                if (textSize > 0)
+                    builder.SetTextSize(Convert.ToSingle(textSize));
+
+                builder.SetMargin(Convert.ToSingle(ToolTipEffect.GetMargin(Element)));
+                builder.SetPadding(ToolTipEffect.GetPadding(Element));
+                builder.SetCancelable(true);
+
+                builder.Build().Show();
+
+                //  _toolTipsManager?.Show(toolTipView);
             }
         }
- 
+
         protected override void OnAttached()
         {
             var control = Control ?? Container;
-            OnTap(control, null);
-            //control.Click += OnTap;
+
+            control.Click += OnTap;
+
         }
+
 
         protected override void OnDetached()
         {
             var control = Control ?? Container;
-            //control.Click -= OnTap;
-            _toolTipsManager.FindAndDismiss(control);
+            control.Click -= OnTap;
+            builder?.Dispose();
         }
 
-        class TipListener : Java.Lang.Object, ITipListener
+        protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
         {
-            public void OnTipDismissed(Android.Views.View p0, int p1, bool p2)
+            base.OnElementPropertyChanged(args);
+            if (args.PropertyName == "IsOpen")
             {
-
+                if (ToolTipEffect.GetIsOpen(Element))
+                {
+                    GetToolTip();
+                }
             }
         }
     }

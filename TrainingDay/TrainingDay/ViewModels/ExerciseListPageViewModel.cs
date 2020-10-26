@@ -26,7 +26,7 @@ namespace TrainingDay.ViewModels
         public ExerciseListPageViewModel()
         {
             ChoseExercisesCommand = new Command(ChoseExercises);
-            DeleteExerciseCommand = new Command(DeleteExerciseFromBase);
+            DeleteExerciseCommand = new Command<ViewCell>(DeleteExerciseFromBase);
             ViewFilterWindowCommand = new Command(ViewFilterWindow);
             Items = new ObservableCollection<TrainingExerciseViewModel>();
             BaseItems = new ObservableCollection<TrainingExerciseViewModel>();
@@ -63,36 +63,21 @@ namespace TrainingDay.ViewModels
         }
 
         public ICommand DeleteExerciseCommand { protected set; get; }
-        private void DeleteExerciseFromBase()
+        private void DeleteExerciseFromBase(ViewCell viewCell)
         {
-            var deleteItems = GetSelectedItems();
-            var names = string.Join("\n", deleteItems.Select(item => item.ExerciseItemName));
-            var idItemsToRemove = new List<int>();
-            QuestionPopup popup = new QuestionPopup(Resource.DeleteExercises, Resource.AreYouSerious + "\n" + names);
+            //var deleteItems = GetSelectedItems();
+            //var names = string.Join("\n", deleteItems.Select(item => item.ExerciseItemName));
+            //var idItemsToRemove = new List<int>();
+            viewCell.ContextActions.Clear();
+            var item = (TrainingExerciseViewModel)viewCell.BindingContext;
+            QuestionPopup popup = new QuestionPopup(Resource.DeleteExercises, Resource.AreYouSerious + "\n" + item.ExerciseItemName);
             popup.PopupClosed += (o, closedArgs) =>
             {
                 if (closedArgs.Button == Resource.OkString)
                 {
-                    bool isDeleted = false;
-                    foreach (var exerciseSelectViewModel in deleteItems)
-                    {
-                        if (exerciseSelectViewModel.IsSelected)
-                        {
-                            idItemsToRemove.Add(exerciseSelectViewModel.ExerciseId);
-                            App.Database.DeleteExerciseItem(exerciseSelectViewModel.ExerciseId);
-                            isDeleted = true;
-                        }
-                    }
-
-                    if (isDeleted)
-                    {
-                        DependencyService.Get<IMessage>().ShortAlert(Resource.DeletedString);
-                        foreach (var idItem in idItemsToRemove)
-                        {
-                            var itemToFind = Items.First(item => item.ExerciseId == idItem);
-                            Items.Remove(itemToFind);
-                        }
-                    }
+                    App.Database.DeleteExerciseItem(item.ExerciseId);
+                    App.Database.DeleteTrainingExerciseItemByExerciseId(item.ExerciseId);
+                    Items.Remove(item);
                 }
             };
             popup.Show(Resource.OkString, Resource.CancelString);

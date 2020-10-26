@@ -21,7 +21,7 @@ namespace TrainingDay.Views.Controls
             InitializeComponent();
             dataPicker = new Picker();
             dataPicker.ItemsSource = Enumerable.Range(0, 60).Select(min => min.ToString("D2")).ToList();
-            dataPicker.SelectedIndexChanged +=DataPickerOnSelectedIndexChanged;
+            dataPicker.SelectedIndexChanged += DataPickerOnSelectedIndexChanged;
             dataPicker.IsVisible = false;
             dataPicker.Unfocused += DataPicker_Unfocused;
             BindingContextChanged += ExerciseView_BindingContextChanged;
@@ -77,32 +77,6 @@ namespace TrainingDay.Views.Controls
         private void ImageTapped(object sender, EventArgs e)
         {
             ImageTappedEvent?.Invoke(this, ImageControl.Source);
-        }
-
-        public bool IsLandscape { get; set; }
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            base.OnSizeAllocated(width, height);
-            //if (Device.info.CurrentOrientation == DeviceOrientation.Landscape)
-            //{
-            //    IsLandscape = true;
-            //    MainGrid.Children.Remove(MusclesWrapPanel);
-            //    GridWithImage.Children.Add(MusclesWrapPanel);
-
-            //    Grid.SetColumn(MusclesWrapPanel, 2);
-            //    Grid.SetRow(MusclesWrapPanel, 0);
-            //    MusclesWrapPanel.Orientation = StackOrientation.Vertical;
-            //}
-            //if (Device.info.CurrentOrientation == DeviceOrientation.Portrait)
-            //{
-            //    IsLandscape = false;
-            //    MusclesWrapPanel.Orientation = StackOrientation.Horizontal;
-            //    GridWithImage.Children.Remove(MusclesWrapPanel);
-            //    MainGrid.Children.Add(MusclesWrapPanel);
-            //    Grid.SetColumn(MusclesWrapPanel, 0);
-            //    Grid.SetRow(MusclesWrapPanel,2);
-            //}
-            //OnPropertyChanged(nameof(IsLandscape));
         }
 
         private void AddWeightAndRepsItem_Clicked(object sender, EventArgs e)
@@ -238,6 +212,15 @@ namespace TrainingDay.Views.Controls
         {
             var item = ((TrainingExerciseViewModel)BindingContext);
             item.WeightAndRepsItems.Remove(sender);
+        }
+
+
+        private void StartCalculateTime_Clicked(object sender, EventArgs e)
+        {
+            var item = ((TrainingExerciseViewModel)BindingContext);
+
+            item.StartCalculateDateTime = DateTime.Now;
+            item.IsTimeCalculating = true;
         }
     }
 }

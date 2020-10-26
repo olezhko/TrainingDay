@@ -6,13 +6,17 @@
              x:Class="TrainingDay.Views.MainPage">
     <ContentPage.Content>
         <Grid>
-            <Grid VerticalOptions="Center">
+            <Grid VerticalOptions="End">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+
 
                 <StackLayout Orientation="Horizontal" Grid.Row="0">
                     <StackLayout.GestureRecognizers>
@@ -55,10 +59,23 @@
 
                 <StackLayout Orientation="Horizontal" Grid.Row="3">
                     <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ShowNotesPage_Click"/>
+                    </StackLayout.GestureRecognizers>
+                    <ImageButton Source="notes.png" CornerRadius="5" HeightRequest="80" WidthRequest="80" BorderColor="Gray" BorderWidth="1" 
+                             BackgroundColor="Transparent" HorizontalOptions="Center" Clicked="ShowNotesPage_Click"/>
+                    <Label Text="{services:Translate NewsString}" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="Large">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShowNotesPage_Click"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="4">
+                    <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ShowSettingsPage_Click"/>
                     </StackLayout.GestureRecognizers>
                     <ImageButton Source="settings.png" CornerRadius="5" HeightRequest="80" WidthRequest="80" BorderColor="Gray" BorderWidth="1" 
-                             BackgroundColor="Transparent" HorizontalOptions="Center" Clicked="ShowSettingsPage_Click"/>
+                                 BackgroundColor="Transparent" HorizontalOptions="Center" Clicked="ShowSettingsPage_Click"/>
                     <Label Text="{services:Translate SettingsString}" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="Large">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="ShowSettingsPage_Click"/>
@@ -66,9 +83,8 @@
                     </Label>
                 </StackLayout>
 
+                <controls:AdMobView AdUnitId="ca-app-pub-8728883017081055/2677919170" VerticalOptions="End" BackgroundColor="Transparent" Grid.Row="6"/>
             </Grid>
-
-            <controls:AdMobView AdUnitId="ca-app-pub-8728883017081055/2677919170" VerticalOptions="End" BackgroundColor="Transparent" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
