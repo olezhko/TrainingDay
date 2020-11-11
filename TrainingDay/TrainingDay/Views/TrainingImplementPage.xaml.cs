@@ -99,12 +99,12 @@ namespace TrainingDay.View
             UpdateTime();
 
             //save to restore if not finish
-            //SaveNotFinishedTraining(Items, TrainingItem.Title, TrainingItem.Id);
-
+            SaveNotFinishedTraining(TrainingItem.Title, TrainingItem.Id);
+            UpdateNotifyTimer();
             return _enabledTimer;
         }
 
-        private void SaveNotFinishedTraining(ObservableCollection<SuperSetViewModel> items, string title, int id)
+        private void SaveNotFinishedTraining(string title, int id)
         {
             Settings.IsTrainingNotFinishedTime = CurrentTime;
             var fn = "NotFinished.trday";
@@ -125,6 +125,27 @@ namespace TrainingDay.View
             training.SaveToFile(filename);
         }
 
+        private void UpdateNotifyTimer()
+        {
+            if (_enabledTimer)
+            {
+                var name = string.Join(" - ", Items[StepProgressBarControl.StepSelected].Select(a => a.ExerciseItemName));
+                DependencyService.Get<IMessage>().ShowNotification(App.TrainingImplementTimeId, name,
+                    CurrentTime, true, true);
+            }
+        }
+
+        private void UpdateTime()
+        {
+            var exercises = Items[StepProgressBarControl.StepSelected];
+            foreach (var item in exercises)
+            {
+                if (item.Tags.Contains(ExerciseTags.ExerciseByTime) && item.IsTimeCalculating && item.IsNotFinished)
+                {
+                    item.Time = DateTime.Now - item.StartCalculateDateTime;
+                }
+            }
+        }
         #endregion
 
         #region Finish
@@ -137,6 +158,7 @@ namespace TrainingDay.View
                 if (Items.All(a => a.All(item => !item.IsNotFinished)) && _enabledTimer)
                 {
                     _enabledTimer = false;
+                    DependencyService.Get<IMessage>().CancelNotification(App.TrainingImplementTimeId);
                     DeviceDisplay.KeepScreenOn = false;
                     SaveLastTraining();
                     SaveChangedExercises();
@@ -161,18 +183,6 @@ namespace TrainingDay.View
             {
                 Crashes.TrackError(ex);
                 Application.Current.MainPage = new NavigationPage(new MainPage());
-            }
-        }
-
-        private void UpdateTime()
-        {
-            var exercises = Items[StepProgressBarControl.StepSelected];
-            foreach (var item in exercises)
-            {
-                if (item.Tags.Contains(ExerciseTags.ExerciseByTime) && item.IsTimeCalculating && item.IsNotFinished)
-                {
-                    item.Time = DateTime.Now - item.StartCalculateDateTime;
-                }
             }
         }
 
@@ -246,8 +256,6 @@ namespace TrainingDay.View
                 }
             }
         }
-
-
         #endregion
 
         public ICommand AddExercisesCommand => new Command(AddExercisesRequest);
@@ -291,6 +299,8 @@ namespace TrainingDay.View
             {
                 if (closedArgs.Button == Resource.OkString)
                 {
+                    _enabledTimer = false;
+                    DependencyService.Get<IMessage>().CancelNotification(App.TrainingImplementTimeId);
                     DeviceDisplay.KeepScreenOn = false;
                     Settings.IsTrainingNotFinished = false;
                     Application.Current.MainPage = new NavigationPage(new MainPage());
@@ -299,7 +309,6 @@ namespace TrainingDay.View
             };
             popup.Show(Resource.OkString, Resource.CancelString);
         }
-
 
         public ICommand ViewFullScreenTimeCommand => new Command(ViewFullScreenTime);
         public bool IsViewFullScreenTime { get; set; }
@@ -317,30 +326,5 @@ namespace TrainingDay.View
                 DependencyService.Get<IDeviceConfig>().SetBrightness(-1.0f);
             }
         }
-
-        //List<SuperSetViewModel> removedList = new List<SuperSetViewModel>();
-        //private void RemoveExerciseClicked(object sender, EventArgs e)
-        //{
-        //    removedList.Add(Items[StepProgressBarControl.StepSelected]);
-
-        //    Items.RemoveAt(StepProgressBarControl.StepSelected);
-        //    OnPropertyChanged(nameof(Items));
-        //    DependencyService.Get<IMessage>().ShortAlert(Resource.DeletedString);
-        //}
-
-        //private void SaveRemoved()
-        //{
-        //    foreach (var superSet in removedList)
-        //    {
-        //        if (superSet.Count > 1)
-        //        {
-        //            App.Database.DeleteSuperSetItem(superSet.Id);
-        //        }
-        //        foreach (var trainingExerciseViewModel in superSet)
-        //        {
-        //            App.Database.DeleteTrainingExerciseItem(trainingExerciseViewModel.TrainingExerciseId);
-        //        }
-        //    }
-        //}
     }
 }

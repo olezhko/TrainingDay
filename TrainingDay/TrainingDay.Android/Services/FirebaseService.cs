@@ -6,82 +6,12 @@ using Android.Util;
 using Firebase.Messaging;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using TrainingDay.Services;
-using Xamarin.Forms;
 using Application = Android.App.Application;
 using TaskStackBuilder = Android.Support.V4.App.TaskStackBuilder;
 
 namespace TrainingDay.Droid.Services
 {
-    [Service]
-    public class NotificationService : Service
-    {
-        private const string Tag = "[PeriodicBackgroundService]";
-
-        private bool _isRunning;
-        private Context _context;
-        private Task _task;
-
-        #region overrides
-
-        public override IBinder OnBind(Intent intent)
-        {
-            return null;
-        }
-
-        public override void OnCreate()
-        {
-            _context = this;
-            _isRunning = false;
-            _task = new Task(DoWork);
-        }
-
-        public override void OnDestroy()
-        {
-            _isRunning = false;
-
-            if (_task != null && _task.Status == TaskStatus.RanToCompletion)
-            {
-                _task.Dispose();
-            }
-        }
-
-        public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
-        {
-            if (!_isRunning)
-            {
-                _isRunning = true;
-                _task.Start();
-            }
-
-            return StartCommandResult.Sticky;
-        }
-
-        #endregion
-
-        private DateTime lastTime;
-
-        private void DoWork()
-        {
-            try
-            {
-                while (true)
-                {
-                    if (DateTime.Now - lastTime > TimeSpan.FromDays(1))
-                    {
-                        lastTime = DateTime.Now;
-                        MessagingCenter.Send<string>(this.Class.Name, "SendNotify");
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Log.WriteLine(LogPriority.Error, Tag, e.ToString());
-            }
-        }
-    }
-
     [Service]
     [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
     public class MyFirebaseMessagingService : FirebaseMessagingService
@@ -129,7 +59,7 @@ namespace TrainingDay.Droid.Services
             {
                 case "Weight":
                 case "weight":
-                    //if (app.IsShowWeightNotify())
+                    if (app.IsShowWeightNotify())
                     {
                         SendNotification(app.WeightMessageTitle, app.WeightMessage, message.Data, App.WeightNotificationId);
                         App.WeightNotificationState = true;

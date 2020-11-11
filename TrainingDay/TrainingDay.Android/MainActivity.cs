@@ -25,7 +25,6 @@ namespace TrainingDay.Droid
             App.ScreenWidth = (width - 0.5f) / density;
             App.ScreenHeight = (height - 0.5f) / density;
 
-
             LoadSettings();
 
             base.OnCreate(savedInstanceState);
@@ -73,7 +72,6 @@ namespace TrainingDay.Droid
             SetTheme(theme);
         }
 
-
         private void CheckAppPermissions()
         {
             if ((int) Build.VERSION.SdkInt < 23)
@@ -92,8 +90,7 @@ namespace TrainingDay.Droid
             }
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions,
-            Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -132,9 +129,8 @@ namespace TrainingDay.Droid
             //}
         }
 
-        static readonly string TAG = "MainActivity";
-
-        internal static readonly string CHANNEL_ID = "my_notification_channel";
+        internal static readonly string CHANNEL_ID = "Application";
+        internal static readonly string Silent_CHANNEL_ID = "Implement Notify";
 
         private bool IsPlayServicesAvailable()
         {
@@ -152,13 +148,19 @@ namespace TrainingDay.Droid
                 return;
             }
 
-            var channel = new NotificationChannel(CHANNEL_ID, "my_notification_channel", NotificationImportance.Max)
+            var channel = new NotificationChannel(CHANNEL_ID, CHANNEL_ID, NotificationImportance.Max)
             {
-                Description = "Description"
+                Description = "Main"
             };
-
             var notificationManager = (NotificationManager) GetSystemService(NotificationService);
             notificationManager.CreateNotificationChannel(channel);
+
+
+            var silent_channel = new NotificationChannel(Silent_CHANNEL_ID, Silent_CHANNEL_ID, NotificationImportance.Low)
+            {
+                Description = "Implement Notify"
+            };
+            notificationManager.CreateNotificationChannel(silent_channel);
         }
     }
 

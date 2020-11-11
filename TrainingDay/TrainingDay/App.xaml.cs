@@ -186,6 +186,8 @@ namespace TrainingDay
 
         public static int TrainingNotificationId { get; set; } = 100;
         public static int WeightNotificationId { get; set; } = 101;
+        public static int TrainingImplementTimeId { get; set; } = 102;
+
         public static bool WeightNotificationState { get; set; } 
         public static bool TrainingNotificationState { get; set; }
 

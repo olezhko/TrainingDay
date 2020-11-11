@@ -1,15 +1,13 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.OS;
+using Android.Graphics;
 using Android.Support.V4.App;
 using Android.Widget;
-using Java.Lang;
 using TrainingDay.Droid.Services;
 using TrainingDay.Services;
 using Xamarin.Forms;
 using AlertDialog = Android.App.AlertDialog;
 using Application = Android.App.Application;
-using TaskStackBuilder = Android.Support.V4.App.TaskStackBuilder;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MessageAndroid))]
 namespace TrainingDay.Droid.Services
@@ -38,43 +36,37 @@ namespace TrainingDay.Droid.Services
             Toast.MakeText(Application.Context, message, ToastLength.Short).Show();
         }
 
-        //public void ShowNotification(int id, string title, string message, string openedPage, PageEnum key)
-        //{
-        //    // Pass the current button press count value to the next activity:
-        //    var valuesForActivity = new Bundle();
-        //    valuesForActivity.PutString(key.ToString(), openedPage);
+        public void ShowNotification(int id, string title, string message,bool isUpdateCurrent, bool isSilent)
+        {
+            Intent intent = new Intent(Application.Context, typeof(MainActivity));
+            intent.PutExtra(title, title);
+            intent.PutExtra(message, message);
 
-        //    // When the user clicks the notification, SecondActivity will start up.
-        //    var resultIntent = new Android.Content.Intent(Application.Context, typeof(MainActivity));
-        //    // Pass some values to SecondActivity:
-        //    resultIntent.PutExtras(valuesForActivity);
+            PendingIntent pendingIntent = PendingIntent.GetActivity(Application.Context, pendingIntentId, intent, 
+                isUpdateCurrent? PendingIntentFlags.UpdateCurrent: PendingIntentFlags.OneShot);
 
-        //    // Construct a back stack for cross-task navigation:
-        //    var stackBuilder = TaskStackBuilder.Create(Application.Context);
-        //    stackBuilder.AddParentStack(Class.FromType(typeof(MainActivity)));
-        //    stackBuilder.AddNextIntent(resultIntent);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(Application.Context, isSilent?MainActivity.Silent_CHANNEL_ID:MainActivity.CHANNEL_ID)
+                .SetContentIntent(pendingIntent)
+                .SetContentTitle(title)
+                .SetContentText(message)
+                .SetLargeIcon(BitmapFactory.DecodeResource(Application.Context.Resources, Resource.Drawable.main))
+                .SetSmallIcon(Resource.Drawable.main)
+                .SetPriority((int)NotificationPriority.Low)
+                .SetVisibility((int)NotificationVisibility.Public)
+                .SetOngoing(true); // disable swipe
 
-        //    // Create the PendingIntent with the back stack:            
-        //    var resultPendingIntent = stackBuilder.GetPendingIntent(0, (int)PendingIntentFlags.UpdateCurrent);
-
-        //    // Build the notification:
-        //    var builder = new NotificationCompat.Builder(Application.Context, )
-        //        .SetAutoCancel(true) // Dismiss the notification from the notification area when the user clicks on it
-        //        .SetContentIntent(resultPendingIntent) // Start up this activity when the user clicks the intent.
-        //        .SetContentTitle(title) // Set the title
-        //        .SetSmallIcon(Resource.Drawable.main) // This is the icon to display
-        //        .SetContentText(message); // the message to display.
-
-        //    // Finally, publish the notification:
-        //    var notificationManager = NotificationManagerCompat.From(Application.Context);
-        //    notificationManager.Notify(id, builder.Build());
-        //}
+            Notification notification = builder.Build();
+            var notificationManager = NotificationManagerCompat.From(Application.Context);
+            notificationManager.Notify(id, notification);
+        }
 
         public void CancelNotification(int id)
         {
             var notificationManager = NotificationManagerCompat.From(Application.Context);
             notificationManager.Cancel(id);
         }
+
+        const int pendingIntentId = 0;
 
 
         //public string EnterAlert(string title, string oldValue)

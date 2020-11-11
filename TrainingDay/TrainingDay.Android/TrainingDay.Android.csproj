@@ -143,7 +143,7 @@
     <Compile Include="Services\EntryWithDotRenderer.cs" />
     <Compile Include="Services\ILocalize.cs" />
     <Compile Include="Services\IMessage.cs" />
-    <Compile Include="Services\NotificationService.cs" />
+    <Compile Include="Services\FirebaseService.cs" />
     <Compile Include="Services\Sqlite.cs" />
     <Compile Include="SplashActivity.cs" />
   </ItemGroup>

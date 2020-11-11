@@ -11,6 +11,7 @@ namespace TrainingDay.Services
         void ShowMessage(string message, string title);
         void LongAlert(string message);
         void ShortAlert(string message);
+        void ShowNotification(int id, string title, string message, bool isUpdateCurrent, bool isSilent);
         void CancelNotification(int id);
     }
 }
