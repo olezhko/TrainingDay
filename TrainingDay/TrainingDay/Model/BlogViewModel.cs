@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SQLite;
+﻿using SQLite;
+using System;
 using TrainingDay.ViewModels;
 using Xamarin.Forms;
 

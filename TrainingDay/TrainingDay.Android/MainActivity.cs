@@ -5,12 +5,13 @@ using Android.Content.PM;
 using Android.Gms.Common;
 using Android.OS;
 using Newtonsoft.Json;
+using TrainingDay.Services;
 
 namespace TrainingDay.Droid
 {
     [Activity(Label = "TrainingDay", Icon = "@drawable/icon", 
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
-        LaunchMode = LaunchMode.SingleTask)]
+        LaunchMode = LaunchMode.SingleTask, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -162,10 +163,5 @@ namespace TrainingDay.Droid
             };
             notificationManager.CreateNotificationChannel(silent_channel);
         }
-    }
-
-    public class SettingsLocal
-    {
-        public bool IsLightTheme { get; set; }
     }
 }

@@ -278,91 +278,6 @@ namespace TrainingDay.ViewModels
             gr.IsExpanded = group.Expanded;
             App.Database.SaveTrainingGroup(gr);
         }
-
-
-        //#region Union
-
-        //public bool IsVisibleGroups { get; set; }
-        //private TrainingViewModel trainingMoveToGroup { get; set; }
-
-        //public Grouping<string,TrainingViewModel> SelectedGroupToTraining { get; set; }
-        //public void AcceptGroup()
-        //{
-        //    IsVisibleGroups = false;
-        //    OnPropertyChanged(nameof(IsVisibleGroups));
-
-        //    GroupSelected(SelectedGroupToTraining?.Id ?? 0);
-        //}
-
-        //public string NewGroupName { get; set; }
-        //public ICommand GroupPickerChangedCommand => new Command(GroupPickerChanged);
-        //private void GroupPickerChanged(object args)
-        //{
-        //    SelectedGroupToTraining = args as Grouping<string, TrainingViewModel>;
-        //    AcceptGroup();
-        //}
-
-        //public void GroupSelected(int id)
-        //{
-        //    if (trainingMoveToGroup.GroupName!=null && id == trainingMoveToGroup.GroupName.Id)
-        //    {
-        //        return;
-        //    }
-        //    var unions = App.Database.GetTrainingsGroups();
-        //    if (trainingMoveToGroup.GroupName != null && trainingMoveToGroup.GroupName.Id != 0  )
-        //    {
-        //        var unionToEdit = unions.First(u => u.Id == trainingMoveToGroup.GroupName.Id);
-        //        var vm = new TrainingUnionViewModel(unionToEdit);
-        //        vm.TrainingIDs.Remove(trainingMoveToGroup.Id);
-        //        if (vm.TrainingIDs.Count != 0)
-        //            App.Database.SaveTrainingGroup(vm.Model);
-        //        else
-        //            App.Database.DeleteTrainingGroup(vm.Id);
-        //    }
-
-        //    if (id == 0)
-        //    {
-        //        var name = NewGroupName;
-        //        if (!string.IsNullOrEmpty(name))
-        //        {
-        //            var union = unions.FirstOrDefault(un => un.Name == name);
-        //            if (union != null)
-        //            {
-        //                var viewModel = new TrainingUnionViewModel(union);
-        //                viewModel.TrainingIDs.Add(trainingMoveToGroup.Id);
-        //                trainingMoveToGroup.GroupName = viewModel;
-        //                App.Database.SaveTrainingGroup(viewModel.Model);
-        //            }
-        //            else
-        //            {
-        //                var viewModel = new TrainingUnionViewModel();
-        //                viewModel.Name = name;
-        //                viewModel.TrainingIDs.Add(trainingMoveToGroup.Id);
-        //                trainingMoveToGroup.GroupName = viewModel;
-        //                App.Database.SaveTrainingGroup(viewModel.Model);
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        var union = unions.FirstOrDefault(un => un.Id == id);
-        //        if (union != null)
-        //        {
-        //            var viewModel = new TrainingUnionViewModel(union);
-        //            viewModel.TrainingIDs.Add(trainingMoveToGroup.Id);
-        //            trainingMoveToGroup.GroupName = viewModel;
-        //            App.Database.SaveTrainingGroup(viewModel.Model);
-        //        }
-        //    }
-
-
-        //    LoadItems();
-        //    SelectedGroupToTraining = null;
-        //    DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
-        //}
-
-        //public ObservableCollection<Grouping<string, TrainingViewModel>> GroupsNamesToNewGroup { get; set; } = new ObservableCollection<Grouping<string, TrainingViewModel>>();
-        //#endregion
     }
 
     public class Grouping<K, T> : ObservableCollection<T>
@@ -504,6 +419,7 @@ namespace TrainingDay.ViewModels
 
                     TagsValue = ExerciseTagExtension.ConvertListToInt(trainingExerciseViewModel.Tags),
                     WeightAndRepsString = ExerciseTagExtension.ConvertJson(trainingExerciseViewModel.Tags, trainingExerciseViewModel),
+                    CodeNum = trainingExerciseViewModel.GetExercise().CodeNum
                 });
             }
 

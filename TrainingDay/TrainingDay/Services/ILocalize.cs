@@ -11,7 +11,6 @@ namespace TrainingDay.Services
     {
         CultureInfo GetCurrentCultureInfo();
         string GetCurrentLanguage();
-        TimeSpan GetTimeZone();
     }
 
     [ContentProperty("Text")]

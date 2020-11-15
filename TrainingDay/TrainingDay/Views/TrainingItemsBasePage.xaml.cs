@@ -70,6 +70,11 @@ namespace TrainingDay.Views
                                     Tags = ExerciseTagExtension.ConvertFromIntToList(trainingExerciseSerialize.TagsValue),
                                 };
 
+                                TrainingExerciseViewModel.Description descriptionsStrings = JsonConvert.DeserializeObject<TrainingExerciseViewModel.Description>(trainingExerciseSerialize.ShortDescription);
+                                item.AdviceDescription = descriptionsStrings.advice;
+                                item.ExecutionDescription = descriptionsStrings.exec;
+                                item.StartingPositionDescription = descriptionsStrings.start;
+
                                 ExerciseTagExtension.ConvertJsonBack(item, trainingExerciseSerialize.WeightAndRepsString);
                                 training.AddExercise(item);
                             }

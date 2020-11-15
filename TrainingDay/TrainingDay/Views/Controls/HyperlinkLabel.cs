@@ -19,7 +19,6 @@ namespace TrainingDay.Views.Controls
         public HyperlinkLabel()
         {
             TextDecorations = TextDecorations.Underline;
-            TextColor = Color.Blue;
             GestureRecognizers.Add(new TapGestureRecognizer
             {
                 Command = new Command(async () => await Launcher.OpenAsync(Url))

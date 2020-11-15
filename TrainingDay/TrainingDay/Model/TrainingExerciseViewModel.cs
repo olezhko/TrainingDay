@@ -98,6 +98,17 @@ namespace TrainingDay.ViewModels
             }
         }
 
+        private int codeNum = -1;
+        public int CodeNum
+        {
+            get => codeNum;
+            set
+            {
+                codeNum = value;
+                OnPropertyChanged();
+            }
+        }
+
         private int _superSetNumInTraining = 0;
         public int SuperSetNum // see TrainingExercisesPage
         {
@@ -247,7 +258,7 @@ namespace TrainingDay.ViewModels
                 TrainingExerciseId = comm.Id;
                 SuperSetId = comm.SuperSetId;
                 Tags = ExerciseTagExtension.ConvertFromIntToList(exercise.TagsValue);
-                
+                CodeNum = exercise.CodeNum;
                 ExerciseTagExtension.ConvertJsonBack(this, comm.WeightAndRepsString);
                 try
                 {
@@ -276,7 +287,8 @@ namespace TrainingDay.ViewModels
                 ExerciseImageUrl = ExerciseImageUrl,
                 ExerciseItemName = _name,
                 MusclesString = MusclesConverter.ConvertFromListToString(Muscles.ToList()),
-                TagsValue = ExerciseTagExtension.ConvertListToInt(Tags)
+                TagsValue = ExerciseTagExtension.ConvertListToInt(Tags),
+                CodeNum = CodeNum
             };
         }
 

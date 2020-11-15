@@ -56,7 +56,7 @@ namespace TrainingDay.iOS.Services
             if (interstitial.IsReady)
             {
                 var viewController = GetVisibleViewController();
-                interstitial.PresentFromRootViewController(viewController);
+                interstitial.Present(viewController);
             }
         }
     }

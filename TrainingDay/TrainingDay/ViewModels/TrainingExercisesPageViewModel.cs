@@ -311,10 +311,7 @@ namespace TrainingDay.ViewModels
         private void CreateSuperSet()
         {
             //Training.CreateSuperSetByItems(selectedItems);
-            if (selectedItems.Count == 1)
-            {
-                return;
-            }
+           
             var id = App.Database.SaveSuperSetItem(new SuperSet()
             {
                 Count = selectedItems.Count,
@@ -434,8 +431,11 @@ namespace TrainingDay.ViewModels
                 }
                 else
                 {
-                    CreateSuperSet();
-                    StopAction(true);
+                    if (selectedItems.Count == 1)
+                    {
+                        CreateSuperSet();
+                        StopAction(true);
+                    }
                 }
         }
 

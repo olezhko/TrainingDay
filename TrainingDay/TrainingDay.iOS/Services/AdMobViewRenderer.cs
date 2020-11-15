@@ -20,7 +20,7 @@ namespace TrainingDay.iOS.Services
             if (e.OldElement == null)
             {
                 BannerView bannerView = new BannerView(AdSizeCons.Banner, new CGPoint(0, 0));
-                bannerView.AdUnitID = (Element as AdMobView).AdUnitId;
+                bannerView.AdUnitId = (Element as AdMobView).AdUnitId;
                 foreach (UIWindow uiWindow in UIApplication.SharedApplication.Windows)
                 {
                     if (uiWindow.RootViewController != null)

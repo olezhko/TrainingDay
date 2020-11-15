@@ -32,10 +32,5 @@ namespace TrainingDay.Droid.Services
             var androidLocale = Java.Util.Locale.Default;
             return androidLocale.Language;
         }
-
-        public TimeSpan GetTimeZone()
-        {
-            return TimeZoneInfo.Local.BaseUtcOffset;
-        }
     }
 }

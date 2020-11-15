@@ -116,22 +116,22 @@ namespace TrainingDay
             var superSets = new List<SuperSet>();
 
             var id = Database.SaveTrainingItem(new Training() { Title = vm.Title });
+            int exerciseId;
             foreach (var item in vm.Items)
             {
-                var exercise = exercises.FirstOrDefault(a => a.ExerciseImageUrl == item.ExerciseImageUrl);
-
-                int exerciseId;
+                var exercise = exercises.FirstOrDefault(a => a.CodeNum == item.CodeNum);
                 if (exercise != null)
                     exerciseId = exercise.Id;
                 else
                 {
                     var newItem = new Exercise()
                     {
-                        Description = exercise.Description,
-                        ExerciseImageUrl = exercise.ExerciseImageUrl,
-                        ExerciseItemName = exercise.ExerciseItemName,
-                        MusclesString = exercise.MusclesString,
-                        Version = exercise.Version
+                        Description = item.ShortDescription,
+                        ExerciseImageUrl = item.ExerciseImageUrl,
+                        ExerciseItemName = item.ExerciseItemName,
+                        MusclesString = item.Muscles,
+                        TagsValue = item.TagsValue,
+                        CodeNum = -1
                     };
                     exerciseId = Database.SaveExerciseItem(newItem);
 
@@ -168,7 +168,7 @@ namespace TrainingDay
                     TrainingId = id,
                     SuperSetId = superSetId,
                     ExerciseId = exerciseId,
-                    WeightAndRepsString = item.WeightAndRepsString
+                    WeightAndRepsString = item.WeightAndRepsString,
                 });
             }
         }
@@ -265,7 +265,7 @@ namespace TrainingDay
                 Settings.IsTokenSavedOnServer = false;
 
                 var language = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
-                var zone = DependencyService.Get<ILocalize>().GetTimeZone();
+                var zone = TimeZoneInfo.Local.BaseUtcOffset;
                 var res = await SiteService.SendTokenToServer(token, language.Name, zone,Settings.WeightNotifyFreq);
                 Settings.IsTokenSavedOnServer = res;
             }

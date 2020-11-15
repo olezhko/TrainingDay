@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CarouselView.FormsPlugin.iOS;
 using Foundation;
+using TrainingDay.iOS.Services;
 using UIKit;
+using UserNotifications;
 
 namespace TrainingDay.iOS
 {
@@ -22,8 +23,11 @@ namespace TrainingDay.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            CarouselViewRenderer.Init();
+            Xamarin.Forms.Forms.SetFlags(new string[]
+                {"CarouselView_Experimental", "IndicatorView_Experimental", "Expander_Experimental","Shapes_Experimental"});
             global::Xamarin.Forms.Forms.Init();
+
+            UNUserNotificationCenter.Current.Delegate = new iOSNotificationReceiver();
             LoadApplication(new App(false));
             App.ScreenWidth = UIScreen.MainScreen.Bounds.Width;
             App.ScreenHeight = UIScreen.MainScreen.Bounds.Height;

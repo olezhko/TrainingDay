@@ -84,10 +84,6 @@
                     </Label>
                 </StackLayout>
 
-                <StackLayout Orientation="Vertical" Grid.Row="6">
-                    <controls:HyperlinkLabel Text="Site" Url="https://trainingday.tk/" HorizontalOptions="Center" />
-                    <controls:HyperlinkLabel Text="Instagram" Url="https://www.instagram.com/trainingday.app/" HorizontalOptions="Center" />
-                </StackLayout>
                 <controls:AdMobView AdUnitId="ca-app-pub-8728883017081055/2677919170" VerticalOptions="End" BackgroundColor="Transparent" Grid.Row="7"/>
             </Grid>
         </Grid>

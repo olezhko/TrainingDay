@@ -25,7 +25,6 @@ namespace TrainingDay.Droid.Services
             Settings.Token = p0;
         }
 
-
         public override void OnMessageReceived(RemoteMessage message)
         {
             var app = (App.Current as App);

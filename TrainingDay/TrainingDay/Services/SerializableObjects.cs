@@ -61,5 +61,7 @@ namespace TrainingDay.Services
         public int SuperSetNum { get; set; }
         public int TagsValue { get; set; }
         public int TrainingExerciseId { get; set; }
+
+        public int CodeNum { get; set; }
     }
 }
