@@ -918,4 +918,58 @@
 		<ExerciseImageUrl>https://img.mensxp.com/media/content/2017/Sep/how-effective-is-the-hammer-grip-closed-elbow-press-740x400-1-1505302351.jpg</ExerciseImageUrl>
 		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
 	</Exercise>
+		<Exercise>
+		<CodeNum>113</CodeNum>
+		<Name>Lifting the body with a turn</Name>
+		<Version>1.0.5.7</Version>
+		<Description>{"start":"Sit on the floor with your knees bent and rest on your heels. The angle between the thigh and the lower leg is about 120 degrees. Lean back a little, but don't round your back. Keep your hands behind your head, elbows wide apart.","exec":"Bring your navel towards your back and twist slightly to the right. The movement is small and occurs due to the movement of the ribs. This counts as one repeat. Inhale as you pivot to the center and twist to the left. Do 30 reps, changing sides.","advice":"",}</Description>
+		<Muscles>Abdominal,Glute,LowerBack</Muscles>
+		<ExerciseImageUrl></ExerciseImageUrl>
+		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+	</Exercise>
+	<Exercise>
+		<CodeNum>115</CodeNum>
+		<Name>Curtsy Lunge</Name>
+		<Version>1.0.5.7</Version>
+		<Description>{"start":"Stand with your feet shoulder-width apart and your arms down at your sides. ","exec":"Putting your weight into your right foot, step back and around with your left foot — almost as if you’re curtsying — allowing your arms to come up in front of you to a comfortable position. Ensure that your chest stays proud. Stop lunging when your right thigh is parallel to the ground. Begin to straighten your right leg, pushing up through your heel, and returning your left foot to the starting position. Repeat steps 1–3 for the desired number of reps, then switch legs. ","advice":"",}</Description>
+		<Muscles>Buttocks,Quadriceps</Muscles>
+		<ExerciseImageUrl></ExerciseImageUrl>
+		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+	</Exercise>
+	<Exercise>
+		<CodeNum>116</CodeNum>
+		<Name>Backward-facing reverse pushup</Name>
+		<Version>1.0.5.7</Version>
+		<Description>{"start":"Start by sitting on the floor with your knees bent and hands on the floor beneath your shoulders. ","exec":"Push off the floor, straightening your upper body and arms so your shoulders are directly above your hands. With your hips pushing your body upward, straighten your legs so your body is supported only by your hands and heels. Hold that position for several seconds, then slowly lower your body until your butt touches the floor. That’s 1 rep. Try a few reps at first, with the ultimate goal of doing several sets of 10 to 15 reps.","advice":"",}</Description>
+		<Muscles>Triceps</Muscles>
+		<ExerciseImageUrl></ExerciseImageUrl>
+		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+	</Exercise>
+	<Exercise>
+		<CodeNum>117</CodeNum>
+		<Name>Basic Squat With Side Leg Lift </Name>
+		<Version>1.0.5.7</Version>
+		<Description>{"start":"Stand with your feet shoulder-width distance apart, feet parallel. Hold your hands out in front of you for balance. ","exec":"Bend your knees, lowering your hips deeply so your thighs are parallel with the floor, keeping your weight back in your heels.    Then rise back up, straightening the legs completely and lifting the left leg out to the side, squeezing the outer glute.    As you step the foot back into shoulder-width distance position, squat down again. Then stand up and do a side leg lift on the right side. Lower the leg back to the starting position.    This counts as one rep. Do three sets of 15 reps on each side.","advice":"",}</Description>
+		<Muscles>Abdominal,Quadriceps,Thighs</Muscles>
+		<ExerciseImageUrl></ExerciseImageUrl>
+		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+	</Exercise>
+	<Exercise>
+		<CodeNum>118</CodeNum>
+		<Name>Pilates Crunch</Name>
+		<Version>1.0.5.7</Version>
+		<Description>{"start":"","exec":"Lie back with legs straight and arms extended above head next to ears. Bring arms forward, tilt chin down, and slowly curl upper body up, reaching hands to toes. Repeat 8 to 10 times three times a week.","advice":"",}</Description>
+		<Muscles>Abdominal</Muscles>
+		<ExerciseImageUrl></ExerciseImageUrl>
+		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+	</Exercise>
+	<Exercise>
+		<CodeNum>119</CodeNum>
+		<Name>Incline lunge</Name>
+		<Version>1.0.5.7</Version>
+		<Description>{"start":"Stand up straight, then take a wide step back with your right foot, bending both knees. Both knees are still bent, pull the torso forward and straighten the right knee. The gluteus muscle should feel the work.","exec":"Push off with your left heel and pull your right leg forward. Return to starting position. Do 12 reps, then change legs.","advice":"",}</Description>
+		<Muscles></Muscles>
+		<ExerciseImageUrl></ExerciseImageUrl>
+		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+	</Exercise>
 </Root>

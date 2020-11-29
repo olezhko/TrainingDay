@@ -1,6 +1,5 @@
 ﻿using Android;
 using Android.App;
-using Android.Content;
 using Android.Content.PM;
 using Android.Gms.Common;
 using Android.OS;
@@ -38,7 +37,6 @@ namespace TrainingDay.Droid
             Android.Glide.Forms.Init(this, debug: true);
             OxyPlot.Xamarin.Forms.Platform.Android.PlotViewRenderer.Init();
             CheckAppPermissions();
-
             LoadApplication(new App(local.IsLightTheme));
 
             IsPlayServicesAvailable();
@@ -97,48 +95,15 @@ namespace TrainingDay.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        protected override void OnNewIntent(Intent intent)
-        {
-            base.OnNewIntent(intent);
-            var type = Intent.GetStringExtra("type");
-            if (type == "weight")
-            {
-
-            }
-
-
-            //if (Intent.Extras != null)
-            //{
-            //    foreach (var key in Intent.Extras.KeySet())
-            //    {
-            //        var value = Intent.Extras.GetString(key);
-            //        Log.Debug(TAG, "Key: {0} Value: {1}", key, value);
-            //    }
-            //}
-
-            //if (Intent.Extras != null)
-            //{
-            //    var page = Intent.Extras.GetString("type");
-            //    if (page == "weight")
-            //    {
-
-            //    }
-            //    else
-            //    {
-            //        (App.Current as App).OpenPage(page);
-            //    }
-            //}
-        }
-
-        internal static readonly string CHANNEL_ID = "Application";
-        internal static readonly string Silent_CHANNEL_ID = "Implement Notify";
-
         private bool IsPlayServicesAvailable()
         {
             int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
             return resultCode == ConnectionResult.Success;
         }
 
+
+        internal static readonly string CHANNEL_ID = "Application";
+        internal static readonly string Silent_CHANNEL_ID = "Implement Notify";
         private void CreateNotificationChannel()
         {
             if (Build.VERSION.SdkInt < BuildVersionCodes.O)

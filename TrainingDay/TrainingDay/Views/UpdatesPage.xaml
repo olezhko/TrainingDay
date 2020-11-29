@@ -12,14 +12,7 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout Margin="10">
-            <StackLayout>
-                <Label Text="{services:Translate WhatNewString}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large"/>
-                <!--<Picker ItemsSource="{Binding UpdatesVersionList}" SelectedItem="{Binding VersionSelected}" SelectedIndex="0" x:Name="PickerVersion">
-                    <Picker.Behaviors>
-                        <services:EventToCommandBehavior EventName="SelectedIndexChanged" Command="{Binding VersionChangedCommand}" />
-                    </Picker.Behaviors>
-                </Picker>-->
-            </StackLayout>
+            <Label Text="{services:Translate WhatNewString}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large"/>
             <CarouselView ItemsSource="{Binding UpdatesCollection}" IndicatorView="indicatorView">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>

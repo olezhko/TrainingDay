@@ -58,5 +58,10 @@ namespace TrainingDay.Views
                 await Browser.OpenAsync(@"http://trainingday.tk/waist-hip?year=2020&Month=10", BrowserLaunchMode.SystemPreferred);
             }
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return base.OnBackButtonPressed();
+        }
     }
 }

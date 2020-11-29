@@ -35,7 +35,7 @@ namespace TrainingDay.Views
 
         private void ShowNotesPage_Click(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new BlogsPage() { Title = "Новости" }, true);
+            Navigation.PushAsync(new BlogsPage() { Title = Resource.NewsString }, true);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace TrainingDay
     public partial class App : Application
     {
         public const string DATABASE_NAME = "exercise.db";
-        public const string Version = "1.0.5.6";
+        public const string Version = "1.0.5.7";
         private static Repository database;
 
         private static object lockBase = new object();
@@ -69,8 +69,8 @@ namespace TrainingDay
             }
             else
             {
-                //MainPage = new UpdatesPage();
-                MainPage = new NavigationPage(new MainPage());
+                MainPage = new UpdatesPage();
+                //MainPage = new NavigationPage(new MainPage());
             }
 
             IsLightTheme = isLight;
@@ -190,23 +190,6 @@ namespace TrainingDay
 
         public static bool WeightNotificationState { get; set; } 
         public static bool TrainingNotificationState { get; set; }
-
-        public void OpenPage(string page)
-        {
-            try
-            {
-                var pageItem = Activator.CreateInstance(Type.GetType(page));
-                Application.Current.MainPage = new NavigationPage(new MainPage());
-                App.Current.MainPage.Navigation.PushAsync(pageItem as Page,true);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Crashes.TrackError(e);
-            }
-        }
-
-
 
         public string NewWorkoutMessageTitle { get; set; } = Resource.TrainingString;
         public string NewWorkoutMessage = Resource.ReturnToTrainingMessage;

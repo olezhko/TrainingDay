@@ -556,6 +556,15 @@ namespace TrainingDay.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fitness.
+        /// </summary>
+        internal static string FitnessString {
+            get {
+                return ResourceManager.GetString("FitnessString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to For.
         /// </summary>
         internal static string For {

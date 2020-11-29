@@ -72,6 +72,14 @@ namespace TrainingDay.ViewModels
                 Exercises = new ObservableCollection<TrainingExerciseViewModel>(exerciseBase.Where(ex => ExerciseTagExtension.ConvertFromIntToList(ex.TagsValue).Contains(ExerciseTags.CanDoAtHome)).Select(item => new TrainingExerciseViewModel(item, new TrainingExerciseComm())))
             });
 
+            PreparedTrainingsCollection.Add(new PreparedTrainingViewModel()
+            {
+                Name = Resource.FitnessString,
+                TrainingImageUrl = ImageSource.FromResource("TrainingDay.Resources.prepared.fitness.jpg"),
+                Exercises = new ObservableCollection<TrainingExerciseViewModel>(GetExercisesByCodeNum(exerciseBase, 113, 109,114,115,116,117,118,119,108,111,84,
+                    103,102,110))
+            });
+
             var value = MusclesConverter.SetMuscles(MusclesEnum.Chest);
             PreparedTrainingsCollection.Add(new PreparedTrainingViewModel()
             {
@@ -176,6 +184,38 @@ namespace TrainingDay.ViewModels
                     Console.WriteLine(e);
                 }
             }
+            return result;
+        }
+
+        private ObservableCollection<TrainingExerciseViewModel> GetExercisesByCodeNum(List<Exercise> baseExercises, params int[] codeNums)
+        {
+            var result = new ObservableCollection<TrainingExerciseViewModel>();
+            int i = 0;
+            foreach (var codeNum in codeNums)
+            {
+                try
+                {
+                    var exercise = baseExercises.FirstOrDefault(item => item.CodeNum == codeNum);
+                    if (exercise != null)
+                    {
+                        result.Add(new TrainingExerciseViewModel(exercise, new TrainingExerciseComm()
+                        {
+                            OrderNumber = i,
+                            ExerciseId = exercise.Id,
+                        })
+                        {
+                            WeightAndRepsItems = new ObservableCollection<WeightAndReps>(new WeightAndReps[3])
+                        });
+                    }
+
+                    i++;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+
             return result;
         }
     }

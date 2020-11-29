@@ -6,6 +6,7 @@ using Android.Util;
 using Firebase.Messaging;
 using System;
 using System.Collections.Generic;
+using Microsoft.AppCenter.Crashes;
 using TrainingDay.Services;
 using Application = Android.App.Application;
 using TaskStackBuilder = Android.Support.V4.App.TaskStackBuilder;
@@ -27,66 +28,62 @@ namespace TrainingDay.Droid.Services
 
         public override void OnMessageReceived(RemoteMessage message)
         {
-            var app = (App.Current as App);
-            var notify = message.GetNotification();
-            string body = "";
             try
             {
-                if (notify != null)
+                var app = (App.Current as App);
+                var notify = message.GetNotification();
+                string body = "";
+                try
                 {
-                    body = notify.Body;
-                }
-                else
-                {
-                    message.Data.TryGetValue("type", out string backBody);
-                    if (backBody != null)
+                    if (notify != null)
                     {
-                        body = backBody;
+                        body = notify.Body;
                     }
+                    else
+                    {
+                        message.Data.TryGetValue("type", out string backBody);
+                        if (backBody != null)
+                        {
+                            body = backBody;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+
+                if (string.IsNullOrEmpty(body))
+                {
+                    return;
+                }
+                switch (body)
+                {
+                    case "Weight":
+                    case "weight":
+                        if (app.IsShowWeightNotify())
+                        {
+                            SendNotification(app.WeightMessageTitle, app.WeightMessage, message.Data, App.WeightNotificationId);
+                            App.WeightNotificationState = true;
+                        }
+                        break;
+                    case "NewWorkout":
+                        if (app.IsShowNewWorkoutNotify())
+                        {
+                            SendNotification(app.NewWorkoutMessageTitle, app.NewWorkoutMessage, message.Data, App.TrainingNotificationId);
+                            App.TrainingNotificationState = true;
+                        }
+                        break;
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-            }
-
-            if (string.IsNullOrEmpty(body))
-            {
-                return;   
-            }
-            switch (body)
-            {
-                case "Weight":
-                case "weight":
-                    if (app.IsShowWeightNotify())
-                    {
-                        SendNotification(app.WeightMessageTitle, app.WeightMessage, message.Data, App.WeightNotificationId);
-                        App.WeightNotificationState = true;
-                    }
-                    break;
-                case "NewWorkout":
-                    if (app.IsShowNewWorkoutNotify())
-                    {
-                        SendNotification(app.NewWorkoutMessageTitle, app.NewWorkoutMessage, message.Data, App.TrainingNotificationId);
-                        App.TrainingNotificationState = true;
-                    }
-                    break;
+                Crashes.TrackError(e);
             }
         }
 
         void SendNotification(string title, string messageBody, IDictionary<string, string> data, int id)
         {
-            //var intent = new Intent(Application.Context, typeof(MainActivity));
-            //intent.AddFlags(ActivityFlags.ClearTop);
-            //foreach (var key in data.Keys)
-            //{
-            //    intent.PutExtra(key, data[key]);
-            //}
-
-            //var pendingIntent = PendingIntent.GetActivity(this, id, intent, PendingIntentFlags.UpdateCurrent);
-
-
-
             var valuesForActivity = new Bundle();
             foreach (var key in data.Keys)
             {
@@ -94,6 +91,7 @@ namespace TrainingDay.Droid.Services
             }
             var resultIntent = new Android.Content.Intent(Application.Context, typeof(MainActivity));
             resultIntent.PutExtras(valuesForActivity);
+            resultIntent.AddFlags(ActivityFlags.NewTask | ActivityFlags.SingleTop | ActivityFlags.ClearTop);
 
             var stackBuilder = TaskStackBuilder.Create(Application.Context);
             stackBuilder.AddParentStack(Java.Lang.Class.FromType(typeof(MainActivity)));
@@ -109,7 +107,8 @@ namespace TrainingDay.Droid.Services
                 .SetAutoCancel(true)
                 .SetPriority((int)NotificationPriority.Max)
                 .SetCategory(Notification.CategoryMessage)
-                .SetContentIntent(pendingIntent);
+                .SetContentIntent(pendingIntent)
+                .SetOngoing(true);
 
             var notificationManager = NotificationManagerCompat.From(Application.Context);
             notificationManager.Notify(id, notificationBuilder.Build());

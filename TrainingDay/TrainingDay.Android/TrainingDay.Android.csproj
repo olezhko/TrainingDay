@@ -288,21 +288,6 @@
     <AndroidResource Include="Resources\drawable\union_del.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\union_add.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-      <SubType>Designer</SubType>
-    </AndroidAsset>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\union_del.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-      <SubType>Designer</SubType>
-    </AndroidAsset>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\video_select.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\notes.png" />
   </ItemGroup>
   <ItemGroup>
@@ -312,7 +297,10 @@
     <AndroidResource Include="Resources\drawable\info.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\info.png" />
+    <AndroidAsset Include="Assets\fitness.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\bug.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>

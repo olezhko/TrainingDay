@@ -546,4 +546,7 @@
   <data name="NewsString" xml:space="preserve">
     <value>Новости</value>
   </data>
+  <data name="FitnessString" xml:space="preserve">
+    <value>Фитнес</value>
+  </data>
 </root>

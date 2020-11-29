@@ -918,4 +918,58 @@
 		<ExerciseImageUrl>https://img.mensxp.com/media/content/2017/Sep/how-effective-is-the-hammer-grip-closed-elbow-press-740x400-1-1505302351.jpg</ExerciseImageUrl>
 		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
 	</Exercise>
+		<Exercise>
+		<CodeNum>113</CodeNum>
+		<Name>Подъем корпуса с поворотом</Name>
+		<Version>1.0.5.7</Version>
+		<Description>{"start":"Сядьте на пол, согните колени и упритесь на пятки. Угол между бедром и голенью – около 120 градусов. Отклонитесь немного назад, но не округляйте спину. Руки держите за головой, локти широко расставлены. ","exec":"Подайте пупок к спине и слегка скрутитесь вправо. Движение небольшое и происходит за счет движения ребер. Это считается за один повтор. Вдохните, пока поворачиваетесь в центр, и скрутитесь влево. Сделайте 30 повторов, меняя стороны.","advice":"",}</Description>
+		<Muscles>Abdominal,Glute,LowerBack</Muscles>
+		<ExerciseImageUrl></ExerciseImageUrl>
+		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+	</Exercise>
+	<Exercise>
+		<CodeNum>115</CodeNum>
+		<Name>Реверанс</Name>
+		<Version>1.0.5.7</Version>
+		<Description>{"start":"Встаньте ровно. Сделайте шаг левой ногой назад и вправо и согните колени. ","exec":"Присядьте так, чтобы ваши бедра скрестились. Вернитесь в исходное положение, повторите 10 раз на одну сторону, затем столько же на другую.","advice":"",}</Description>
+		<Muscles>Buttocks,Quadriceps</Muscles>
+		<ExerciseImageUrl></ExerciseImageUrl>
+		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+	</Exercise>
+	<Exercise>
+		<CodeNum>116</CodeNum>
+		<Name>Отжимания со спины</Name>
+		<Version>1.0.5.7</Version>
+		<Description>{"start":"Опирайтесь на стопы и руки, расположенные на ширине плеч, живот смотрит вверх. ","exec":"Выпрямляйте руки и поднимайте таз как можно выше от пола. В верхнем положении вдохните, затем сгибайте локти. Выдохните и выпрямите руки: прорабатываем трицепсы. Сделайте 15 повторов.","advice":"",}</Description>
+		<Muscles>Triceps</Muscles>
+		<ExerciseImageUrl></ExerciseImageUrl>
+		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+	</Exercise>
+	<Exercise>
+		<CodeNum>117</CodeNum>
+		<Name>Приседания с выбросом ноги вбок</Name>
+		<Version>1.0.5.7</Version>
+		<Description>{"start":"","exec":"Начните делать глубокое приседания. Перенесите вес тела на левую ногу, скрутитесь и выбросьте правую ногу вбок. Нога должна стремиться вперед, а не вверх. Опустите ногу и вернитесь в положение глубокого приседания. Это один повтор. Повторите с другой стороны. Всего упражнение следует сделать 20 повторов.","advice":"",}</Description>
+		<Muscles>Abdominal,Quadriceps,Thighs</Muscles>
+		<ExerciseImageUrl></ExerciseImageUrl>
+		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+	</Exercise>
+	<Exercise>
+		<CodeNum>118</CodeNum>
+		<Name>Скручивание: упражнение из Пилатеса</Name>
+		<Version>1.0.5.7</Version>
+		<Description>{"start":"Сядьте на пол, стопы опираются в пол, колени согнуты под углом 90 градусов. Вытяните руки к потолку, вытягивайте спину вслед за руками.","exec":"На выдохе толкайте живот к спине и начинайте укладываться на пол позвонок за позвонком. Движения должны быть плавными и мягкими. Когда голова достигнет пола, укладывайте руки за голову вдоль пола. На выдохе начинайте сворачиваться вверх, медленно поднимая спину от пола и приходя в положение сидя. На вдохе вытяните руки вверх. Это один повтор. Сделайте 10 повторов, медленно и мягко.","advice":"",}</Description>
+		<Muscles>Abdominal</Muscles>
+		<ExerciseImageUrl></ExerciseImageUrl>
+		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+	</Exercise>
+	<Exercise>
+		<CodeNum>119</CodeNum>
+		<Name>Наклонный выпад</Name>
+		<Version>1.0.5.7</Version>
+		<Description>{"start":"Встаньте ровно, затем сделайте правой ногой широкий шаг назад, согнув оба колена. Оба колена по-прежнему согнуты, вытягивайте корпус вперед и выпрямляйте правое колено. Ягодичная мыщца должна чувствовать работу. ","exec":"Оттолкнитесь левой пяткой и притяните правую ногу вперед. Вернитесь в исходное положение. Сделайте 12 повторов, затем смените ногу.","advice":"",}</Description>
+		<Muscles></Muscles>
+		<ExerciseImageUrl></ExerciseImageUrl>
+		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+	</Exercise>
 </Root>

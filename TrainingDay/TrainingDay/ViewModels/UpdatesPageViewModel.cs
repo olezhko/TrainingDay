@@ -1,16 +1,12 @@
-﻿using Syncfusion.DataSource.Extensions;
+﻿using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Input;
-using System.Xml.Linq;
-using Newtonsoft.Json;
-using SQLite;
 using TrainingDay.Services;
 using TrainingDay.Views;
 using Xamarin.Forms;
@@ -22,8 +18,6 @@ namespace TrainingDay.ViewModels
         public ObservableCollection<UpdateViewModel> UpdatesCollection { get; set; }
         public UpdatesPageViewModel()
         {
-            VersionSelected = App.Version;
-            UpdatesVersionList = new ObservableCollection<string>();
             UpdatesCollection = new ObservableCollection<UpdateViewModel>();
             LoadAllUpdates();
 
@@ -32,7 +26,6 @@ namespace TrainingDay.ViewModels
 
         ObservableCollection<UpdateViewModel> _baseUpdatesCollection = new ObservableCollection<UpdateViewModel>();
         string text;
-        ObservableCollection<string> UpdatesVersionList { get; set; }
 
         private void LoadAllUpdates()
         {
@@ -59,26 +52,10 @@ namespace TrainingDay.ViewModels
                 {
                     result = reader.ReadToEnd();
                 }
-                //XDocument doc = XDocument.Load(stream);
-                //var updatesBase = doc.Root.Elements("Update").Select(n => new UpdateItem()
-                //{
-                //    Title = n.Element("Title").Value,
-                //    Text = n.Element("Text").Value,
-                //    Version = n.Element("Version").Value,
-                //});
 
                 var updatesBase = JsonConvert.DeserializeObject<List<UpdateItem>>(result);
                 ConvertFromResource(updatesBase);
                 _baseUpdatesCollection = new ObservableCollection<UpdateViewModel>(updatesBase.Select(item => new UpdateViewModel(item)));
-                foreach (var baseUpdate in _baseUpdatesCollection)
-                {
-                    if (!UpdatesVersionList.Contains(baseUpdate.Version))
-                    {
-                        UpdatesVersionList.Add(baseUpdate.Version);
-                    }
-                }
-
-                OnPropertyChanged(nameof(UpdatesVersionList));
             }
             catch (Exception e)
             {
@@ -132,11 +109,9 @@ namespace TrainingDay.ViewModels
 
 
         public ICommand VersionChangedCommand => new Command(VersionChanged);
-        public string VersionSelected { get; set; }
         private void VersionChanged()
         {
-            UpdatesCollection = new ObservableCollection<UpdateViewModel>(_baseUpdatesCollection.Where(item => item.Model.Version == VersionSelected));
-
+            UpdatesCollection = new ObservableCollection<UpdateViewModel>(_baseUpdatesCollection.Where(item => item.Model.Version == App.Version));
             if (UpdatesCollection.Count == 0)
             {
                 Application.Current.MainPage = new NavigationPage(new MainPage());
@@ -149,7 +124,7 @@ namespace TrainingDay.ViewModels
         {
             Application.Current.MainPage = new NavigationPage(new MainPage());
 
-            App.Database.SaveUpdate(VersionSelected);
+            App.Database.SaveUpdate(App.Version);
         }
     }
 

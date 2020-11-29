@@ -58,8 +58,8 @@ namespace TrainingDay.Model
         [Description("Передняя дельта", "Front Delta")] ShouldersFront,
         [Description("Задняя дельта", "Back Delta")] ShouldersBack,
         [Description("Средняя дельта", "Middle Delta")] ShouldersMiddle,
-        [Description("Широчайшие спина", "WidestBack")] WidestBack,
-        [Description("Средняя спина", "MiddleBack")] MiddleBack,
+        [Description("Широчайшие спина", "Widest Back")] WidestBack,
+        [Description("Средняя спина", "Middle Back")] MiddleBack,
         [Description("Разгибатель позвоночника", "Erector Spinae")] ErectorSpinae,
         [Description("Грудь", "Chest")] Chest,
         [Description("Пресс", "Abdominal")] Abdominal,
@@ -73,6 +73,7 @@ namespace TrainingDay.Model
         [Description("Бедра", "Thighs")] Thighs,
         [Description("Ягодицы", "Glute")] Buttocks,
         [Description("Кардио", "Cardio")] Cardio,
+        [Description("Поясница", "Lower Back")] LowerBack,
 
 
         [Description("Выберите", "Chouse")] None
