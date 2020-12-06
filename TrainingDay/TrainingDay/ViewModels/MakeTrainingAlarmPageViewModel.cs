@@ -41,17 +41,6 @@ namespace TrainingDay.ViewModels
             LoadTrainingItems();
         }
 
-        //public RelayCommand GoToTonesCommand => new RelayCommand(GoToTones);
-        //private async void GoToTones()
-        //{
-        //    var file = await CrossFilePicker.Current.PickFile(new string[]{ "audio/*" });
-        //    if (file != null)
-        //    {
-        //        Alarm.Tone = file.DataArray;
-        //        Alarm.ToneFilename = file.FileName;
-        //    }
-        //}
-
         public ICommand SaveAlarmCommand => new Command(SaveAlarm);
         private void SaveAlarm()
         {

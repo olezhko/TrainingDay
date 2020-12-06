@@ -187,6 +187,7 @@ namespace TrainingDay
         public static int TrainingNotificationId { get; set; } = 100;
         public static int WeightNotificationId { get; set; } = 101;
         public static int TrainingImplementTimeId { get; set; } = 102;
+        public static int NewBlogId { get; set; } = 103;
 
         public static bool WeightNotificationState { get; set; } 
         public static bool TrainingNotificationState { get; set; }
@@ -210,6 +211,7 @@ namespace TrainingDay
         }
 
         public string WeightMessageTitle { get; set; } = Resource.WeightString;
+
         public string WeightMessage = Resource.PleaseEnterYourNewWeight;
         public bool IsShowWeightNotify()
         {

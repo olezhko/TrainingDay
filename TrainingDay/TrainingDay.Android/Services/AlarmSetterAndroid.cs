@@ -4,12 +4,10 @@ using Android.Util;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using TrainingDay.Controls;
 using TrainingDay.Droid.Render;
 using TrainingDay.Services;
 using TrainingDay.ViewModels;
-using Xamarin.Forms;
 using Application = Android.App.Application;
 
 [assembly: Xamarin.Forms.Dependency(typeof(AlarmSetterAndroid))]

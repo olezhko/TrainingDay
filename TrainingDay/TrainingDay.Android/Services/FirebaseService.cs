@@ -74,6 +74,11 @@ namespace TrainingDay.Droid.Services
                             App.TrainingNotificationState = true;
                         }
                         break;
+                    case "blog":
+                        message.Data.TryGetValue("title", out string newBlogTitle);
+                        message.Data.TryGetValue("body", out string newBlogMessage);
+                        SendNotification(newBlogTitle, newBlogMessage, message.Data, App.NewBlogId);
+                        break;
                 }
             }
             catch (Exception e)
@@ -107,8 +112,7 @@ namespace TrainingDay.Droid.Services
                 .SetAutoCancel(true)
                 .SetPriority((int)NotificationPriority.Max)
                 .SetCategory(Notification.CategoryMessage)
-                .SetContentIntent(pendingIntent)
-                .SetOngoing(true);
+                .SetContentIntent(pendingIntent);
 
             var notificationManager = NotificationManagerCompat.From(Application.Context);
             notificationManager.Notify(id, notificationBuilder.Build());

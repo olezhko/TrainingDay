@@ -21,6 +21,10 @@ namespace TrainingDay.Views
 
 		    ScreenOnImplementedSwitch.IsToggled = Settings.IsDisplayOnImplement;
             TokenEditor.Text = Settings.Token;
+
+#if DEBUG
+            TokenEditor.IsVisible = true;
+#endif
         }
 
         private void Switch_OnToggled(object sender, ToggledEventArgs e)

@@ -41,7 +41,7 @@
                     </StackLayout>
                 </Frame>
 
-                <Editor x:Name="TokenEditor" IsVisible="True"/>
+                <Editor x:Name="TokenEditor" IsVisible="False"/>
 
                 <Frame Style="{StaticResource FrameCellStyle}" IsVisible="False">
                     <StackLayout Orientation="Vertical">

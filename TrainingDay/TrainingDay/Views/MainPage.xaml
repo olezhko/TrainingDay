@@ -13,8 +13,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
@@ -71,7 +71,20 @@
                     </Label>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal" Grid.Row="4">
+                <!--<StackLayout Orientation="Horizontal" Grid.Row="4">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ShowTrainingAlarms_Click"/>
+                    </StackLayout.GestureRecognizers>
+                    <ImageButton Source="alarm.png" CornerRadius="5" HeightRequest="80" WidthRequest="80" BorderColor="Gray" BorderWidth="1" 
+                                 BackgroundColor="Transparent" HorizontalOptions="Center" Clicked="ShowTrainingAlarms_Click"/>
+                    <Label Text="{services:Translate SettingsString}" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="Large">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShowTrainingAlarms_Click"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>-->
+
+                <StackLayout Orientation="Horizontal" Grid.Row="5">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ShowSettingsPage_Click"/>
                     </StackLayout.GestureRecognizers>

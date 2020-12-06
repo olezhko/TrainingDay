@@ -3,7 +3,6 @@ using TrainingDay.Resources;
 using TrainingDay.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using ItemTappedEventArgs = Syncfusion.ListView.XForms.ItemTappedEventArgs;
 
 namespace TrainingDay.View
 {
@@ -39,7 +38,7 @@ namespace TrainingDay.View
             var vm = BindingContext as TrainingExercisesPageViewModel;
             if (vm.Training == null || vm.Training.Id == 0)
             {
-                //ToolbarItems.Remove(AddAlarmToolbarItem);
+                ToolbarItems.Remove(AddAlarmToolbarItem);
                 MakeTrainingButton.IsVisible = false;
             }
             else

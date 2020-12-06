@@ -10,7 +10,7 @@
         <viewModels:TrainingExercisesPageViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
-        <!--<ToolbarItem Icon="add_alarm.png" Command="{Binding MakeNotifyCommand}" Order="Secondary" x:Name="AddAlarmToolbarItem" Text="{services:Translate Notification}"/>-->
+        <ToolbarItem Icon="add_alarm.png" Command="{Binding MakeNotifyCommand}" Order="Secondary" x:Name="AddAlarmToolbarItem" Text="{services:Translate Notification}"/>
         <ToolbarItem IconImageSource="add.png" Command="{Binding AddExercisesCommand}" Order="Primary" />
         <ToolbarItem IconImageSource="accept.png" Command="{Binding SaveChangesCommand}" Order="Primary" Text="{services:Translate SaveTrainingString}"/>
 
