@@ -17,7 +17,7 @@ namespace TrainingDay.Model
             Color.Olive,Color.SandyBrown,Color.SeaGreen,
             Color.DarkSlateGray,Color.MediumTurquoise,Color.Sienna,
             Color.CornflowerBlue,Color.Crimson,Color.DarkRed,
-            Color.MediumPurple,Color.Firebrick};
+            Color.MediumPurple,Color.Firebrick,Color.PeachPuff};
 
         public int Id { get; set; }
 
@@ -107,8 +107,12 @@ namespace TrainingDay.Model
                 {
                     for (int i = 0; i < enums.Length; i++)
                     {
-                        var res = Enum.Parse(typeof(MusclesEnum), enums[i]);
-                        muscle.Add(new MuscleViewModel((MusclesEnum)res));
+                        //var res = Enum.Parse(typeof(MusclesEnum), enums[i]);
+                        var res = Enum.TryParse<MusclesEnum>(enums[i], out MusclesEnum muscleValue);
+                        if (res)
+                        {
+                            muscle.Add(new MuscleViewModel(muscleValue));
+                        }
                     }
                 }
                 catch (Exception e)

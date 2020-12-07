@@ -923,7 +923,7 @@
 		<Name>Lifting the body with a turn</Name>
 		<Version>1.0.5.7</Version>
 		<Description>{"start":"Sit on the floor with your knees bent and rest on your heels. The angle between the thigh and the lower leg is about 120 degrees. Lean back a little, but don't round your back. Keep your hands behind your head, elbows wide apart.","exec":"Bring your navel towards your back and twist slightly to the right. The movement is small and occurs due to the movement of the ribs. This counts as one repeat. Inhale as you pivot to the center and twist to the left. Do 30 reps, changing sides.","advice":"",}</Description>
-		<Muscles>Abdominal,Glute,LowerBack</Muscles>
+		<Muscles>Abdominal,Buttocks,LowerBack</Muscles>
 		<ExerciseImageUrl></ExerciseImageUrl>
 		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
 	</Exercise>

@@ -22,7 +22,9 @@ namespace TrainingDay.Droid.Services
         {
             base.OnNewToken(p0);
             Log.Debug(TAG, "Refreshed token: " + p0);
+#if DEBUG
             App.SendRegistrationToServer(p0);
+#endif
             Settings.Token = p0;
         }
 
@@ -32,53 +34,46 @@ namespace TrainingDay.Droid.Services
             {
                 var app = (App.Current as App);
                 var notify = message.GetNotification();
-                string body = "";
+                string type = "";
+                string title = "";
+                string text = "";
                 try
                 {
                     if (notify != null)
                     {
-                        body = notify.Body;
+                        title = notify.Title;
+                        text = notify.Body;
                     }
-                    else
-                    {
-                        message.Data.TryGetValue("type", out string backBody);
-                        if (backBody != null)
-                        {
-                            body = backBody;
-                        }
-                    }
+                    message.Data.TryGetValue("type", out type);
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
                 }
 
-                if (string.IsNullOrEmpty(body))
+                if (!string.IsNullOrEmpty(type))
                 {
-                    return;
-                }
-                switch (body)
-                {
-                    case "Weight":
-                    case "weight":
-                        if (app.IsShowWeightNotify())
-                        {
-                            SendNotification(app.WeightMessageTitle, app.WeightMessage, message.Data, App.WeightNotificationId);
-                            App.WeightNotificationState = true;
-                        }
-                        break;
-                    case "NewWorkout":
-                        if (app.IsShowNewWorkoutNotify())
-                        {
-                            SendNotification(app.NewWorkoutMessageTitle, app.NewWorkoutMessage, message.Data, App.TrainingNotificationId);
-                            App.TrainingNotificationState = true;
-                        }
-                        break;
-                    case "blog":
-                        message.Data.TryGetValue("title", out string newBlogTitle);
-                        message.Data.TryGetValue("body", out string newBlogMessage);
-                        SendNotification(newBlogTitle, newBlogMessage, message.Data, App.NewBlogId);
-                        break;
+                    switch (type)
+                    {
+                        case "Weight":
+                        case "weight":
+                            if (app.IsShowWeightNotify())
+                            {
+                                SendNotification(app.WeightMessageTitle, app.WeightMessage, message.Data, App.WeightNotificationId);
+                                App.WeightNotificationState = true;
+                            }
+                            break;
+                        case "NewWorkout":
+                            if (app.IsShowNewWorkoutNotify())
+                            {
+                                SendNotification(app.NewWorkoutMessageTitle, app.NewWorkoutMessage, message.Data, App.TrainingNotificationId);
+                                App.TrainingNotificationState = true;
+                            }
+                            break;
+                        case "blog":
+                            SendNotification(title, text, message.Data, App.NewBlogId);
+                            break;
+                    }
                 }
             }
             catch (Exception e)

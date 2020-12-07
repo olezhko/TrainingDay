@@ -69,8 +69,8 @@ namespace TrainingDay
             }
             else
             {
-                MainPage = new UpdatesPage();
-                //MainPage = new NavigationPage(new MainPage());
+                //MainPage = new UpdatesPage();
+                MainPage = new NavigationPage(new MainPage());
             }
 
             IsLightTheme = isLight;

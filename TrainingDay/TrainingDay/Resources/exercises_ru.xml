@@ -923,7 +923,7 @@
 		<Name>Подъем корпуса с поворотом</Name>
 		<Version>1.0.5.7</Version>
 		<Description>{"start":"Сядьте на пол, согните колени и упритесь на пятки. Угол между бедром и голенью – около 120 градусов. Отклонитесь немного назад, но не округляйте спину. Руки держите за головой, локти широко расставлены. ","exec":"Подайте пупок к спине и слегка скрутитесь вправо. Движение небольшое и происходит за счет движения ребер. Это считается за один повтор. Вдохните, пока поворачиваетесь в центр, и скрутитесь влево. Сделайте 30 повторов, меняя стороны.","advice":"",}</Description>
-		<Muscles>Abdominal,Glute,LowerBack</Muscles>
+		<Muscles>Abdominal,Buttocks,LowerBack</Muscles>
 		<ExerciseImageUrl></ExerciseImageUrl>
 		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
 	</Exercise>

@@ -19,9 +19,9 @@
                     <DataTemplate>
                         <ViewCell x:Name="viewCell">
                             <Frame Style="{StaticResource FrameCellStyle}"  BackgroundColor="{DynamicResource ListItemBackgroundColor}" VerticalOptions="Fill">
-                                <StackLayout Orientation="Vertical" VerticalOptions="Fill" Padding="10">
-                                    <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <StackLayout Orientation="Horizontal" VerticalOptions="Fill" Padding="0" >
                                     <Image Source="{Binding TrainingImageUrl}" HorizontalOptions="Fill" VerticalOptions="Start" HeightRequest="150" WidthRequest="150" Aspect="AspectFit"/>
+                                    <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
                                 </StackLayout>
                             </Frame>
                         </ViewCell>
