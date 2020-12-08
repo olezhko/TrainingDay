@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using TrainingDay.Resources;
 using TrainingDay.Services;
@@ -79,7 +80,9 @@ namespace TrainingDay.ViewModels
             }
 
             DependencyService.Get<IMessage>().ShortAlert(Resource.AddedString);
-            Navigation.PopAsync(false);
+
+            var last = Navigation.NavigationStack.Last();
+            Navigation.RemovePage(last);
             Navigation.PopAsync(false);
         }
     }

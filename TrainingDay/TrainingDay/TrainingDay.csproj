@@ -18,6 +18,7 @@
     <None Remove="Resources\prepared\cardio.png" />
     <None Remove="Resources\prepared\chest.png" />
     <None Remove="Resources\prepared\fitness.jpg" />
+    <None Remove="Resources\prepared\fitness.png" />
     <None Remove="Resources\prepared\home.png" />
     <None Remove="Resources\prepared\legsAndGlutes.png" />
     <None Remove="Resources\prepared\press.png" />
@@ -33,7 +34,7 @@
     <EmbeddedResource Include="Resources\prepared\back.png" />
     <EmbeddedResource Include="Resources\prepared\cardio.png" />
     <EmbeddedResource Include="Resources\prepared\chest.png" />
-    <EmbeddedResource Include="Resources\prepared\fitness.jpg" />
+    <EmbeddedResource Include="Resources\prepared\fitness.png" />
     <EmbeddedResource Include="Resources\prepared\home.png" />
     <EmbeddedResource Include="Resources\prepared\legsAndGlutes.png" />
     <EmbeddedResource Include="Resources\prepared\press.png" />

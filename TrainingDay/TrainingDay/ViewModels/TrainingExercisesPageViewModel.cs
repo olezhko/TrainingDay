@@ -166,16 +166,16 @@ namespace TrainingDay.ViewModels
         }
 
         public ICommand MakeTrainingCommand => new Command(MakeTraining);
-        private void MakeTraining()
+        private async void MakeTraining()
         {
             DependencyService.Get<IMessage>().ShowMessage(Resource.AdviceBeforeTrainingMessage, Resource.AdviceString);
             foreach (var item in Training.Exercises)
             {
                 item.IsNotFinished = true;
             }
-            //await Navigation.PushAsync(new TrainingImplementPage() { TrainingItem = Training, Title = Training.Title });
+            await Navigation.PushAsync(new TrainingImplementPage() { TrainingItem = Training, Title = Training.Title });
 
-            Application.Current.MainPage = new NavigationPage(new TrainingImplementPage() { TrainingItem = Training, Title = Training.Title });
+            //Application.Current.MainPage = new NavigationPage(new TrainingImplementPage() { TrainingItem = Training, Title = Training.Title });
         }
 
 
@@ -559,7 +559,6 @@ namespace TrainingDay.ViewModels
             PrepareAction(Resource.ChouseExerciseString);
         }
     }
-
 
     public enum ExerciseCheckBoxAction
     {

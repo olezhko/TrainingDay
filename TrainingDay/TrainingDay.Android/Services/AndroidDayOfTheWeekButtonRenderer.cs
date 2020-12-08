@@ -2,6 +2,7 @@
 using Android.Support.V4.Content.Res;
 
 using System.ComponentModel;
+using Android.Graphics;
 using TrainingDay.Controls;
 using TrainingDay.Droid.Render;
 using Xamarin.Forms;
@@ -51,7 +52,7 @@ namespace TrainingDay.Droid.Render
 
         private void Element_Clicked(object sender, System.EventArgs e)
         {
-            _dowButton.IsSelected = !_dowButton.IsSelected;
+            //_dowButton.IsSelected = !_dowButton.IsSelected;
         }
 
         protected override void Dispose(bool disposing)
@@ -80,13 +81,13 @@ namespace TrainingDay.Droid.Render
         void ButtonSelected()
         {
             Control.SetTextColor(_selectedTextColor);
-            Control.Background.SetColorFilter(_selectedColor, Android.Graphics.PorterDuff.Mode.Src);
+            //Control.SetBackgroundColor(_selectedColor);
         }
 
         void ButtonDeselected()
         {
             Control.SetTextColor(_deselectedTextColor);
-            Control.Background.SetColorFilter(_deselectedColor, Android.Graphics.PorterDuff.Mode.Src);
+            //Control.SetBackgroundColor(_deselectedColor);
         }
     }
 }

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AppCenter.Crashes;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
-using Microsoft.AppCenter.Crashes;
-using Newtonsoft.Json;
 using TrainingDay.Model;
 using TrainingDay.Resources;
 using TrainingDay.Services;
@@ -303,8 +301,10 @@ namespace TrainingDay.View
                     DependencyService.Get<IMessage>().CancelNotification(App.TrainingImplementTimeId);
                     DeviceDisplay.KeepScreenOn = false;
                     Settings.IsTrainingNotFinished = false;
-                    Application.Current.MainPage = new NavigationPage(new MainPage());
-                    Application.Current.MainPage.Navigation.PushAsync(new TrainingItemsBasePage() { Title = Resource.TrainingsBaseString }, true);
+
+                    Navigation.PopAsync();
+                    //Application.Current.MainPage = new NavigationPage(new MainPage());
+                    //Application.Current.MainPage.Navigation.PushAsync(new TrainingItemsBasePage() { Title = Resource.TrainingsBaseString }, true);
                 }
             };
             popup.Show(Resource.OkString, Resource.CancelString);

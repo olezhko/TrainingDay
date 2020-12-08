@@ -144,7 +144,7 @@
 
 
 
-            <Button Command="{Binding MakeTrainingCommand}" Text="{services:Translate MakeTrainingString}" Grid.Row="2" FontSize="Large" x:Name="MakeTrainingButton" Margin="5">
+            <Button Command="{Binding MakeTrainingCommand}" Text="{services:Translate MakeTrainingString}" Grid.Row="2" FontSize="Large" x:Name="MakeTrainingButton" Margin="5" BackgroundColor="LimeGreen">
                 <Button.Style>
                     <Style TargetType="Button" >
                         <Style.Triggers>

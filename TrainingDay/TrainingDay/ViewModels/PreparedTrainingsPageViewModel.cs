@@ -75,7 +75,7 @@ namespace TrainingDay.ViewModels
             PreparedTrainingsCollection.Add(new PreparedTrainingViewModel()
             {
                 Name = Resource.FitnessString,
-                TrainingImageUrl = ImageSource.FromResource("TrainingDay.Resources.prepared.fitness.jpg"),
+                TrainingImageUrl = ImageSource.FromResource("TrainingDay.Resources.prepared.fitness.png"),
                 Exercises = new ObservableCollection<TrainingExerciseViewModel>(GetExercisesByCodeNum(exerciseBase, 113,
                     109, 114, 115, 116, 117, 118, 119, 108, 111, 84, 103, 102, 110))
             });

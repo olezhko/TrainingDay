@@ -192,7 +192,13 @@ namespace TrainingDay.Controls
 
     public class DayOfWeekButton : Button
     {
-        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(DayOfWeekButton), false, BindingMode.TwoWay);
+        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(DayOfWeekButton), false, BindingMode.TwoWay,propertyChanged: IsSelectedPropertyChanged);
+
+        private static void IsSelectedPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            var picker = (DayOfWeekButton)bindable;
+            picker.BackgroundColor = ((bool) newvalue) ? Color.White : Color.DimGray;
+        }
 
         public bool IsSelected
         {

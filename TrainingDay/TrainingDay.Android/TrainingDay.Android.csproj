@@ -297,15 +297,15 @@
     <AndroidResource Include="Resources\drawable\info.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\fitness.jpg" />
+    <AndroidAsset Include="Assets\bug.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\bug.png" />
+    <AndroidAsset Include="Assets\fitness.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadDebuggerTimeoutExceptionTrainingDayAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionTrainingDayAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

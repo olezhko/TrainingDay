@@ -18,13 +18,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <controls:DayOfWeekButton Clicked="Monday_OnClicked" x:Name="Monday" Text="{services:Translate DayTextMonday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Monday}"/>
-            <controls:DayOfWeekButton Clicked="Tuesday_OnClicked" x:Name="Tuesday" Text="{services:Translate DayTextThusday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Tuesday}" Grid.Column="1"/>
-            <controls:DayOfWeekButton Clicked="Wednesday_OnClicked" x:Name="Wednesday" Text="{services:Translate DayTextWensdey}"  IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Wednesday}"  Grid.Column="2"/>
-            <controls:DayOfWeekButton Clicked="Thursday_OnClicked" x:Name="Thursday" Text="{services:Translate DayTextThursday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Thursday}"  Grid.Column="3"/>
-            <controls:DayOfWeekButton Clicked="Friday_OnClicked" x:Name="Friday" Text="{services:Translate DayTextFriday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Friday}" Grid.Column="4"/>
-            <controls:DayOfWeekButton Clicked="Saturday_OnClicked" x:Name="Saturday" Text="{services:Translate DayTextSaturday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Saturday}" Grid.Column="5"/>
-            <controls:DayOfWeekButton Clicked="Sunday_OnClicked" x:Name="Sunday" Text="{services:Translate DayTextSunday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Sunday}" Grid.Column="6"/>
+            <controls:DayOfWeekButton Clicked="Monday_OnClicked" x:Name="Monday" Text="{services:Translate DayTextMonday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Monday}" BackgroundColor="DimGray"/>
+            <controls:DayOfWeekButton Clicked="Tuesday_OnClicked" x:Name="Tuesday" Text="{services:Translate DayTextThusday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Tuesday}" Grid.Column="1" BackgroundColor="DimGray"/>
+            <controls:DayOfWeekButton Clicked="Wednesday_OnClicked" x:Name="Wednesday" Text="{services:Translate DayTextWensdey}"  IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Wednesday}"  Grid.Column="2" BackgroundColor="DimGray"/>
+            <controls:DayOfWeekButton Clicked="Thursday_OnClicked" x:Name="Thursday" Text="{services:Translate DayTextThursday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Thursday}"  Grid.Column="3" BackgroundColor="DimGray"/>
+            <controls:DayOfWeekButton Clicked="Friday_OnClicked" x:Name="Friday" Text="{services:Translate DayTextFriday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Friday}" Grid.Column="4" BackgroundColor="DimGray"/>
+            <controls:DayOfWeekButton Clicked="Saturday_OnClicked" x:Name="Saturday" Text="{services:Translate DayTextSaturday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Saturday}" Grid.Column="5" BackgroundColor="DimGray"/>
+            <controls:DayOfWeekButton Clicked="Sunday_OnClicked" x:Name="Sunday" Text="{services:Translate DayTextSunday}" IsSelected="{Binding Source={x:Reference ThisView}, Path=Days.Sunday}" Grid.Column="6" BackgroundColor="DimGray"/>
         </Grid>
     </ContentView.Content>
 </ContentView>
