@@ -38,6 +38,7 @@ namespace TrainingDay.ViewModels
             var item = sender as AlarmViewModel;
             if (e.PropertyName == nameof(AlarmViewModel.IsActive) && item != null)
             {
+                var serverId = SiteService.UpdateAlarm(item.AlarmItem);
                 if (item.IsActive)
                 {
                     DependencyService.Get<IAlarmSetter>().SetAlarm(item.AlarmItem);
@@ -87,6 +88,7 @@ namespace TrainingDay.ViewModels
             viewCell.ContextActions.Clear();
             var item = (AlarmViewModel) viewCell.BindingContext;
             item.IsActive = false;
+            SiteService.DeleteAlarm(item.AlarmItem.ServerId);
             DependencyService.Get<IAlarmSetter>().DeleteAlarm(item.AlarmItem);
             App.Database.DeleteAlarmItem(item.AlarmItem.Id);
             Alarms.Remove(item);

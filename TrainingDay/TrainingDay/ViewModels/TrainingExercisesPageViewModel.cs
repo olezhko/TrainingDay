@@ -214,7 +214,7 @@ namespace TrainingDay.ViewModels
 
             DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
             //Application.Current.MainPage = new NavigationPage(new MainPage());
-            Navigation.PopAsync();
+            //Navigation.PopAsync();
         }
 
         private void ClearTrExUnused()

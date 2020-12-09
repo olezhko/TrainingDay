@@ -51,7 +51,6 @@ namespace TrainingDay.ViewModels
             }
 
             Alarm.IsActive = true;
-
             //Set alarm and add to our list of alarms
             Alarm.AlarmItem.TrainingId = SelectedTrainingItem.Id;
             var newItem = new Alarm()
@@ -64,6 +63,9 @@ namespace TrainingDay.ViewModels
                 //Tone = Alarm.Tone,
                 TrainingId = SelectedTrainingItem.Id
             };
+            var serverId = SiteService.SendAlarm(newItem).Result;
+            newItem.ServerId = serverId;
+
             var id = App.Database.SaveAlarmItem(newItem);
             Alarm.AlarmItem.Id = id;
             DependencyService.Get<IAlarmSetter>().SetAlarm(newItem);
