@@ -77,5 +77,72 @@ namespace TrainingDay.Services
                 return new ObservableCollection<MobileBlog>();
             }
         }
+
+        
+        private static string _alarmEditUrl = domain + @"/Alarm/edit";
+        private static string _alarmCreateUrl = domain + @"/Alarm/add";
+        private static string _alarmDeleteUrl = domain + @"/Alarm/delete";
+        /// <summary>
+        /// Create/Edit alarm
+        /// </summary>
+        /// <returns>Server Alarm Id</returns>
+        public static async Task<int> SendAlarm(Alarm alarm)
+        {
+            try
+            {
+                var client = new RestClient(_sendTokenUrl);
+                client.Timeout = -1;
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Cookie", ".AspNetCore.Antiforgery.F1R49Bn-sHQ=CfDJ8DSuB5KQHH1HjhVjYb_UYNkYnk6PjUp68qgFq-vApTTa3RgeXB8Harisq5G6j8Vkg6qU734I-rQc_UzJBGUzGqj4LHrD22C_xEO4y-103zt7fOxt933aKV0B4TjmCyornURtfXjI-FjElAJo_qrtN_c");
+                request.AddParameter("application/json", JsonConvert.SerializeObject(alarm), ParameterType.RequestBody);
+                try
+                {
+                    var result = await client.ExecuteAsync(request);
+                    Debug.WriteLine($"Result Status Code: {result.StatusCode} - {result.Content}");
+                    return Convert.ToInt32(result.Content);
+                }
+                catch (Exception e)
+                {
+                    Crashes.TrackError(e);
+                    return -1;
+                }
+            }
+            catch (Exception e)
+            {
+                Crashes.TrackError(e);
+                return -1;
+            }
+        }
+
+        public static async Task<int> DeleteAlarm(int serverId = 0)
+        {
+            try
+            {
+                var client = new RestClient(_sendTokenUrl);
+                client.Timeout = -1;
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Cookie", ".AspNetCore.Antiforgery.F1R49Bn-sHQ=CfDJ8DSuB5KQHH1HjhVjYb_UYNkYnk6PjUp68qgFq-vApTTa3RgeXB8Harisq5G6j8Vkg6qU734I-rQc_UzJBGUzGqj4LHrD22C_xEO4y-103zt7fOxt933aKV0B4TjmCyornURtfXjI-FjElAJo_qrtN_c");
+                request.AddParameter("application/json", JsonConvert.SerializeObject(serverId), ParameterType.RequestBody);
+                try
+                {
+                    var result = await client.ExecuteAsync(request);
+                    Debug.WriteLine($"Result Status Code: {result.StatusCode} - {result.Content}");
+                    return Convert.ToInt32(result.Content);
+                }
+                catch (Exception e)
+                {
+                    Crashes.TrackError(e);
+                    return -1;
+                }
+            }
+            catch (Exception e)
+            {
+                Crashes.TrackError(e);
+                return -1;
+            }
+        }
+
     }
 }

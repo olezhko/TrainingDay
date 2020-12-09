@@ -12,6 +12,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
@@ -68,20 +69,20 @@
                 </Label>
             </StackLayout>
 
-            <!--<StackLayout Orientation="Horizontal" Grid.Row="4">
+            <StackLayout Orientation="Horizontal" Grid.Row="4">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ShowTrainingAlarms_Click"/>
                     </StackLayout.GestureRecognizers>
                     <ImageButton Source="alarm.png" CornerRadius="5" HeightRequest="60" WidthRequest="60" 
                                  BackgroundColor="Transparent" HorizontalOptions="Center" Clicked="ShowTrainingAlarms_Click"/>
-                    <Label Text="{services:Translate SettingsString}" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="Large">
+                <Label Text="{services:Translate TrainingNotifications}" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="Large">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="ShowTrainingAlarms_Click"/>
                         </Label.GestureRecognizers>
                     </Label>
-                </StackLayout>-->
+                </StackLayout>
 
-            <StackLayout Orientation="Horizontal" Grid.Row="4">
+            <StackLayout Orientation="Horizontal" Grid.Row="5">
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="ShowSettingsPage_Click"/>
                 </StackLayout.GestureRecognizers>
@@ -94,7 +95,7 @@
                 </Label>
             </StackLayout>
 
-            <controls:AdMobView AdUnitId="ca-app-pub-8728883017081055/2677919170" VerticalOptions="End" BackgroundColor="Transparent" Grid.Row="5"/>
+            <controls:AdMobView AdUnitId="ca-app-pub-8728883017081055/2677919170" VerticalOptions="End" BackgroundColor="Transparent" Grid.Row="6"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

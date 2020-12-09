@@ -37,5 +37,10 @@ namespace TrainingDay.Views
         {
             Navigation.PushAsync(new BlogsPage() { Title = Resource.NewsString }, true);
         }
+
+        private void ShowTrainingAlarms_Click(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new TrainingAlarmListPage() { Title = Resource.TrainingNotifications }, true);
+        }
     }
 }

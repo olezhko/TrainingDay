@@ -34,6 +34,7 @@ namespace TrainingDay.Services
         public bool IsActive { get; set; }// need
         public int Days { get; set; }// need
         public int TrainingId { get; set; }// need
+        public int ServerId { get; set; }
     }
 
     [Table("WeightNote")]
