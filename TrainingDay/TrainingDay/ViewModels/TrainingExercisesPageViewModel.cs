@@ -431,7 +431,7 @@ namespace TrainingDay.ViewModels
                 }
                 else
                 {
-                    if (selectedItems.Count == 1)
+                    if (selectedItems.Count > 1)
                     {
                         CreateSuperSet();
                         StopAction(true);

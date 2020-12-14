@@ -21,7 +21,7 @@
                 <xForms:SfListView ItemsSource="{Binding ExerciseItems}" x:Name="ItemsListView"  AutoFitMode="Height"  DragStartMode="OnHold" >
                     <xForms:SfListView.ItemTemplate>
                         <DataTemplate>
-                            <Frame Style="{StaticResource FrameCellStyle}" BackgroundColor="{DynamicResource ListItemBackgroundColor}">
+                            <Frame Style="{StaticResource FrameCellStyle}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>

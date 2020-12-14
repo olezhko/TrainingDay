@@ -20,8 +20,8 @@
                         <ViewCell x:Name="viewCell">
                             <Frame Style="{StaticResource FrameCellStyle}"  BackgroundColor="{DynamicResource ListItemBackgroundColor}" VerticalOptions="Fill">
                                 <StackLayout Orientation="Horizontal" VerticalOptions="Fill" Padding="0" >
-                                    <Image Source="{Binding TrainingImageUrl}" HorizontalOptions="Fill" VerticalOptions="Start" HeightRequest="150" WidthRequest="150" Aspect="AspectFit"/>
-                                    <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                                    <Image Source="{Binding TrainingImageUrl}" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="150" WidthRequest="150" Aspect="AspectFit"/>
                                 </StackLayout>
                             </Frame>
                         </ViewCell>

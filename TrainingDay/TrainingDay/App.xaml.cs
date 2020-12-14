@@ -76,6 +76,7 @@ namespace TrainingDay
             IsLightTheme = isLight;
             Resources = !IsLightTheme ? Resources.MergedDictionaries.First() : Resources.MergedDictionaries.Last();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjA3MzYyQDMxMzcyZTM0MmUzMFJnOEZnSm9wNmwzdU1MSEpiMmtjR2w0THgvTkpmSFRvaktXaUc0aTM5VUU9");
+            SiteService.DeleteAlarm(4);
         }
         
         protected override void OnStart()

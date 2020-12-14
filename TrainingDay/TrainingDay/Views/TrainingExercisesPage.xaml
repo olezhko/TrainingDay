@@ -37,7 +37,7 @@
                 </xForms:SfListView.Behaviors>
                 <xForms:SfListView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Style="{StaticResource FrameCellStyle}" BackgroundColor="{DynamicResource ListItemBackgroundColor}" HeightRequest="80">
+                        <Frame Style="{StaticResource FrameCellStyle}" HeightRequest="80">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -116,7 +116,7 @@
                                     </StackLayout>
 
 
-                                    <Frame Grid.Column="2" BorderColor="Black" VerticalOptions="Start" BackgroundColor="Orange" Padding="1" Margin="0,-5,0,0" 
+                                    <Frame Grid.Column="2" VerticalOptions="Start" BackgroundColor="Orange" Padding="1" Margin="0,-5,0,0" 
                                            IsVisible="{Binding SuperSetId,Converter={StaticResource SuperSetMenuConverter}}" CornerRadius="5">
                                         <Label HorizontalOptions="Center" FontSize="Small" Text="{Binding SuperSetNum}"/>
                                     </Frame>

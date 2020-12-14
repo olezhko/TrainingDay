@@ -71,14 +71,8 @@
                                 <MenuItem IsDestructive="true" Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.AddToGroupCommand}" 
                                                   CommandParameter="{Binding Source={x:Reference viewCell}}" IconImageSource="union_add.png"/>
                             </ViewCell.ContextActions>
-                            <Frame BackgroundColor="{DynamicResource ListItemBackgroundColor}" Style="{StaticResource FrameCellStyle}" Padding="20">
-                                <Grid VerticalOptions="Fill" HorizontalOptions="Fill">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold" VerticalOptions="Center"/>
-                                </Grid>
+                            <Frame Style="{StaticResource FrameCellStyle}" Padding="20">
+                                <Label Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold" VerticalOptions="Center"/>
                             </Frame>
                         </ViewCell>
                     </DataTemplate>

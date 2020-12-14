@@ -22,9 +22,7 @@ namespace TrainingDay.Droid.Services
         {
             base.OnNewToken(p0);
             Log.Debug(TAG, "Refreshed token: " + p0);
-#if DEBUG
             App.SendRegistrationToServer(p0);
-#endif
             Settings.Token = p0;
         }
 

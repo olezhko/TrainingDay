@@ -130,7 +130,6 @@
                     </StackLayout>
                 </Grid>
                 <plot:PlotView Model="{Binding PlotViewHips}" Grid.Row="9" Margin="10" HeightRequest="200"/>
-
             </Grid>
 
 

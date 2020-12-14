@@ -42,7 +42,7 @@
                                         <MenuItem IsDestructive="true" IconImageSource="remove.png" Command="{Binding Source={x:Reference ExercisesListView}, Path=BindingContext.DeleteExerciseCommand}" 
                                                   CommandParameter="{Binding Source={x:Reference viewCell}}"/>
                                     </ViewCell.ContextActions>
-                                    <Frame Style="{StaticResource FrameCellStyle}"  BackgroundColor="{DynamicResource ListItemBackgroundColor}">
+                                    <Frame Style="{StaticResource FrameCellStyle}">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>

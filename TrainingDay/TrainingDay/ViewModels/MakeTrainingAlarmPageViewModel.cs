@@ -42,7 +42,7 @@ namespace TrainingDay.ViewModels
         }
 
         public ICommand SaveAlarmCommand => new Command(SaveAlarm);
-        private void SaveAlarm()
+        private async void SaveAlarm()
         {
             if (!ValidateFields())
             {
@@ -63,7 +63,7 @@ namespace TrainingDay.ViewModels
                 //Tone = Alarm.Tone,
                 TrainingId = SelectedTrainingItem.Id
             };
-            var serverId = SiteService.SendAlarm(newItem).Result;
+            var serverId = await SiteService.SendAlarm(newItem);
             newItem.ServerId = serverId;
 
             var id = App.Database.SaveAlarmItem(newItem);

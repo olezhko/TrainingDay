@@ -70,11 +70,5 @@ namespace TrainingDay.Views
         {
             Settings.IsDisplayOnImplement = ScreenOnImplementedSwitch.IsToggled;
         }
-
-        private void ClearHistoryTrainings_Click(object sender, EventArgs e)
-        {
-            App.Database.DeleteAll<LastTraining>();
-            App.Database.DeleteAll<LastTrainingExercise>();
-        }
     }
 }

@@ -33,12 +33,12 @@ namespace TrainingDay.ViewModels
             }
         }
 
-        private void NewItemOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private async void NewItemOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             var item = sender as AlarmViewModel;
             if (e.PropertyName == nameof(AlarmViewModel.IsActive) && item != null)
             {
-                var serverId = SiteService.UpdateAlarm(item.AlarmItem);
+                await SiteService.UpdateAlarm(item.AlarmItem);
                 if (item.IsActive)
                 {
                     DependencyService.Get<IAlarmSetter>().SetAlarm(item.AlarmItem);
