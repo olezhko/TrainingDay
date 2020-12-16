@@ -174,8 +174,6 @@ namespace TrainingDay.ViewModels
                 item.IsNotFinished = true;
             }
             await Navigation.PushAsync(new TrainingImplementPage() { TrainingItem = Training, Title = Training.Title });
-
-            //Application.Current.MainPage = new NavigationPage(new TrainingImplementPage() { TrainingItem = Training, Title = Training.Title });
         }
 
 

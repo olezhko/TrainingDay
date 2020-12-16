@@ -79,7 +79,7 @@ namespace TrainingDay.Views
                                 training.AddExercise(item);
                             }
 
-                            Application.Current.MainPage = new NavigationPage(new TrainingImplementPage()
+                            Navigation.PushAsync(new TrainingImplementPage()
                             {
                                 TrainingItem = training,
                                 Title = training.Title,

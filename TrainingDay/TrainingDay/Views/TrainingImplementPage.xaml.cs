@@ -147,7 +147,7 @@ namespace TrainingDay.View
         #endregion
 
         #region Finish
-        private void FinishButtonClicked(object sender, EventArgs e)
+        private async void FinishButtonClicked(object sender, EventArgs e)
         {
             try
             {
@@ -164,12 +164,15 @@ namespace TrainingDay.View
 
                     // если добавить упражненияво время выполнения , потом по завершению не вернуться в главную страницу,
                     // то при добавлении упражнении в след раз во время выполенияв тренировку добавляется по две
-                    Application.Current.MainPage = new NavigationPage(new MainPage());
+                    //Application.Current.MainPage = new NavigationPage(new MainPage());
+
                     DependencyService.Get<IMessage>().ShowMessage(Resource.AdviceAfterTrainingMessage, Resource.AdviceString);
                     DependencyService.Get<IMessage>().ShortAlert(Resource.TrainingFinishedString);
 
                     DependencyService.Get<IAdInterstitial>().ShowAd("ca-app-pub-8728883017081055/7837401616");
                     DependencyService.Get<IMessage>().CancelNotification(App.TrainingNotificationId);
+
+                    await Navigation.PopAsync();
                 }
                 else
                 {
@@ -180,7 +183,7 @@ namespace TrainingDay.View
             catch (Exception ex)
             {
                 Crashes.TrackError(ex);
-                Application.Current.MainPage = new NavigationPage(new MainPage());
+                await Navigation.PopAsync();
             }
         }
 
@@ -303,8 +306,6 @@ namespace TrainingDay.View
                     Settings.IsTrainingNotFinished = false;
 
                     Navigation.PopAsync();
-                    //Application.Current.MainPage = new NavigationPage(new MainPage());
-                    //Application.Current.MainPage.Navigation.PushAsync(new TrainingItemsBasePage() { Title = Resource.TrainingsBaseString }, true);
                 }
             };
             popup.Show(Resource.OkString, Resource.CancelString);

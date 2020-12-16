@@ -10,7 +10,6 @@ using TrainingDay.Views;
 using TrainingDay.Views.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Device = Xamarin.Forms.Device;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TrainingDay
@@ -18,7 +17,7 @@ namespace TrainingDay
     public partial class App : Application
     {
         public const string DATABASE_NAME = "exercise.db";
-        public const string Version = "1.0.5.7";
+        public const string Version = "1.0.6.1";
         private static Repository database;
 
         private static object lockBase = new object();
@@ -69,14 +68,12 @@ namespace TrainingDay
             }
             else
             {
-                //MainPage = new UpdatesPage();
                 MainPage = new NavigationPage(new MainPage());
             }
 
             IsLightTheme = isLight;
             Resources = !IsLightTheme ? Resources.MergedDictionaries.First() : Resources.MergedDictionaries.Last();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjA3MzYyQDMxMzcyZTM0MmUzMFJnOEZnSm9wNmwzdU1MSEpiMmtjR2w0THgvTkpmSFRvaktXaUc0aTM5VUU9");
-            SiteService.DeleteAlarm(4);
         }
         
         protected override void OnStart()
@@ -244,7 +241,7 @@ namespace TrainingDay
             try
             {
                 // send token and language
-                if (/*Settings.IsTokenSavedOnServer ||*/ string.IsNullOrEmpty(token))
+                if (string.IsNullOrEmpty(token))
                 {
                     return;
                 }
