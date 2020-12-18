@@ -20,8 +20,9 @@ namespace TrainingDay.Views
             FreqWeightNotify.Text = Settings.WeightNotifyFreq.ToString();
 
 		    ScreenOnImplementedSwitch.IsToggled = Settings.IsDisplayOnImplement;
-            TokenEditor.Text = Settings.Token;
+            ScreenOnImplementedSwitch.Toggled += Switch_OnToggled;
 
+            TokenEditor.Text = Settings.Token;
 #if DEBUG
             TokenEditor.IsVisible = true;
 #endif

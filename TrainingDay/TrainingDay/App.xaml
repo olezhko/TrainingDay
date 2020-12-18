@@ -114,7 +114,7 @@
                         <Setter Property="CancelButtonColor" Value="White"/>
                         <Setter Property="PlaceholderColor" Value="White"/>
                     </Style>
-                    <Color x:Key="ListItemBackgroundColor">#444A4E63</Color>
+                    <Color x:Key="ListItemBackgroundColor">#44b9bdd2</Color>
                     <Color x:Key="PrimaryColor">#d0ddcf</Color>
                     <Color x:Key="PrimaryDarkColor">#e5e1d6</Color>
                     <Color x:Key="AccentColor">#e5e1d6</Color>

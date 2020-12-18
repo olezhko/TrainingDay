@@ -7,7 +7,6 @@
              xmlns:viewmodels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
              x:Class="TrainingDay.Views.WeightViewAndSetPage" Title="{services:Translate WeightControlString}" IconImageSource="weight.png">
     <ContentPage.ToolbarItems>
-        <!--<ToolbarItem Clicked="ShowWeightHistory_Click" x:Name="ShowWeightHistoryMenu" Text="{services:Translate HistoryString}"/>-->
         <ToolbarItem Clicked="ShowInfo_Click" IconImageSource="info.png"/>
     </ContentPage.ToolbarItems>
     <ContentPage.BindingContext>

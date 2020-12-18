@@ -10,7 +10,7 @@
                 <StackLayout Orientation="Vertical" Margin="5">
                     <StackLayout Orientation="Horizontal">
                         <Label Text="{services:Translate LightThemeString}" FontSize="Medium" HorizontalOptions="StartAndExpand"/>
-                        <Switch Toggled="Switch_OnToggled" x:Name="ThemeSwitch"/>
+                        <Switch x:Name="ThemeSwitch"/>
                     </StackLayout>
                     <Label Text="{services:Translate ChangesAcceptAfterReboot}" FontSize="Medium" TextColor="Green" x:Name="ChangesHideLabel" IsVisible="False"/>
                 </StackLayout>

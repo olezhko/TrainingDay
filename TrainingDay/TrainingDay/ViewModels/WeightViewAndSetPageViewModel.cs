@@ -631,8 +631,8 @@ namespace TrainingDay.ViewModels
                     };
                 }
                 goalHipsSeries.Points.Clear();
-                goalHipsSeries.Points.Add(new DataPoint(startDate, GoalWaist));
-                goalHipsSeries.Points.Add(new DataPoint(endDate, GoalWaist));
+                goalHipsSeries.Points.Add(new DataPoint(startDate, GoalHips));
+                goalHipsSeries.Points.Add(new DataPoint(endDate, GoalHips));
                 if (PlotViewHips.Series.Count == 1)
                 {
                     PlotViewHips.Series.Add(goalHipsSeries);

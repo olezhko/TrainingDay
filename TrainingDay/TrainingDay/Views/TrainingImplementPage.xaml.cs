@@ -158,6 +158,7 @@ namespace TrainingDay.View
                     _enabledTimer = false;
                     DependencyService.Get<IMessage>().CancelNotification(App.TrainingImplementTimeId);
                     DeviceDisplay.KeepScreenOn = false;
+                    Settings.IsTrainingNotFinished = false;
                     SaveLastTraining();
                     SaveChangedExercises();
                     //SaveRemoved();
@@ -205,7 +206,6 @@ namespace TrainingDay.View
 
         private void SaveLastTraining()
         {
-            Settings.IsTrainingNotFinished = false;
             App.Database.SaveLastTrainingItem(new LastTraining()
             {
                 ElapsedTime = DateTime.Now - _startTrainingDateTime + StartTime,
