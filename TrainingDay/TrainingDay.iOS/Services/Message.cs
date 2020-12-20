@@ -85,7 +85,7 @@ namespace TrainingDay.iOS.Services
 
             // Local notifications can be time or location based
             // Create a time-based trigger, interval is in seconds and must be greater than 0
-            var trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(0.25, false);
+            var trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(1, false);
 
             var request = UNNotificationRequest.FromIdentifier(id.ToString(), content, trigger);
             UNUserNotificationCenter.Current.AddNotificationRequest(request, (err) =>

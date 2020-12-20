@@ -6,7 +6,9 @@ using System.Text;
 using Foundation;
 using TrainingDay.Services;
 using UIKit;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(TrainingDay.iOS.Services.Localize))]
 namespace TrainingDay.iOS.Services
 {
     public class Localize : ILocalize

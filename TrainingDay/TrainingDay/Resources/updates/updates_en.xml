@@ -7,19 +7,19 @@
 },
 {
 "Id":"1",
-"Version":"1.0.6.3",
+"Version":"1.0.6.4",
 "Title":"New Fitness Exercises",
 "Text":"<p>Fitness exercises.</p><p>More fitness exercises are now available for you.</p><p><img width=200 height=200 src=fitness.jpg /></p>"
 },
 {
 "Id":"2",
-"Version":"1.0.6.3",
+"Version":"1.0.6.4",
 "Title":"Preset Workout - Fitness",
 "Text":"<p>Fitness exercises.</p><p>Preset fitness workout is now available, basic simple fitness exercises.</p><p><img width=200 height=200 src=fitness.jpg /></p>"
 },
 {
 "Id":"3",
-"Version":"1.0.6.3",
+"Version":"1.0.6.4",
 "Title":"Bug Fixed",
 "Text":"<p>Bug Fixed.</p> <p>Fixed errors in the program logic and usability.</p><p><img width=200 height=200 src=bug.png /></p>"
 }

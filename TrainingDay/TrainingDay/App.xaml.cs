@@ -10,6 +10,7 @@ using TrainingDay.Views;
 using TrainingDay.Views.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Device = Xamarin.Forms.Device;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TrainingDay
@@ -17,7 +18,7 @@ namespace TrainingDay
     public partial class App : Application
     {
         public const string DATABASE_NAME = "exercise.db";
-        public const string Version = "1.0.6.3";
+        public const string Version = "1.0.6.4";
         private static Repository database;
 
         private static object lockBase = new object();
@@ -61,15 +62,24 @@ namespace TrainingDay
                 System.Exception ex = (System.Exception) args.ExceptionObject;
                 Crashes.TrackError(ex);
             };
-            var last = Database.GetUpdates();
-            if (last == null || Version.CompareTo(last.Version) > 0)
-            {
-                MainPage = new UpdatesPage();
-            }
-            else
+
+            if (Device.RuntimePlatform == Device.iOS)
             {
                 MainPage = new NavigationPage(new MainPage());
             }
+            else
+            {
+                var last = Database.GetUpdates();
+                if (last == null || Version.CompareTo(last.Version) > 0)
+                {
+                    MainPage = new UpdatesPage();
+                }
+                else
+                {
+                    MainPage = new NavigationPage(new MainPage());
+                }
+            }
+            
 
             IsLightTheme = isLight;
             Resources = !IsLightTheme ? Resources.MergedDictionaries.First() : Resources.MergedDictionaries.Last();

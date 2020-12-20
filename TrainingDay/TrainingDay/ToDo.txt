@@ -13,3 +13,10 @@ https://github.com/google/material-design-icons/tree/master/action/drawable-anyd
 
 
 https://devblogs.microsoft.com/xamarin/xamarin-essentials-now-with-permissions-app-theme-authentication/
+
+
+
+
+Ios remove
+1. sharing training
+2. alarms

@@ -11,6 +11,11 @@ namespace TrainingDay.Views
         public MainPage()
         {
             InitializeComponent();
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                MainGrid.Children.Remove(AlarmsStackLayout);
+                Grid.SetRow(SettingsStackLayout,4);
+            }
         }
 
         private void ShowTrainingsItemsPage_Click(object sender, EventArgs e)

@@ -7,7 +7,7 @@
     <ContentPage.Content>
         <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Default">
             <StackLayout>
-                <StackLayout Orientation="Vertical" Margin="5">
+                <StackLayout Orientation="Vertical" Margin="5" x:Name="ThemeStackLayoutStackPanel">
                     <StackLayout Orientation="Horizontal">
                         <Label Text="{services:Translate LightThemeString}" FontSize="Medium" HorizontalOptions="StartAndExpand"/>
                         <Switch x:Name="ThemeSwitch"/>

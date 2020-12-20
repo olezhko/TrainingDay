@@ -24,9 +24,7 @@ namespace TrainingDay.View
             {
                 _isShown = true;
                 var vm = BindingContext as TrainingExercisesPageViewModel;
-                
                 vm.StartSelectExercises();
-                
                 DisplayAlert(Resource.AdviceString, Resource.HelpDeleteUnusefulExercises, "OK");
             }
             ItemsListView.SelectedItem = null;
@@ -42,7 +40,13 @@ namespace TrainingDay.View
                 MakeTrainingButton.IsVisible = false;
             }
             else
+            {
                 MakeTrainingButton.IsVisible = true;
+                if (Device.RuntimePlatform ==Device.iOS)
+                {
+                    ToolbarItems.Remove(AddAlarmToolbarItem);
+                }
+            }
         }
     }
 }

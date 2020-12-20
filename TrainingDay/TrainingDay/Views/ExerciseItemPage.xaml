@@ -40,18 +40,18 @@
                 <StackLayout Grid.Row="4">
                     <StackLayout Orientation="Horizontal">
                         <CheckBox x:Name="ExerciseByRepsAndWeightCheckBox"/>
-                        <Label FontSize="Medium" Text="{services:Translate ExerciseForTypeString}"/>
-                        <Label FontSize="Medium" Text="{services:Translate RepsAndWeightString}"/>
+                        <Label FontSize="Medium" Text="{services:Translate ExerciseForTypeString}" VerticalOptions="Center"/>
+                        <Label FontSize="Medium" Text="{services:Translate RepsAndWeightString}" VerticalOptions="Center"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <CheckBox x:Name="ExerciseByTimeCheckBox"/>
-                        <Label FontSize="Medium" Text="{services:Translate ExerciseForTypeString}"/>
-                        <Label FontSize="Medium" Text="{services:Translate TimeString}"/>
+                        <Label FontSize="Medium" Text="{services:Translate ExerciseForTypeString}" VerticalOptions="Center"/>
+                        <Label FontSize="Medium" Text="{services:Translate TimeString}" VerticalOptions="Center"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <CheckBox x:Name="ExerciseByDistanceCheckBox"/>
-                        <Label FontSize="Medium" Text="{services:Translate ExerciseForTypeString}"/>
-                        <Label FontSize="Medium" Text="{services:Translate DistanceString}"/>
+                        <Label FontSize="Medium" Text="{services:Translate ExerciseForTypeString}" VerticalOptions="Center"/>
+                        <Label FontSize="Medium" Text="{services:Translate DistanceString}" VerticalOptions="Center"/>
                     </StackLayout>
                 </StackLayout>
 

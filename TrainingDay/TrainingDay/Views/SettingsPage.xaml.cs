@@ -20,12 +20,17 @@ namespace TrainingDay.Views
             FreqWeightNotify.Text = Settings.WeightNotifyFreq.ToString();
 
 		    ScreenOnImplementedSwitch.IsToggled = Settings.IsDisplayOnImplement;
-            ScreenOnImplementedSwitch.Toggled += Switch_OnToggled;
+            ThemeSwitch.Toggled += Switch_OnToggled;
 
             TokenEditor.Text = Settings.Token;
 #if DEBUG
             TokenEditor.IsVisible = true;
 #endif
+
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                ThemeStackLayoutStackPanel.IsVisible = false;
+            }
         }
 
         private void Switch_OnToggled(object sender, ToggledEventArgs e)

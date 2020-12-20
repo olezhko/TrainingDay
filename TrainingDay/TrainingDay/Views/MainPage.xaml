@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
              xmlns:controls="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
-             x:Class="TrainingDay.Views.MainPage">
+             x:Class="TrainingDay.Views.MainPage" Title="TrainingDay">
     <ContentPage.Content>
-        <Grid VerticalOptions="FillAndExpand">
+        <Grid VerticalOptions="FillAndExpand" x:Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -69,7 +69,7 @@
                 </Label>
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal" Grid.Row="4">
+            <StackLayout Orientation="Horizontal" Grid.Row="4" x:Name="AlarmsStackLayout">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ShowTrainingAlarms_Click"/>
                     </StackLayout.GestureRecognizers>
@@ -82,7 +82,7 @@
                     </Label>
                 </StackLayout>
 
-            <StackLayout Orientation="Horizontal" Grid.Row="5">
+            <StackLayout Orientation="Horizontal" Grid.Row="5" x:Name="SettingsStackLayout">
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="ShowSettingsPage_Click"/>
                 </StackLayout.GestureRecognizers>

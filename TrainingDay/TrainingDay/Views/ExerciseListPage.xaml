@@ -34,7 +34,7 @@
             <Grid VerticalOptions="FillAndExpand" IsVisible="{Binding State,Converter={StaticResource StateToVisibilityConverter},ConverterParameter={x:Static controls2:States.Normal}}">
                 <StackLayout Orientation="Vertical">
                     <ListView ItemsSource="{Binding Items}" SeparatorVisibility="None" HasUnevenRows="True" ItemTapped="ListView_OnItemTapped" CachingStrategy="RecycleElementAndDataTemplate" x:Name="ExercisesListView" 
-                                      androidSpecific:ListView.IsFastScrollEnabled="True" >
+                                      androidSpecific:ListView.IsFastScrollEnabled="True" BackgroundColor="Transparent">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell x:Name="viewCell">

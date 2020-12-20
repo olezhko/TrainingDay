@@ -149,7 +149,7 @@ namespace TrainingDay.ViewModels
                     AxislineStyle = LineStyle.Solid,
                     AxislineColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
                     TicklineColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    TextColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White
+                    TextColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
                 });
 
                 var max = weightNotes.Length == 0 ? 100 : weightNotes.Max(a => a.Weight) + 1;

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Foundation;
+﻿using Foundation;
+using Google.MobileAds;
+using Syncfusion.ListView.XForms.iOS;
+using Syncfusion.XForms.iOS.EffectsView;
 using TrainingDay.iOS.Services;
 using UIKit;
 using UserNotifications;
@@ -23,16 +23,17 @@ namespace TrainingDay.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            MobileAds.SharedInstance.Start(completionHandler:null);
             Xamarin.Forms.Forms.SetFlags(new string[]
                 {"CarouselView_Experimental", "IndicatorView_Experimental", "Expander_Experimental","Shapes_Experimental"});
             global::Xamarin.Forms.Forms.Init();
-
+            OxyPlot.Xamarin.Forms.Platform.iOS.PlotViewRenderer.Init();
+            SfListViewRenderer.Init();
+            SfEffectsViewRenderer.Init();  //Initialize only when effects view is added to Listview.
             UNUserNotificationCenter.Current.Delegate = new iOSNotificationReceiver();
             LoadApplication(new App(false));
             App.ScreenWidth = UIScreen.MainScreen.Bounds.Width;
             App.ScreenHeight = UIScreen.MainScreen.Bounds.Height;
-            OxyPlot.Xamarin.Forms.Platform.iOS.PlotViewRenderer.Init();
-
             return base.FinishedLaunching(app, options);
         }
     }

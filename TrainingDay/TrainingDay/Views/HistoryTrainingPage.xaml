@@ -17,7 +17,7 @@
             <Label HorizontalTextAlignment="Center" VerticalOptions="Start" Text="{services:Translate NoLastTrainings}" FontSize="Medium"
                IsVisible="{Binding State,Converter={StaticResource StateToVisibilityConverter},ConverterParameter={x:Static controls1:States.NoData}}"/>
 
-            <ListView ItemsSource="{Binding LastTrainings}" HasUnevenRows="True" IsGroupingEnabled="true" x:Name="LastTrainingsListView"
+            <ListView ItemsSource="{Binding LastTrainings}" HasUnevenRows="True" IsGroupingEnabled="true" x:Name="LastTrainingsListView" BackgroundColor="Transparent"
                   IsVisible="{Binding State,Converter={StaticResource StateToVisibilityConverter},ConverterParameter={x:Static controls1:States.View1}}">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>

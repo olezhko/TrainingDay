@@ -128,8 +128,9 @@ namespace TrainingDay.View
             if (_enabledTimer)
             {
                 var name = string.Join(" - ", Items[StepProgressBarControl.StepSelected].Select(a => a.ExerciseItemName));
-                DependencyService.Get<IMessage>().ShowNotification(App.TrainingImplementTimeId, name,
-                    CurrentTime, true, true);
+                if (Device.RuntimePlatform == Device.Android)
+                    DependencyService.Get<IMessage>().ShowNotification(App.TrainingImplementTimeId, name,
+                        CurrentTime, true, true);
             }
         }
 

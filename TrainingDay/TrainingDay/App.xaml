@@ -27,7 +27,14 @@
                     </Style>
 
                     <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
-                        <Setter Property="BarTextColor" Value="#FFFFFF"/>
+                        <Setter Property="BarTextColor">
+                            <Setter.Value>
+                                <OnPlatform x:TypeArguments="Color">
+                                    <On Platform="iOS" Value="{StaticResource ContentPageBackgroundColor}" />
+                                    <On Platform="Android" Value="White" />
+                                </OnPlatform>
+                            </Setter.Value>
+                        </Setter>
                     </Style>
                     <Style TargetType="SearchBar" ApplyToDerivedTypes="True">
                         <Setter Property="BackgroundColor" Value="#FFFFFF"/>
@@ -41,9 +48,24 @@
                     <Style TargetType="RadioButton" ApplyToDerivedTypes="True">
                         <Setter Property="TextColor" Value="#FFFFFF"/>
                     </Style>
+
                     <Style TargetType="Editor" ApplyToDerivedTypes="True">
-                        <Setter Property="TextColor" Value="#FFFFFF"/>
-                        <Setter Property="PlaceholderColor" Value="#FFFFFF"/>
+                        <Setter Property="TextColor">
+                            <Setter.Value>
+                                <OnPlatform x:TypeArguments="Color">
+                                    <On Platform="iOS" Value="Black" />
+                                    <On Platform="Android" Value="White" />
+                                </OnPlatform>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="PlaceholderColor">
+                            <Setter.Value>
+                                <OnPlatform x:TypeArguments="Color">
+                                    <On Platform="iOS" Value="Black" />
+                                    <On Platform="Android" Value="White" />
+                                </OnPlatform>
+                            </Setter.Value>
+                        </Setter>
                     </Style>
                     <Style TargetType="Frame" ApplyToDerivedTypes="True" x:Key="FrameCellStyle">
                         <Setter Property="BorderColor" Value="Transparent"/>
@@ -59,14 +81,28 @@
                     </Style>
 
                     <Style TargetType="Entry" ApplyToDerivedTypes="True">
-                        <Setter Property="TextColor" Value="#FFFFFF"/>
+                        <Setter Property="TextColor">
+                            <Setter.Value>
+                                <OnPlatform x:TypeArguments="Color">
+                                    <On Platform="iOS" Value="Black" />
+                                    <On Platform="Android" Value="White" />
+                                </OnPlatform>
+                            </Setter.Value>
+                        </Setter>
                         <Setter Property="PlaceholderColor" Value="LightGray"/>
                         <Setter Property="FontSize" Value="24"/>
                     </Style>
 
                     <Style TargetType="Picker" ApplyToDerivedTypes="True">
-                        <Setter Property="TextColor" Value="#FFFFFF"/>
                         <Setter Property="TitleColor" Value="#FFFFFF"/>
+                        <Setter Property="TextColor">
+                            <Setter.Value>
+                                <OnPlatform x:TypeArguments="Color">
+                                    <On Platform="iOS" Value="Black" />
+                                    <On Platform="Android" Value="White" />
+                                </OnPlatform>
+                            </Setter.Value>
+                        </Setter>
                     </Style>
                     <Style TargetType="TimePicker" ApplyToDerivedTypes="True">
                         <Setter Property="TextColor" Value="#FFFFFF"/>
@@ -211,9 +247,6 @@
                     <controls:StateToVisibilityConverter x:Key="StateToVisibilityConverter"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
-
-
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

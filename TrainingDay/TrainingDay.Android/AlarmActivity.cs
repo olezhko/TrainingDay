@@ -53,10 +53,13 @@ namespace TrainingDay.Droid
             timeTextView.Text = _alarm.TimeOffset.ToLocalTime().ToString(@"hh\:mm");
             nameTextView.Text = _alarm.Name;
 
-            _mediaPlayer = MediaPlayer.Create(this, Resource.Raw.alarmsound);
-
-            _mediaPlayer.Looping = true;
-            _mediaPlayer.Start();
+            var audioMgr = (AudioManager)GetSystemService(AudioService);
+            if (audioMgr.RingerMode == RingerMode.Normal)
+            {
+                _mediaPlayer = MediaPlayer.Create(this, Resource.Raw.alarmsound);
+                _mediaPlayer.Looping = true;
+                _mediaPlayer.Start();
+            }
         }
 
         void CloseButton_Click(object sender, EventArgs e)
