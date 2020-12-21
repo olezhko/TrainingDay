@@ -55,7 +55,10 @@ namespace TrainingDay
         public App(bool isLight)
         {
             InitializeComponent();
-            AppCenter.Start("96acc322-4770-4aa3-876b-16ce5a802a38", typeof(Analytics), typeof(Crashes));
+            AppCenter.Start(Device.RuntimePlatform == Device.iOS
+                    ? "59807e71-013b-4d42-9306-4a6044d9dc5f"
+                    : "96acc322-4770-4aa3-876b-16ce5a802a38", typeof(Analytics), typeof(Crashes));
+
             Resource.Culture = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
             AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
             {
