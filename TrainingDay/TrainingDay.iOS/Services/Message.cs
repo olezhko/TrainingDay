@@ -65,7 +65,6 @@ namespace TrainingDay.iOS.Services
             }
         }
 
-
         public void ShowNotification(int id, string title, string message, bool isUpdateCurrent, bool isSilent)
         {
             // EARLY OUT: app doesn't have permissions

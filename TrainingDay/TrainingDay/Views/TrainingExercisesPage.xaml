@@ -158,12 +158,10 @@
                 </Button.Style>
             </Button>
 
-            <Frame Grid.Row="3" IsVisible="{Binding IsExercisesCheckBoxVisible}" Style="{DynamicResource FrameCellStyle}" HorizontalOptions="Center">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
-                    <Button Text="{services:Translate CancelString}" Command="{Binding CancelActionCommand}"/>
-                    <Button Text="{Binding ExerciseActionString}" Command="{Binding StartActionCommand}"/>
-                </StackLayout>
-            </Frame>
+            <StackLayout Orientation="Horizontal" Grid.Row="3" IsVisible="{Binding IsExercisesCheckBoxVisible}" HorizontalOptions="Center">
+                <Button Text="{services:Translate CancelString}" Command="{Binding CancelActionCommand}"/>
+                <Button Text="{Binding ExerciseActionString}" Command="{Binding StartActionCommand}"/>
+            </StackLayout>
 
             <controls2:AdMobView AdUnitId="ca-app-pub-8728883017081055/3839299823" BackgroundColor="Transparent" VerticalOptions="Start" Grid.Row="4"/>
 

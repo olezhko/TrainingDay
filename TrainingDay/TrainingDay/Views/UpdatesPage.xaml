@@ -23,7 +23,7 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
             <IndicatorView x:Name="indicatorView" IndicatorColor="DimGray" SelectedIndicatorColor="Green" HorizontalOptions="Center" />
-            <Button Text="{services:Translate CloseString}" Command="{Binding CloseCommand}" CornerRadius="5"/>
+            <Button Text="{services:Translate CloseString}" Command="{Binding CloseCommand}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
