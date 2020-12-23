@@ -4,9 +4,7 @@ using RestSharp;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Net;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using TrainingDay.Model;
 
 namespace TrainingDay.Services

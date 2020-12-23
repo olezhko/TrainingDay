@@ -4,6 +4,7 @@
              xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
              xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
              xmlns:controls1="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              x:Class="TrainingDay.Views.TrainingItemsBasePage" Title="{services:Translate TrainingsBaseString}" IconImageSource="main.png" x:Name="Page">
     <ContentPage.BindingContext>
         <viewModels:TrainingItemsBasePageViewModel/>
@@ -30,7 +31,8 @@
 
             <ListView ItemsSource="{Binding ItemsGrouped}" HorizontalOptions="FillAndExpand" x:Name="ItemsListView" HasUnevenRows="True" RowHeight="-1" BackgroundColor="Transparent" 
                       SeparatorVisibility="None" GroupDisplayBinding="{Binding Key}"  IsGroupingEnabled="True" 
-                      IsVisible="{Binding State,Converter={StaticResource StateToVisibilityConverter},ConverterParameter={x:Static controls1:States.Normal}}">
+                      IsVisible="{Binding State,Converter={StaticResource StateToVisibilityConverter},ConverterParameter={x:Static controls1:States.Normal}}"
+                      ios:ListView.GroupHeaderStyle="Grouped">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell Height="50">

@@ -32,7 +32,7 @@
                 </ListView.Behaviors>
             </ListView>
 
-            <Button Grid.Row="1" Command="{Binding CreateNewTrainingCommand}" Text="{services:Translate CreateNewString}" CornerRadius="5" VerticalOptions="End"  Margin="5"/>
+            <Button Grid.Row="1" Command="{Binding CreateNewTrainingCommand}" Text="{services:Translate CreateNewString}" VerticalOptions="End" Margin="5"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -49,6 +49,12 @@
                         <Setter Property="TextColor" Value="#FFFFFF"/>
                     </Style>
 
+                    <Style TargetType="Button" ApplyToDerivedTypes="True">
+                        <Setter Property="BackgroundColor" Value="Gray"/>
+                        <Setter Property="TextColor" Value="White"/>
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+
                     <Style TargetType="Editor" ApplyToDerivedTypes="True">
                         <Setter Property="TextColor">
                             <Setter.Value>
