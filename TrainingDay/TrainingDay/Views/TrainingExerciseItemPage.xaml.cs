@@ -45,7 +45,7 @@ namespace TrainingDay.Views
         }
 
         private bool isSaved;
-        private void Save_clicked(object sender, EventArgs e)
+        private async void Save_clicked(object sender, EventArgs e)
         {        
             if (!String.IsNullOrEmpty(ExerciseView.CurrentExercise.ExerciseItemName))
             {
@@ -53,7 +53,7 @@ namespace TrainingDay.Views
                 DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
                 App.Database.SaveExerciseItem(ExerciseView.CurrentExercise.GetExercise());
                 App.Database.SaveTrainingExerciseItem(ExerciseView.CurrentExercise.GetTrainingExerciseComm());
-                this.Navigation.PopAsync();
+                await Navigation.PopAsync();
             }
         }
 

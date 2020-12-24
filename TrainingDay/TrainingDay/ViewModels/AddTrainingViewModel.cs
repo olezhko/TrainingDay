@@ -55,7 +55,7 @@ namespace TrainingDay.ViewModels
         }
 
         public ICommand AddTrainingItemCommand { get; set; }
-        private void AddTrainingItemMethod()
+        private async void AddTrainingItemMethod()
         {
             if (string.IsNullOrEmpty(Title) || ExerciseItems.Count == 0)
             {
@@ -83,7 +83,7 @@ namespace TrainingDay.ViewModels
 
             var last = Navigation.NavigationStack.Last();
             Navigation.RemovePage(last);
-            Navigation.PopAsync(false);
+            await Navigation.PopAsync();
         }
     }
 }

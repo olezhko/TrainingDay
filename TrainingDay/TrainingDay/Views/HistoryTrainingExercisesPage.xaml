@@ -14,7 +14,7 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid>
-            <ListView ItemsSource="{Binding TrainingItems}" HasUnevenRows="True" SelectionMode="None">
+            <ListView ItemsSource="{Binding TrainingItems}" HasUnevenRows="True" SelectionMode="None" BackgroundColor="Transparent">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
