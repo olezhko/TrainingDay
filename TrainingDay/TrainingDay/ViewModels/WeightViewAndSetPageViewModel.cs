@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
 using Microcharts;
-using Microsoft.AppCenter.Crashes;
 using SkiaSharp;
 using TrainingDay.Resources;
 using TrainingDay.Services;
@@ -32,43 +31,7 @@ namespace TrainingDay.ViewModels
 
     class WeightViewAndSetPageViewModel : BaseViewModel
     {
-        public WeightViewAndSetPageViewModel()
-        {
-            GoalWeight = Settings.WeightGoal;
-            GoalWaist = Settings.WaistGoal;
-            GoalHips = Settings.HipGoal;
-            SaveCurrentWeightCommand = new Command(SaveCurrentWeight);
-            SaveGoalWeightCommand = new Command(SaveGoalWeight);
-            WeightPeriodChangedCommand = new Command(LoadWeightPlot);
-            var items = App.Database.GetWeightNotesItems();
-
-            if (items != null && items.Any())
-            {
-                var weightItems = items.Where(a => a.Type == (int) WeightType.Weight);
-                if (weightItems.Any())
-                {
-                    CurrentWeightValue = weightItems.Last().Weight;
-                }
-
-                var waistItems = items.Where(a => a.Type == (int)WeightType.Waist);
-                if (waistItems.Any())
-                {
-                    CurrentWaistValue = waistItems.Last().Weight;
-                }
-
-                var hipsItems = items.Where(a => a.Type == (int)WeightType.Hip);
-                if (hipsItems.Any())
-                {
-                    CurrentHipsValue = hipsItems.Last().Weight;
-                }
-            }
-        }
-
-        public void OnAppearing()
-        {
-            PrepareBodyControlItems();
-        }
-
+        #region Publ Prop
         public ICommand WeightPeriodChangedCommand { get; set; }
 
         private int _weightChartPeriod = 0;
@@ -83,236 +46,56 @@ namespace TrainingDay.ViewModels
         }
 
         public int MaxLengthWeightField { get; set; }
+        #endregion
 
-        #region Weight
-        private double _currentWeightValue;
-        public double CurrentWeightValue
+        public WeightViewAndSetPageViewModel()
         {
-            get => _currentWeightValue;
-            set
-            {
-                _currentWeightValue = value;
-                OnPropertyChanged(nameof(CurrentWeightValue));
-                MaxLengthWeightField = value > 100 ? 3 : 4;
-                OnPropertyChanged(nameof(MaxLengthWeightField));
-            }
+            WeightPeriodChangedCommand = new Command(PrepareBodyControlItems);
         }
 
-        private double _currentGoalWeight;
-        public double GoalWeight
+        public void OnAppearing()
         {
-            get =>
-                _currentGoalWeight;
-            set
-            {
-                _currentGoalWeight = value;
-                OnPropertyChanged();
-
-                MaxLengthWeightField = value > 100 ? 3 : 4;
-                OnPropertyChanged(nameof(MaxLengthWeightField));
-            }
+            PrepareBodyControlItems();
         }
 
-        public string GoalWeightString
+        public ICommand SaveGoalValueCommand => new Command<BodyControlItem>(SaveGoalValue);
+        private void SaveGoalValue(BodyControlItem sender)
         {
-            get => GoalWeight.ToString(CultureInfo.InvariantCulture);
-            set
+            WeightType type = sender.Type;
+            switch (type)
             {
-                var res = double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var weight);
-                if (res)
-                {
-                    GoalWeight = weight;
-                }
+                case WeightType.Weight:
+                    Settings.WeightGoal = BodyControlItems.First(item=>item.Type == type).GoalValue;
+                    break;
+                case WeightType.Waist:
+                    Settings.WaistGoal = BodyControlItems.First(item => item.Type == type).GoalValue;
+                    break;
+                case WeightType.Hip:
+                    Settings.HipGoal = BodyControlItems.First(item => item.Type == type).GoalValue;
+                    break;
             }
-        }
-        public string CurrentWeightString
-        {
-            get => CurrentWeightValue.ToString(CultureInfo.InvariantCulture);
-            set
-            {
-                var res = double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var weight);
-                if (res)
-                {
-                    CurrentWeightValue = weight;
-                }
-            }
-        }
-
-        public ICommand SaveGoalWeightCommand { get; set; }
-        private void SaveGoalWeight()
-        {
-            Settings.WeightGoal = GoalWeight;
+            sender.Chart = PrepareChart(sender.GoalValue, sender.ChartItems);
             DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
         }
 
-        public ICommand SaveCurrentWeightCommand { get; set; }
-        private void SaveCurrentWeight()
+        public ICommand SaveCurrentValueCommand => new Command<BodyControlItem>(SaveCurrentValue);
+        private void SaveCurrentValue(BodyControlItem sender)
         {
+            WeightType type = sender.Type;
             WeightNote note = new WeightNote
             {
                 Date = DateTime.Now,
-                Weight = CurrentWeightValue
+                Weight = sender.CurrentValue,
+                Type = (int)type
             };
             App.Database.SaveWeightNotesItem(note);
-            DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
 
-            DependencyService.Get<IMessage>().CancelNotification(App.WeightNotificationId);
-        }
-        #endregion
+            sender.ChartItems.Add(note);
+            sender.Chart = PrepareChart(sender.GoalValue, sender.ChartItems);
 
-        #region Waist
-        private double _currentWaistValue;
-        public double CurrentWaistValue
-        {
-            get => _currentWaistValue;
-            set
-            {
-                _currentWaistValue = value;
-                OnPropertyChanged(nameof(CurrentWaistValue));
-            }
-        }
-
-        private double _currentGoalWaist;
-        public double GoalWaist
-        {
-            get => _currentGoalWaist;
-            set
-            {
-                _currentGoalWaist = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string GoalWaistString
-        {
-            get => GoalWaist.ToString(CultureInfo.InvariantCulture);
-            set
-            {
-                var res = double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var weight);
-                if (res)
-                {
-                    GoalWaist = weight;
-                }
-            }
-        }
-        public string CurrentWaistString
-        {
-            get => CurrentWaistValue.ToString(CultureInfo.InvariantCulture);
-            set
-            {
-                var res = double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var weight);
-                if (res)
-                {
-                    CurrentWaistValue = weight;
-                }
-            }
-        }
-
-        public ICommand SaveGoalWaistCommand => new Command(SaveGoalWaist);
-        private void SaveGoalWaist()
-        {
-            Settings.WaistGoal = GoalWaist;
-            DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
-        }
-
-        public ICommand SaveCurrentWaistCommand => new Command(SaveCurrentWaist);
-        private void SaveCurrentWaist()
-        {
-            WeightNote note = new WeightNote
-            {
-                Date = DateTime.Now,
-                Weight = CurrentWaistValue,
-                Type = (int)WeightType.Waist
-            };
-            App.Database.SaveWeightNotesItem(note);
             DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
             DependencyService.Get<IMessage>().CancelNotification(App.WeightNotificationId);
         }
-        #endregion
-
-        #region Hips
-        private double _currentHipsValue;
-        public double CurrentHipsValue
-        {
-            get => _currentHipsValue;
-            set
-            {
-                _currentHipsValue = value;
-                OnPropertyChanged(nameof(CurrentHipsValue));
-            }
-        }
-
-        private double _currentGoalHips;
-        public double GoalHips
-        {
-            get => _currentGoalHips;
-            set
-            {
-                _currentGoalHips = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string GoalHipsString
-        {
-            get => GoalHips.ToString(CultureInfo.InvariantCulture);
-            set
-            {
-                var res = double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var weight);
-                if (res)
-                {
-                    GoalHips = weight;
-                }
-            }
-        }
-        
-        public string CurrentHipsString
-        {
-            get => CurrentHipsValue.ToString(CultureInfo.InvariantCulture);
-            set
-            {
-                var res = double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var weight);
-                if (res)
-                {
-                    CurrentHipsValue = weight;
-                }
-            }
-        }
-
-        public ICommand SaveGoalHipsCommand => new Command(SaveGoalHips);
-        private void SaveGoalHips()
-        {
-            Settings.HipGoal = GoalHips;
-            DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
-        }
-
-        public ICommand SaveCurrentHipsCommand => new Command(SaveCurrentHips);
-        private void SaveCurrentHips()
-        {
-            WeightNote note = new WeightNote
-            {
-                Date = DateTime.Now,
-                Weight = CurrentHipsValue,
-                Type = (int)WeightType.Hip
-            };
-            App.Database.SaveWeightNotesItem(note);
-            DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
-
-            DependencyService.Get<IMessage>().CancelNotification(App.WeightNotificationId);
-        }
-        #endregion
-
-
-        public ObservableCollection<WeightNote> WeightNotes { get; set; }= new ObservableCollection<WeightNote>();
-        public ICommand DeleteWeightNoteCommand => new Command<WeightNote>(DeleteWeightNote);
-        private void DeleteWeightNote(WeightNote sender)
-        {
-            App.Database.DeleteWeightNote(sender.Id);
-            WeightNotes.Remove(sender);
-            DependencyService.Get<IMessage>().ShortAlert(Resource.DeletedString);
-        }
-
-        #region New Logic
 
         private static int GetDaysByPeriod(ChartWeightPeriod period)
         {
@@ -361,58 +144,57 @@ namespace TrainingDay.ViewModels
             return chartItems;
         }
 
-        public ObservableCollection<BodyControlItem> BodyControlItems { get; set; }= new ObservableCollection<BodyControlItem>();
+        public ObservableCollection<BodyControlItem> BodyControlItems { get; set; } = new ObservableCollection<BodyControlItem>();
         private void PrepareBodyControlItems()
         {
             IsBusy = true;
+            double currentWeightValue = 0, currentWaistValue = 0, currentHipsValue = 0;
             BodyControlItems.Clear();
             //var bodyControlItems = App.Database.GetWeightNotesItems();
             List<WeightNote> bodyControlItems = GenerateData();
 
             int countDaysPeriod = GetDaysByPeriod((ChartWeightPeriod)WeightChartPeriod);
-            var startDate = DateTime.Now.AddDays(-20);
+            var startDate = DateTime.Now.AddDays(-countDaysPeriod);
 
-            var weightItems = PrepareChartData(bodyControlItems,startDate,WeightType.Weight);
+            var weightItems = PrepareChartData(bodyControlItems, startDate, WeightType.Weight);
             if (weightItems.Any())
             {
-                CurrentWeightValue = weightItems.Last().Weight;
+                currentWeightValue = weightItems.Last().Weight;
             }
 
             var waistItems = PrepareChartData(bodyControlItems, startDate, WeightType.Waist);
             if (waistItems.Any())
             {
-                CurrentWaistValue = waistItems.Last().Weight;
+                currentWaistValue = waistItems.Last().Weight;
             }
 
             var hipsItems = PrepareChartData(bodyControlItems, startDate, WeightType.Hip);
             if (hipsItems.Any())
             {
-                CurrentHipsValue = hipsItems.Last().Weight;
+                currentHipsValue = hipsItems.Last().Weight;
             }
 
-            BodyControlItems.Add(new BodyControlItem()
+            BodyControlItems.Add(new BodyControlItem(weightItems)
             {
                 Name = Resource.WeightString,
                 GoalValue = Settings.WeightGoal,
-                CurrentValue = CurrentWeightValue,
+                CurrentValue = currentWeightValue,
                 Chart = PrepareChart(Settings.WeightGoal, weightItems)
             });
 
-
-            BodyControlItems.Add(new BodyControlItem()
+            BodyControlItems.Add(new BodyControlItem(waistItems)
             {
                 Name = Resource.WaistString,
                 GoalValue = Settings.WaistGoal,
-                CurrentValue = CurrentWaistValue,
+                CurrentValue = currentWaistValue,
                 Chart = PrepareChart(Settings.WaistGoal, waistItems)
             });
 
-
-            BodyControlItems.Add(new BodyControlItem()
+            BodyControlItems.Add(new BodyControlItem(hipsItems)
             {
                 Name = Resource.HipsString,
                 GoalValue = Settings.HipGoal,
-                CurrentValue = CurrentHipsValue,
+                CurrentValue = currentHipsValue,
                 Chart = PrepareChart(Settings.HipGoal, hipsItems)
             });
 
@@ -494,6 +276,7 @@ namespace TrainingDay.ViewModels
             var minValue = items.Select(item => item.Weight).Min() - 1;
             return new LineChart
             {
+                Margin = 30,
                 LabelOrientation = Orientation.Horizontal,
                 ValueLabelOrientation = Orientation.Horizontal,
                 LabelTextSize = 42,
@@ -510,35 +293,83 @@ namespace TrainingDay.ViewModels
                     Color = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
                     IsAntialias = true,
                     Style = SKPaintStyle.StrokeAndFill,
+                    TextSize = 42
                 },
 
                 YAxisLinesPaint = new SKPaint
                 {
-                Color = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
+                    Color = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
                     IsAntialias = true,
-                Style = SKPaintStyle.Stroke
-            },
-            LabelColor = Settings.IsLightTheme?SKColors.Black : SKColors.White,
-                Series = new List<ChartSerie>()
-            {
-                new ChartSerie()
-                {
-                    Color = SKColors.Green,
-                    Entries = entries
+                    Style = SKPaintStyle.Stroke
                 },
-                //new ChartSerie()
-                //{
-                //    Color = SKColor.Parse("#77d065"),
-                //    Entries = goalEntries
-                //}
-            }};
+                LabelColor = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
+                Series = new List<ChartSerie>()
+                {
+                    new ChartSerie()
+                    {
+                        Color = SKColors.Green,
+                        Entries = entries
+                    },
+                    new ChartSerie()
+                    {
+                        Color = SKColors.Gold,
+                        Entries = goalEntries
+                    }
+                }
+            };
         }
 
-        #endregion
+
+
+        public ObservableCollection<WeightNote> WeightNotes { get; set; } = new ObservableCollection<WeightNote>();
+        public ICommand DeleteWeightNoteCommand => new Command<WeightNote>(DeleteWeightNote);
+        private void DeleteWeightNote(WeightNote sender)
+        {
+            App.Database.DeleteWeightNote(sender.Id);
+            WeightNotes.Remove(sender);
+            DependencyService.Get<IMessage>().ShortAlert(Resource.DeletedString);
+        }
     }
 
     public class BodyControlItem: BaseViewModel
     {
+        public string GoalValueString
+        {
+            get => GoalValue.ToString(CultureInfo.InvariantCulture);
+            set
+            {
+                var res = double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var weight);
+                if (res)
+                {
+                    GoalValue = weight;
+                }
+            }
+        }
+
+        public string CurrentValueString
+        {
+            get => CurrentValue.ToString(CultureInfo.InvariantCulture);
+            set
+            {
+                var res = double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var weight);
+                if (res)
+                {
+                    CurrentValue = weight;
+                }
+            }
+        }
+
+        private WeightType type;
+        public WeightType Type
+        {
+            get => type;
+            set
+            {
+                type = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string _name;
         public string Name
         {
@@ -571,11 +402,21 @@ namespace TrainingDay.ViewModels
             }
         }
 
-        public LineChart Chart { get; set; }
-
-        public BodyControlItem()
+        private LineChart chart;
+        public LineChart Chart
         {
-            
+            get => chart;
+            set
+            {
+                chart = value;
+                OnPropertyChanged();
+            }}
+
+        public List<WeightNote> ChartItems { get; set; }
+
+        public BodyControlItem(List<WeightNote> chartItems)
+        {
+            ChartItems = new List<WeightNote>(chartItems);
         }
     }
 }

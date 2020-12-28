@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:plot="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
              xmlns:services="clr-namespace:TrainingDay.Services"
              xmlns:controls="clr-namespace:TrainingDay.Controls;assembly=TrainingDay"
              xmlns:viewmodels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-             xmlns:system="clr-namespace:System;assembly=netstandard"
-             x:Class="TrainingDay.Views.WeightViewAndSetPage" Title="{services:Translate WeightControlString}" IconImageSource="weight.png">
+             x:Class="TrainingDay.Views.WeightViewAndSetPage" Title="{services:Translate WeightControlString}" IconImageSource="weight.png"
+             x:Name="Page">
     <ContentPage.ToolbarItems>
         <ToolbarItem Clicked="ShowInfo_Click" IconImageSource="info.png"/>
     </ContentPage.ToolbarItems>
@@ -47,7 +46,8 @@
                                     <Label Text="{services:Translate CurrentString}" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium"/>
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                         <controls:EntryWithDot MaxLength="{Binding MaxLengthWeightField}" Text="{Binding CurrentValue,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" HorizontalTextAlignment="Center" x:Name="CurrentEntry" VerticalOptions="Center"/>
-                                        <ImageButton Command="{Binding SaveCurrentWeightCommand}" Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" x:Name="SaveCurrentWeightImageButton" />
+                                        <ImageButton Command="{Binding Source={x:Reference Page}, Path=BindingContext.SaveCurrentValueCommand}"  CommandParameter="{Binding }"
+                                                     Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" />
                                     </StackLayout>
                                 </StackLayout>
 
@@ -57,7 +57,8 @@
                                     <Label Text="{services:Translate GoalString}"  VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium" />
                                     <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
                                         <controls:EntryWithDot MaxLength="{Binding MaxLengthWeightField}" Text="{Binding GoalValue,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" HorizontalTextAlignment="Center" x:Name="GoalEntry" VerticalOptions="Center"/>
-                                        <ImageButton Command="{Binding SaveGoalWeightCommand}" Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" x:Name="SaveGoalWeightImageButton" />
+                                        <ImageButton Command="{Binding Source={x:Reference Page}, Path=BindingContext.SaveGoalValueCommand}" CommandParameter="{Binding }"
+                                                     Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" />
                                     </StackLayout>
                                 </StackLayout>
                             </Grid>

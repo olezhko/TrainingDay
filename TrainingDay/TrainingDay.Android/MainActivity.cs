@@ -35,7 +35,6 @@ namespace TrainingDay.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             Android.Glide.Forms.Init(this, debug: true);
-            OxyPlot.Xamarin.Forms.Platform.Android.PlotViewRenderer.Init();
             CheckAppPermissions();
             LoadApplication(new App(local.IsLightTheme));
 

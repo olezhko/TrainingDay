@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using Microcharts;
-using SkiaSharp;
 using TrainingDay.Resources;
-using TrainingDay.Services;
 using TrainingDay.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -35,10 +30,6 @@ namespace TrainingDay.Views
         {
             base.OnAppearing();
             vm?.OnAppearing();
-
-            //vm?.LoadWeightPlot();
-            //vm?.LoadWaistPlot();
-            //vm?.LoadHipsPlot();
         }
 
         private bool _isVisibleWeightHistory;
@@ -52,15 +43,15 @@ namespace TrainingDay.Views
 
         private async void ShowInfo_Click(object sender, EventArgs e)
         {
-            var coef = vm.CurrentWaistValue / vm.CurrentHipsValue;
-            StringBuilder sb = new StringBuilder();
-            sb.Append(string.Format(Resource.WaistHipMessage.Replace("_", "\n"), coef));
+            //var coef = vm.CurrentWaistValue / vm.CurrentHipsValue;
+            //StringBuilder sb = new StringBuilder();
+            //sb.Append(string.Format(Resource.WaistHipMessage.Replace("_", "\n"), coef));
 
-            var result = await DisplayAlert(Resource.HelperString, sb.ToString(), Resource.OkString,Resource.CancelString);
-            if (result)
-            {
-                await Browser.OpenAsync(@"http://trainingday.tk/waist-hip?year=2020&Month=10", BrowserLaunchMode.SystemPreferred);
-            }
+            //var result = await DisplayAlert(Resource.HelperString, sb.ToString(), Resource.OkString,Resource.CancelString);
+            //if (result)
+            //{
+            //    await Browser.OpenAsync(@"http://trainingday.tk/waist-hip?year=2020&Month=10", BrowserLaunchMode.SystemPreferred);
+            //}
         }
     }
 }
