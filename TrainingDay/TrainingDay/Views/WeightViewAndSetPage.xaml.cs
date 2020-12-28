@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using OxyPlot;
+using Microcharts;
+using SkiaSharp;
 using TrainingDay.Resources;
 using TrainingDay.Services;
 using TrainingDay.ViewModels;
@@ -28,13 +30,15 @@ namespace TrainingDay.Views
             vm = new WeightViewAndSetPageViewModel();
             BindingContext  = vm;
         }
-
+        
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            vm?.LoadWeightPlot();
-            vm?.LoadWaistPlot();
-            vm?.LoadHipsPlot();
+            vm?.OnAppearing();
+
+            //vm?.LoadWeightPlot();
+            //vm?.LoadWaistPlot();
+            //vm?.LoadHipsPlot();
         }
 
         private bool _isVisibleWeightHistory;
@@ -57,11 +61,6 @@ namespace TrainingDay.Views
             {
                 await Browser.OpenAsync(@"http://trainingday.tk/waist-hip?year=2020&Month=10", BrowserLaunchMode.SystemPreferred);
             }
-        }
-
-        protected override bool OnBackButtonPressed()
-        {
-            return base.OnBackButtonPressed();
         }
     }
 }

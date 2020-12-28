@@ -5,6 +5,8 @@
              xmlns:services="clr-namespace:TrainingDay.Services"
              xmlns:controls="clr-namespace:TrainingDay.Controls;assembly=TrainingDay"
              xmlns:viewmodels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
              x:Class="TrainingDay.Views.WeightViewAndSetPage" Title="{services:Translate WeightControlString}" IconImageSource="weight.png">
     <ContentPage.ToolbarItems>
         <ToolbarItem Clicked="ShowInfo_Click" IconImageSource="info.png"/>
@@ -13,155 +15,58 @@
         <viewmodels:WeightViewAndSetPageViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <ScrollView>
-            <Grid x:Name="WeightGrid">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
+        <Grid x:Name="WeightGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="200"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{services:Translate ChousePeriodString}" HorizontalOptions="Start" VerticalTextAlignment="Center" FontSize="Default"/>
+                <controls:CustomPicker SelectedIndex="{Binding WeightChartPeriod}" Title="{services:Translate ChousePeriodString}" HorizontalOptions="FillAndExpand" x:Name="PeriodPicker" VerticalTextAlignment="Center" FontSize="Default">
+                    <Picker.Behaviors>
+                        <services:EventToCommandBehavior EventName="SelectedIndexChanged" Command="{Binding WeightPeriodChangedCommand}"/>
+                    </Picker.Behaviors>
+                </controls:CustomPicker>
+            </StackLayout>
 
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="200"/>
+            <CarouselView Grid.Row="2" IndicatorView="indicatorView" ItemsSource="{Binding BodyControlItems}" >
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10" >
+                            <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding Name}" FontSize="Medium"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="200"/>
-                </Grid.RowDefinitions>
-
-                <Grid Margin="10,0" Grid.Row="0" x:Name="PeriodPickerGrid" HorizontalOptions="FillAndExpand" >
-                    <controls:CustomPicker SelectedIndex="{Binding WeightChartPeriod}" Title="{services:Translate ChousePeriodString}" HorizontalOptions="FillAndExpand" x:Name="PeriodPicker">
-                        <Picker.Behaviors>
-                            <services:EventToCommandBehavior EventName="SelectedIndexChanged" Command="{Binding WeightPeriodChangedCommand}"/>
-                        </Picker.Behaviors>
-                    </controls:CustomPicker>
-                </Grid>
-
-                <Label Grid.Row="1" BackgroundColor="White" Margin="5,0" Text="{services:Translate WeightString}" TextColor="Orange" HorizontalTextAlignment="Center" FontSize="Medium" FontAttributes="Bold"/>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackLayout Orientation="Vertical" Padding="0,5">
-                        <Label Text="{services:Translate CurrentString}" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium"/>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <controls:EntryWithDot MaxLength="{Binding MaxLengthWeightField}" Text="{Binding CurrentWeightString,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" HorizontalTextAlignment="Center" x:Name="CurrentEntry" VerticalOptions="Center"/>
-                            <Label Text="{services:Translate KilogramsString}" VerticalTextAlignment="Center" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="End"/>
-                            <ImageButton Command="{Binding SaveCurrentWeightCommand}" Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" x:Name="SaveCurrentWeightImageButton" />
-                        </StackLayout>
-                    </StackLayout>
-
-                    <Grid Grid.Column="1" Margin="1" BackgroundColor="Gray" />
-
-                    <StackLayout Orientation="Vertical" Grid.Column="2" Padding="0,5">
-                        <Label Text="{services:Translate GoalString}"  VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium" />
-                        <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
-                            <controls:EntryWithDot MaxLength="{Binding MaxLengthWeightField}" Text="{Binding GoalWeightString,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" HorizontalTextAlignment="Center" x:Name="GoalEntry" VerticalOptions="Center"/>
-                            <Label Text="{services:Translate KilogramsString}" VerticalTextAlignment="Center" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center"/>
-                            <ImageButton Command="{Binding SaveGoalWeightCommand}" Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" x:Name="SaveGoalWeightImageButton" />
-                        </StackLayout>
-                    </StackLayout>
-                </Grid>
-                <plot:PlotView Model="{Binding PlotViewWeight}" Grid.Row="3" Margin="10" x:Name="PlotView" HeightRequest="200"/>
-
-
-                <Label Grid.Row="4" BackgroundColor="White" Margin="5,0" Text="{services:Translate WaistString}" TextColor="Orange" HorizontalTextAlignment="Center" FontSize="Medium" FontAttributes="Bold"/>
-                <Grid Grid.Row="5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackLayout Orientation="Vertical" Padding="0,5">
-                        <Label Text="{services:Translate CurrentString}" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium"/>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <controls:EntryWithDot MaxLength="3" Text="{Binding CurrentWaistString,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
-                            <!--<Label Text="{services:Translate KilogramsString}" VerticalTextAlignment="Center" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="End"/>-->
-                            <ImageButton Command="{Binding SaveCurrentWaistCommand}" Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" />
-                        </StackLayout>
-                    </StackLayout>
-
-                    <Grid Grid.Column="1" Margin="1" BackgroundColor="Gray" />
-
-                    <StackLayout Orientation="Vertical" Grid.Column="2" Padding="0,5">
-                        <Label Text="{services:Translate GoalString}"  VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium" />
-                        <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
-                            <controls:EntryWithDot MaxLength="3" Text="{Binding GoalWaistString,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
-                            <!--<Label Text="{services:Translate KilogramsString}" VerticalTextAlignment="Center" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center"/>-->
-                            <ImageButton Command="{Binding SaveGoalWaistCommand}" Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" />
-                        </StackLayout>
-                    </StackLayout>
-                </Grid>
-                <plot:PlotView Model="{Binding PlotViewWaist}" Grid.Row="6" Margin="10" HeightRequest="200"/>
-
-                <Label Grid.Row="7" BackgroundColor="White" Margin="5,0" Text="{services:Translate HipsString}" TextColor="Orange" HorizontalTextAlignment="Center" FontSize="Medium" FontAttributes="Bold"/>
-                <Grid Grid.Row="8">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackLayout Orientation="Vertical" Padding="0,5">
-                        <Label Text="{services:Translate CurrentString}" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium"/>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <controls:EntryWithDot MaxLength="3" Text="{Binding CurrentHipsString,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" HorizontalTextAlignment="Center"  VerticalOptions="Center"/>
-                            <!--<Label Text="{services:Translate KilogramsString}" VerticalTextAlignment="Center" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="End"/>-->
-                            <ImageButton Command="{Binding SaveCurrentHipsCommand}" Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" />
-                        </StackLayout>
-                    </StackLayout>
-
-                    <Grid Grid.Column="1" Margin="1" BackgroundColor="Gray" />
-
-                    <StackLayout Orientation="Vertical" Grid.Column="2" Padding="0,5">
-                        <Label Text="{services:Translate GoalString}"  VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium" />
-                        <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
-                            <controls:EntryWithDot MaxLength="3" Text="{Binding GoalHipsString,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
-                            <!--<Label Text="{services:Translate KilogramsString}" VerticalTextAlignment="Center" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center"/>-->
-                            <ImageButton Command="{Binding SaveGoalHipsCommand}" Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" />
-                        </StackLayout>
-                    </StackLayout>
-                </Grid>
-                <plot:PlotView Model="{Binding PlotViewHips}" Grid.Row="9" Margin="10" HeightRequest="200"/>
-            </Grid>
-
-
-
-            <!--<Grid x:Name="WeightItemsList" IsVisible="False" >
-                <CollectionView ItemsSource="{Binding WeightNotes}" BackgroundColor="{DynamicResource ContentPageBackgroundColor}" >
-                    <CollectionView.EmptyView>
-                        <Label HorizontalTextAlignment="Center" VerticalOptions="Center" Text="{services:Translate NoWeightHistory}" FontSize="Medium"/>
-                    </CollectionView.EmptyView>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame Style="{DynamicResource FrameCellStyle}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="30"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackLayout Orientation="Vertical">
-                                        <Label Text="{Binding Date}"/>
-                                        <Label Text="{Binding Weight}"/>
+                                <StackLayout Orientation="Vertical" Padding="0,5">
+                                    <Label Text="{services:Translate CurrentString}" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium"/>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                        <controls:EntryWithDot MaxLength="{Binding MaxLengthWeightField}" Text="{Binding CurrentValue,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" HorizontalTextAlignment="Center" x:Name="CurrentEntry" VerticalOptions="Center"/>
+                                        <ImageButton Command="{Binding SaveCurrentWeightCommand}" Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" x:Name="SaveCurrentWeightImageButton" />
                                     </StackLayout>
+                                </StackLayout>
 
-                                    <Image Grid.Row="0" Source="clear.png" Grid.Column="1">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={x:Reference WeightItemsList}, Path=BindingContext.DeleteWeightNoteCommand}" CommandParameter="{Binding }" />
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                </Grid>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </Grid>-->
-        </ScrollView>
+                                <Grid Grid.Column="1" Margin="1" BackgroundColor="Gray" />
+
+                                <StackLayout Orientation="Vertical" Grid.Column="2" Padding="0,5">
+                                    <Label Text="{services:Translate GoalString}"  VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium" />
+                                    <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+                                        <controls:EntryWithDot MaxLength="{Binding MaxLengthWeightField}" Text="{Binding GoalValue,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" HorizontalTextAlignment="Center" x:Name="GoalEntry" VerticalOptions="Center"/>
+                                        <ImageButton Command="{Binding SaveGoalWeightCommand}" Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" x:Name="SaveGoalWeightImageButton" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Grid>
+                            <forms:ChartView x:Name="chartView" BackgroundColor="Transparent" Chart="{Binding Chart}" VerticalOptions="FillAndExpand" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView Grid.Row="1" x:Name="indicatorView" IndicatorColor="LightGray" SelectedIndicatorColor="Green" HorizontalOptions="Center"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -37,10 +37,10 @@
                         </Setter>
                     </Style>
                     <Style TargetType="SearchBar" ApplyToDerivedTypes="True">
-                        <Setter Property="BackgroundColor" Value="#FFFFFF"/>
-                        <Setter Property="TextColor" Value="DimGray"/>
-                        <Setter Property="CancelButtonColor" Value="DimGray"/>
-                        <Setter Property="PlaceholderColor" Value="DimGray"/>
+                        <Setter Property="BackgroundColor" Value="Transparent"/>
+                        <Setter Property="TextColor" Value="White"/>
+                        <Setter Property="CancelButtonColor" Value="White"/>
+                        <Setter Property="PlaceholderColor" Value="LightGray"/>
                     </Style>
                     <Style TargetType="Label" ApplyToDerivedTypes="True">
                         <Setter Property="TextColor" Value="#FFFFFF"/>
@@ -100,7 +100,7 @@
                     </Style>
 
                     <Style TargetType="Picker" ApplyToDerivedTypes="True">
-                        <Setter Property="TitleColor" Value="#FFFFFF"/>
+                        <Setter Property="TitleColor" Value="Black"/>
                         <Setter Property="TextColor">
                             <Setter.Value>
                                 <OnPlatform x:TypeArguments="Color">
@@ -151,10 +151,10 @@
 
                 <ResourceDictionary x:Key="LightTheme">
                     <Style TargetType="SearchBar" ApplyToDerivedTypes="True">
-                        <Setter Property="BackgroundColor" Value="DimGray"/>
-                        <Setter Property="TextColor" Value="White"/>
-                        <Setter Property="CancelButtonColor" Value="White"/>
-                        <Setter Property="PlaceholderColor" Value="White"/>
+                        <Setter Property="BackgroundColor" Value="Transparent"/>
+                        <Setter Property="TextColor" Value="Black"/>
+                        <Setter Property="CancelButtonColor" Value="Black"/>
+                        <Setter Property="PlaceholderColor" Value="Gray"/>
                     </Style>
                     <Color x:Key="ListItemBackgroundColor">#44b9bdd2</Color>
                     <Color x:Key="PrimaryColor">#d0ddcf</Color>

@@ -16,7 +16,9 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar Placeholder="{services:Translate SearchByNameString}" TextChanged="SearchBar_OnTextChanged" x:Name="SearchBar" HeightRequest="46" Text="{Binding NameFilter}" />
+            <Frame Style="{StaticResource FrameCellStyle}" CornerRadius="15">
+                <SearchBar Placeholder="{services:Translate SearchByNameString}" TextChanged="SearchBar_OnTextChanged" x:Name="SearchBar" HeightRequest="46" Text="{Binding NameFilter}" />
+            </Frame>
 
             <StackLayout WidthRequest="100" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding State,Converter={StaticResource StateToVisibilityConverter},ConverterParameter={x:Static controls2:States.Loading}}">
                 <ActivityIndicator IsRunning="True" />

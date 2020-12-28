@@ -1,13 +1,12 @@
-﻿using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
+using Microcharts;
 using Microsoft.AppCenter.Crashes;
+using SkiaSharp;
 using TrainingDay.Resources;
 using TrainingDay.Services;
 using Xamarin.Forms;
@@ -65,298 +64,12 @@ namespace TrainingDay.ViewModels
             }
         }
 
+        public void OnAppearing()
+        {
+            PrepareBodyControlItems();
+        }
+
         public ICommand WeightPeriodChangedCommand { get; set; }
-        public void LoadWeightPlot()
-        {
-            try
-            {
-                PlotViewWeight = new PlotModel();
-
-                int countDaysPeriod = 0;
-                switch ((ChartWeightPeriod)WeightChartPeriod)
-                {
-                    case ChartWeightPeriod.Week:
-                        countDaysPeriod = 7;
-                        break;
-                    case ChartWeightPeriod.TwoWeeks:
-                        countDaysPeriod = (14);
-                        break;
-                    case ChartWeightPeriod.Mounth:
-                        countDaysPeriod = (31);
-                        break;
-                    case ChartWeightPeriod.TwoMounth:
-                        countDaysPeriod = (62);
-                        break;
-                    case ChartWeightPeriod.ThreeMounth:
-                        countDaysPeriod = (3 * 31);
-                        break;
-                    case ChartWeightPeriod.HalfYear:
-                        countDaysPeriod = (6 * 31);
-                        break;
-                    case ChartWeightPeriod.Year:
-                        countDaysPeriod = (365);
-                        break;
-                }
-                var startDate = DateTime.Now.AddDays(-countDaysPeriod);
-                var endDate = DateTime.Now;
-
-                var minValue = DateTimeAxis.ToDouble(startDate);
-                var maxValue = DateTimeAxis.ToDouble(endDate);
-
-                var weightItems = App.Database.GetWeightNotesItems();
-                WeightNotes = new ObservableCollection<WeightNote>(weightItems.Reverse());
-                var periodWeightItems = weightItems.Where(a => a.Date > startDate).Where(a => a.Type == (int)WeightType.Weight);
-                OnPropertyChanged(nameof(WeightNotes));
-                var chartItems = new List<WeightNote>( );
-                try
-                {
-                    var lastItem = weightItems.Last(item => item.Date < startDate);
-                    chartItems.Add(lastItem);
-                }
-                catch (Exception e)
-                {
-                }
-
-                chartItems.AddRange(periodWeightItems);
-
-                var lineSeries = new LineSeries
-                {
-                    LineStyle = LineStyle.Solid,
-                    StrokeThickness = 1,
-                    MarkerType = MarkerType.Circle,
-                    MarkerSize = 2,
-                    MarkerStroke = Settings.IsLightTheme? OxyColors.Black : OxyColors.White,
-                    CanTrackerInterpolatePoints = true,
-                    Color = OxyColors.Green,
-                    TrackerFormatString = "X={2},\nY={4}",
-                };
-
-                WeightNote[] weightNotes = chartItems.ToArray();
-                foreach (var periodWeightItem in weightNotes)
-                {
-                    lineSeries.Points.Add(new DataPoint(DateTimeAxis.ToDouble(periodWeightItem.Date), periodWeightItem.Weight));
-                }
-
-                PlotViewWeight.Axes.Add(new DateTimeAxis
-                {
-                    Position = AxisPosition.Bottom,
-                    Minimum = minValue,
-                    Maximum = maxValue,
-                    IntervalType = DateTimeIntervalType.Days,
-                    StringFormat = "dd/MM/yyyy",
-                    IsPanEnabled = false,
-                    IsZoomEnabled = false,
-                    AxislineStyle = LineStyle.Solid,
-                    AxislineColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    TicklineColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    TextColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                });
-
-                var max = weightNotes.Length == 0 ? 100 : weightNotes.Max(a => a.Weight) + 1;
-                var min = weightNotes.Length == 0 ? 0 : weightNotes.Min(a => a.Weight) - 1;
-                min = Math.Min(min, GoalWeight - 1);
-                max = Math.Max(max, GoalWeight + 1);
-
-
-                PlotViewWeight.Axes.Add(new LinearAxis
-                {
-                    Position = AxisPosition.Left,
-                    Maximum = max,
-                    Minimum = min,
-                    IsPanEnabled = false,
-                    IsZoomEnabled = false,
-                    AxislineStyle = LineStyle.Solid,
-                    AxislineColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    TicklineColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    TextColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White
-                });
-
-                PlotViewWeight.PlotAreaBorderColor = OxyColors.Transparent;
-                PlotViewWeight.Series.Add(lineSeries);
-                goalSeriesWeight = null;
-                FillWeightGoalLine(minValue, maxValue);
-
-                OnPropertyChanged(nameof(PlotViewWeight));
-            }
-            catch (Exception ex)
-            {
-                Crashes.TrackError(ex);
-                // ignored
-            }
-        }
-
-        private void FillWeightGoalLine(double startDate, double endDate)
-        {
-            try
-            {
-                if (goalSeriesWeight == null)
-                {
-                    goalSeriesWeight = new LineSeries()
-                    {
-                        Color = OxyColors.Orange
-                    };
-                }
-                goalSeriesWeight.Points.Clear();
-                goalSeriesWeight.Points.Add(new DataPoint(startDate, GoalWeight));
-                goalSeriesWeight.Points.Add(new DataPoint(endDate, GoalWeight));
-                if (PlotViewWeight.Series.Count == 1)
-                {
-                    PlotViewWeight.Series.Add(goalSeriesWeight);
-                }
-                OnPropertyChanged(nameof(PlotViewWeight));
-            }
-            catch (Exception ex)
-            {
-                LoadWeightPlot();
-                Crashes.TrackError(ex);
-            }
-        }
-
-
-        public void LoadWaistPlot()
-        {
-            try
-            {
-                PlotViewWaist = new PlotModel();
-
-                int countDaysPeriod = 0;
-                switch ((ChartWeightPeriod)WeightChartPeriod)
-                {
-                    case ChartWeightPeriod.Week:
-                        countDaysPeriod = 7;
-                        break;
-                    case ChartWeightPeriod.TwoWeeks:
-                        countDaysPeriod = (14);
-                        break;
-                    case ChartWeightPeriod.Mounth:
-                        countDaysPeriod = (31);
-                        break;
-                    case ChartWeightPeriod.TwoMounth:
-                        countDaysPeriod = (62);
-                        break;
-                    case ChartWeightPeriod.ThreeMounth:
-                        countDaysPeriod = (3 * 31);
-                        break;
-                    case ChartWeightPeriod.HalfYear:
-                        countDaysPeriod = (6 * 31);
-                        break;
-                    case ChartWeightPeriod.Year:
-                        countDaysPeriod = (365);
-                        break;
-                }
-                var startDate = DateTime.Now.AddDays(-countDaysPeriod);
-                var endDate = DateTime.Now;
-
-                var minValue = DateTimeAxis.ToDouble(startDate);
-                var maxValue = DateTimeAxis.ToDouble(endDate);
-
-                var weightItems = App.Database.GetWeightNotesItems();
-                WeightNotes = new ObservableCollection<WeightNote>(weightItems.Reverse());
-                var periodWeightItems = weightItems.Where(a => a.Date > startDate).Where(a => a.Type == (int)WeightType.Waist);
-                OnPropertyChanged(nameof(WeightNotes));
-                var chartItems = new List<WeightNote>();
-                try
-                {
-                    var lastItem = weightItems.Last(item => item.Date < startDate);
-                    chartItems.Add(lastItem);
-                }
-                catch (Exception e)
-                {
-                }
-
-                chartItems.AddRange(periodWeightItems);
-
-                var lineSeries = new LineSeries
-                {
-                    LineStyle = LineStyle.Solid,
-                    StrokeThickness = 1,
-                    MarkerType = MarkerType.Circle,
-                    MarkerSize = 2,
-                    MarkerStroke = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    CanTrackerInterpolatePoints = true,
-                    Color = OxyColors.Green,
-                    TrackerFormatString = "X={2},\nY={4}",
-                };
-
-                WeightNote[] weightNotes = chartItems.ToArray();
-                foreach (var periodWeightItem in weightNotes)
-                {
-                    lineSeries.Points.Add(new DataPoint(DateTimeAxis.ToDouble(periodWeightItem.Date), periodWeightItem.Weight));
-                }
-
-                PlotViewWaist.Axes.Add(new DateTimeAxis
-                {
-                    Position = AxisPosition.Bottom,
-                    Minimum = minValue,
-                    Maximum = maxValue,
-                    IntervalType = DateTimeIntervalType.Days,
-                    StringFormat = "dd/MM/yyyy",
-                    IsPanEnabled = false,
-                    IsZoomEnabled = false,
-                    AxislineStyle = LineStyle.Solid,
-                    AxislineColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    TicklineColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    TextColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White
-                });
-
-                var max = weightNotes.Length == 0 ? 100 : weightNotes.Max(a => a.Weight) + 1;
-                var min = weightNotes.Length == 0 ? 0 : weightNotes.Min(a => a.Weight) - 1;
-                min = Math.Min(min, GoalWaist - 1);
-                max = Math.Max(max, GoalWaist + 1);
-
-
-                PlotViewWaist.Axes.Add(new LinearAxis
-                {
-                    Position = AxisPosition.Left,
-                    Maximum = max,
-                    Minimum = min,
-                    IsPanEnabled = false,
-                    IsZoomEnabled = false,
-                    AxislineStyle = LineStyle.Solid,
-                    AxislineColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    TicklineColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    TextColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White
-                });
-
-                PlotViewWaist.PlotAreaBorderColor = OxyColors.Transparent;
-                PlotViewWaist.Series.Add(lineSeries);
-                goalWaistSeries = null;
-                FillWaistGoalLine(minValue, maxValue);
-
-                OnPropertyChanged(nameof(PlotViewWaist));
-            }
-            catch (Exception ex)
-            {
-                Crashes.TrackError(ex);// ignored
-            }
-        }
-
-        private void FillWaistGoalLine(double startDate, double endDate)
-        {
-            try
-            {
-                if (goalWaistSeries == null)
-                {
-                    goalWaistSeries = new LineSeries()
-                    {
-                        Color = OxyColors.Orange
-                    };
-                }
-                goalWaistSeries.Points.Clear();
-                goalWaistSeries.Points.Add(new DataPoint(startDate, GoalWaist));
-                goalWaistSeries.Points.Add(new DataPoint(endDate, GoalWaist));
-                if (PlotViewWaist.Series.Count == 1)
-                {
-                    PlotViewWaist.Series.Add(goalWaistSeries);
-                }
-                OnPropertyChanged(nameof(PlotViewWaist));
-            }
-            catch (Exception ex)
-            {
-                LoadWaistPlot();
-                Crashes.TrackError(ex);
-            }
-        }
 
         private int _weightChartPeriod = 0;
         public int WeightChartPeriod
@@ -368,7 +81,6 @@ namespace TrainingDay.ViewModels
                 OnPropertyChanged(nameof(WeightChartPeriod));
             }
         }
-
 
         public int MaxLengthWeightField { get; set; }
 
@@ -426,24 +138,10 @@ namespace TrainingDay.ViewModels
             }
         }
 
-        private PlotModel _plotModelWeight;
-        public PlotModel PlotViewWeight
-        {
-            get => _plotModelWeight;
-            set
-            {
-                _plotModelWeight = value;
-                OnPropertyChanged();
-            }
-        }
-
         public ICommand SaveGoalWeightCommand { get; set; }
-        private LineSeries goalSeriesWeight;
         private void SaveGoalWeight()
         {
             Settings.WeightGoal = GoalWeight;
-            FillWeightGoalLine(goalSeriesWeight.Points.First().X, goalSeriesWeight.Points.Last().X);
-            LoadWeightPlot();
             DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
         }
 
@@ -457,7 +155,6 @@ namespace TrainingDay.ViewModels
             };
             App.Database.SaveWeightNotesItem(note);
             DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
-            LoadWeightPlot();
 
             DependencyService.Get<IMessage>().CancelNotification(App.WeightNotificationId);
         }
@@ -511,24 +208,10 @@ namespace TrainingDay.ViewModels
             }
         }
 
-        private PlotModel _plotModelWaist;
-        public PlotModel PlotViewWaist
-        {
-            get => _plotModelWaist;
-            set
-            {
-                _plotModelWaist = value;
-                OnPropertyChanged();
-            }
-        }
-
         public ICommand SaveGoalWaistCommand => new Command(SaveGoalWaist);
-        private LineSeries goalWaistSeries;
         private void SaveGoalWaist()
         {
             Settings.WaistGoal = GoalWaist;
-            FillWaistGoalLine(goalWaistSeries.Points.First().X, goalWaistSeries.Points.Last().X);
-            LoadWaistPlot();
             DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
         }
 
@@ -543,8 +226,6 @@ namespace TrainingDay.ViewModels
             };
             App.Database.SaveWeightNotesItem(note);
             DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
-            LoadWaistPlot();
-
             DependencyService.Get<IMessage>().CancelNotification(App.WeightNotificationId);
         }
         #endregion
@@ -598,170 +279,11 @@ namespace TrainingDay.ViewModels
             }
         }
 
-        private PlotModel _plotModelHips;
-        public PlotModel PlotViewHips
-        {
-            get => _plotModelHips;
-            set
-            {
-                _plotModelHips = value;
-                OnPropertyChanged();
-            }
-        }
-
         public ICommand SaveGoalHipsCommand => new Command(SaveGoalHips);
-        private LineSeries goalHipsSeries;
         private void SaveGoalHips()
         {
             Settings.HipGoal = GoalHips;
-            FillHipsGoalLine(goalHipsSeries.Points.First().X, goalHipsSeries.Points.Last().X);
-            LoadHipsPlot();
             DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
-        }
-
-        private void FillHipsGoalLine(double startDate, double endDate)
-        {
-            try
-            {
-                if (goalHipsSeries == null)
-                {
-                    goalHipsSeries = new LineSeries()
-                    {
-                        Color = OxyColors.Orange
-                    };
-                }
-                goalHipsSeries.Points.Clear();
-                goalHipsSeries.Points.Add(new DataPoint(startDate, GoalHips));
-                goalHipsSeries.Points.Add(new DataPoint(endDate, GoalHips));
-                if (PlotViewHips.Series.Count == 1)
-                {
-                    PlotViewHips.Series.Add(goalHipsSeries);
-                }
-                OnPropertyChanged(nameof(PlotViewHips));
-            }
-            catch (Exception ex)
-            {
-                LoadHipsPlot();
-                Crashes.TrackError(ex);
-            }
-        }
-
-        public void LoadHipsPlot()
-        {
-            try
-            {
-                PlotViewHips = new PlotModel();
-
-                int countDaysPeriod = 0;
-                switch ((ChartWeightPeriod)WeightChartPeriod)
-                {
-                    case ChartWeightPeriod.Week:
-                        countDaysPeriod = 7;
-                        break;
-                    case ChartWeightPeriod.TwoWeeks:
-                        countDaysPeriod = (14);
-                        break;
-                    case ChartWeightPeriod.Mounth:
-                        countDaysPeriod = (31);
-                        break;
-                    case ChartWeightPeriod.TwoMounth:
-                        countDaysPeriod = (62);
-                        break;
-                    case ChartWeightPeriod.ThreeMounth:
-                        countDaysPeriod = (3 * 31);
-                        break;
-                    case ChartWeightPeriod.HalfYear:
-                        countDaysPeriod = (6 * 31);
-                        break;
-                    case ChartWeightPeriod.Year:
-                        countDaysPeriod = (365);
-                        break;
-                }
-                var startDate = DateTime.Now.AddDays(-countDaysPeriod);
-                var endDate = DateTime.Now;
-
-                var minValue = DateTimeAxis.ToDouble(startDate);
-                var maxValue = DateTimeAxis.ToDouble(endDate);
-
-                var weightItems = App.Database.GetWeightNotesItems();
-                WeightNotes = new ObservableCollection<WeightNote>(weightItems.Reverse());
-                var periodWeightItems = weightItems.Where(a => a.Date > startDate).Where(a => a.Type == (int)WeightType.Hip);
-                OnPropertyChanged(nameof(WeightNotes));
-                var chartItems = new List<WeightNote>();
-                try
-                {
-                    var lastItem = weightItems.Last(item => item.Date < startDate);
-                    chartItems.Add(lastItem);
-                }
-                catch (Exception e)
-                {
-                }
-
-                chartItems.AddRange(periodWeightItems);
-
-                var lineSeries = new LineSeries
-                {
-                    LineStyle = LineStyle.Solid,
-                    StrokeThickness = 1,
-                    MarkerType = MarkerType.Circle,
-                    MarkerSize = 2,
-                    MarkerStroke = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    CanTrackerInterpolatePoints = true,
-                    Color = OxyColors.Green,
-                    TrackerFormatString = "X={2},\nY={4}",
-                };
-
-                WeightNote[] weightNotes = chartItems.ToArray();
-                foreach (var periodWeightItem in weightNotes)
-                {
-                    lineSeries.Points.Add(new DataPoint(DateTimeAxis.ToDouble(periodWeightItem.Date), periodWeightItem.Weight));
-                }
-
-                PlotViewHips.Axes.Add(new DateTimeAxis
-                {
-                    Position = AxisPosition.Bottom,
-                    Minimum = minValue,
-                    Maximum = maxValue,
-                    IntervalType = DateTimeIntervalType.Days,
-                    StringFormat = "dd/MM/yyyy",
-                    IsPanEnabled = false,
-                    IsZoomEnabled = false,
-                    AxislineStyle = LineStyle.Solid,
-                    AxislineColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    TicklineColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    TextColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White
-                });
-
-                var max = weightNotes.Length == 0 ? 100 : weightNotes.Max(a => a.Weight) + 1;
-                var min = weightNotes.Length == 0 ? 0 : weightNotes.Min(a => a.Weight) - 1;
-                min = Math.Min(min, GoalHips - 1);
-                max = Math.Max(max, GoalHips + 1);
-
-                PlotViewHips.Axes.Add(new LinearAxis
-                {
-                    Position = AxisPosition.Left,
-                    Maximum = max,
-                    Minimum = min,
-                    IsPanEnabled = false,
-                    IsZoomEnabled = false,
-                    AxislineStyle = LineStyle.Solid,
-                    AxislineColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    TicklineColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White,
-                    TextColor = Settings.IsLightTheme ? OxyColors.Black : OxyColors.White
-                });
-
-                PlotViewHips.PlotAreaBorderColor = OxyColors.Transparent;
-                PlotViewHips.Series.Add(lineSeries);
-                goalHipsSeries = null;
-                FillHipsGoalLine(minValue, maxValue);
-
-                OnPropertyChanged(nameof(PlotViewHips));
-            }
-            catch (Exception ex)
-            {
-                // ignored
-                Crashes.TrackError(ex);
-            }
         }
 
         public ICommand SaveCurrentHipsCommand => new Command(SaveCurrentHips);
@@ -775,7 +297,6 @@ namespace TrainingDay.ViewModels
             };
             App.Database.SaveWeightNotesItem(note);
             DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
-            LoadHipsPlot();
 
             DependencyService.Get<IMessage>().CancelNotification(App.WeightNotificationId);
         }
@@ -789,7 +310,272 @@ namespace TrainingDay.ViewModels
             App.Database.DeleteWeightNote(sender.Id);
             WeightNotes.Remove(sender);
             DependencyService.Get<IMessage>().ShortAlert(Resource.DeletedString);
-            LoadWeightPlot();
+        }
+
+        #region New Logic
+
+        private static int GetDaysByPeriod(ChartWeightPeriod period)
+        {
+            int countDaysPeriod = 0;
+
+            switch (period)
+            {
+                case ChartWeightPeriod.Week:
+                    countDaysPeriod = 7;
+                    break;
+                case ChartWeightPeriod.TwoWeeks:
+                    countDaysPeriod = (14);
+                    break;
+                case ChartWeightPeriod.Mounth:
+                    countDaysPeriod = (31);
+                    break;
+                case ChartWeightPeriod.TwoMounth:
+                    countDaysPeriod = (62);
+                    break;
+                case ChartWeightPeriod.ThreeMounth:
+                    countDaysPeriod = (3 * 31);
+                    break;
+                case ChartWeightPeriod.HalfYear:
+                    countDaysPeriod = (6 * 31);
+                    break;
+                case ChartWeightPeriod.Year:
+                    countDaysPeriod = (365);
+                    break;
+            }
+
+            return countDaysPeriod;
+        }
+
+        private static List<WeightNote> PrepareChartData(IEnumerable<WeightNote> bodyControlItems, DateTime startDate, WeightType type)
+        {
+            var periodWeightItems = bodyControlItems.Where(a => a.Date > startDate).Where(a => a.Type == (int)type);
+            var chartItems = new List<WeightNote>();
+            try
+            {
+                var lastItem = bodyControlItems.Last(item => item.Date < startDate && item.Type == (int)type);
+                chartItems.Add(lastItem);
+            }
+            catch (Exception e) { }
+            chartItems.AddRange(periodWeightItems);
+
+            return chartItems;
+        }
+
+        public ObservableCollection<BodyControlItem> BodyControlItems { get; set; }= new ObservableCollection<BodyControlItem>();
+        private void PrepareBodyControlItems()
+        {
+            IsBusy = true;
+            BodyControlItems.Clear();
+            //var bodyControlItems = App.Database.GetWeightNotesItems();
+            List<WeightNote> bodyControlItems = GenerateData();
+
+            int countDaysPeriod = GetDaysByPeriod((ChartWeightPeriod)WeightChartPeriod);
+            var startDate = DateTime.Now.AddDays(-20);
+
+            var weightItems = PrepareChartData(bodyControlItems,startDate,WeightType.Weight);
+            if (weightItems.Any())
+            {
+                CurrentWeightValue = weightItems.Last().Weight;
+            }
+
+            var waistItems = PrepareChartData(bodyControlItems, startDate, WeightType.Waist);
+            if (waistItems.Any())
+            {
+                CurrentWaistValue = waistItems.Last().Weight;
+            }
+
+            var hipsItems = PrepareChartData(bodyControlItems, startDate, WeightType.Hip);
+            if (hipsItems.Any())
+            {
+                CurrentHipsValue = hipsItems.Last().Weight;
+            }
+
+            BodyControlItems.Add(new BodyControlItem()
+            {
+                Name = Resource.WeightString,
+                GoalValue = Settings.WeightGoal,
+                CurrentValue = CurrentWeightValue,
+                Chart = PrepareChart(Settings.WeightGoal, weightItems)
+            });
+
+
+            BodyControlItems.Add(new BodyControlItem()
+            {
+                Name = Resource.WaistString,
+                GoalValue = Settings.WaistGoal,
+                CurrentValue = CurrentWaistValue,
+                Chart = PrepareChart(Settings.WaistGoal, waistItems)
+            });
+
+
+            BodyControlItems.Add(new BodyControlItem()
+            {
+                Name = Resource.HipsString,
+                GoalValue = Settings.HipGoal,
+                CurrentValue = CurrentHipsValue,
+                Chart = PrepareChart(Settings.HipGoal, hipsItems)
+            });
+
+            IsBusy = false;
+        }
+
+        private List<WeightNote> GenerateData()
+        {
+            var bodyControlItems = new List<WeightNote>();
+            bodyControlItems.Add(new WeightNote()
+            {
+                Date = new DateTime(2020, 12, 20),
+                Weight = 86,
+                Type = (int)WeightType.Weight
+            });
+            bodyControlItems.Add(new WeightNote()
+            {
+                Date = new DateTime(2020, 12, 25),
+                Weight = 80,
+                Type = (int)WeightType.Weight
+            });
+
+            bodyControlItems.Add(new WeightNote()
+            {
+                Date = new DateTime(2020, 12, 10),
+                Weight = 81,
+                Type = (int)WeightType.Waist
+            });
+
+            bodyControlItems.Add(new WeightNote()
+            {
+                Date = new DateTime(2020, 12, 21),
+                Weight = 86,
+                Type = (int)WeightType.Waist
+            });
+            bodyControlItems.Add(new WeightNote()
+            {
+                Date = new DateTime(2020, 12, 01),
+                Weight = 86,
+                Type = (int)WeightType.Hip
+            });
+
+            bodyControlItems.Add(new WeightNote()
+            {
+                Date = new DateTime(2020, 12, 23),
+                Weight = 81,
+                Type = (int)WeightType.Hip
+            });
+
+            return bodyControlItems;
+        }
+
+        private LineChart PrepareChart(double goal, IEnumerable<WeightNote> items)
+        {
+            var start = items.First().Date;
+            var end = items.Last().Date;
+            var goalEntries = new List<ChartEntry>();
+            goalEntries.Add(new ChartEntry((float)goal)
+            {
+                ValueLabel = goal.ToString(),
+                Label = start.ToLongDateString(),
+                ValueLabelColor = SKColors.Gold,
+            });
+            goalEntries.Add(new ChartEntry((float)goal)
+            {
+                ValueLabel = goal.ToString(),
+                Label = end.ToLongDateString(),
+                ValueLabelColor = SKColors.Gold,
+            });
+
+
+            var entries = items.Select(item => new ChartEntry((float)item.Weight)
+            {
+                ValueLabel = item.Weight.ToString(),
+                Label = item.Date.ToLongDateString(),
+                ValueLabelColor = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
+            }).ToList();
+
+            var minValue = items.Select(item => item.Weight).Min() - 1;
+            return new LineChart
+            {
+                LabelOrientation = Orientation.Horizontal,
+                ValueLabelOrientation = Orientation.Horizontal,
+                LabelTextSize = 42,
+                ValueLabelTextSize = 42,
+                SerieLabelTextSize = 42,
+                LineMode = LineMode.Straight,
+                ShowYAxisLines = true,
+                ShowYAxisText = true,
+                MinValue = (float)minValue,
+                BackgroundColor = SKColors.Transparent,
+                YAxisPosition = Position.Left,
+                YAxisTextPaint = new SKPaint
+                {
+                    Color = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
+                    IsAntialias = true,
+                    Style = SKPaintStyle.StrokeAndFill,
+                },
+
+                YAxisLinesPaint = new SKPaint
+                {
+                Color = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
+                    IsAntialias = true,
+                Style = SKPaintStyle.Stroke
+            },
+            LabelColor = Settings.IsLightTheme?SKColors.Black : SKColors.White,
+                Series = new List<ChartSerie>()
+            {
+                new ChartSerie()
+                {
+                    Color = SKColors.Green,
+                    Entries = entries
+                },
+                //new ChartSerie()
+                //{
+                //    Color = SKColor.Parse("#77d065"),
+                //    Entries = goalEntries
+                //}
+            }};
+        }
+
+        #endregion
+    }
+
+    public class BodyControlItem: BaseViewModel
+    {
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private double _currentValue;
+        public double CurrentValue
+        {
+            get => _currentValue;
+            set
+            {
+                _currentValue = value;
+                OnPropertyChanged();
+            } }
+
+        private double goalValue;
+        public double GoalValue
+        {
+            get => goalValue;
+            set
+            {
+                goalValue = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public LineChart Chart { get; set; }
+
+        public BodyControlItem()
+        {
+            
         }
     }
 }
