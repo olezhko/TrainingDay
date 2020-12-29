@@ -262,7 +262,7 @@ namespace TrainingDay
 
                 var language = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
                 var zone = TimeZoneInfo.Local.BaseUtcOffset;
-                var res = await SiteService.SendTokenToServer(token, language.Name, zone,Settings.WeightNotifyFreq);
+                var res = await SiteService.SendTokenToServer(token, language.Name, zone, Settings.WeightNotifyFreq);
                 Settings.IsTokenSavedOnServer = res;
             }
             catch (Exception e)

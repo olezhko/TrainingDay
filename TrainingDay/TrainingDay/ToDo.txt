@@ -6,17 +6,6 @@ https://appetize.io/demo?device=iphone6s&scale=75&orientation=portrait&osVersion
 https://habr.com/company/microsoft/blog/316714/
 https://habr.com/company/microsoft/blog/347638/
 https://xamdev.ru/5-ways-to-boost-xamarin-forms/
-https://habr.com/post/418007/
-https://www.xamboy.com/2019/03/01/showing-tooltips-in-xamarin-forms/
-https://material.io/tools/icons/?icon=note_add&style=baseline
-https://github.com/google/material-design-icons/tree/master/action/drawable-anydpi-v21
 
-
+1. Auth
 https://devblogs.microsoft.com/xamarin/xamarin-essentials-now-with-permissions-app-theme-authentication/
-
-
-
-
-Ios remove
-1. sharing training
-2. alarms

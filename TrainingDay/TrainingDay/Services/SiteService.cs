@@ -15,6 +15,9 @@ namespace TrainingDay.Services
         public string Language { get; set; }
         public string Zone { get; set; }
         public int Frequency { get; set; }
+
+        public DateTime LastWorkout { get; set; }
+        public DateTime LastBodyControl { get; set; }
     }
 
     public class MobileAlarm
