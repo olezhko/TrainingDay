@@ -150,8 +150,7 @@ namespace TrainingDay.ViewModels
             IsBusy = true;
             double currentWeightValue = 0, currentWaistValue = 0, currentHipsValue = 0;
             BodyControlItems.Clear();
-            //var bodyControlItems = App.Database.GetWeightNotesItems();
-            List<WeightNote> bodyControlItems = GenerateData();
+            var bodyControlItems = App.Database.GetWeightNotesItems();
 
             int countDaysPeriod = GetDaysByPeriod((ChartWeightPeriod)WeightChartPeriod);
             var startDate = DateTime.Now.AddDays(-countDaysPeriod);
@@ -201,54 +200,12 @@ namespace TrainingDay.ViewModels
             IsBusy = false;
         }
 
-        private List<WeightNote> GenerateData()
-        {
-            var bodyControlItems = new List<WeightNote>();
-            bodyControlItems.Add(new WeightNote()
-            {
-                Date = new DateTime(2020, 12, 20),
-                Weight = 86,
-                Type = (int)WeightType.Weight
-            });
-            bodyControlItems.Add(new WeightNote()
-            {
-                Date = new DateTime(2020, 12, 25),
-                Weight = 80,
-                Type = (int)WeightType.Weight
-            });
-
-            bodyControlItems.Add(new WeightNote()
-            {
-                Date = new DateTime(2020, 12, 10),
-                Weight = 81,
-                Type = (int)WeightType.Waist
-            });
-
-            bodyControlItems.Add(new WeightNote()
-            {
-                Date = new DateTime(2020, 12, 21),
-                Weight = 86,
-                Type = (int)WeightType.Waist
-            });
-            bodyControlItems.Add(new WeightNote()
-            {
-                Date = new DateTime(2020, 12, 01),
-                Weight = 86,
-                Type = (int)WeightType.Hip
-            });
-
-            bodyControlItems.Add(new WeightNote()
-            {
-                Date = new DateTime(2020, 12, 23),
-                Weight = 81,
-                Type = (int)WeightType.Hip
-            });
-
-            return bodyControlItems;
-        }
-
         private LineChart PrepareChart(double goal, IEnumerable<WeightNote> items)
         {
+            if (!items.Any())
+            {
+                return null;
+            }
             var start = items.First().Date;
             var end = items.Last().Date;
             var goalEntries = new List<ChartEntry>();
@@ -264,7 +221,6 @@ namespace TrainingDay.ViewModels
                 Label = end.ToLongDateString(),
                 ValueLabelColor = SKColors.Gold,
             });
-
 
             var entries = items.Select(item => new ChartEntry((float)item.Weight)
             {

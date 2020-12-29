@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using TrainingDay.Resources;
 using TrainingDay.ViewModels;
@@ -43,15 +44,18 @@ namespace TrainingDay.Views
 
         private async void ShowInfo_Click(object sender, EventArgs e)
         {
-            //var coef = vm.CurrentWaistValue / vm.CurrentHipsValue;
-            //StringBuilder sb = new StringBuilder();
-            //sb.Append(string.Format(Resource.WaistHipMessage.Replace("_", "\n"), coef));
+            var waist = vm.BodyControlItems.First(item => item.Type == WeightType.Waist).CurrentValue;
+            var hips = vm.BodyControlItems.First(item => item.Type == WeightType.Hip).CurrentValue;
 
-            //var result = await DisplayAlert(Resource.HelperString, sb.ToString(), Resource.OkString,Resource.CancelString);
-            //if (result)
-            //{
-            //    await Browser.OpenAsync(@"http://trainingday.tk/waist-hip?year=2020&Month=10", BrowserLaunchMode.SystemPreferred);
-            //}
+            var coef = waist / hips;
+            StringBuilder sb = new StringBuilder();
+            sb.Append(string.Format(Resource.WaistHipMessage.Replace("_", "\n"), coef));
+
+            var result = await DisplayAlert(Resource.HelperString, sb.ToString(), Resource.OkString, Resource.CancelString);
+            if (result)
+            {
+                await Browser.OpenAsync(@"http://trainingday.tk/waist-hip?year=2020&Month=10", BrowserLaunchMode.SystemPreferred);
+            }
         }
     }
 }
