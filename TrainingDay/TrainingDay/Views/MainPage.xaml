@@ -95,7 +95,14 @@
                 </Label>
             </StackLayout>
 
-            <controls:AdMobView AdUnitId="ca-app-pub-8728883017081055/2677919170" VerticalOptions="End" BackgroundColor="Transparent" Grid.Row="6"/>
+            <controls:AdMobView VerticalOptions="End" BackgroundColor="Transparent" Grid.Row="6">
+                <controls:AdMobView.AdUnitId>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="ca-app-pub-8728883017081055/7119310061" />
+                        <On Platform="Android" Value="ca-app-pub-8728883017081055/2677919170" />
+                    </OnPlatform>
+                </controls:AdMobView.AdUnitId>
+            </controls:AdMobView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

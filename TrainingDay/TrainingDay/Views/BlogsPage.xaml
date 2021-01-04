@@ -30,7 +30,14 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
-            <controls:AdMobView AdUnitId="ca-app-pub-8728883017081055/2677919170" VerticalOptions="End" BackgroundColor="Transparent" />
+            <controls:AdMobView VerticalOptions="End" BackgroundColor="Transparent">
+                <controls:AdMobView.AdUnitId>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="ca-app-pub-8728883017081055/7119310061" />
+                        <On Platform="Android" Value="ca-app-pub-8728883017081055/2677919170" />
+                    </OnPlatform>
+                </controls:AdMobView.AdUnitId>
+            </controls:AdMobView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

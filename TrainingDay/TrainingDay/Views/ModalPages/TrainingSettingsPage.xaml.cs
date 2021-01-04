@@ -27,34 +27,39 @@ namespace TrainingDay.Views.ModalPages
         }
 
         public event EventHandler<TrainingSettingsActions> ActionSelected;
-        private void AddAlarmCommand_Clicked(object sender, EventArgs e)
+        private async void AddAlarmCommand_Clicked(object sender, EventArgs e)
         {
             ActionSelected?.BeginInvoke(this, TrainingSettingsActions.AddAlarm, null, null);
-            Navigation.PopModalAsync(false);
+            await Navigation.PopModalAsync(Device.RuntimePlatform == Device.Android);
         }
 
-        private void ShareTrainingCommand_Clicked(object sender, EventArgs e)
+        private async void ShareTrainingCommand_Clicked(object sender, EventArgs e)
         {
             ActionSelected?.BeginInvoke(this, TrainingSettingsActions.ShareTraining, null, null);
-            Navigation.PopModalAsync(false);
+            await Navigation.PopModalAsync(Device.RuntimePlatform == Device.Android);
         }
 
-        private void SetSuperSetCommand_Clicked(object sender, EventArgs e)
+        private async void SetSuperSetCommand_Clicked(object sender, EventArgs e)
         {
             ActionSelected?.BeginInvoke(this, TrainingSettingsActions.SuperSetAction, null, null);
-            Navigation.PopModalAsync(false);
+            await Navigation.PopModalAsync(Device.RuntimePlatform == Device.Android);
         }
 
-        private void StartMoveExerciseCommand_Clicked(object sender, EventArgs e)
+        private async void StartMoveExerciseCommand_Clicked(object sender, EventArgs e)
         {
             ActionSelected?.BeginInvoke(this, TrainingSettingsActions.MoveExercises, null, null);
-            Navigation.PopModalAsync(false);
+            await Navigation.PopModalAsync(Device.RuntimePlatform == Device.Android);
         }
 
-        private void StartCopyExerciseCommand_Clicked(object sender, EventArgs e)
+        private async void StartCopyExerciseCommand_Clicked(object sender, EventArgs e)
         {
             ActionSelected?.BeginInvoke(this, TrainingSettingsActions.CopyExercises, null, null);
-            Navigation.PopModalAsync(false);
+            await Navigation.PopModalAsync(Device.RuntimePlatform == Device.Android);
+        }
+
+        private async void ClosePage_Click(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync(Device.RuntimePlatform == Device.Android);
         }
     }
 }

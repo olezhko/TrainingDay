@@ -78,7 +78,14 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <controls2:AdMobView VerticalOptions="End" BackgroundColor="Transparent" x:Name="AdMobView"/>
+                    <controls2:AdMobView VerticalOptions="End" BackgroundColor="Transparent" x:Name="AdMobView">
+                        <controls2:AdMobView.AdUnitId>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="iOS" Value="ca-app-pub-8728883017081055/7119310061" />
+                                <On Platform="Android" Value="ca-app-pub-8728883017081055/2677919170" />
+                            </OnPlatform>
+                        </controls2:AdMobView.AdUnitId>
+                    </controls2:AdMobView>
                 </StackLayout>
                 <Image Source="add.png" Margin="0,0,20,20" HorizontalOptions="End" VerticalOptions="End" HeightRequest="80" WidthRequest="80" >
                     <Image.GestureRecognizers>

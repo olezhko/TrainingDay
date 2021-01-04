@@ -12,12 +12,13 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="add.png" Command="{Binding AddExercisesCommand}" Order="Primary" />
         <ToolbarItem IconImageSource="accept.png" Command="{Binding SaveChangesCommand}" Order="Primary" />
+        <ToolbarItem IconImageSource="settings.png" Command="{Binding ShowTrainingSettingsPageCommand}" Order="Primary" />
 
-        <ToolbarItem Text="{services:Translate Notification}" Command="{Binding MakeNotifyCommand}" Order="Secondary" x:Name="AddAlarmToolbarItem" />
+        <!--<ToolbarItem Text="{services:Translate Notification}" Command="{Binding MakeNotifyCommand}" Order="Secondary" x:Name="AddAlarmToolbarItem" />
         <ToolbarItem Text="{services:Translate ShareTrainingString}" Command="{Binding ShareTrainingCommand}" Order="Secondary"/>
         <ToolbarItem Text="{services:Translate SuperSetString}" Command="{Binding SetSuperSetCommand}" Order="Secondary" />
         <ToolbarItem Text="{services:Translate MoveString}" Command="{Binding StartMoveExerciseCommand}" Order="Secondary" />
-        <ToolbarItem Text="{services:Translate CopyString}" Command="{Binding StartCopyExerciseCommand}" Order="Secondary" />
+        <ToolbarItem Text="{services:Translate CopyString}" Command="{Binding StartCopyExerciseCommand}" Order="Secondary" />-->
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
@@ -163,7 +164,14 @@
                 <Button Text="{Binding ExerciseActionString}" Command="{Binding StartActionCommand}"/>
             </StackLayout>
 
-            <controls2:AdMobView BackgroundColor="Transparent" VerticalOptions="Start" Grid.Row="4" x:Name="MobView"/>
+            <controls2:AdMobView BackgroundColor="Transparent" VerticalOptions="Start" Grid.Row="4">
+                <controls2:AdMobView.AdUnitId>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="ca-app-pub-8728883017081055/7119310061"/>
+                        <On Platform="Android" Value="ca-app-pub-8728883017081055/3839299823" />
+                    </OnPlatform>
+                </controls2:AdMobView.AdUnitId>
+            </controls2:AdMobView>
 
             <StackLayout IsVisible="{Binding IsMoveOrCopyAction}" Grid.Row="0" Grid.RowSpan="4" BackgroundColor="{DynamicResource ContentPageBackgroundColor}">
                 <Label Text="{services:Translate ChooseTrainingOrNewString}" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Start" FontSize="Medium"/>

@@ -27,11 +27,6 @@ namespace TrainingDay.View
         {
             InitializeComponent();
             Items = new ObservableCollection<SuperSetViewModel>();
-            if (Device.RuntimePlatform == Device.iOS)
-                PromoView.AdUnitId = "ca-app-pub-8728883017081055/9745473409";
-            else if (Device.RuntimePlatform == Device.Android)
-                PromoView.AdUnitId = "ca-app-pub-8728883017081055/4843502807";
-
             BindingContext = this;
             _startTrainingDateTime = DateTime.Now;
             _enabledTimer = true;

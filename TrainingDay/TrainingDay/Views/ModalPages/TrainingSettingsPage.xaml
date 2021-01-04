@@ -4,12 +4,22 @@
              xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
              x:Class="TrainingDay.Views.ModalPages.TrainingSettingsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Button Text="{services:Translate Notification}" x:Name="AddAlarmToolbarItem" Clicked="AddAlarmCommand_Clicked"/>
-            <Button Text="{services:Translate ShareTrainingString}" Clicked="ShareTrainingCommand_Clicked" />
-            <Button Text="{services:Translate SuperSetString}" Clicked="SetSuperSetCommand_Clicked" />
-            <Button Text="{services:Translate MoveString}" Clicked="StartMoveExerciseCommand_Clicked" />
-            <Button Text="{services:Translate CopyString}" Clicked="StartCopyExerciseCommand_Clicked"/>
-        </StackLayout>
+        <Grid VerticalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <ImageButton Source="clear.png" WidthRequest="60" HeightRequest="60" HorizontalOptions="End" Clicked="ClosePage_Click" BackgroundColor="Transparent"/>
+            <Button Grid.Row="1" Text="{services:Translate Notification}" x:Name="AddAlarmToolbarItem" Clicked="AddAlarmCommand_Clicked" x:FieldModifier="public"/>
+            <Button Grid.Row="2" Text="{services:Translate ShareTrainingString}" Clicked="ShareTrainingCommand_Clicked" />
+            <Button Grid.Row="3" Text="{services:Translate SuperSetString}" Clicked="SetSuperSetCommand_Clicked" />
+            <Button Grid.Row="4" Text="{services:Translate MoveString}" Clicked="StartMoveExerciseCommand_Clicked" />
+            <Button Grid.Row="5" Text="{services:Translate CopyString}" Clicked="StartCopyExerciseCommand_Clicked"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

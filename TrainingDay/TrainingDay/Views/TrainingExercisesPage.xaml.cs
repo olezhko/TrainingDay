@@ -28,16 +28,14 @@ namespace TrainingDay.View
                 vm.StartSelectExercises();
                 DisplayAlert(Resource.AdviceString, Resource.HelpDeleteUnusefulExercises, "OK");
             }
-            else
-            {
-                vm.Training.Exercises.Clear();
-                TrainingItemsBasePageViewModel.PrepareTrainingViewModel(vm.Training);
-                vm.Load(vm.Training);
-            }
+            //else
+            //{
+            //    vm.Training.Exercises.Clear();
+            //    TrainingItemsBasePageViewModel.PrepareTrainingViewModel(vm.Training);
+            //    vm.Load(vm.Training);
+            //}
             
             ItemsListView.SelectedItem = null;
-
-            MobView.AdUnitId = Device.RuntimePlatform == Device.Android ? "ca-app-pub-8728883017081055/3839299823" : "ca-app-pub-8728883017081055/7119310061";
         }
 
         protected override void OnBindingContextChanged()
@@ -46,16 +44,16 @@ namespace TrainingDay.View
             var vm = BindingContext as TrainingExercisesPageViewModel;
             if (vm.Training == null || vm.Training.Id == 0)
             {
-                ToolbarItems.Remove(AddAlarmToolbarItem);
+                //ToolbarItems.Remove(AddAlarmToolbarItem);
                 MakeTrainingButton.IsVisible = false;
             }
             else
             {
                 MakeTrainingButton.IsVisible = true;
-                if (Device.RuntimePlatform ==Device.iOS)
-                {
-                    ToolbarItems.Remove(AddAlarmToolbarItem);
-                }
+                //if (Device.RuntimePlatform ==Device.iOS)
+                //{
+                //    ToolbarItems.Remove(AddAlarmToolbarItem);
+                //}
             }
         }
     }

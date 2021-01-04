@@ -85,7 +85,14 @@
                 </ListView.Behaviors>
             </ListView>
 
-            <controls1:AdMobView VerticalOptions="End" BackgroundColor="Transparent" Grid.Row="2" x:Name="AdMobView"/>
+            <controls1:AdMobView VerticalOptions="End" BackgroundColor="Transparent" Grid.Row="2" x:Name="AdMobView">
+                <controls1:AdMobView.AdUnitId>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="ca-app-pub-8728883017081055/4777741279" />
+                        <On Platform="Android" Value="ca-app-pub-8728883017081055/2677919170" />
+                    </OnPlatform>
+                </controls1:AdMobView.AdUnitId>
+            </controls1:AdMobView>
 
             <Image Source="add.png" HorizontalOptions="Center" VerticalOptions="End" HeightRequest="60" WidthRequest="60" x:Name="AddImage" Grid.Row="1">
                 <Image.GestureRecognizers>

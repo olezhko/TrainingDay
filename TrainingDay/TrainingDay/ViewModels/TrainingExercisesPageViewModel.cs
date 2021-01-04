@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ using TrainingDay.Services;
 using TrainingDay.View;
 using TrainingDay.Views;
 using TrainingDay.Views.Controls;
+using TrainingDay.Views.ModalPages;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -555,6 +557,37 @@ namespace TrainingDay.ViewModels
             CurrentAction = ExerciseCheckBoxAction.Select;
             OnPropertyChanged(nameof(CurrentAction));
             PrepareAction(Resource.ChouseExerciseString);
+        }
+
+        public ICommand ShowTrainingSettingsPageCommand => new Command(ShowTrainingSettingsPage);
+        private async void ShowTrainingSettingsPage()
+        {
+            var page = new TrainingSettingsPage();
+            page.AddAlarmToolbarItem.IsEnabled = !(Training == null || Training.Id == 0 || Device.RuntimePlatform == Device.iOS);
+            page.ActionSelected += Page_ActionSelected;
+            await Navigation.PushModalAsync(page);
+        }
+
+        private void Page_ActionSelected(object sender, TrainingSettingsPage.TrainingSettingsActions e)
+        {
+            switch (e)
+            {
+                case TrainingSettingsPage.TrainingSettingsActions.AddAlarm:
+                    MakeNotify();
+                    break;
+                case TrainingSettingsPage.TrainingSettingsActions.ShareTraining:
+                    ShareTraining();
+                    break;
+                case TrainingSettingsPage.TrainingSettingsActions.SuperSetAction:
+                    InitSuperSetMode();
+                    break;
+                case TrainingSettingsPage.TrainingSettingsActions.MoveExercises:
+                    StartMoveExercises();
+                    break;
+                case TrainingSettingsPage.TrainingSettingsActions.CopyExercises:
+                    StartCopyExercise();
+                    break;
+            }
         }
     }
 
