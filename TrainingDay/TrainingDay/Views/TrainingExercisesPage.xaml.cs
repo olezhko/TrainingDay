@@ -20,14 +20,24 @@ namespace TrainingDay.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            var vm = BindingContext as TrainingExercisesPageViewModel;
+
             if (IsShowDeleteUnusefulExercisesHelp && !_isShown)
             {
                 _isShown = true;
-                var vm = BindingContext as TrainingExercisesPageViewModel;
                 vm.StartSelectExercises();
                 DisplayAlert(Resource.AdviceString, Resource.HelpDeleteUnusefulExercises, "OK");
             }
+            else
+            {
+                vm.Training.Exercises.Clear();
+                TrainingItemsBasePageViewModel.PrepareTrainingViewModel(vm.Training);
+                vm.Load(vm.Training);
+            }
+            
             ItemsListView.SelectedItem = null;
+
+            MobView.AdUnitId = Device.RuntimePlatform == Device.Android ? "ca-app-pub-8728883017081055/3839299823" : "ca-app-pub-8728883017081055/7119310061";
         }
 
         protected override void OnBindingContextChanged()

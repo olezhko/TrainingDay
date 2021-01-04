@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             x:Class="TrainingDay.Views.ModalPages.TrainingSettingsPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="{services:Translate Notification}" x:Name="AddAlarmToolbarItem" Clicked="AddAlarmCommand_Clicked"/>
+            <Button Text="{services:Translate ShareTrainingString}" Clicked="ShareTrainingCommand_Clicked" />
+            <Button Text="{services:Translate SuperSetString}" Clicked="SetSuperSetCommand_Clicked" />
+            <Button Text="{services:Translate MoveString}" Clicked="StartMoveExerciseCommand_Clicked" />
+            <Button Text="{services:Translate CopyString}" Clicked="StartCopyExerciseCommand_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

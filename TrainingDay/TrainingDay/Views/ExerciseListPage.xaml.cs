@@ -32,6 +32,8 @@ namespace TrainingDay.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            AdMobView.AdUnitId =
+                Device.RuntimePlatform == Device.Android ? "ca-app-pub-8728883017081055/2677919170" : "ca-app-pub-8728883017081055/7119310061";
             _viewModel.UpdateItems();
         }
 

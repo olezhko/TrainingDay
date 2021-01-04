@@ -862,7 +862,7 @@ namespace TrainingDay.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notification.
+        ///   Looks up a localized string similar to Create notification.
         /// </summary>
         internal static string Notification {
             get {
@@ -1092,15 +1092,6 @@ namespace TrainingDay.Resources {
         internal static string SharedString {
             get {
                 return ResourceManager.GetString("SharedString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Share.
-        /// </summary>
-        internal static string ShareString {
-            get {
-                return ResourceManager.GetString("ShareString", resourceCulture);
             }
         }
         

@@ -31,6 +31,7 @@ namespace TrainingDay.Views
             vm = BindingContext as TrainingItemsBasePageViewModel;
             vm.LoadItems();
             IsStartNotFinishedTraining();
+            AdMobView.AdUnitId = Device.RuntimePlatform == Device.Android?"ca-app-pub-8728883017081055/2677919170": "ca-app-pub-8728883017081055/4777741279";
         }
         
         private void IsStartNotFinishedTraining()

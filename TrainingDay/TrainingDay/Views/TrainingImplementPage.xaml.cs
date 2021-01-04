@@ -28,7 +28,7 @@ namespace TrainingDay.View
             InitializeComponent();
             Items = new ObservableCollection<SuperSetViewModel>();
             if (Device.RuntimePlatform == Device.iOS)
-                PromoView.AdUnitId = "iOS Key";
+                PromoView.AdUnitId = "ca-app-pub-8728883017081055/9745473409";
             else if (Device.RuntimePlatform == Device.Android)
                 PromoView.AdUnitId = "ca-app-pub-8728883017081055/4843502807";
 
@@ -162,18 +162,17 @@ namespace TrainingDay.View
                     Settings.IsTrainingNotFinished = false;
                     SaveLastTraining();
                     SaveChangedExercises();
-                    //SaveRemoved();
-
-                    // если добавить упражненияво время выполнения , потом по завершению не вернуться в главную страницу,
-                    // то при добавлении упражнении в след раз во время выполенияв тренировку добавляется по две
-                    //Application.Current.MainPage = new NavigationPage(new MainPage());
 
                     DependencyService.Get<IMessage>().ShowMessage(Resource.AdviceAfterTrainingMessage, Resource.AdviceString);
                     DependencyService.Get<IMessage>().ShortAlert(Resource.TrainingFinishedString);
 
-                    DependencyService.Get<IAdInterstitial>().ShowAd("ca-app-pub-8728883017081055/7837401616");
+                    DependencyService.Get<IAdInterstitial>().ShowAd(Device.RuntimePlatform == Device.Android
+                        ? "ca-app-pub-8728883017081055/7837401616"
+                        : "ca-app-pub-8728883017081055/1550276858");
+
                     DependencyService.Get<IMessage>().CancelNotification(App.TrainingNotificationId);
 
+                    await SiteService.SendFinishedWorkout(Settings.Token);
                     await Navigation.PopAsync();
                 }
                 else

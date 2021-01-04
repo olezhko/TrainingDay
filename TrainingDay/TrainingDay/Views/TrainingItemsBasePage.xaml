@@ -68,11 +68,11 @@
                             <ViewCell.ContextActions>
                                 <MenuItem IsDestructive="true" IconImageSource="remove.png" Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.DeleteSelectedTrainingsCommand}" 
                                                   CommandParameter="{Binding Source={x:Reference viewCell}}" Text="Remove"/>
-
+                                <MenuItem IsDestructive="true" Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.AddToGroupCommand}" 
+                                          CommandParameter="{Binding Source={x:Reference viewCell}}" IconImageSource="union_add.png" Text="Group"/>
                                 <MenuItem IsDestructive="true" Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.DeleteFromGroupCommand}" 
                                                   CommandParameter="{Binding Source={x:Reference viewCell}}" IconImageSource="union_del.png" Text="Ungroup"/>
-                                <MenuItem IsDestructive="true" Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.AddToGroupCommand}" 
-                                                  CommandParameter="{Binding Source={x:Reference viewCell}}" IconImageSource="union_add.png" Text="Group"/>
+
                             </ViewCell.ContextActions>
                             <Frame Style="{StaticResource FrameCellStyle}" Padding="20">
                                 <Label Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold" VerticalOptions="Center"/>
@@ -85,7 +85,7 @@
                 </ListView.Behaviors>
             </ListView>
 
-            <controls1:AdMobView AdUnitId="ca-app-pub-8728883017081055/2677919170" VerticalOptions="End" BackgroundColor="Transparent" Grid.Row="2" />
+            <controls1:AdMobView VerticalOptions="End" BackgroundColor="Transparent" Grid.Row="2" x:Name="AdMobView"/>
 
             <Image Source="add.png" HorizontalOptions="Center" VerticalOptions="End" HeightRequest="60" WidthRequest="60" x:Name="AddImage" Grid.Row="1">
                 <Image.GestureRecognizers>

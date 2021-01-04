@@ -78,7 +78,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <controls2:AdMobView AdUnitId="ca-app-pub-8728883017081055/2677919170" VerticalOptions="End" BackgroundColor="Transparent" />
+                    <controls2:AdMobView VerticalOptions="End" BackgroundColor="Transparent" x:Name="AdMobView"/>
                 </StackLayout>
                 <Image Source="add.png" Margin="0,0,20,20" HorizontalOptions="End" VerticalOptions="End" HeightRequest="80" WidthRequest="80" >
                     <Image.GestureRecognizers>

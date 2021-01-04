@@ -286,7 +286,7 @@
     <value>Minutes</value>
   </data>
   <data name="Notification" xml:space="preserve">
-    <value>Notification</value>
+    <value>Create notification</value>
   </data>
   <data name="OnTheseDays" xml:space="preserve">
     <value>On These Days</value>
@@ -422,9 +422,6 @@
   </data>
   <data name="ReturnToTrainingMessage" xml:space="preserve">
     <value>You have not implemented a workout for a long time. Maybe today is that day?</value>
-  </data>
-  <data name="ShareString" xml:space="preserve">
-    <value>Share</value>
   </data>
   <data name="DeleteExerciseFromSuperSetQuestion" xml:space="preserve">
     <value>Delete exercise from superset?</value>

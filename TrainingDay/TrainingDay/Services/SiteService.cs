@@ -15,9 +15,6 @@ namespace TrainingDay.Services
         public string Language { get; set; }
         public string Zone { get; set; }
         public int Frequency { get; set; }
-
-        public DateTime LastWorkout { get; set; }
-        public DateTime LastBodyControl { get; set; }
     }
 
     public class MobileAlarm
@@ -79,6 +76,63 @@ namespace TrainingDay.Services
             }
         }
 
+        private static string _sendFinishedWorkoutUrl = domain + @"/MobileTokens/workout";
+        public static async Task<bool> SendFinishedWorkout(string tokenString)
+        {
+            try
+            {
+                var client = new RestClient(_sendFinishedWorkoutUrl);
+                client.Timeout = -1;
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Cookie", ".AspNetCore.Antiforgery.F1R49Bn-sHQ=CfDJ8DSuB5KQHH1HjhVjYb_UYNkYnk6PjUp68qgFq-vApTTa3RgeXB8Harisq5G6j8Vkg6qU734I-rQc_UzJBGUzGqj4LHrD22C_xEO4y-103zt7fOxt933aKV0B4TjmCyornURtfXjI-FjElAJo_qrtN_c");
+                request.AddParameter("application/json", JsonConvert.SerializeObject(tokenString), ParameterType.RequestBody);
+                try
+                {
+                    var result = await client.ExecuteAsync(request);
+                    Debug.WriteLine($"Result Status Code: {result.StatusCode} - {result.Content}");
+                }
+                catch (Exception e)
+                {
+                    Crashes.TrackError(e);
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Crashes.TrackError(e);
+                return false;
+            }
+        }
+
+        private static string _sendBodyControlUrl = domain + @"/MobileTokens/bodycontrol";
+        public static async Task<bool> SendBodyControl(string tokenString)
+        {
+            try
+            {
+                var client = new RestClient(_sendBodyControlUrl);
+                client.Timeout = -1;
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Cookie", ".AspNetCore.Antiforgery.F1R49Bn-sHQ=CfDJ8DSuB5KQHH1HjhVjYb_UYNkYnk6PjUp68qgFq-vApTTa3RgeXB8Harisq5G6j8Vkg6qU734I-rQc_UzJBGUzGqj4LHrD22C_xEO4y-103zt7fOxt933aKV0B4TjmCyornURtfXjI-FjElAJo_qrtN_c");
+                request.AddParameter("application/json", JsonConvert.SerializeObject(tokenString), ParameterType.RequestBody);
+                try
+                {
+                    var result = await client.ExecuteAsync(request);
+                    Debug.WriteLine($"Result Status Code: {result.StatusCode} - {result.Content}");
+                }
+                catch (Exception e)
+                {
+                    Crashes.TrackError(e);
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Crashes.TrackError(e);
+                return false;
+            }
+        }
 
         private static string _getBlogsUrl = domain + @"/MobileBlogs";
         public static async Task<ObservableCollection<MobileBlog>> GetBlogsFromServer()

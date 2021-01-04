@@ -25,6 +25,8 @@ namespace TrainingDay.Old
         }
         public string Text { get; set; }
         public MusclesEnum Muscle { get; set; }
+
+        public Color Color { get; set; }
     }
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -44,7 +46,7 @@ namespace TrainingDay.Old
                 {
                     Text = EnumBindablePicker<MusclesEnum>.GetEnumDescription((MusclesEnum) i),
                     Muscle = (MusclesEnum) i,
-                    IsChecked = parent.MuscleFilter.Contains((MusclesEnum)i)
+                    IsChecked = parent.MuscleFilter.Contains((MusclesEnum)i),
                 };
                 newItem.PropertyChanged += NewItem_PropertyChanged;
                 itemsMuscles.Add(newItem);

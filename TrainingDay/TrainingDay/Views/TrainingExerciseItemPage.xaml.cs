@@ -53,7 +53,8 @@ namespace TrainingDay.Views
                 DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
                 App.Database.SaveExerciseItem(ExerciseView.CurrentExercise.GetExercise());
                 App.Database.SaveTrainingExerciseItem(ExerciseView.CurrentExercise.GetTrainingExerciseComm());
-                await Navigation.PopAsync();
+
+                await Navigation.PopAsync(false);
             }
         }
 

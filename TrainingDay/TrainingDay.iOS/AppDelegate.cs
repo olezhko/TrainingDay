@@ -27,7 +27,6 @@ namespace TrainingDay.iOS
             Xamarin.Forms.Forms.SetFlags(new string[]
                 {"CarouselView_Experimental", "IndicatorView_Experimental", "Expander_Experimental","Shapes_Experimental"});
             global::Xamarin.Forms.Forms.Init();
-            OxyPlot.Xamarin.Forms.Platform.iOS.PlotViewRenderer.Init();
             SfListViewRenderer.Init();
             SfEffectsViewRenderer.Init();  //Initialize only when effects view is added to Listview.
             UNUserNotificationCenter.Current.Delegate = new iOSNotificationReceiver();

@@ -79,7 +79,7 @@ namespace TrainingDay.ViewModels
         }
 
         public ICommand SaveCurrentValueCommand => new Command<BodyControlItem>(SaveCurrentValue);
-        private void SaveCurrentValue(BodyControlItem sender)
+        private async void SaveCurrentValue(BodyControlItem sender)
         {
             WeightType type = sender.Type;
             WeightNote note = new WeightNote
@@ -95,6 +95,7 @@ namespace TrainingDay.ViewModels
 
             DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
             DependencyService.Get<IMessage>().CancelNotification(App.WeightNotificationId);
+            await SiteService.SendBodyControl(Settings.Token);
         }
 
         private static int GetDaysByPeriod(ChartWeightPeriod period)

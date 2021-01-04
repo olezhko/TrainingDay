@@ -286,7 +286,7 @@
     <value>Минут</value>
   </data>
   <data name="Notification" xml:space="preserve">
-    <value>Напоминание</value>
+    <value>Создать напоминание</value>
   </data>
   <data name="OnTheseDays" xml:space="preserve">
     <value>Для дней</value>
@@ -419,9 +419,6 @@
   </data>
   <data name="ReturnToTrainingMessage" xml:space="preserve">
     <value>Вы давно не выполняли тренировку. Может сегодня тот день?</value>
-  </data>
-  <data name="ShareString" xml:space="preserve">
-    <value>Поделиться</value>
   </data>
   <data name="DeleteExerciseFromSuperSetQuestion" xml:space="preserve">
     <value>Удалить упражнение из суперсета?</value>

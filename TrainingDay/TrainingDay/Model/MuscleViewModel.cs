@@ -10,14 +10,15 @@ namespace TrainingDay.Model
 {
     public class MuscleViewModel : BaseViewModel
     {
-        private static List<Color> _colors = new List<Color>(){
+        public static List<Color> Colors = new List<Color>(){
             Color.Red,Color.Green,Color.Gold,
             Color.SlateBlue,Color.Teal,Color.Gray,
             Color.DodgerBlue,Color.Orange,Color.Purple,
             Color.Olive,Color.SandyBrown,Color.SeaGreen,
             Color.DarkSlateGray,Color.MediumTurquoise,Color.Sienna,
             Color.CornflowerBlue,Color.Crimson,Color.DarkRed,
-            Color.MediumPurple,Color.Firebrick,Color.PeachPuff};
+            Color.MediumPurple,Color.LawnGreen,Color.PeachPuff,
+            Color.DimGray,Color.DarkSlateGray, Color.SlateBlue}; // unused
 
         public int Id { get; set; }
 
@@ -35,7 +36,7 @@ namespace TrainingDay.Model
         public MuscleViewModel(MusclesEnum muscle)
         {
             Id = (int)muscle;
-            Color = _colors[Id];
+            Color = Colors[Id];
             Name = EnumBindablePicker<MusclesEnum>.GetEnumDescription(muscle);
         }
 
