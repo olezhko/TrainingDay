@@ -75,7 +75,7 @@ namespace TrainingDay.View
                         ExerciseChanged?.Invoke(this, ex.GetExercise());
 
                     DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
-                    this.Navigation.PopAsync();
+                    this.Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
                 }
             }
             catch(Exception ex)

@@ -397,8 +397,8 @@ namespace TrainingDay.ViewModels
                 Training.Exercises.ForEach(item=>item.IsSelected = false);
                 if (CurrentAction == ExerciseCheckBoxAction.Select)
                 {
-                    Navigation.PopAsync();
-                    Navigation.PopAsync();
+                    Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
+                    Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
                     return;
                 }
             }
@@ -419,8 +419,8 @@ namespace TrainingDay.ViewModels
             {
                 SaveNewTraining();
                 StopAction(true);
-                Navigation.PopAsync();
-                Navigation.PopAsync();
+                Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
+                Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
             }
             else
                 if (CurrentAction != ExerciseCheckBoxAction.SuperSet)

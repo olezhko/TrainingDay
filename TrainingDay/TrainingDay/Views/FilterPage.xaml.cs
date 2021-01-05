@@ -676,7 +676,7 @@ namespace TrainingDay.Old
         {
             MusclesListView.IsVisible = false;
             vmParent.MuscleFilter = currentMuscles;
-            Navigation.PopAsync();
+            Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
         }
     }
 }

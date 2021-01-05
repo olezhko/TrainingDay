@@ -29,31 +29,31 @@ namespace TrainingDay.Views.ModalPages
         public event EventHandler<TrainingSettingsActions> ActionSelected;
         private async void AddAlarmCommand_Clicked(object sender, EventArgs e)
         {
-            ActionSelected?.BeginInvoke(this, TrainingSettingsActions.AddAlarm, null, null);
+            ActionSelected?.Invoke(this, TrainingSettingsActions.AddAlarm);
             await Navigation.PopModalAsync(Device.RuntimePlatform == Device.Android);
         }
 
         private async void ShareTrainingCommand_Clicked(object sender, EventArgs e)
         {
-            ActionSelected?.BeginInvoke(this, TrainingSettingsActions.ShareTraining, null, null);
+            ActionSelected?.Invoke(this, TrainingSettingsActions.ShareTraining);
             await Navigation.PopModalAsync(Device.RuntimePlatform == Device.Android);
         }
 
         private async void SetSuperSetCommand_Clicked(object sender, EventArgs e)
         {
-            ActionSelected?.BeginInvoke(this, TrainingSettingsActions.SuperSetAction, null, null);
+            ActionSelected?.Invoke(this, TrainingSettingsActions.SuperSetAction);
             await Navigation.PopModalAsync(Device.RuntimePlatform == Device.Android);
         }
 
         private async void StartMoveExerciseCommand_Clicked(object sender, EventArgs e)
         {
-            ActionSelected?.BeginInvoke(this, TrainingSettingsActions.MoveExercises, null, null);
+            ActionSelected?.Invoke(this, TrainingSettingsActions.MoveExercises);
             await Navigation.PopModalAsync(Device.RuntimePlatform == Device.Android);
         }
 
         private async void StartCopyExerciseCommand_Clicked(object sender, EventArgs e)
         {
-            ActionSelected?.BeginInvoke(this, TrainingSettingsActions.CopyExercises, null, null);
+            ActionSelected?.Invoke(this, TrainingSettingsActions.CopyExercises);
             await Navigation.PopModalAsync(Device.RuntimePlatform == Device.Android);
         }
 

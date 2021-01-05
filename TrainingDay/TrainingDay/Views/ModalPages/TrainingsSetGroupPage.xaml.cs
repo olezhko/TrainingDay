@@ -66,7 +66,7 @@ namespace TrainingDay.Views.ModalPages
             }
 
             DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
-            await Navigation.PopAsync();
+            await Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
         }
 
         private void DeleteGroup(List<TrainingUnion> unions)
@@ -96,7 +96,7 @@ namespace TrainingDay.Views.ModalPages
                 //  если тренировка уже в группе и группа такая же, как и выбрали
                 if (trainingMoveToGroup.GroupName != null && id == trainingMoveToGroup.GroupName.Id)
                 {
-                    Navigation.PopAsync();
+                    Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
                     return;
                 }
 
@@ -133,7 +133,7 @@ namespace TrainingDay.Views.ModalPages
                 Crashes.TrackError(e);
             }
             
-            Navigation.PopAsync();
+            Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
         }
 
         private void ItemsListView_OnItemTapped(object sender, ItemTappedEventArgs e)

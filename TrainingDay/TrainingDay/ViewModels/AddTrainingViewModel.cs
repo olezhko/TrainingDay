@@ -83,7 +83,7 @@ namespace TrainingDay.ViewModels
 
             var last = Navigation.NavigationStack.Last();
             Navigation.RemovePage(last);
-            await Navigation.PopAsync();
+            await Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
         }
     }
 }

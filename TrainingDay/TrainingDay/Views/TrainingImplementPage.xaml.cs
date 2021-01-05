@@ -168,7 +168,7 @@ namespace TrainingDay.View
                     DependencyService.Get<IMessage>().CancelNotification(App.TrainingNotificationId);
 
                     await SiteService.SendFinishedWorkout(Settings.Token);
-                    await Navigation.PopAsync();
+                    await Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
                 }
                 else
                 {
@@ -179,7 +179,7 @@ namespace TrainingDay.View
             catch (Exception ex)
             {
                 Crashes.TrackError(ex);
-                await Navigation.PopAsync();
+                await Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
             }
         }
 
@@ -300,7 +300,7 @@ namespace TrainingDay.View
                     DeviceDisplay.KeepScreenOn = false;
                     Settings.IsTrainingNotFinished = false;
 
-                    Navigation.PopAsync();
+                    Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
                 }
             };
             popup.Show(Resource.OkString, Resource.CancelString);
