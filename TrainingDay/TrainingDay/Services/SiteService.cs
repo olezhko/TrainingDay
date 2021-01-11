@@ -56,7 +56,6 @@ namespace TrainingDay.Services
                 client.Timeout = -1;
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
-                request.AddHeader("Cookie", ".AspNetCore.Antiforgery.F1R49Bn-sHQ=CfDJ8DSuB5KQHH1HjhVjYb_UYNkYnk6PjUp68qgFq-vApTTa3RgeXB8Harisq5G6j8Vkg6qU734I-rQc_UzJBGUzGqj4LHrD22C_xEO4y-103zt7fOxt933aKV0B4TjmCyornURtfXjI-FjElAJo_qrtN_c");
                 request.AddParameter("application/json", JsonConvert.SerializeObject(token), ParameterType.RequestBody);
                 try
                 {
@@ -85,8 +84,11 @@ namespace TrainingDay.Services
                 client.Timeout = -1;
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
-                request.AddHeader("Cookie", ".AspNetCore.Antiforgery.F1R49Bn-sHQ=CfDJ8DSuB5KQHH1HjhVjYb_UYNkYnk6PjUp68qgFq-vApTTa3RgeXB8Harisq5G6j8Vkg6qU734I-rQc_UzJBGUzGqj4LHrD22C_xEO4y-103zt7fOxt933aKV0B4TjmCyornURtfXjI-FjElAJo_qrtN_c");
-                request.AddParameter("application/json", JsonConvert.SerializeObject(tokenString), ParameterType.RequestBody);
+
+                MobileToken token = new MobileToken();
+                token.Token = tokenString;
+                var data = JsonConvert.SerializeObject(token);
+                request.AddParameter("application/json", JsonConvert.SerializeObject(data), ParameterType.RequestBody);
                 try
                 {
                     var result = await client.ExecuteAsync(request);
@@ -114,8 +116,11 @@ namespace TrainingDay.Services
                 client.Timeout = -1;
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/json");
-                request.AddHeader("Cookie", ".AspNetCore.Antiforgery.F1R49Bn-sHQ=CfDJ8DSuB5KQHH1HjhVjYb_UYNkYnk6PjUp68qgFq-vApTTa3RgeXB8Harisq5G6j8Vkg6qU734I-rQc_UzJBGUzGqj4LHrD22C_xEO4y-103zt7fOxt933aKV0B4TjmCyornURtfXjI-FjElAJo_qrtN_c");
-                request.AddParameter("application/json", JsonConvert.SerializeObject(tokenString), ParameterType.RequestBody);
+
+                MobileToken token = new MobileToken();
+                token.Token = tokenString;
+                var data = JsonConvert.SerializeObject(token);
+                request.AddParameter("application/json", data, ParameterType.RequestBody);
                 try
                 {
                     var result = await client.ExecuteAsync(request);

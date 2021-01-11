@@ -30,7 +30,7 @@
                 </controls:CustomPicker>
             </StackLayout>
 
-            <CarouselView Grid.Row="2" IndicatorView="indicatorView" ItemsSource="{Binding BodyControlItems}" >
+            <CarouselView Grid.Row="1" IndicatorView="indicatorView" ItemsSource="{Binding BodyControlItems}" >
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Padding="10" >
@@ -67,7 +67,7 @@
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
-            <IndicatorView Grid.Row="1" x:Name="indicatorView" IndicatorSize="{OnPlatform Android='9', iOS='10'}" MaximumVisible="6" HideSingle="True" ItemsSource="{Binding BodyControlItems}" IndicatorColor="LightGray" SelectedIndicatorColor="RoyalBlue" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <IndicatorView Grid.Row="2" x:Name="indicatorView" IndicatorSize="{OnPlatform Android='9', iOS='10'}" MaximumVisible="6" HideSingle="True" ItemsSource="{Binding BodyControlItems}" IndicatorColor="LightGray" SelectedIndicatorColor="RoyalBlue" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
