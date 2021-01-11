@@ -194,7 +194,7 @@ namespace TrainingDay.ViewModels
             int order = 0;
             foreach (var item in Training.Exercises)
             {
-                if (!item.IsSelected && CurrentAction== ExerciseCheckBoxAction.Select)
+                if (!item.IsSelected && CurrentAction == ExerciseCheckBoxAction.Select)
                 {
                     continue;//ignore
                 }
@@ -213,8 +213,6 @@ namespace TrainingDay.ViewModels
             }
 
             DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
-            //Application.Current.MainPage = new NavigationPage(new MainPage());
-            //Navigation.PopAsync();
         }
 
         private void ClearTrExUnused()
@@ -397,7 +395,7 @@ namespace TrainingDay.ViewModels
                 Training.Exercises.ForEach(item=>item.IsSelected = false);
                 if (CurrentAction == ExerciseCheckBoxAction.Select)
                 {
-                    Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
+                    Navigation.PopAsync(false);
                     Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
                     return;
                 }
@@ -419,7 +417,7 @@ namespace TrainingDay.ViewModels
             {
                 SaveNewTraining();
                 StopAction(true);
-                Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
+                Navigation.PopAsync(false);
                 Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
             }
             else
@@ -563,7 +561,7 @@ namespace TrainingDay.ViewModels
         private async void ShowTrainingSettingsPage()
         {
             var page = new TrainingSettingsPage();
-            page.AddAlarmToolbarItem.IsEnabled = !(Training == null || Training.Id == 0 || Device.RuntimePlatform == Device.iOS);
+            page.AddAlarmToolbarItem.IsVisible = !(Training == null || Training.Id == 0 || Device.RuntimePlatform == Device.iOS);
             page.ActionSelected += Page_ActionSelected;
             await Navigation.PushModalAsync(page);
         }

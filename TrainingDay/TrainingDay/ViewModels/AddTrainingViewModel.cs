@@ -81,9 +81,18 @@ namespace TrainingDay.ViewModels
 
             DependencyService.Get<IMessage>().ShortAlert(Resource.AddedString);
 
-            var last = Navigation.NavigationStack.Last();
-            Navigation.RemovePage(last);
-            await Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                var last = Navigation.NavigationStack.Last();
+                Navigation.RemovePage(last);
+                await Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
+            }
+            else
+            {
+                Application.Current.MainPage = new NavigationPage(new MainPage());
+            }
+
+            //await Navigation.PopToRootAsync();
         }
     }
 }

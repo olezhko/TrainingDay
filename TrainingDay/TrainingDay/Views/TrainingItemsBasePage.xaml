@@ -75,7 +75,7 @@
 
                             </ViewCell.ContextActions>
                             <Frame Style="{StaticResource FrameCellStyle}" Padding="20">
-                                <Label Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold" VerticalOptions="Center"/>
+                                <Label Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="Medium" FontAttributes="Bold" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
                             </Frame>
                         </ViewCell>
                     </DataTemplate>

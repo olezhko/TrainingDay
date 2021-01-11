@@ -44,7 +44,7 @@ namespace TrainingDay.ViewModels
                     }
                     tr.Title = trVm.Name;
                     vm.Load(tr);
-                    Navigation.PushAsync(new TrainingExercisesPage() { BindingContext = vm, IsShowDeleteUnusefulExercisesHelp = true});
+                    Navigation.PushAsync(new PreparedTrainingExercisesPage() { BindingContext = vm});
                 }
             }
             catch (Exception e)
@@ -55,9 +55,9 @@ namespace TrainingDay.ViewModels
 
 
         public ICommand CreateNewTrainingCommand { get; set; }
-        private void AddNewTraining()
+        private async void AddNewTraining()
         {
-            Navigation.PushAsync(new AddTrainingPage());
+            await Navigation.PushAsync(new AddTrainingPage());
         }
 
         public void FillTrainings()

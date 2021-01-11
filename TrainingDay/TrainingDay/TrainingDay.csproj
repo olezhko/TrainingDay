@@ -83,6 +83,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\PreparedTrainingExercisesPage.xaml.cs">
+      <DependentUpon>PreparedTrainingExercisesPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

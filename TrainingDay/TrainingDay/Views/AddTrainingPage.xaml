@@ -18,10 +18,10 @@
                 <Entry Keyboard="Text" Text="{Binding Title}" FontSize="Medium" HorizontalOptions="FillAndExpand" Placeholder="{services:Translate NameString1}"/>
 
                 <Button Text="{services:Translate ChouseExerciseString}" Command="{Binding SelectExercisesCommand}" />
-                <xForms:SfListView ItemsSource="{Binding ExerciseItems}" x:Name="ItemsListView"  AutoFitMode="Height"  DragStartMode="OnHold" >
+                <xForms:SfListView ItemsSource="{Binding ExerciseItems}" x:Name="ItemsListView" AutoFitMode="Height" DragStartMode="OnHold">
                     <xForms:SfListView.ItemTemplate>
                         <DataTemplate>
-                            <Frame Style="{StaticResource FrameCellStyle}">
+                            <Frame Style="{StaticResource FrameCellStyle}" HeightRequest="80">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>

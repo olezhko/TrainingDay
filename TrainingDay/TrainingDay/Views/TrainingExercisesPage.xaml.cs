@@ -15,46 +15,29 @@ namespace TrainingDay.View
             ItemsListView.DragDropController.UpdateSource = true;
         }
 
-        private bool _isShown = false;
-        public bool IsShowDeleteUnusefulExercisesHelp = false;
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            var vm = BindingContext as TrainingExercisesPageViewModel;
-
-            if (IsShowDeleteUnusefulExercisesHelp && !_isShown)
-            {
-                _isShown = true;
-                vm.StartSelectExercises();
-                DisplayAlert(Resource.AdviceString, Resource.HelpDeleteUnusefulExercises, "OK");
-            }
-            //else
-            //{
-            //    vm.Training.Exercises.Clear();
-            //    TrainingItemsBasePageViewModel.PrepareTrainingViewModel(vm.Training);
-            //    vm.Load(vm.Training);
-            //}
-            
             ItemsListView.SelectedItem = null;
         }
 
-        protected override void OnBindingContextChanged()
-        {
-            base.OnBindingContextChanged();
-            var vm = BindingContext as TrainingExercisesPageViewModel;
-            if (vm.Training == null || vm.Training.Id == 0)
-            {
-                //ToolbarItems.Remove(AddAlarmToolbarItem);
-                MakeTrainingButton.IsVisible = false;
-            }
-            else
-            {
-                MakeTrainingButton.IsVisible = true;
-                //if (Device.RuntimePlatform ==Device.iOS)
-                //{
-                //    ToolbarItems.Remove(AddAlarmToolbarItem);
-                //}
-            }
-        }
+        //protected override void OnBindingContextChanged()
+        //{
+        //    base.OnBindingContextChanged();
+        //    var vm = BindingContext as TrainingExercisesPageViewModel;
+        //    if (vm.Training == null || vm.Training.Id == 0)
+        //    {
+        //        //ToolbarItems.Remove(AddAlarmToolbarItem);
+        //        MakeTrainingButton.IsVisible = false;
+        //    }
+        //    else
+        //    {
+        //        MakeTrainingButton.IsVisible = true;
+        //        //if (Device.RuntimePlatform == Device.iOS)
+        //        //{
+        //        //    ToolbarItems.Remove(AddAlarmToolbarItem);
+        //        //}
+        //    }
+        //}
     }
 }
