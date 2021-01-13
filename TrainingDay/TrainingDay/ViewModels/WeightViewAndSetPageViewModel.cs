@@ -213,20 +213,23 @@ namespace TrainingDay.ViewModels
             goalEntries.Add(new ChartEntry((float)goal)
             {
                 ValueLabel = goal.ToString(),
-                Label = start.ToLongDateString(),
+                Label = start.ToShortDateString(),
                 ValueLabelColor = SKColors.Gold,
             });
             goalEntries.Add(new ChartEntry((float)goal)
             {
                 ValueLabel = goal.ToString(),
-                Label = end.ToLongDateString(),
+                Label = end.ToShortDateString(),
                 ValueLabelColor = SKColors.Gold,
             });
 
-            var entries = items.Select(item => new ChartEntry((float)item.Weight)
+            var dictDate = items.GroupBy(k => k.Date.Date)
+                .OrderByDescending(k => k.Key)
+                .ToDictionary(k => k.Key, v => v.OrderByDescending(x => x.Date).Last());
+            var entries = dictDate.Select(item => new ChartEntry((float)item.Value.Weight)
             {
-                ValueLabel = item.Weight.ToString(),
-                Label = item.Date.ToLongDateString(),
+                ValueLabel = item.Value.Weight.ToString(),
+                Label = item.Key.ToLongDateString(),
                 ValueLabelColor = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
             }).ToList();
 

@@ -27,6 +27,6 @@
 "Id":"4",
 "Version":"1.0.6.5",
 "Title":"Bug Fixed",
-"Text":"<p>Bug Fixed.</p> <p>Fixed errors in the program logic and usability.</p><p><img width="200" height="200" src="bug.png" /></p>"
+"Text":"<p>Bug Fixed.</p> <p>Fixed errors in the program logic and usability.</p><p><img width=200 height=200 src=bug.png /></p>"
 }
 ]
