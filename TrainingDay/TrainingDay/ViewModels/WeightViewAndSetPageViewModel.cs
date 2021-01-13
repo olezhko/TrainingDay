@@ -151,7 +151,20 @@ namespace TrainingDay.ViewModels
             IsBusy = true;
             double currentWeightValue = 0, currentWaistValue = 0, currentHipsValue = 0;
             BodyControlItems.Clear();
-            var bodyControlItems = App.Database.GetWeightNotesItems();
+            //var bodyControlItems = App.Database.GetWeightNotesItems();
+
+            var bodyControlItems = new List<WeightNote>()
+            {
+                new WeightNote(){Date = new DateTime(2020,12,1),Weight = 100,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = new DateTime(2020,12,8),Weight = 90,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = new DateTime(2020,12,15),Weight = 95,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = new DateTime(2020,12,22),Weight = 85,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = new DateTime(2020,12,27),Weight = 97,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = new DateTime(2021,01,2),Weight = 96,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = new DateTime(2021,01,7),Weight = 91,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = new DateTime(2021,01,12),Weight = 91,Type = (int)WeightType.Weight},
+            };
+
 
             int countDaysPeriod = GetDaysByPeriod((ChartWeightPeriod)WeightChartPeriod);
             var startDate = DateTime.Now.AddDays(-countDaysPeriod);
@@ -224,12 +237,12 @@ namespace TrainingDay.ViewModels
             });
 
             var dictDate = items.GroupBy(k => k.Date.Date)
-                .OrderByDescending(k => k.Key)
-                .ToDictionary(k => k.Key, v => v.OrderByDescending(x => x.Date).Last());
+                .OrderBy(k => k.Key)
+                .ToDictionary(k => k.Key, v => v.OrderBy(x => x.Date).Last());
             var entries = dictDate.Select(item => new ChartEntry((float)item.Value.Weight)
             {
                 ValueLabel = item.Value.Weight.ToString(),
-                Label = item.Key.ToLongDateString(),
+                Label = item.Key.ToShortDateString(),
                 ValueLabelColor = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
             }).ToList();
 
@@ -270,11 +283,11 @@ namespace TrainingDay.ViewModels
                         Color = SKColors.Green,
                         Entries = entries
                     },
-                    new ChartSerie()
-                    {
-                        Color = SKColors.Gold,
-                        Entries = goalEntries
-                    }
+                    //new ChartSerie()
+                    //{
+                    //    Color = SKColors.Gold,
+                    //    Entries = goalEntries
+                    //}
                 }
             };
         }
