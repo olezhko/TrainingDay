@@ -461,37 +461,6 @@ namespace TrainingDay.ViewModels
         {
             bool res = false;
             res = Exercises.Remove(exercise);
-            //foreach (var superSet in ExercisesBySuperSet)
-            //{
-            //    if (exercise.SuperSetId != 0)
-            //    {
-            //        if (superSet.Id == exercise.SuperSetId)
-            //        {
-            //            if (superSet.Count == 1)
-            //            {
-            //                ExercisesBySuperSet.Remove(superSet);
-            //            }
-            //            else
-            //            {
-            //                int index = superSet.IndexOf(a => a.TrainingExerciseId == exercise.TrainingExerciseId);
-            //                superSet.RemoveAt(index);
-            //            }
-            //            ReloadItems();
-            //            res = true;
-            //            break;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        if (superSet.First().TrainingExerciseId == exercise.TrainingExerciseId)
-            //        {
-            //            ExercisesBySuperSet.Remove(superSet);
-            //            ReloadItems();
-            //            res = true;
-            //            break;
-            //        }
-            //    }
-            //}
 
             return res;
         }

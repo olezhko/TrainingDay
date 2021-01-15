@@ -20,24 +20,5 @@ namespace TrainingDay.View
             base.OnAppearing();
             ItemsListView.SelectedItem = null;
         }
-
-        //protected override void OnBindingContextChanged()
-        //{
-        //    base.OnBindingContextChanged();
-        //    var vm = BindingContext as TrainingExercisesPageViewModel;
-        //    if (vm.Training == null || vm.Training.Id == 0)
-        //    {
-        //        //ToolbarItems.Remove(AddAlarmToolbarItem);
-        //        MakeTrainingButton.IsVisible = false;
-        //    }
-        //    else
-        //    {
-        //        MakeTrainingButton.IsVisible = true;
-        //        //if (Device.RuntimePlatform == Device.iOS)
-        //        //{
-        //        //    ToolbarItems.Remove(AddAlarmToolbarItem);
-        //        //}
-        //    }
-        //}
     }
 }

@@ -71,6 +71,45 @@ namespace TrainingDay.ViewModels
             }
         }
 
+        public ICommand DeleteExerciseCommand => new Command<TrainingExerciseViewModel>(DeleteExercise);
+        private void DeleteExercise(TrainingExerciseViewModel sender)
+        {
+            if (CurrentAction == ExerciseCheckBoxAction.SuperSet)
+            {
+                if (sender.SuperSetId != 0)
+                {
+                    QuestionPopup popup = new QuestionPopup("", Resource.DeleteExerciseFromSuperSetQuestion);
+                    popup.PopupClosed += (o, closedArgs) =>
+                    {
+                        if (closedArgs.Button == Resource.OkString)
+                        {
+                            var id = sender.SuperSetId;
+                            sender.SuperSetId = 0;
+                            CheckSuperSetExist(id);
+                        }
+                    };
+                    popup.Show(Resource.OkString, Resource.CancelString);
+                }
+            }
+            else
+            {
+                QuestionPopup popup = new QuestionPopup(Resource.DeleteExercises, Resource.AreYouSerious + "\n" + sender.ExerciseItemName);
+                popup.PopupClosed += (o, closedArgs) =>
+                {
+                    if (closedArgs.Button == Resource.OkString)
+                    {
+                        Training.DeleteExercise(sender);
+
+                        if (sender.SuperSetId != 0)
+                            CheckSuperSetExist(sender.SuperSetId);
+                    }
+                };
+                popup.Show(Resource.OkString, Resource.CancelString);
+            }
+        }
+
+
+
         public ICommand MakeNotifyCommand => new Command(MakeNotify);
         private async void MakeNotify()
         {
@@ -110,42 +149,7 @@ namespace TrainingDay.ViewModels
 
 
 
-        public ICommand DeleteExerciseCommand => new Command<TrainingExerciseViewModel>(DeleteExercise);
-        private void DeleteExercise(TrainingExerciseViewModel sender)// "cross button pressed"
-        {
-            if (CurrentAction == ExerciseCheckBoxAction.SuperSet)
-            {
-                if (sender.SuperSetId != 0)
-                {
-                    QuestionPopup popup = new QuestionPopup("", Resource.DeleteExerciseFromSuperSetQuestion);
-                    popup.PopupClosed += (o, closedArgs) =>
-                    {
-                        if (closedArgs.Button == Resource.OkString)
-                        {
-                            var id = sender.SuperSetId;
-                            sender.SuperSetId = 0;
-                            CheckSuperSetExist(id);
-                        }
-                    };
-                    popup.Show(Resource.OkString,Resource.CancelString);
-                }
-            }
-            else
-            {
-                QuestionPopup popup = new QuestionPopup(Resource.DeleteExercises, Resource.AreYouSerious + "\n" + sender.ExerciseItemName);
-                popup.PopupClosed += (o, closedArgs) =>
-                {
-                    if (closedArgs.Button == Resource.OkString)
-                    {
-                        Training.DeleteExercise(sender);
 
-                        if(sender.SuperSetId != 0)
-                            CheckSuperSetExist(sender.SuperSetId);
-                    }
-                };
-                popup.Show(Resource.OkString, Resource.CancelString);
-            }
-        }
 
         private void CheckSuperSetExist(int supersetId)
         {

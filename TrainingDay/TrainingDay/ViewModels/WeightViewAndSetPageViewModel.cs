@@ -246,6 +246,13 @@ namespace TrainingDay.ViewModels
                 ValueLabelColor = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
             }).ToList();
 
+            //var goalEntries = entries.Select(item => new ChartEntry((float)goal)
+            //{
+            //    ValueLabel = goal.ToString(),
+            //    Label = item.Label,
+            //    ValueLabelColor = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
+            //}).ToList();
+
             var minValue = items.Select(item => item.Weight).Min() - 1;
             return new LineChart
             {
@@ -283,11 +290,11 @@ namespace TrainingDay.ViewModels
                         Color = SKColors.Green,
                         Entries = entries
                     },
-                    //new ChartSerie()
-                    //{
-                    //    Color = SKColors.Gold,
-                    //    Entries = goalEntries
-                    //}
+                    new ChartSerie()
+                    {
+                        Color = SKColors.Gold,
+                        Entries = goalEntries
+                    }
                 }
             };
         }
