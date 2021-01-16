@@ -16,7 +16,7 @@ namespace TrainingDay.iOS.Services
     public class MessageIOS : IMessage
     {
         const double LONG_DELAY = 3.5;
-        const double SHORT_DELAY = 2.0;
+        const double SHORT_DELAY = 1.0;
         NSTimer alertDelay;
         UIAlertController alert;
         public void ShowMessage(string message, string title)

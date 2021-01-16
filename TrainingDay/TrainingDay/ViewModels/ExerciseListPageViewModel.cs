@@ -93,7 +93,7 @@ namespace TrainingDay.ViewModels
         public ICommand ChoseExercisesCommand { protected set; get; }
         private void ChoseExercises()
         {
-            Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
+            Navigation.PopAsync();
             ExercisesChousen?.Invoke(this, null);
         }
 

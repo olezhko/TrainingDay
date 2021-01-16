@@ -54,7 +54,7 @@ namespace TrainingDay.Views
                 App.Database.SaveExerciseItem(ExerciseView.CurrentExercise.GetExercise());
                 App.Database.SaveTrainingExerciseItem(ExerciseView.CurrentExercise.GetTrainingExerciseComm());
 
-                await Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
+                await Navigation.PopAsync();
             }
         }
 

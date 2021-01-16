@@ -62,9 +62,9 @@ namespace TrainingDay.View
             {
                 ExerciseViewModel ex = BindingContext as ExerciseViewModel;
                 ex.Tags.Clear();
-                if(ExerciseByDistanceCheckBox.IsChecked) ex.Tags.Add(ExerciseTags.ExerciseByDistance);
-                if(ExerciseByRepsAndWeightCheckBox.IsChecked) ex.Tags.Add(ExerciseTags.ExerciseByRepsAndWeight);
-                if(ExerciseByTimeCheckBox.IsChecked) ex.Tags.Add(ExerciseTags.ExerciseByTime);
+                if (ExerciseByDistanceCheckBox.IsChecked) ex.Tags.Add(ExerciseTags.ExerciseByDistance);
+                if (ExerciseByRepsAndWeightCheckBox.IsChecked) ex.Tags.Add(ExerciseTags.ExerciseByRepsAndWeight);
+                if (ExerciseByTimeCheckBox.IsChecked) ex.Tags.Add(ExerciseTags.ExerciseByTime);
 
                 if (!String.IsNullOrEmpty(ex.ExerciseItemName))
                 {
@@ -75,10 +75,10 @@ namespace TrainingDay.View
                         ExerciseChanged?.Invoke(this, ex.GetExercise());
 
                     DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
-                    this.Navigation.PopAsync(Device.RuntimePlatform == Device.Android);
+                    this.Navigation.PopAsync();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Crashes.TrackError(ex);
             }
