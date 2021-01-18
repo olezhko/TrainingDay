@@ -293,7 +293,7 @@ namespace TrainingDay.View
             QuestionPopup popup = new QuestionPopup("", Resource.CancelTrainingQuestion);
             popup.PopupClosed += (o, closedArgs) =>
             {
-                if (closedArgs.Button == Resource.OkString)
+                if (closedArgs.Button == Resource.YesString)
                 {
                     _enabledTimer = false;
                     DependencyService.Get<IMessage>().CancelNotification(App.TrainingImplementTimeId);
@@ -303,7 +303,7 @@ namespace TrainingDay.View
                     Navigation.PopAsync();
                 }
             };
-            popup.Show(Resource.OkString, Resource.CancelString);
+            popup.Show(Resource.YesString, Resource.NoString);
         }
 
         public ICommand ViewFullScreenTimeCommand => new Command(ViewFullScreenTime);

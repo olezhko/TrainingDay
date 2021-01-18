@@ -45,12 +45,14 @@ namespace TrainingDay.iOS.Services
         
         void ShowAlert(string message, double seconds)
         {
-            alertDelay = NSTimer.CreateScheduledTimer(seconds, (obj) =>
-            {
-                DismissMessage();
-            });
-            alert = UIAlertController.Create(null, message, UIAlertControllerStyle.Alert);
-            UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
+            ShowMessage(message, "");
+
+            //alertDelay = NSTimer.CreateScheduledTimer(seconds, (obj) =>
+            //{
+            //    DismissMessage();
+            //});
+            //alert = UIAlertController.Create(null, message, UIAlertControllerStyle.Alert);
+            //UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
         }
 
         void DismissMessage()

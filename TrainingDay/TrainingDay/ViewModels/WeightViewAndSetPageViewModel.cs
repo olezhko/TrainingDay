@@ -151,8 +151,7 @@ namespace TrainingDay.ViewModels
             IsBusy = true;
             double currentWeightValue = 0, currentWaistValue = 0, currentHipsValue = 0;
             BodyControlItems.Clear();
-            //var bodyControlItems = App.Database.GetWeightNotesItems();
-
+#if DEBUG
             var bodyControlItems = new List<WeightNote>()
             {
                 new WeightNote(){Date = new DateTime(2020,12,1),Weight = 100,Type = (int)WeightType.Weight},
@@ -164,7 +163,9 @@ namespace TrainingDay.ViewModels
                 new WeightNote(){Date = new DateTime(2021,01,7),Weight = 91,Type = (int)WeightType.Weight},
                 new WeightNote(){Date = new DateTime(2021,01,12),Weight = 91,Type = (int)WeightType.Weight},
             };
-
+#else
+            var bodyControlItems = App.Database.GetWeightNotesItems();
+#endif
 
             int countDaysPeriod = GetDaysByPeriod((ChartWeightPeriod)WeightChartPeriod);
             var startDate = DateTime.Now.AddDays(-countDaysPeriod);

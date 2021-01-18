@@ -44,18 +44,32 @@ namespace TrainingDay.Views
 
         private async void ShowInfo_Click(object sender, EventArgs e)
         {
-            var waist = vm.BodyControlItems.First(item => item.Type == WeightType.Waist).CurrentValue;
-            var hips = vm.BodyControlItems.First(item => item.Type == WeightType.Hip).CurrentValue;
-
-            var coef = waist / hips;
-            StringBuilder sb = new StringBuilder();
-            sb.Append(string.Format(Resource.WaistHipMessage.Replace("_", "\n"), coef));
-
-            var result = await DisplayAlert(Resource.HelperString, sb.ToString(), Resource.OkString, Resource.CancelString);
-            if (result)
+            try
             {
-                await Browser.OpenAsync(@"http://trainingday.tk/waist-hip?year=2020&Month=10", BrowserLaunchMode.SystemPreferred);
+                double coef = -1;
+                if (vm.BodyControlItems.Any(item => item.Type == WeightType.Waist) && vm.BodyControlItems.Any(item => item.Type == WeightType.Waist))
+                {
+                    var waist = vm.BodyControlItems.First(item => item.Type == WeightType.Waist).CurrentValue;
+                    var hips = vm.BodyControlItems.First(item => item.Type == WeightType.Hip).CurrentValue;
+
+                    coef = waist / hips;
+                }
+
+                
+                StringBuilder sb = new StringBuilder();
+                sb.Append(string.Format(Resource.WaistHipMessage.Replace("_", "\n"), coef));
+
+                var result = await DisplayAlert(Resource.HelperString, sb.ToString(), Resource.OkString, Resource.CancelString);
+                if (result)
+                {
+                    await Browser.OpenAsync(@"http://trainingday.tk/waist-hip?year=2020&Month=10", BrowserLaunchMode.SystemPreferred);
+                }
             }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
+            
         }
     }
 }

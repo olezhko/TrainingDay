@@ -546,4 +546,10 @@
   <data name="FitnessString" xml:space="preserve">
     <value>Fitness</value>
   </data>
+  <data name="NoString" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="YesString" xml:space="preserve">
+    <value>Yes</value>
+  </data>
 </root>

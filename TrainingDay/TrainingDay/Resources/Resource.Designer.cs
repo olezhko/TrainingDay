@@ -853,6 +853,15 @@ namespace TrainingDay.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string NoString {
+            get {
+                return ResourceManager.GetString("NoString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not all fields entered.
         /// </summary>
         internal static string NotAllFieldsEntered {
@@ -1344,6 +1353,15 @@ namespace TrainingDay.Resources {
         internal static string YearString {
             get {
                 return ResourceManager.GetString("YearString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string YesString {
+            get {
+                return ResourceManager.GetString("YesString", resourceCulture);
             }
         }
     }

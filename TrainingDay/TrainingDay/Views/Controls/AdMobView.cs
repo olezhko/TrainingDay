@@ -18,6 +18,13 @@ namespace TrainingDay.Views.Controls
             get => (string)GetValue(AdUnitIdProperty);
             set => SetValue(AdUnitIdProperty, value);
         }
+
+        public AdMobView()
+        {
+#if DEBUG
+            IsVisible = false;
+#endif
+        }
     }
 
     public interface IAdInterstitial
