@@ -567,7 +567,7 @@ namespace TrainingDay.ViewModels
             var page = new TrainingSettingsPage();
             page.AddAlarmToolbarItem.IsVisible = !(Training == null || Training.Id == 0 || Device.RuntimePlatform == Device.iOS);
             page.ActionSelected += Page_ActionSelected;
-            await Navigation.PushModalAsync(page);
+            await Navigation.PushAsync(page);
         }
 
         private void Page_ActionSelected(object sender, TrainingSettingsPage.TrainingSettingsActions e)

@@ -41,7 +41,7 @@ namespace TrainingDay.ViewModels
         public ICommand OpenBlogCommand=>new Command<BlogViewModel>(OpenBlog);
         private async void OpenBlog(BlogViewModel obj)
         {
-            await Navigation.PushModalAsync(new BlogItemPage(){BindingContext = obj});
+            await Navigation.PushAsync(new BlogItemPage(){BindingContext = obj});
         }
     }
 }
