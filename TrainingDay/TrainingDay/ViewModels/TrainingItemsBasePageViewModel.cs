@@ -124,15 +124,19 @@ namespace TrainingDay.ViewModels
         public ICommand ItemSelectedCommand { get; set; }
         private async void TrainingSelected(SelectedItemChangedEventArgs parameter)
         {
-            TrainingViewModel trVm = parameter.SelectedItem as TrainingViewModel;
-            PrepareTrainingViewModel(trVm);
+            //TrainingViewModel trVm = parameter.SelectedItem as TrainingViewModel;
+            //PrepareTrainingViewModel(trVm);
 
-            TrainingExercisesPageViewModel vm = new TrainingExercisesPageViewModel()
-            {
-                Navigation = Navigation
-            };
-            vm.Load(trVm);
-            await Navigation.PushAsync(new TrainingExercisesPage() {BindingContext = vm});
+            //TrainingExercisesPageViewModel vm = new TrainingExercisesPageViewModel()
+            //{
+            //    Navigation = Navigation
+            //};
+            //vm.Load(trVm);
+
+            var page = new TrainingExercisesPage();
+            page.TrainingId = (parameter.SelectedItem as TrainingViewModel).Id;
+            //page.Load((parameter.SelectedItem as TrainingViewModel).Id);
+            await Navigation.PushAsync(page);
         }
 
         public static void PrepareTrainingViewModel(TrainingViewModel vm)

@@ -19,9 +19,11 @@ namespace TrainingDay.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            Load(TrainingId);
             ItemsListView.SelectedItem = null;
         }
 
+        public int TrainingId { get; set; }
         private void Load(int id)
         {
             TrainingViewModel trVm = new TrainingViewModel(App.Database.GetTrainingItem(id));
@@ -31,6 +33,7 @@ namespace TrainingDay.View
                 Navigation = Navigation
             };
             vm.Load(trVm);
+            BindingContext = vm;
         }
 
         public static void PrepareTrainingViewModel(TrainingViewModel vm)
