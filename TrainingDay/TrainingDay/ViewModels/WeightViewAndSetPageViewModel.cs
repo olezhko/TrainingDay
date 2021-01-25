@@ -223,19 +223,6 @@ namespace TrainingDay.ViewModels
             }
             var start = items.First().Date;
             var end = items.Last().Date;
-            var goalEntries = new List<ChartEntry>();
-            goalEntries.Add(new ChartEntry((float)goal)
-            {
-                ValueLabel = goal.ToString(),
-                Label = start.ToShortDateString(),
-                ValueLabelColor = SKColors.Gold,
-            });
-            goalEntries.Add(new ChartEntry((float)goal)
-            {
-                ValueLabel = goal.ToString(),
-                Label = end.ToShortDateString(),
-                ValueLabelColor = SKColors.Gold,
-            });
 
             var dictDate = items.GroupBy(k => k.Date.Date)
                 .OrderBy(k => k.Key)
@@ -247,12 +234,12 @@ namespace TrainingDay.ViewModels
                 ValueLabelColor = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
             }).ToList();
 
-            //var goalEntries = entries.Select(item => new ChartEntry((float)goal)
-            //{
-            //    ValueLabel = goal.ToString(),
-            //    Label = item.Label,
-            //    ValueLabelColor = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
-            //}).ToList();
+            var goalEntries = entries.Select(item => new ChartEntry((float)goal)
+            {
+                ValueLabel = goal.ToString(),
+                Label = item.Label,
+                ValueLabelColor = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
+            }).ToList();
 
             var minValue = items.Select(item => item.Weight).Min() - 1;
             return new LineChart
@@ -276,7 +263,6 @@ namespace TrainingDay.ViewModels
                     Style = SKPaintStyle.StrokeAndFill,
                     TextSize = 42
                 },
-
                 YAxisLinesPaint = new SKPaint
                 {
                     Color = Settings.IsLightTheme ? SKColors.Black : SKColors.White,
@@ -290,7 +276,8 @@ namespace TrainingDay.ViewModels
                     {
                         Color = SKColors.Green,
                         Entries = entries
-                    },
+                    }
+                    ,
                     new ChartSerie()
                     {
                         Color = SKColors.Gold,
