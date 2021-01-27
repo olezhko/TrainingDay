@@ -45,7 +45,7 @@
                                 <StackLayout Orientation="Vertical" Padding="0,5">
                                     <Label Text="{services:Translate CurrentString}" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium"/>
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                                        <controls:EntryWithDot MaxLength="{Binding Source={x:Reference Page}, Path=BindingContext.MaxLengthWeightField}" Text="{Binding CurrentValueString,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" x:Name="CurrentEntry" VerticalOptions="Center"/>
+                                        <controls:EntryWithDot MaxLength="{Binding MaxLengthCurrentField}" Text="{Binding CurrentValueString,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" x:Name="CurrentEntry" VerticalOptions="Center"/>
                                         <ImageButton Command="{Binding Source={x:Reference Page}, Path=BindingContext.SaveCurrentValueCommand}"  CommandParameter="{Binding }"
                                                      Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" />
                                     </StackLayout>
@@ -56,7 +56,7 @@
                                 <StackLayout Orientation="Vertical" Grid.Column="2" Padding="0,5">
                                     <Label Text="{services:Translate GoalString}" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium" />
                                     <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
-                                        <controls:EntryWithDot MaxLength="{Binding Source={x:Reference Page}, Path=BindingContext.MaxLengthWeightField}" Text="{Binding GoalValueString,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" x:Name="GoalEntry" VerticalOptions="Center"/>
+                                        <controls:EntryWithDot MaxLength="{Binding MaxLengthGoalField}" Text="{Binding GoalValueString,Mode=TwoWay}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="Medium" x:Name="GoalEntry" VerticalOptions="Center"/>
                                         <ImageButton Command="{Binding Source={x:Reference Page}, Path=BindingContext.SaveGoalValueCommand}" CommandParameter="{Binding }"
                                                      Source="accept.png" BackgroundColor="Transparent" Margin="5" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" BorderColor="Gray" BorderWidth="1" CornerRadius="2" Aspect="Fill" />
                                     </StackLayout>

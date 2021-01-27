@@ -45,7 +45,6 @@ namespace TrainingDay.ViewModels
             }
         }
 
-        public int MaxLengthWeightField { get; set; }
         #endregion
 
         public WeightViewAndSetPageViewModel()
@@ -154,14 +153,16 @@ namespace TrainingDay.ViewModels
 #if DEBUG
             var bodyControlItems = new List<WeightNote>()
             {
-                new WeightNote(){Date = new DateTime(2020,12,1),Weight = 100,Type = (int)WeightType.Weight},
-                new WeightNote(){Date = new DateTime(2020,12,8),Weight = 90,Type = (int)WeightType.Weight},
-                new WeightNote(){Date = new DateTime(2020,12,15),Weight = 95,Type = (int)WeightType.Weight},
-                new WeightNote(){Date = new DateTime(2020,12,22),Weight = 85,Type = (int)WeightType.Weight},
-                new WeightNote(){Date = new DateTime(2020,12,27),Weight = 97,Type = (int)WeightType.Weight},
-                new WeightNote(){Date = new DateTime(2021,01,2),Weight = 96,Type = (int)WeightType.Weight},
-                new WeightNote(){Date = new DateTime(2021,01,7),Weight = 91,Type = (int)WeightType.Weight},
-                new WeightNote(){Date = new DateTime(2021,01,12),Weight = 91,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = DateTime.Now - TimeSpan.FromDays(100),Weight = 100,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = DateTime.Now - TimeSpan.FromDays(80),Weight = 100,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = DateTime.Now - TimeSpan.FromDays(57),Weight = 100,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = DateTime.Now - TimeSpan.FromDays(43),Weight = 90,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = DateTime.Now - TimeSpan.FromDays(31),Weight = 95,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = DateTime.Now - TimeSpan.FromDays(23),Weight = 85,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = DateTime.Now - TimeSpan.FromDays(18),Weight = 97,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = DateTime.Now - TimeSpan.FromDays(13),Weight = 96,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = DateTime.Now - TimeSpan.FromDays(6),Weight = 91,Type = (int)WeightType.Weight},
+                new WeightNote(){Date = DateTime.Now - TimeSpan.FromDays(1),Weight = 91,Type = (int)WeightType.Weight},
             };
 #else
             var bodyControlItems = App.Database.GetWeightNotesItems();
@@ -301,6 +302,10 @@ namespace TrainingDay.ViewModels
 
     public class BodyControlItem: BaseViewModel
     {
+        public int MaxLengthCurrentField { get; set; } = 3;
+        public int MaxLengthGoalField { get; set; } = 3;
+
+
         public string GoalValueString
         {
             get => GoalValue.ToString(CultureInfo.InvariantCulture);
@@ -357,6 +362,9 @@ namespace TrainingDay.ViewModels
             {
                 _currentValue = value;
                 OnPropertyChanged();
+
+                MaxLengthCurrentField = value > 100 ? 3 : 4;
+                OnPropertyChanged(nameof(MaxLengthCurrentField));
             } }
 
         private double goalValue;
@@ -367,6 +375,9 @@ namespace TrainingDay.ViewModels
             {
                 goalValue = value;
                 OnPropertyChanged();
+
+                MaxLengthGoalField = value > 100 ? 3 : 4;
+                OnPropertyChanged(nameof(MaxLengthGoalField));
             }
         }
 
