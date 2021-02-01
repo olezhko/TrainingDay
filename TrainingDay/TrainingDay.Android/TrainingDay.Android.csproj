@@ -143,6 +143,7 @@
     <Compile Include="Services\FirebaseService.cs" />
     <Compile Include="Services\Sqlite.cs" />
     <Compile Include="SplashActivity.cs" />
+    <Compile Include="WebAuthenticationCallbackActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json" />

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
              xmlns:controls="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
+             xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
              x:Class="TrainingDay.Views.SettingsPage" IconImageSource = "settings.png" Title="{services:Translate SettingsString}">
     <ContentPage.Content>
         <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Default">
@@ -68,6 +69,15 @@
                     </Grid>
 
                     <controls:HyperlinkLabel Text="Instagram" TextDecorations="Underline" Url="https://www.instagram.com/trainingday.app/" VerticalTextAlignment="Center"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <StackLayout.BindingContext>
+                        <viewModels:WebAuthenticatorViewModel/>
+                    </StackLayout.BindingContext>
+                    <Button Text="Google" Command="{Binding GoogleCommand}"/>
+                    <!--<Button Text="Facebook" Command="{Binding FacebookCommand}"/>
+                    <Button Text="Apple" Command="{Binding AppleCommand}"/>-->
                 </StackLayout>
             </StackLayout>
         </ScrollView>

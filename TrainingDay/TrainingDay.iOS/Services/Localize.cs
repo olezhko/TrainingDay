@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -22,16 +23,18 @@ namespace TrainingDay.iOS.Services
                 var pref = NSLocale.PreferredLanguages[0];
                 netLanguage = pref.Replace("_", "-"); // заменяет pt_BR на pt-BR
             }
+            
             System.Globalization.CultureInfo ci = null;
             try
             {
                 ci = new System.Globalization.CultureInfo(netLanguage);
             }
-            catch
+            catch(Exception ex)
             {
                 ci = new System.Globalization.CultureInfo(prefLanguage);
             }
-            return ci;
+
+            return CultureInfo.CurrentCulture;
         }
 
         public string GetCurrentLanguage()
@@ -44,7 +47,7 @@ namespace TrainingDay.iOS.Services
                 netLanguage = pref.Replace("_", "-"); // заменяет pt_BR на pt-BR
             }
 
-            return netLanguage;
+            return CultureInfo.CurrentCulture.DisplayName;
         }
     }
 }

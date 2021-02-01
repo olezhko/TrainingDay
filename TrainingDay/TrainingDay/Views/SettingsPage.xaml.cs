@@ -12,7 +12,7 @@ namespace TrainingDay.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SettingsPage : ContentPage
 	{
-		public SettingsPage ()
+		public SettingsPage()
 		{
 			InitializeComponent ();
             ThemeSwitch.IsToggled = ((App.Current) as App).IsLightTheme;

@@ -84,6 +84,7 @@
     <Compile Include="Services\PopupLoader.cs" />
     <Compile Include="Services\Sqlite.cs" />
     <None Include="Entitlements.plist" />
+    <None Include="GoogleService-Info.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -288,7 +289,7 @@
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionTrainingDayiOSHideInfoBar="True" TriggeredFromHotReload="False" />
+      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadDebuggerTimeoutExceptionTrainingDayiOSHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

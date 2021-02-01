@@ -127,5 +127,13 @@ namespace TrainingDay.Droid
             };
             notificationManager.CreateNotificationChannel(silent_channel);
         }
+
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+            Xamarin.Essentials.Platform.OnResume();
+        }
     }
 }

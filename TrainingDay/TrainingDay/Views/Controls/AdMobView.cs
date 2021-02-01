@@ -21,9 +21,9 @@ namespace TrainingDay.Views.Controls
 
         public AdMobView()
         {
-#if DEBUG
-            IsVisible = false;
-#endif
+//#if DEBUG
+//            IsVisible = false;
+//#endif
         }
     }
 
