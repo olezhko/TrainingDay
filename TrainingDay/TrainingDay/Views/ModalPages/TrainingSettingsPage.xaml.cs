@@ -29,14 +29,14 @@ namespace TrainingDay.Views.ModalPages
         public event EventHandler<TrainingSettingsActions> ActionSelected;
         private async void AddAlarmCommand_Clicked(object sender, EventArgs e)
         {
-            ActionSelected?.Invoke(this, TrainingSettingsActions.AddAlarm);
             await Navigation.PopAsync();
+            ActionSelected?.Invoke(this, TrainingSettingsActions.AddAlarm);
         }
 
         private async void ShareTrainingCommand_Clicked(object sender, EventArgs e)
         {
-            ActionSelected?.Invoke(this, TrainingSettingsActions.ShareTraining);
             await Navigation.PopAsync();
+            ActionSelected?.Invoke(this, TrainingSettingsActions.ShareTraining);
         }
 
         private async void SetSuperSetCommand_Clicked(object sender, EventArgs e)
@@ -47,14 +47,14 @@ namespace TrainingDay.Views.ModalPages
 
         private async void StartMoveExerciseCommand_Clicked(object sender, EventArgs e)
         {
-            ActionSelected?.Invoke(this, TrainingSettingsActions.MoveExercises);
             await Navigation.PopAsync();
+            ActionSelected?.Invoke(this, TrainingSettingsActions.MoveExercises);
         }
 
         private async void StartCopyExerciseCommand_Clicked(object sender, EventArgs e)
         {
-            ActionSelected?.Invoke(this, TrainingSettingsActions.CopyExercises);
             await Navigation.PopAsync();
+            ActionSelected?.Invoke(this, TrainingSettingsActions.CopyExercises);
         }
 
         private async void ClosePage_Click(object sender, EventArgs e)

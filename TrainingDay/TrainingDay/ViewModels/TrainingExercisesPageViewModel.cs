@@ -557,7 +557,6 @@ namespace TrainingDay.ViewModels
                 Title = Resource.ShareTrainingString,
                 File = new ShareFile(filename, "application/trday")
             });
-            DependencyService.Get<IMessage>().ShortAlert(Resource.SharedString);
         }
         #endregion
 

@@ -25,8 +25,8 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Frame CornerRadius="20" BackgroundColor="Gray">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
+            <Frame CornerRadius="20" BackgroundColor="Gray" Padding="0">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start" Padding="0">
                     <ImageButton Source="add.png" VerticalOptions="Center" HeightRequest="40" WidthRequest="40" Command="{Binding CreateNewAndPasteCommand}" BackgroundColor="Transparent"/>
                     <Button VerticalOptions="Center" Command="{Binding CreateNewAndPasteCommand}" Text="{services:Translate CreateNewString}" BackgroundColor="Transparent"/>
                 </StackLayout>
