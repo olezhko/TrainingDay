@@ -41,8 +41,8 @@ namespace TrainingDay.Views.ModalPages
 
         private async void SetSuperSetCommand_Clicked(object sender, EventArgs e)
         {
-            ActionSelected?.Invoke(this, TrainingSettingsActions.SuperSetAction);
             await Navigation.PopAsync();
+            ActionSelected?.Invoke(this, TrainingSettingsActions.SuperSetAction);
         }
 
         private async void StartMoveExerciseCommand_Clicked(object sender, EventArgs e)

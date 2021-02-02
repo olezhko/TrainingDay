@@ -46,6 +46,7 @@ namespace TrainingDay.Views.Controls
                 }
                 NameEditor.IsVisible = item.ExerciseImageUrl == null;
                 NameLabel.IsVisible = item.ExerciseImageUrl != null;
+                LoadVideoItems();
             }
         }
 

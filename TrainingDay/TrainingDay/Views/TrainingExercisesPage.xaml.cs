@@ -28,10 +28,9 @@ namespace TrainingDay.View
         {
             TrainingViewModel trVm = new TrainingViewModel(App.Database.GetTrainingItem(id));
             PrepareTrainingViewModel(trVm);
-            TrainingExercisesPageViewModel vm = new TrainingExercisesPageViewModel()
-            {
-                Navigation = Navigation
-            };
+            TrainingExercisesPageViewModel vm = BindingContext as TrainingExercisesPageViewModel ?? new TrainingExercisesPageViewModel();
+
+            vm.Navigation = Navigation;
             vm.Load(trVm);
             BindingContext = vm;
         }

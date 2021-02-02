@@ -39,6 +39,7 @@ namespace TrainingDay.ViewModels
             OnPropertyChanged(nameof(Training.Title));
 
             Training.Id = trVm.Id;
+            Training.Exercises.Clear();
             foreach (var item in trVm.Exercises)
             {
                 Training.AddExercise(item);
@@ -415,6 +416,7 @@ namespace TrainingDay.ViewModels
 
         public ICommand StartActionCommand => new Command(StartAction);
         public bool IsMoveOrCopyAction { get; set; } // need for show or hide listview with training to copy or move
+
         private void StartAction()
         {
             if (CurrentAction == ExerciseCheckBoxAction.Select)
@@ -424,21 +426,23 @@ namespace TrainingDay.ViewModels
                 Navigation.PopAsync(false);
                 Navigation.PopAsync();
             }
+            else if (CurrentAction != ExerciseCheckBoxAction.SuperSet)
+            {
+                ReFillTrainingToCopyOrMove();
+                TrainingExercisesMoveOrCopy page = new TrainingExercisesMoveOrCopy(); // added
+                page.BindingContext = this;
+                Navigation.PushAsync(page); // added
+                IsMoveOrCopyAction = true;
+                OnPropertyChanged(nameof(IsMoveOrCopyAction));
+            }
             else
-                if (CurrentAction != ExerciseCheckBoxAction.SuperSet)
+            {
+                if (selectedItems.Count > 1)
                 {
-                    ReFillTrainingToCopyOrMove();
-                    IsMoveOrCopyAction = true;
-                    OnPropertyChanged(nameof(IsMoveOrCopyAction));
+                    CreateSuperSet();
+                    StopAction(true);
                 }
-                else
-                {
-                    if (selectedItems.Count > 1)
-                    {
-                        CreateSuperSet();
-                        StopAction(true);
-                    }
-                }
+            }
         }
 
         private void ReFillTrainingToCopyOrMove()
@@ -464,6 +468,8 @@ namespace TrainingDay.ViewModels
         public ICommand TrainingSelectedCommand => new Command<ItemTappedEventArgs>(TrainingSelected);
         private void TrainingSelected(ItemTappedEventArgs parameter)
         {
+            Navigation.PopAsync(); // added
+
             TrainingViewModel trVm = parameter.Item as TrainingViewModel;
             int id = trVm.Id;
             if (id!=0)
@@ -499,6 +505,8 @@ namespace TrainingDay.ViewModels
         public ICommand CreateNewAndPasteCommand => new Command(CreateNewAndPaste);
         private void CreateNewAndPaste()
         {
+            Navigation.PopAsync(); // added
+
             var id = App.Database.SaveTrainingItem(new Training()
             {
                 Title = Resource.TrainingString

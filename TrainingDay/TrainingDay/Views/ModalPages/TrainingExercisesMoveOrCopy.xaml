@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
+             xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
+             x:Class="TrainingDay.Views.ModalPages.TrainingExercisesMoveOrCopy" Title="{services:Translate ChooseTrainingOrNewString}">
+    <ContentPage.BindingContext>
+        <viewModels:TrainingExercisesPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout IsVisible="{Binding IsMoveOrCopyAction}" Grid.Row="0" Grid.RowSpan="4" BackgroundColor="{DynamicResource ContentPageBackgroundColor}">
+            <Label Text="{services:Translate ChooseTrainingOrNewString}" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Start" FontSize="Medium"/>
+            <ListView ItemsSource="{Binding TrainingItems}" HasUnevenRows="True" RowHeight="-1" VerticalOptions="Start">
+                <ListView.Behaviors>
+                    <services:EventToCommandBehavior EventName="ItemTapped" Command="{Binding TrainingSelectedCommand}" />
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell x:Name="viewCell">
+                            <Frame BackgroundColor="Transparent" Style="{StaticResource FrameCellStyle}" Padding="20">
+                                <Label Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="Medium"  HorizontalOptions="Center" FontAttributes="Bold" VerticalOptions="Center"/>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Frame CornerRadius="20" BackgroundColor="Gray">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
+                    <ImageButton Source="add.png" VerticalOptions="Center" HeightRequest="40" WidthRequest="40" Command="{Binding CreateNewAndPasteCommand}" BackgroundColor="Transparent"/>
+                    <Button VerticalOptions="Center" Command="{Binding CreateNewAndPasteCommand}" Text="{services:Translate CreateNewString}" BackgroundColor="Transparent"/>
+                </StackLayout>
+            </Frame>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

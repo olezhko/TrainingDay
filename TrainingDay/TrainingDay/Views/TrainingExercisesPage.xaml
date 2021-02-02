@@ -13,12 +13,6 @@
         <ToolbarItem IconImageSource="add.png" Command="{Binding AddExercisesCommand}" Order="Primary" />
         <ToolbarItem IconImageSource="accept.png" Command="{Binding SaveChangesCommand}" Order="Primary" />
         <ToolbarItem IconImageSource="settings.png" Command="{Binding ShowTrainingSettingsPageCommand}" Order="Primary" />
-
-        <!--<ToolbarItem Text="{services:Translate Notification}" Command="{Binding MakeNotifyCommand}" Order="Secondary" x:Name="AddAlarmToolbarItem" />
-        <ToolbarItem Text="{services:Translate ShareTrainingString}" Command="{Binding ShareTrainingCommand}" Order="Secondary"/>
-        <ToolbarItem Text="{services:Translate SuperSetString}" Command="{Binding SetSuperSetCommand}" Order="Secondary" />
-        <ToolbarItem Text="{services:Translate MoveString}" Command="{Binding StartMoveExerciseCommand}" Order="Secondary" />
-        <ToolbarItem Text="{services:Translate CopyString}" Command="{Binding StartCopyExerciseCommand}" Order="Secondary" />-->
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
@@ -135,15 +129,6 @@
                 </xForms:SfListView.ItemTemplate>
             </xForms:SfListView>
 
-
-
-
-
-
-
-
-
-
             <Button Command="{Binding MakeTrainingCommand}" Text="{services:Translate MakeTrainingString}" Grid.Row="2" FontSize="Large" x:Name="MakeTrainingButton" Margin="5" BackgroundColor="LimeGreen">
                 <Button.Style>
                     <Style TargetType="Button" >
@@ -177,28 +162,7 @@
                 </controls2:AdMobView.AdUnitId>
             </controls2:AdMobView>
 
-            <StackLayout IsVisible="{Binding IsMoveOrCopyAction}" Grid.Row="0" Grid.RowSpan="4" BackgroundColor="{DynamicResource ContentPageBackgroundColor}">
-                <Label Text="{services:Translate ChooseTrainingOrNewString}" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Start" FontSize="Medium"/>
-                <ListView ItemsSource="{Binding TrainingItems}" HasUnevenRows="True" RowHeight="-1" VerticalOptions="Start">
-                    <ListView.Behaviors>
-                        <services:EventToCommandBehavior EventName="ItemTapped" Command="{Binding TrainingSelectedCommand}" />
-                    </ListView.Behaviors>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell x:Name="viewCell">
-                                <Frame BackgroundColor="Transparent" Style="{StaticResource FrameCellStyle}" Padding="20">
-                                    <Label Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="Medium"  HorizontalOptions="Center" FontAttributes="Bold" VerticalOptions="Center"/>
-                                </Frame>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
-                    <ImageButton Source="add.png" VerticalOptions="Center" HeightRequest="40" WidthRequest="40" Command="{Binding CreateNewAndPasteCommand}" BackgroundColor="Transparent"/>
-                    <Button VerticalOptions="Center" Command="{Binding CreateNewAndPasteCommand}" Text="{services:Translate CreateNewString}"/>
-                </StackLayout>
-            </StackLayout>
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>
