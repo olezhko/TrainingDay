@@ -124,15 +124,7 @@
                 </xForms:SfListView.ItemTemplate>
             </xForms:SfListView>
 
-
-            <Grid Grid.Row="3" IsVisible="{Binding IsExercisesCheckBoxVisible}" HorizontalOptions="FillAndExpand">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Text="{services:Translate CancelString}" Command="{Binding CancelActionCommand}" HorizontalOptions="FillAndExpand"/>
-                <Button Grid.Column="1" Text="{Binding ExerciseActionString}" Command="{Binding StartActionCommand}" HorizontalOptions="FillAndExpand"/>
-            </Grid>
+            <Button Grid.Row="3" IsVisible="{Binding IsExercisesCheckBoxVisible}" Text="{Binding ExerciseActionString}" Command="{Binding StartActionCommand}" HorizontalOptions="FillAndExpand"/>
 
             <controls2:AdMobView BackgroundColor="Transparent" VerticalOptions="Start" Grid.Row="4">
                 <controls2:AdMobView.AdUnitId>
