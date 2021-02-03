@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TrainingDay.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -54,6 +55,10 @@ namespace TrainingDay.ViewModels
                 }
 
                 AuthToken = r?.AccessToken ?? r?.IdToken;
+                if (scheme == "Google")
+                {
+                    Settings.GoogleToken = AuthToken;
+                }
             }
             catch (Exception ex)
             {

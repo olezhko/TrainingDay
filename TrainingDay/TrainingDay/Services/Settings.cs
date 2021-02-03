@@ -135,5 +135,14 @@ namespace TrainingDay.Services
             get => AppSettings.GetValueOrDefault(nameof(HipGoal), SettingsHipGoal);
             set => AppSettings.AddOrUpdateValue(nameof(HipGoal), value);
         }
+
+
+
+        private static readonly string SettingsGoogleToken = "";
+        public static string GoogleToken
+        {
+            get => AppSettings.GetValueOrDefault(nameof(GoogleToken), SettingsGoogleToken);
+            set => AppSettings.AddOrUpdateValue(nameof(GoogleToken), value);
+        }
     }
 }

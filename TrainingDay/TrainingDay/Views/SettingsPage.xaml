@@ -71,7 +71,7 @@
                     <controls:HyperlinkLabel Text="Instagram" TextDecorations="Underline" Url="https://www.instagram.com/trainingday.app/" VerticalTextAlignment="Center"/>
                 </StackLayout>
 
-                <StackLayout>
+                <StackLayout IsVisible="False">
                     <StackLayout.BindingContext>
                         <viewModels:WebAuthenticatorViewModel/>
                     </StackLayout.BindingContext>
