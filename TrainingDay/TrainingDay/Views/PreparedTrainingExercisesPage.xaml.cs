@@ -20,7 +20,7 @@ namespace TrainingDay.View
             base.OnAppearing();
             var vm = BindingContext as TrainingExercisesPageViewModel;
             vm.StartSelectExercises();
-            DisplayAlert(Resource.AdviceString, Resource.HelpDeleteUnusefulExercises, "OK");
+            DisplayAlert(Resource.AdviceString, Resource.MarkTheRequiredExercisesAndPress + Resource.SaveTrainingString, "OK");
             ItemsListView.SelectedItem = null;
         }
     }

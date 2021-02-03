@@ -504,8 +504,8 @@
   <data name="AuthorString" xml:space="preserve">
     <value>Author: {0}</value>
   </data>
-  <data name="HelpDeleteUnusefulExercises" xml:space="preserve">
-    <value>Select exercises and checkmark selected exercises</value>
+  <data name="MarkTheRequiredExercisesAndPress" xml:space="preserve">
+    <value>Checkmark the required exercises and press </value>
   </data>
   <data name="StartWorkoutString" xml:space="preserve">
     <value>Start Workout</value>

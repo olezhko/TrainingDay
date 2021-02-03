@@ -32,27 +32,6 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <!--<Switch VerticalOptions="Center" IsToggled="{Binding IsSelected, Mode=TwoWay}" IsVisible="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.IsExercisesCheckBoxVisible}" HorizontalOptions="CenterAndExpand">
-                                    <Switch.Style>
-                                        <Style TargetType="Switch">
-                                            <Style.Triggers>
-                                                <MultiTrigger TargetType="Switch">
-                                                    <MultiTrigger.Conditions>
-                                                        <BindingCondition Binding="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.CurrentAction}" 
-                                                                          Value="{x:Static viewModels:ExerciseCheckBoxAction.SuperSet}" />
-                                                        <BindingCondition Binding="{Binding SuperSetId,Converter={StaticResource SuperSetMenuConverter}}" Value="True" />
-                                                    </MultiTrigger.Conditions>
-                                                    <Setter Property="IsEnabled" Value="False"/>
-                                                </MultiTrigger>
-                                            </Style.Triggers>
-                                            <Setter Property="IsEnabled" Value="True"/>
-                                        </Style>
-                                    </Switch.Style>
-                                    <Switch.Behaviors>
-                                        <services:EventToCommandBehavior EventName="Toggled" Command="{Binding Source={x:Reference ContentPage}, 
-                                            Path=BindingContext.SuperSetExercisesCheckedChangedCommand}" CommandParameter="{Binding }"/>
-                                    </Switch.Behaviors>
-                                </Switch>-->
 
                                 <CheckBox VerticalOptions="Center" IsChecked="{Binding IsSelected, Mode=TwoWay}" IsVisible="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.IsExercisesCheckBoxVisible}" HorizontalOptions="CenterAndExpand">
                                     <CheckBox.Style>

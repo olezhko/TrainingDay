@@ -628,15 +628,6 @@ namespace TrainingDay.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select exercises and checkmark selected exercises.
-        /// </summary>
-        internal static string HelpDeleteUnusefulExercises {
-            get {
-                return ResourceManager.GetString("HelpDeleteUnusefulExercises", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to HELPER.
         /// </summary>
         internal static string HelperString {
@@ -732,6 +723,15 @@ namespace TrainingDay.Resources {
         internal static string MakeTrainingString {
             get {
                 return ResourceManager.GetString("MakeTrainingString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checkmark the required exercises and press .
+        /// </summary>
+        internal static string MarkTheRequiredExercisesAndPress {
+            get {
+                return ResourceManager.GetString("MarkTheRequiredExercisesAndPress", resourceCulture);
             }
         }
         

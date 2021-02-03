@@ -67,6 +67,8 @@ namespace TrainingDay.ViewModels
                 selectedItems.ForEach(a=>a.IsSelected = false);
                 foreach (var exerciseItem in selectedItems)
                 {
+                    exerciseItem.TrainingId = Training.Id;
+                    App.Database.SaveTrainingExerciseItem(exerciseItem.GetTrainingExerciseComm());
                     Training.AddExercise(exerciseItem);
                 }
             }
@@ -565,7 +567,7 @@ namespace TrainingDay.ViewModels
         {
             CurrentAction = ExerciseCheckBoxAction.Select;
             OnPropertyChanged(nameof(CurrentAction));
-            PrepareAction(Resource.ChouseExerciseString);
+            PrepareAction(Resource.SaveTrainingString);
         }
 
         public ICommand ShowTrainingSettingsPageCommand => new Command(ShowTrainingSettingsPage);

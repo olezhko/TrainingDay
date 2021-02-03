@@ -121,6 +121,7 @@ namespace TrainingDay.ViewModels
         public AlarmViewModel()
         {
             AlarmItem = new Alarm();
+            AlarmItem.TimeOffset = DateTimeOffset.Now;
         }
 
         public AlarmViewModel(Alarm alarmItem)

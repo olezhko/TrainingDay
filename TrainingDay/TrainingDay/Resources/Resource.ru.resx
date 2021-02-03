@@ -501,8 +501,8 @@
   <data name="AuthorString" xml:space="preserve">
     <value>Автор: {0}</value>
   </data>
-  <data name="HelpDeleteUnusefulExercises" xml:space="preserve">
-    <value>Выберите упражнения и поставьте галочки на выбранных упражнениях</value>
+  <data name="MarkTheRequiredExercisesAndPress" xml:space="preserve">
+    <value>Отметьте необходимые упражнения и нажмите кнопку </value>
   </data>
   <data name="HelperString" xml:space="preserve">
     <value>ПОМОЩНИК</value>
