@@ -48,6 +48,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
                 <StackLayout>
@@ -59,6 +60,14 @@
                     </Frame>
                 </StackLayout>
                 <StackLayout Grid.Row="0" Grid.Column="1">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SkipButtonClicked"/>
+                    </StackLayout.GestureRecognizers>
+                    <Frame x:Name="SkipButton" CornerRadius="20" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="DimGray" HeightRequest="40" WidthRequest="40" Padding="0" Margin="0">
+                        <Image Source="skip.png" HeightRequest="40" WidthRequest="40" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout Grid.Row="0" Grid.Column="2">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="FinishButtonClicked"/>
                     </StackLayout.GestureRecognizers>

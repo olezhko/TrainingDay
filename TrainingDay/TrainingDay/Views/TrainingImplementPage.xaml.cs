@@ -40,6 +40,7 @@ namespace TrainingDay.View
             if (e.PropertyName == nameof(StepProgressBar.StepSelected))
             {
                 FinishButton.IsVisible = Items[StepProgressBarControl.StepSelected].First().IsNotFinished;
+                SkipButton.IsVisible = Items[StepProgressBarControl.StepSelected].First().IsNotFinished;
             }
         }
 
@@ -149,7 +150,9 @@ namespace TrainingDay.View
             {
                 Items[StepProgressBarControl.StepSelected].ForEach(item => item.IsNotFinished = false);
 
-                if (Items.All(a => a.All(item => !item.IsNotFinished)) && _enabledTimer)
+                Items[StepProgressBarControl.StepSelected].ForEach(item => item.IsSkipped = false);
+
+                if (Items.All(a => a.All(item => !item.IsNotFinished || item.IsSkipped)) && _enabledTimer)
                 {
                     _enabledTimer = false;
                     DependencyService.Get<IMessage>().CancelNotification(App.TrainingImplementTimeId);
@@ -188,7 +191,7 @@ namespace TrainingDay.View
             int index = 0;
             foreach (var trainingExerciseViewModel in Items)
             {
-                if (trainingExerciseViewModel.First().IsNotFinished)
+                if (trainingExerciseViewModel.First().IsNotFinished && !trainingExerciseViewModel.First().IsSkipped)
                 {
                     return index;
                 }
@@ -214,6 +217,10 @@ namespace TrainingDay.View
             {
                 foreach (var item in superSet)
                 {
+                    if (item.IsSkipped)
+                    {
+                        continue;
+                    }
                     App.Database.SaveLastTrainingExerciseItem(new LastTrainingExercise()
                     {
                         LastTrainingId = id,
@@ -321,6 +328,20 @@ namespace TrainingDay.View
             {
                 DependencyService.Get<IDeviceConfig>().SetBrightness(-1.0f);
             }
+        }
+
+        private void SkipButtonClicked(object sender, EventArgs e)
+        {
+            if (!Items[StepProgressBarControl.StepSelected].First().IsSkipped) // if ex or superset not skipped
+            {
+                StepProgressBarControl.SkipElement(); // make it skipped in step
+                StepProgressBarControl.NextElement(FirstIndexIsNotFinished());
+            }
+            else
+            {
+                StepProgressBarControl.DeSkipElement();
+            }
+            Items[StepProgressBarControl.StepSelected].ForEach(item => item.IsSkipped = !item.IsSkipped);// reverse skipped in exercise
         }
     }
 }

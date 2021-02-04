@@ -225,6 +225,22 @@ namespace TrainingDay.Views.Controls
                 children.BackgroundColor = Color.LightGreen;
             }
         }
+        public void DeSkipElement()
+        {
+            var children = headersStackLayout.Children.FirstOrDefault(p => (Convert.ToInt32(p.ClassId) == StepSelected + 1)) as Button;
+            if (children != null)
+            {
+                children.BackgroundColor = Color.Transparent;
+            }
+        }
+        public void SkipElement()
+        {
+            var children = headersStackLayout.Children.FirstOrDefault(p => (Convert.ToInt32(p.ClassId) == StepSelected + 1)) as Button;
+            if (children != null)
+            {
+                children.BackgroundColor = Color.DimGray;
+            }
+        }
 
         private static void ItemsSource_OnPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {

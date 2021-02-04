@@ -37,6 +37,17 @@ namespace TrainingDay.ViewModels
             }
         }
 
+        private bool skipped = false;
+        public bool IsSkipped
+        {
+            get => skipped;
+            set
+            {
+                skipped = value;
+                OnPropertyChanged();
+            }
+        }
+
         public int TrainingExerciseId { get; set; }
         public int ExerciseId { get; set; }
         public int TrainingId { get; set; }
