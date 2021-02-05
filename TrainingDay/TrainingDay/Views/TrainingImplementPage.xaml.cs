@@ -1,6 +1,7 @@
 ﻿using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
@@ -152,6 +153,7 @@ namespace TrainingDay.View
 
                 Items[StepProgressBarControl.StepSelected].ForEach(item => item.IsSkipped = false);
 
+                
                 if (Items.All(a => a.All(item => !item.IsNotFinished || item.IsSkipped)) && _enabledTimer)
                 {
                     _enabledTimer = false;
@@ -332,7 +334,9 @@ namespace TrainingDay.View
 
         private void SkipButtonClicked(object sender, EventArgs e)
         {
-            if (!Items[StepProgressBarControl.StepSelected].First().IsSkipped) // if ex or superset not skipped
+            Items[StepProgressBarControl.StepSelected].ForEach(item => item.IsSkipped = !item.IsSkipped);// reverse skipped in exercise
+
+            if (Items[StepProgressBarControl.StepSelected].First().IsSkipped) // if ex or superset not skipped
             {
                 StepProgressBarControl.SkipElement(); // make it skipped in step
                 StepProgressBarControl.NextElement(FirstIndexIsNotFinished());
@@ -341,7 +345,6 @@ namespace TrainingDay.View
             {
                 StepProgressBarControl.DeSkipElement();
             }
-            Items[StepProgressBarControl.StepSelected].ForEach(item => item.IsSkipped = !item.IsSkipped);// reverse skipped in exercise
         }
     }
 }
