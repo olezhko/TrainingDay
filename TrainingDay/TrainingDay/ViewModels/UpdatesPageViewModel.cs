@@ -72,6 +72,7 @@ namespace TrainingDay.ViewModels
                     text = updateItem.Text;
                     ReplaceParams(ref text, "width=", "width=\"");
                     ReplaceParams(ref text, "height=", "height=\"");
+                    ReplaceParams(ref text, "align=", "align=\"");
                     ReplaceParams(ref text, "src=", "src=\"");
                     updateItem.Text = text;
                 }

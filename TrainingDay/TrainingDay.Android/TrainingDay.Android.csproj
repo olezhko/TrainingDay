@@ -298,10 +298,10 @@
     <AndroidAsset Include="Assets\bug.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\fitness.png" />
+    <AndroidResource Include="Resources\drawable\skip.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\skip.png" />
+    <AndroidAsset Include="Assets\skip.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>

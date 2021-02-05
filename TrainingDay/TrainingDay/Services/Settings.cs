@@ -101,7 +101,7 @@ namespace TrainingDay.Services
         }
 
 
-        private static readonly bool SettingsIsExpandedMainGroup = false;
+        private static readonly bool SettingsIsExpandedMainGroup = true;
         public static bool IsExpandedMainGroup
         {
             get => AppSettings.GetValueOrDefault(nameof(IsExpandedMainGroup), SettingsIsExpandedMainGroup);
