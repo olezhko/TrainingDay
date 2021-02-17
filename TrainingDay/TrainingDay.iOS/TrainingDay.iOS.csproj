@@ -84,7 +84,6 @@
     <Compile Include="Services\PopupLoader.cs" />
     <Compile Include="Services\Sqlite.cs" />
     <None Include="Entitlements.plist" />
-    <None Include="GoogleService-Info.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -193,12 +192,13 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\TrainingDay\TrainingDay.csproj">
-      <Project>{B68D315E-8E79-4280-AA4F-5366E48FDF46}</Project>
+      <Project>{148F462C-B448-438B-AFDE-A908B0AFDAC2}</Project>
       <Name>TrainingDay</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\weight.png" />
+    <BundleResource Include="GoogleService-Info.plist" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\train_hist.png" />
