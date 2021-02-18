@@ -18,7 +18,7 @@ namespace TrainingDay
     public partial class App : Application
     {
         public const string DATABASE_NAME = "exercise.db";
-        public const string Version = "1.0.6.12";
+        public const string Version = "1.0.6.13";
         private static Repository database;
 
         private static object lockBase = new object();

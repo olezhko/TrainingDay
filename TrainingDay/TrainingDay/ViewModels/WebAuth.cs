@@ -62,7 +62,7 @@ namespace TrainingDay.ViewModels
                     //if (r.Properties.TryGetValue("name", out var name) && !string.IsNullOrEmpty(name))
                     //    googleName = $"Name: {name}{Environment.NewLine}";
                     if (r.Properties.TryGetValue("email", out var email) && !string.IsNullOrEmpty(email))
-                        Settings.GoogleEmail = $"Email: {email}{Environment.NewLine}";
+                        Settings.GoogleEmail = Uri.UnescapeDataString(email);
                 }
             }
             catch (Exception ex)
