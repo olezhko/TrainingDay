@@ -71,11 +71,14 @@
                     <controls:HyperlinkLabel Text="Instagram" TextDecorations="Underline" Url="https://www.instagram.com/trainingday.app/" VerticalTextAlignment="Center"/>
                 </StackLayout>
 
-                <StackLayout IsVisible="False">
+                <StackLayout IsVisible="True">
                     <StackLayout.BindingContext>
                         <viewModels:WebAuthenticatorViewModel/>
                     </StackLayout.BindingContext>
+                    
+                    
                     <Button Text="Google" Command="{Binding GoogleCommand}"/>
+                    <Label Text="{Binding GoogleEmail}"/>
                     <!--<Button Text="Facebook" Command="{Binding FacebookCommand}"/>
                     <Button Text="Apple" Command="{Binding AppleCommand}"/>-->
                 </StackLayout>

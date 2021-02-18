@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using TrainingDay.Model;
 using TrainingDay.Resources;
@@ -150,30 +151,11 @@ namespace TrainingDay.View
             try
             {
                 Items[StepProgressBarControl.StepSelected].ForEach(item => item.IsNotFinished = false);
-
                 Items[StepProgressBarControl.StepSelected].ForEach(item => item.IsSkipped = false);
 
-                
                 if (Items.All(a => a.All(item => !item.IsNotFinished || item.IsSkipped)) && _enabledTimer)
                 {
-                    _enabledTimer = false;
-                    DependencyService.Get<IMessage>().CancelNotification(App.TrainingImplementTimeId);
-                    DeviceDisplay.KeepScreenOn = false;
-                    Settings.IsTrainingNotFinished = false;
-                    SaveLastTraining();
-                    SaveChangedExercises();
-
-                    DependencyService.Get<IMessage>().ShowMessage(Resource.AdviceAfterTrainingMessage, Resource.AdviceString);
-                    DependencyService.Get<IMessage>().ShortAlert(Resource.TrainingFinishedString);
-
-                    DependencyService.Get<IAdInterstitial>().ShowAd(Device.RuntimePlatform == Device.Android
-                        ? "ca-app-pub-8728883017081055/7837401616"
-                        : "ca-app-pub-8728883017081055/1550276858");
-
-                    DependencyService.Get<IMessage>().CancelNotification(App.TrainingNotificationId);
-
-                    await SiteService.SendFinishedWorkout(Settings.Token);
-                    await Navigation.PopAsync();
+                    await FinishAndSave();
                 }
                 else
                 {
@@ -203,6 +185,29 @@ namespace TrainingDay.View
 
             return index;
         }
+
+        private async Task FinishAndSave()
+        {
+            _enabledTimer = false;
+            DependencyService.Get<IMessage>().CancelNotification(App.TrainingImplementTimeId);
+            DeviceDisplay.KeepScreenOn = false;
+            Settings.IsTrainingNotFinished = false;
+            SaveLastTraining();
+            SaveChangedExercises();
+
+            DependencyService.Get<IMessage>().ShowMessage(Resource.AdviceAfterTrainingMessage, Resource.AdviceString);
+            DependencyService.Get<IMessage>().ShortAlert(Resource.TrainingFinishedString);
+
+            DependencyService.Get<IAdInterstitial>().ShowAd(Device.RuntimePlatform == Device.Android
+                ? "ca-app-pub-8728883017081055/7837401616"
+                : "ca-app-pub-8728883017081055/1550276858");
+
+            DependencyService.Get<IMessage>().CancelNotification(App.TrainingNotificationId);
+
+            await SiteService.SendFinishedWorkout(Settings.Token);
+            await Navigation.PopAsync();
+        }
+
 
         private void SaveLastTraining()
         {
@@ -332,7 +337,7 @@ namespace TrainingDay.View
             }
         }
 
-        private void SkipButtonClicked(object sender, EventArgs e)
+        private async void SkipButtonClicked(object sender, EventArgs e)
         {
             Items[StepProgressBarControl.StepSelected].ForEach(item => item.IsSkipped = !item.IsSkipped);// reverse skipped in exercise
 
@@ -340,6 +345,10 @@ namespace TrainingDay.View
             {
                 StepProgressBarControl.SkipElement(); // make it skipped in step
                 StepProgressBarControl.NextElement(FirstIndexIsNotFinished());
+                if (Items.All(a => a.All(item => !item.IsNotFinished || item.IsSkipped)) && _enabledTimer)
+                {
+                    await FinishAndSave();
+                }
             }
             else
             {

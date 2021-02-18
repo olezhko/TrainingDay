@@ -15,11 +15,12 @@ namespace TrainingDay.ViewModels
 
         public WebAuthenticatorViewModel()
         {
+            GoogleEmail = Settings.GoogleEmail;
             GoogleCommand = new Command(async () => await OnAuthenticate("Google"));
             FacebookCommand = new Command(async () => await OnAuthenticate("Facebook"));
             AppleCommand = new Command(async () => await OnAuthenticate("Apple"));
         }
-
+        public string GoogleEmail { get; set; }
         public ICommand GoogleCommand { get; }
 
         public ICommand FacebookCommand { get; }
@@ -58,6 +59,10 @@ namespace TrainingDay.ViewModels
                 if (scheme == "Google")
                 {
                     Settings.GoogleToken = AuthToken;
+                    //if (r.Properties.TryGetValue("name", out var name) && !string.IsNullOrEmpty(name))
+                    //    googleName = $"Name: {name}{Environment.NewLine}";
+                    if (r.Properties.TryGetValue("email", out var email) && !string.IsNullOrEmpty(email))
+                        Settings.GoogleEmail = $"Email: {email}{Environment.NewLine}";
                 }
             }
             catch (Exception ex)

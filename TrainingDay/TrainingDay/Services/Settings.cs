@@ -144,5 +144,12 @@ namespace TrainingDay.Services
             get => AppSettings.GetValueOrDefault(nameof(GoogleToken), SettingsGoogleToken);
             set => AppSettings.AddOrUpdateValue(nameof(GoogleToken), value);
         }
+
+        private static readonly string SettingsGoogleEmail = "";
+        public static string GoogleEmail
+        {
+            get => AppSettings.GetValueOrDefault(nameof(GoogleEmail), SettingsGoogleEmail);
+            set => AppSettings.AddOrUpdateValue(nameof(GoogleEmail), value);
+        }
     }
 }
