@@ -972,4 +972,31 @@
 		<ExerciseImageUrl></ExerciseImageUrl>
 		<Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
 	</Exercise>
+  <Exercise>
+    <CodeNum>120</CodeNum>
+    <Name>Barbell Front Raise</Name>
+    <Version>1.0.6.13</Version>
+    <Description>{"start":"Grip the barbell with hands shoulder-width apart and feet positioned at about hip-width. Hold the barbell down by the front of your thighs. Maintain an erect posture with shoulders about neutral or retracted. ","exec":"While keeping the elbows straight or slightly bent, raise your arms up in front of you to eye or shoulder level. Slowly lower the bar and repeat. ","advice":"There’s no need to try and jump to maximum poundages as it’ll limit the effectiveness of the exercise and place unnecessary stress on your joints. You also want your arms to be positioned parallel and not too narrow or wide to maximize results.",}</Description>
+    <Muscles>ShouldersFront,ShouldersMiddle,Chest,Trapezium</Muscles>
+    <ExerciseImageUrl></ExerciseImageUrl>
+    <Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+  </Exercise>
+  <Exercise>
+    <CodeNum>121</CodeNum>
+    <Name>Pushup and Row</Name>
+    <Version>1.0.6.13</Version>
+    <Description>{"start":"Start in a pushup position as you grip a pair of hex dumbbells placed shoulder-width apart, your palms facing in. Keep your feet about hip-width apart.","exec":"Lower down into a pushup until your body hovers just above the floor. Your body should stay in a straight line from head to heels the entire time. Pause, and then push yourself back up. Now bring one dumbbell toward your rib cage and return it to the floor.","advice":"Keep the elbows close to your sides. Make sure you do not round your back. Keep your hips level throughout the movement. Keep your body in a straight line. Avoid any sagging in the middle by keeping your back straight (but not arched).",}</Description>
+    <Muscles>Chest,WidestBack,ShouldersFront,ShouldersBack,ShouldersMiddle</Muscles>
+    <ExerciseImageUrl></ExerciseImageUrl>
+    <Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+  </Exercise>
+  <Exercise>
+    <CodeNum>122</CodeNum>
+    <Name>Leaning dumbbell lateral raise</Name>
+    <Version>1.0.6.13</Version>
+    <Description>{"start":"Starting position: Holding a dumbbell in one hand, grasp a pole, cable machine, or anything stable with your free hand. Position both feet under the hand with which you are grasping the pole and lean out to the side holding the dumbbell, allowing the dumbbell to hang straight down. Flex your hips slightly so that you are leaning a little forward.","exec":"Keeping your body still and elbow slightly flexed, exhale as you raise the dumbbell out to the side. Hold for a count of two. Inhale as you lower the dumbbell to the starting position in a controlled manner. Repeat for the prescribed number of repetitions. Repeat the exercise with your opposite arm.","advice":"Keep your body still; only your arm should move. Holding on to the pole helps to stabilize your body, which reduces your ability to cheat. Do not swing the dumbbell; keep the movement slow and under control. If you have to swing the dumbbell, you are using too much weight and should reduce the load. If you use too much weight, your trapezius will get more involved, which will reduce the emphasis on your lateral deltoid. If the leaning dumbbell lateral raise hurts your shoulders, avoid it.",}</Description>
+    <Muscles>ShouldersFront,ShouldersMiddle,Chest,Trapezium</Muscles>
+    <ExerciseImageUrl></ExerciseImageUrl>
+    <Tag>DatabaseExercise,ExerciseByRepsAndWeight</Tag>
+  </Exercise>
 </Root>

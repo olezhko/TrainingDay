@@ -10,7 +10,6 @@
         <viewModels:ExerciseListPageViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="remove.png" Command="{Binding DeleteExerciseCommand}" Order="Primary" Text="{services:Translate RemoveSelectedString}" x:Name="RemoveFromBaseMenu"/>
         <ToolbarItem IconImageSource="accept.png" Command="{Binding ChoseExercisesCommand}" Order="Primary" CommandParameter="{Binding}" x:Name="AcceptChouseMenu"/>
         <ToolbarItem IconImageSource="filter.png" Command="{Binding ViewFilterWindowCommand}" Order="Primary" Text="{services:Translate FilterString}"/>
     </ContentPage.ToolbarItems>
@@ -36,7 +35,7 @@
             <Grid VerticalOptions="FillAndExpand" IsVisible="{Binding State,Converter={StaticResource StateToVisibilityConverter},ConverterParameter={x:Static controls2:States.Normal}}">
                 <StackLayout Orientation="Vertical">
                     <ListView ItemsSource="{Binding Items}" SeparatorVisibility="None" HasUnevenRows="True" ItemTapped="ListView_OnItemTapped" CachingStrategy="RecycleElementAndDataTemplate" x:Name="ExercisesListView" 
-                                      androidSpecific:ListView.IsFastScrollEnabled="True" BackgroundColor="Transparent">
+                                      androidSpecific:ListView.IsFastScrollEnabled="True" BackgroundColor="Transparent" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell x:Name="viewCell">

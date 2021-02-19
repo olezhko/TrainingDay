@@ -26,7 +26,6 @@ namespace TrainingDay.ViewModels
         public ExerciseListPageViewModel()
         {
             ChoseExercisesCommand = new Command(ChoseExercises);
-            DeleteExerciseCommand = new Command<ViewCell>(DeleteExerciseFromBase);
             ViewFilterWindowCommand = new Command(ViewFilterWindow);
             Items = new ObservableCollection<TrainingExerciseViewModel>();
             BaseItems = new ObservableCollection<TrainingExerciseViewModel>();
@@ -62,26 +61,7 @@ namespace TrainingDay.ViewModels
             return resultItems;
         }
 
-        public ICommand DeleteExerciseCommand { protected set; get; }
-        private void DeleteExerciseFromBase(ViewCell viewCell)
-        {
-            //var deleteItems = GetSelectedItems();
-            //var names = string.Join("\n", deleteItems.Select(item => item.ExerciseItemName));
-            //var idItemsToRemove = new List<int>();
-            viewCell.ContextActions.Clear();
-            var item = (TrainingExerciseViewModel)viewCell.BindingContext;
-            QuestionPopup popup = new QuestionPopup(Resource.DeleteExercises, Resource.AreYouSerious + "\n" + item.ExerciseItemName);
-            popup.PopupClosed += (o, closedArgs) =>
-            {
-                if (closedArgs.Button == Resource.OkString)
-                {
-                    App.Database.DeleteExerciseItem(item.ExerciseId);
-                    App.Database.DeleteTrainingExerciseItemByExerciseId(item.ExerciseId);
-                    Items.Remove(item);
-                }
-            };
-            popup.Show(Resource.OkString, Resource.CancelString);
-        }
+        
 
         public ICommand ViewFilterWindowCommand { protected set; get; }
         private void ViewFilterWindow()
@@ -146,10 +126,8 @@ namespace TrainingDay.ViewModels
                 foreach (var exercise in baseItems)
                 {
                     var newItem = new TrainingExerciseViewModel(exercise, new TrainingExerciseComm());
-                    //if (selItems.Any(ex => ex.ExerciseId == exercise.Id)) // если было до этого выбрано
-                    //{
-                    //    newItem.IsSelected = true;
-                    //}
+                    bool isUserExercise = !newItem.Tags.Contains(ExerciseTags.DatabaseExercise);
+
                     newItem.IsSelected = selectedIndexes.Contains(newItem.ExerciseId);
                     bool byname = false, byFilter = false;
 
@@ -196,6 +174,7 @@ namespace TrainingDay.ViewModels
                         }
                     }
                 }
+                
                 return newItems;
             }
             catch (Exception e)

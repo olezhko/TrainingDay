@@ -6,6 +6,7 @@
              x:Class="TrainingDay.View.ExerciseItemPage" Title="{services:Translate ExerciseInformationString}" >
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="accept.png" Clicked="Save_clicked" />
+        <ToolbarItem IconImageSource="remove.png" Clicked="Remove_clicked" x:Name="DeleteExerciseToolbarItem"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>

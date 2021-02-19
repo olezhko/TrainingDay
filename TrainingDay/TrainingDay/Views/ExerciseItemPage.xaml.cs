@@ -54,6 +54,11 @@ namespace TrainingDay.View
             ExerciseByDistanceCheckBox.IsChecked = item.Tags.Contains(ExerciseTags.ExerciseByDistance);
             ExerciseByRepsAndWeightCheckBox.IsChecked = item.Tags.Contains(ExerciseTags.ExerciseByRepsAndWeight);
             ExerciseByTimeCheckBox.IsChecked = item.Tags.Contains(ExerciseTags.ExerciseByTime);
+
+            if (item.Id == 0)
+            {
+                ToolbarItems.Remove(DeleteExerciseToolbarItem);
+            }
         }
 
         private void Save_clicked(object sender, EventArgs e)
@@ -73,9 +78,9 @@ namespace TrainingDay.View
                         NewExerciseAdded?.Invoke(this, ex.GetExercise());
                     else
                         ExerciseChanged?.Invoke(this, ex.GetExercise());
-
                     DependencyService.Get<IMessage>().ShortAlert(Resource.SavedString);
                     this.Navigation.PopAsync();
+                    
                 }
             }
             catch (Exception ex)
@@ -86,6 +91,26 @@ namespace TrainingDay.View
 
         public event EventHandler<Exercise> NewExerciseAdded;
         public event EventHandler<Exercise> ExerciseChanged;
+
+        private void Remove_clicked(object sender, EventArgs e)
+        {
+            ExerciseViewModel ex = BindingContext as ExerciseViewModel;
+            if (ex.Id != 0)
+            {
+                QuestionPopup popup = new QuestionPopup(Resource.DeleteExercises, Resource.AreYouSerious + "\n" + ex.ExerciseItemName);
+                popup.PopupClosed += async (o, closedArgs) =>
+                {
+                    if (closedArgs.Button == Resource.OkString)
+                    {
+                        App.Database.DeleteExerciseItem(ex.Id);
+                        App.Database.DeleteTrainingExerciseItemByExerciseId(ex.Id);
+                        DependencyService.Get<IMessage>().ShortAlert(Resource.DeletedString);
+                        await Navigation.PopAsync();
+                    }
+                };
+                popup.Show(Resource.OkString, Resource.CancelString);
+            }
+        }
     }
 
     public class ExerciseViewModel: BaseViewModel

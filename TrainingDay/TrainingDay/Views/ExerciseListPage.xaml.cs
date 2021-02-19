@@ -11,7 +11,6 @@ namespace TrainingDay.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ExerciseListPage : ContentPage
     {
-        private int _listViewScrollId;
         public ExerciseListPage()
         {
             InitializeComponent();
@@ -26,13 +25,24 @@ namespace TrainingDay.Views
             InitializeComponent();
             _viewModel = viewmodel;
             BindingContext = _viewModel;
-            ToolbarItems.Remove(RemoveFromBaseMenu);
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             _viewModel.UpdateItems();
+            if (newExerciseAdded)
+            { 
+                newExerciseAdded = false;
+                ScrollToEnd();
+            }
+        }
+
+        private void ScrollToEnd()
+        {
+            Device.BeginInvokeOnMainThread(() => {
+                ExercisesListView.ScrollTo(_viewModel.Items[_viewModel.Items.Count - 1], ScrollToPosition.End, false);
+            });
         }
 
         private async void AddExercisesButton_Clicked(object sender, EventArgs e)
@@ -44,17 +54,18 @@ namespace TrainingDay.Views
             await Navigation.PushAsync(page);
         }
 
+        public bool newExerciseAdded = false;
         private void Page_NewExerciseAdded(object sender, Exercise e)
         {
+            newExerciseAdded = true;
             _viewModel.Items.Add(new TrainingExerciseViewModel(e,new TrainingExerciseComm()));
         }
 
         private async void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-           TrainingExerciseViewModel selected = e.Item as TrainingExerciseViewModel;
+            TrainingExerciseViewModel selected = e.Item as TrainingExerciseViewModel;
             ExerciseItemPage page = new ExerciseItemPage();
             ExerciseViewModel vM = new ExerciseViewModel(App.Database.GetExerciseItem(selected.ExerciseId));
-            _listViewScrollId = selected.ExerciseId;
             page.BindingContext = vM;
             page.ExerciseChanged += Page_ExerciseChanged;
             await Navigation.PushAsync(page);
