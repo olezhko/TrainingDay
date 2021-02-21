@@ -24,15 +24,27 @@
 "Text":"<p>Bug Fixed.</p> <p>Fixed errors in the program logic and usability.</p><p><img width=200 height=200 src=bug.png /></p>"
 },
 {
-"Id":"3",
+"Id":"4",
 "Version":"1.0.6.12",
 "Title":"Bug Fixed",
 "Text":"<p>Bug Fixed.</p> <p>Fixed errors in the program logic and usability.</p><p><img width=200 height=200 src=bug.png /></p>"
 },
 {
-"Id":"3",
+"Id":"5",
 "Version":"1.0.6.12",
 "Title":"Skip exercise",
 "Text":"<p>When performing a workout, you can skip the exercise</p><p>Select an exercise, press the button <img width=40 height=40 src=skip.png />, the exercise will receive a skipped status. Pressing again - the status will be reset. </p>"
+},
+{
+"Id":"6",
+"Version":"1.0.6.13",
+"Title":"Bug Fixed",
+"Text":"<p>Bug Fixed.</p> <p>Fixed errors in the program logic and usability.</p><p><img width=200 height=200 src=bug.png /></p>"
+},
+{
+"Id":"7",
+"Version":"1.0.6.13",
+"Title":"New exercises",
+"Text":"<p>Added some exercises</p><ul>  <li>Leaning dumbbell lateral raise</li>  <li>Pushup and Row</li>  <li>Barbell Front Raise</li></ul>"
 }
 ]
