@@ -19,11 +19,17 @@
             <controls1:StepProgressBar SteppedColor="{DynamicResource SubtitleColor}" StepColor="{DynamicResource SeparatorColor}" ItemsSource="{Binding Items}" x:Name="StepProgressBarControl">
                 <controls1:StepProgressBar.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
+                        <Grid>
+                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
                             <Label IsVisible="{Binding IsSuperSet}" Text="{services:Translate SuperSetString}" FontSize="Large" HorizontalTextAlignment="Center" TextColor="Orange"/>
 
-                            <IndicatorView x:Name="indicatorView" IndicatorColor="LightGray" SelectedIndicatorColor="Orange" HorizontalOptions="Center" />
-                            <CarouselView ItemsSource="{Binding SuperSetItems}" HorizontalOptions="Center" x:Name="ImageCollectionView" IndicatorView="indicatorView">
+                            <IndicatorView Grid.Row="1" x:Name="indicatorView" IndicatorSize="{OnPlatform Android='9', iOS='10'}" MaximumVisible="6" HideSingle="True" ItemsSource="{Binding SuperSetItems}" IndicatorColor="LightGray" SelectedIndicatorColor="Orange" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="10"/>
+
+                            <CarouselView Grid.Row="2" ItemsSource="{Binding SuperSetItems}" HorizontalOptions="Center" x:Name="ImageCollectionView" IndicatorView="indicatorView">
                                 <CarouselView.ItemsLayout>
                                     <LinearItemsLayout Orientation="Horizontal" />
                                 </CarouselView.ItemsLayout>
@@ -35,7 +41,7 @@
                                     </DataTemplate>
                                 </CarouselView.ItemTemplate>
                             </CarouselView>
-                        </StackLayout>
+                        </Grid>
                     </DataTemplate>
                 </controls1:StepProgressBar.ItemTemplate>
             </controls1:StepProgressBar>

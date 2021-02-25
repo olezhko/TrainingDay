@@ -6,7 +6,7 @@
     <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{DynamicResource ContentPageBackgroundColor}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="20"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -16,11 +16,11 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Text="{services:Translate ChooseGroupOrNewString}" HorizontalTextAlignment="Center" FontSize="Medium" Margin="5"/>
-                <ImageButton Grid.Column="1" WidthRequest="40" HeightRequest="40" Source="add.png" Clicked="ShowNewGroupWnd_Click" BackgroundColor="Transparent" Margin="10"/>
+                <Label Text="{services:Translate ChooseGroupOrNewString}" HorizontalTextAlignment="Center" FontSize="Medium" Margin="5" VerticalOptions="Center"/>
+                <ImageButton Grid.Column="1" WidthRequest="40" HeightRequest="40" Source="add.png" Clicked="ShowNewGroupWnd_Click" BackgroundColor="Transparent" Margin="10" VerticalOptions="Center"/>
             </Grid>
 
-            <ListView Grid.Row="2" ItemsSource="{Binding GroupsNamesToNewGroup}" x:Name="ItemsListView" ItemTapped="ItemsListView_OnItemTapped" HasUnevenRows="True">
+            <ListView Grid.Row="2" ItemsSource="{Binding GroupsNamesToNewGroup}" x:Name="ItemsListView" ItemTapped="ItemsListView_OnItemTapped" HasUnevenRows="True" BackgroundColor="Transparent">
                 <ListView.Behaviors>
                     <services:EventToCommandBehavior EventName="ItemSelected" Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.GroupPickerChangedCommand}" 
                                                              CommandParameter="{Binding }" />
