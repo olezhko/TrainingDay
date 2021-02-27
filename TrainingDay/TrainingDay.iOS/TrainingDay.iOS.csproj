@@ -181,10 +181,19 @@
     <PackageReference Include="Xamarin.Facebook.iOS">
       <Version>5.12.0</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.iOS.Analytics">
+      <Version>6.9.0</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging">
       <Version>4.7.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1821" />
+    <PackageReference Include="Xamarin.Firebase.iOS.Core">
+      <Version>6.10.4</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.iOS.InstanceID">
+      <Version>4.8.0</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Google.iOS.MobileAds">
       <Version>7.66.0</Version>
     </PackageReference>
