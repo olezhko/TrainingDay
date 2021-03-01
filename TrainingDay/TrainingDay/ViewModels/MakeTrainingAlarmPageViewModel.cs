@@ -60,11 +60,18 @@ namespace TrainingDay.ViewModels
                 Name = Alarm.Name,
                 TimeOffset = Alarm.GetDateTimeOffsetFromTimeSpan(Alarm.Time),
                 IsActive = Alarm.IsActive,
-                //Tone = Alarm.Tone,
-                TrainingId = SelectedTrainingItem.Id
+                TrainingId = SelectedTrainingItem.Id,
+                ServerId = Alarm.AlarmItem.ServerId
             };
-            var serverId = await SiteService.SendAlarm(newItem);
-            newItem.ServerId = serverId;
+            if (newItem.ServerId == 0)
+            {
+                var serverId = await SiteService.SendAlarm(newItem);
+                newItem.ServerId = serverId;
+            }
+            else
+            {
+                await SiteService.UpdateAlarm(newItem);
+            }
 
             var id = App.Database.SaveAlarmItem(newItem);
             Alarm.AlarmItem.Id = id;
@@ -76,29 +83,12 @@ namespace TrainingDay.ViewModels
 
         protected bool ValidateFields()
         {
-            bool validation = true;
+            bool validation = DaysOfWeek.GetHasADayBeenSelected(Alarm.Days);
 
-            if (!DaysOfWeek.GetHasADayBeenSelected(Alarm.Days))
+            if (string.IsNullOrWhiteSpace(Alarm.Name) || SelectedTrainingItem == null)
             {
                 validation = false;
             }
-
-            if (string.IsNullOrWhiteSpace(Alarm.Name))
-            {
-                validation = false;
-            }
-
-
-            if (SelectedTrainingItem == null)
-            {
-                validation = false;
-            }
-
-
-            //if (String.IsNullOrEmpty(Alarm.ToneFilename))
-            //{
-            //    validation = false;
-            //}
 
             return validation;
         }

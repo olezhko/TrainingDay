@@ -214,7 +214,6 @@ namespace TrainingDay
                 if (DateTime.Now - lastTrainings.Last().Time > TimeSpan.FromDays(7))
                 {
                     return true;
-                    //DependencyService.Get<IMessage>().ShowNotification(App.TrainingNotificationId, Resource.TrainingString, Resource.ReturnToTrainingMessage, new TrainingItemsBasePage().GetType().ToString(),PageEnum.TrainingItemsBasePage);
                 }
             }
 
@@ -236,13 +235,11 @@ namespace TrainingDay
                     if (DateTime.Now - last.Date > TimeSpan.FromDays(Settings.WeightNotifyFreq))
                     {
                         return true;
-                        //DependencyService.Get<IMessage>().ShowNotification(App.WeightNotificationId, Resource.WeightString, Resource.PleaseEnterYourNewWeight, new WeightViewAndSetPage().GetType().ToString(), PageEnum.WeightViewAndSetPage);
                     }
                 }
                 else
                 {
                     return true;
-                    //DependencyService.Get<IMessage>().ShowNotification(App.WeightNotificationId, Resource.WeightString, Resource.PleaseEnterYourNewWeight, new WeightViewAndSetPage().GetType().ToString(), PageEnum.WeightViewAndSetPage);
                 }
             }
 

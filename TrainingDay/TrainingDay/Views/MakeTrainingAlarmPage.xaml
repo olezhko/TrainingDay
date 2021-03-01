@@ -14,9 +14,7 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Spacing="0">
-                <!--<Label Text="{services:Translate TrainingString}" Style="{StaticResource LargeCenteredHeading}"/>-->
                 <controls:CustomPicker x:Name="TrainingsPicker" SelectedItem="{Binding SelectedTrainingItem, Mode=TwoWay}" Title="{services:Translate SelectTraining}" ItemsSource="{Binding TrainingItems}" ItemDisplayBinding="{Binding Title}" FontSize="Large" Margin="10,0"/>
-                <!--<Picker x:Name="TrainingsPicker" SelectedItem="{Binding SelectedTrainingItem, Mode=TwoWay}" Title="{services:Translate SelectTraining}" ItemsSource="{Binding TrainingItems}" ItemDisplayBinding="{Binding Title}" FontSize="Large" Margin="10,0" />-->
                 
                 <Entry Text="{Binding Alarm.Name}" Placeholder="{services:Translate NameString1}" Margin="40, 0"/>
                 <TimePicker Time="{Binding Alarm.Time}" HorizontalOptions="Center" />

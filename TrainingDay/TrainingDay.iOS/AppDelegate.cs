@@ -27,61 +27,31 @@ namespace TrainingDay.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             MobileAds.SharedInstance.Start(completionHandler:null);
-            Xamarin.Forms.Forms.SetFlags(new string[]
-                {"CarouselView_Experimental", "IndicatorView_Experimental", "Expander_Experimental","Shapes_Experimental"});
             global::Xamarin.Forms.Forms.Init();
             SfListViewRenderer.Init();
             SfEffectsViewRenderer.Init();  //Initialize only when effects view is added to Listview.
             LoadApplication(new App(false));
 
             Firebase.Core.App.Configure();
-
             Messaging.SharedInstance.Delegate = this;
-            // get permission for notification
-            if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
-            {
-                // iOS 10
-                var authOptions = UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound;
-                UNUserNotificationCenter.Current.RequestAuthorization(authOptions, (granted, error) =>
-                {
-                    Console.WriteLine(granted);
-                });
-
-                // For iOS 10 display notification (sent via APNS)
-                UNUserNotificationCenter.Current.Delegate = this;
-            }
-            else
-            {
-
-                var allNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound;
-                var settings = UIUserNotificationSettings.GetSettingsForTypes(allNotificationTypes, null);
-
-
-                UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
-            }
-
-            UIApplication.SharedApplication.RegisterForRemoteNotifications();
-
-            // Firebase component initialize
-            //Firebase.Analytics.Analytics.App.Configure();
-
+            RegisterFirebase();
             Firebase.InstanceID.InstanceId.Notifications.ObserveTokenRefresh((sender, e) =>
             {
                 var token = Messaging.SharedInstance.FcmToken;
-                //var newToken = Firebase.InstanceID.InstanceId.SharedInstance.Token;
+                App.SendRegistrationToServer(token);
+                //var newToken = Firebase.InstanceID.InstanceId.SharedInstance.GetTokenAsync();
                 // if you want to send notification per user, use this token
                 //System.Diagnostics.Debug.WriteLine(newToken);
 
                 //connectFCM();
             });
 
-
-
             App.ScreenWidth = UIScreen.MainScreen.Bounds.Width;
             App.ScreenHeight = UIScreen.MainScreen.Bounds.Height;
             return base.FinishedLaunching(app, options);
         }
 
+        #region Firebase
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
         {
             // Get current device token
@@ -125,7 +95,7 @@ namespace TrainingDay.iOS
 
                 var authOptions = UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound;
                 UNUserNotificationCenter.Current.RequestAuthorization(authOptions, (granted, error) => {
-                    
+
                 });
             }
             else
@@ -139,10 +109,6 @@ namespace TrainingDay.iOS
             UIApplication.SharedApplication.RegisterForRemoteNotifications();
         }
 
-
-        #region Firebase
-
-
         //public override void DidEnterBackground(UIApplication uiApplication)
         //{
         //    Messaging.SharedInstance.Disconnect();
@@ -154,15 +120,15 @@ namespace TrainingDay.iOS
         //    base.OnActivated(uiApplication);
         //}
 
-//        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
-//        {
-//#if DEBUG
-//            Firebase.InstanceID.InstanceId.SharedInstance.SetApnsToken(deviceToken, Firebase.InstanceID.ApnsTokenType.Sandbox);
-//#endif
-//#if RELEASE
-//			Firebase.InstanceID.InstanceId.SharedInstance.SetApnsToken(deviceToken, Firebase.InstanceID.ApnsTokenType.Prod);
-//#endif
-//        }
+        //        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+        //        {
+        //#if DEBUG
+        //            Firebase.InstanceID.InstanceId.SharedInstance.SetApnsToken(deviceToken, Firebase.InstanceID.ApnsTokenType.Sandbox);
+        //#endif
+        //#if RELEASE
+        //			Firebase.InstanceID.InstanceId.SharedInstance.SetApnsToken(deviceToken, Firebase.InstanceID.ApnsTokenType.Prod);
+        //#endif
+        //        }
 
         // iOS 9 <=, fire when recieve notification foreground
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
@@ -196,19 +162,6 @@ namespace TrainingDay.iOS
             var body = notification.Request.Content.Body;
             debugAlert(title, body);
         }
-
-        //private void connectFCM()
-        //{
-        //    Messaging.SharedInstance.Connect((error) =>
-        //    {
-        //        if (error == null)
-        //        {
-        //            //TODO: Change Topic to what is required
-        //            Messaging.SharedInstance.Subscribe("/topics/all");
-        //        }
-        //        System.Diagnostics.Debug.WriteLine(error != null ? "error occured" : "connect success");
-        //    });
-        //}
 
         private void debugAlert(string title, string message)
         {
