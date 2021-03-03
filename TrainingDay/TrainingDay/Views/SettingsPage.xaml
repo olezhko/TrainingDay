@@ -75,10 +75,19 @@
                     <StackLayout.BindingContext>
                         <viewModels:WebAuthenticatorViewModel/>
                     </StackLayout.BindingContext>
-                    
-                    
-                    <Button Text="Google" Command="{Binding GoogleCommand}"/>
-                    <Label Text="{Binding GoogleEmail}"/>
+
+                    <Frame Style="{StaticResource FrameCellStyle}">
+                        <StackLayout>
+                            <Button Text="Google" Command="{Binding GoogleCommand}"/>
+                            <StackLayout Orientation="Horizontal" >
+                                <Label Text="{Binding GoogleEmail}"/>
+                                <Button Text="Sync To" Command="{Binding SyncGoogleCommand}"/>
+                                <Button Text="Update From" Command="{Binding SyncFromGoogleCommand}"/>
+                                <ActivityIndicator IsRunning="{Binding IsSyncActive}" Color="Orange"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
                     <!--<Button Text="Facebook" Command="{Binding FacebookCommand}"/>
                     <Button Text="Apple" Command="{Binding AppleCommand}"/>-->
                 </StackLayout>

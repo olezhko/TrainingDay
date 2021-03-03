@@ -20,7 +20,8 @@ namespace TrainingDay.ViewModels
             FacebookCommand = new Command(async () => await OnAuthenticate("Facebook"));
             AppleCommand = new Command(async () => await OnAuthenticate("Apple"));
         }
-        public string GoogleEmail { get; set; }
+
+        public string GoogleEmail { get; set; } = null;
         public ICommand GoogleCommand { get; }
 
         public ICommand FacebookCommand { get; }
@@ -71,5 +72,37 @@ namespace TrainingDay.ViewModels
                 //await DisplayAlertAsync($"Failed: {ex.Message}");
             }
         }
+
+        public Command SyncGoogleCommand => new Command(SyncGoogle);
+        private void SyncGoogle()
+        {
+            IsSyncActive = true;
+            OnPropertyChanged(nameof(IsSyncActive));
+            Task.Run(async () => await SiteService.UploadRepo()).ContinueWith(task =>
+            {
+                IsSyncActive = false;
+                OnPropertyChanged(nameof(IsSyncActive));
+                DependencyService.Get<IMessage>().ShowMessage(task.Result ? "Синхронизация прошла успешно" : "Синхронизация прошла с ошибкой", "Google Sync");
+                DependencyService.Get<IMessage>().ShowNotification(App.SyncFinishedId, "Google Sync", task.Result ? "Синхронизация прошла успешно" : "Синхронизация прошла с ошибкой", true, false);
+            });
+        }
+
+
+        public Command SyncFromGoogleCommand => new Command(SyncFromGoogle);
+        private void SyncFromGoogle()
+        {
+            IsSyncActive = true;
+            OnPropertyChanged(nameof(IsSyncActive));
+            Task.Run(async () => await SiteService.UploadRepo()).ContinueWith(task =>
+            {
+                IsSyncActive = false;
+                OnPropertyChanged(nameof(IsSyncActive));
+                DependencyService.Get<IMessage>().ShowMessage(task.Result ? "Синхронизация прошла успешно" : "Синхронизация прошла с ошибкой", "Google Sync");
+                DependencyService.Get<IMessage>().ShowNotification(App.SyncFinishedId, "Google Sync", task.Result ? "Синхронизация прошла успешно" : "Синхронизация прошла с ошибкой", true, false);
+            });
+        }
+
+        public bool IsSyncActive { get; set; }
+
     }
 }

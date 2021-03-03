@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 
 namespace TrainingDay.Services
 {
@@ -18,7 +16,6 @@ namespace TrainingDay.Services
         {
             Items = new ObservableCollection<TrainingExerciseSerialize>();
         }
-
 
         public void SaveToFile(string filename)
         {

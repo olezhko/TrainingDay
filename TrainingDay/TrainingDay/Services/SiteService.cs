@@ -257,5 +257,61 @@ namespace TrainingDay.Services
                 return false;
             }
         }
+
+        private static string _uploadRepoUrl = domain + @"/MobileTokens/repo_sync/{0)";
+        public static async Task<bool> UploadRepo()
+        {
+            var repo = new
+            {
+                Trainings = App.Database.GetTrainingItems(),
+                Exercises = App.Database.GetExerciseItems(),
+                TrainingExercise = App.Database.GetTrainingExerciseItems(),
+                TrainingUnions = App.Database.GetTrainingsGroups(),
+                SuperSets = App.Database.GetSuperSetItems(),
+                LastTrainings = App.Database.GetLastTrainingItems(),
+                LastTrainingExercises = App.Database.GetLastTrainingExerciseItems(),
+                BodyControl = App.Database.GetWeightNotesItems(),
+                Alarms = App.Database.GetAlarmItems()
+            };
+
+            var repoSer = JsonConvert.SerializeObject(repo);
+            try
+            {
+                var client = new RestClient(string.Format(_uploadRepoUrl, Settings.GoogleEmail));
+                client.Timeout = 1000;
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("application/json", repoSer, ParameterType.RequestBody);
+                IRestResponse response = await client.ExecuteAsync(request);
+                Console.WriteLine(response.Content);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Crashes.TrackError(e);
+                return false;
+            }
+        }
+
+        private static string _requestRepoUrl = domain + @"/MobileTokens/repo_get/{0)";
+        public static async Task<bool> RequestRepo()
+        {
+            try
+            {
+                var client = new RestClient(string.Format(_requestRepoUrl, Settings.GoogleEmail));
+                client.Timeout = -1;
+                var request = new RestRequest(Method.GET);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("application/json", "", ParameterType.RequestBody);
+                IRestResponse response = await client.ExecuteAsync(request);
+                Console.WriteLine(response.Content);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Crashes.TrackError(e);
+                return false;
+            }
+        }
     }
 }

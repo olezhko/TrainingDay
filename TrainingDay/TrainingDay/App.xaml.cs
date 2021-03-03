@@ -222,6 +222,10 @@ namespace TrainingDay
 
         public string WeightMessageTitle { get; set; } = Resource.WeightString;
 
+
+        public static int SyncFinishedId { get; set; } = 103;
+
+
         public string WeightMessage = Resource.PleaseEnterYourNewWeight;
         public bool IsShowWeightNotify()
         {
