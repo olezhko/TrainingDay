@@ -121,6 +121,9 @@
     <PackageReference Include="Xamarin.GooglePlayServices.Tasks">
       <Version>71.1601.4</Version>
     </PackageReference>
+    <PackageReference Include="XamarinAndroid.ToolTips">
+      <Version>1.0.3</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlarmActivity.cs" />
@@ -136,12 +139,12 @@
     <Compile Include="Services\AndroidFullScreenVideoWebView.cs" />
     <Compile Include="Services\AndroidPickerRenderer.cs" />
     <Compile Include="Services\AndroidTimePickerRenderer.cs" />
-    <Compile Include="Services\EntryPopupLoader.cs" />
     <Compile Include="Services\EntryWithDotRenderer.cs" />
     <Compile Include="Services\ILocalize.cs" />
     <Compile Include="Services\IMessage.cs" />
     <Compile Include="Services\FirebaseService.cs" />
     <Compile Include="Services\Sqlite.cs" />
+    <Compile Include="Services\ToolTipRenderer.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="WebAuthenticationCallbackActivity.cs" />
   </ItemGroup>
@@ -172,6 +175,10 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DataClassLibrary\DataClassLibrary.csproj">
+      <Project>{5fe55148-55a5-4584-906c-7f3fc2314ccf}</Project>
+      <Name>DataClassLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TrainingDay\TrainingDay.csproj">
       <Project>{B68D315E-8E79-4280-AA4F-5366E48FDF46}</Project>
       <Name>TrainingDay</Name>
@@ -306,7 +313,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadDebuggerTimeoutExceptionTrainingDayAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionTrainingDayAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

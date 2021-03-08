@@ -5,6 +5,7 @@
              xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
              xmlns:controls1="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:myToolTipSample="clr-namespace:myToolTipSample;assembly=TrainingDay"
              x:Class="TrainingDay.Views.TrainingItemsBasePage" Title="{services:Translate TrainingsBaseString}" IconImageSource="main.png" x:Name="Page">
     <ContentPage.BindingContext>
         <viewModels:TrainingItemsBasePageViewModel/>
@@ -94,7 +95,15 @@
                 </controls1:AdMobView.AdUnitId>
             </controls1:AdMobView>
 
-            <Image Source="add.png" HorizontalOptions="Center" VerticalOptions="End" HeightRequest="60" WidthRequest="60" x:Name="AddImage" Grid.Row="1">
+            <Image Source="add.png" HorizontalOptions="Center" VerticalOptions="End" HeightRequest="60" WidthRequest="60" x:Name="AddImage" Grid.Row="1"
+                   
+                   
+                   myToolTipSample:ToolTipEffect.BackgroundColor="Silver"
+                   myToolTipSample:ToolTipEffect.IsTapAttached="True"
+                   myToolTipSample:ToolTipEffect.Margin="10"
+                   myToolTipSample:ToolTipEffect.Position="Top"
+                   myToolTipSample:ToolTipEffect.Text="This button to add new Training Item"
+                   myToolTipSample:ToolTipEffect.TextColor="Teal">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding AddNewTrainingCommand}"/>
                 </Image.GestureRecognizers>

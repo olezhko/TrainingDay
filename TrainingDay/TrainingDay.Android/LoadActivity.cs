@@ -8,11 +8,12 @@ using System.IO;
 namespace TrainingDay.Droid
 {
     [Activity(Name = "TrainingDay.Android.LoadActivity", LaunchMode = LaunchMode.SingleTask, Label = "TrainingDay")]
-    [IntentFilter(new string[] { Intent.ActionView, Intent.ActionEdit },
+    [IntentFilter(new string[] { Intent.ActionView, Intent.ActionEdit,Android.Content.Intent.ActionOpenDocument },
         Categories = new string[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
         DataScheme = "content",
         DataHost = "*",
-        DataMimeType = "application/trday"
+        //DataMimeType = @"application/trday"
+        DataMimeType = @"application/octet-stream"
     )]
     public class LoadActivity : Activity
     {

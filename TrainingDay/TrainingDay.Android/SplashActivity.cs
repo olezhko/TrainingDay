@@ -16,6 +16,12 @@ using Android.Widget;
 namespace TrainingDay.Droid
 {
     [Activity(Label = "TrainingDay", Icon = "@drawable/icon", Theme = "@style/splashscreen", MainLauncher = true, NoHistory = true)]
+    //[IntentFilter(new string[] { Intent.ActionView, Intent.ActionEdit },
+    //    Categories = new string[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
+    //    DataScheme = "content",
+    //    DataHost = "*",
+    //    DataMimeType = "application/trday"
+    //)]
     public class SplashActivity : AppCompatActivity
     {
         protected override void OnResume()

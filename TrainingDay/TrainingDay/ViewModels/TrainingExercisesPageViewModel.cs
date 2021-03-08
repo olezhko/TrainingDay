@@ -550,7 +550,7 @@ namespace TrainingDay.ViewModels
         public ICommand ShareTrainingCommand => new Command(ShareTraining);
         private async void ShareTraining()
         {
-            var fn = $"{Resource.TrainingString}_{Training.Title}.trday";
+            var fn = $"{Resource.TrainingString}_{Training.Title}.bin";
             var filename = Path.Combine(FileSystem.CacheDirectory, fn);
 
             Training.SaveToFile(filename);

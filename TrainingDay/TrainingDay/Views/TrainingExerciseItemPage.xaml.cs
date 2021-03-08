@@ -17,6 +17,9 @@ namespace TrainingDay.Views
             InitializeComponent();
         }
 
+        protected override void OnAppearing()
+        {
+        }
         // if we make changes, but after press back, changes is saved
         protected override void OnDisappearing()
         {

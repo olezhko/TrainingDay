@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using myToolTipSample;
 using Newtonsoft.Json;
 using TrainingDay.Model;
 using TrainingDay.Resources;
@@ -28,6 +29,8 @@ namespace TrainingDay.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            ToolTipEffect.SetIsOpen(AddImage, false);
+            ToolTipEffect.SetIsOpen(AddImage, true);
             vm = BindingContext as TrainingItemsBasePageViewModel;
             vm.LoadItems();
             IsStartNotFinishedTraining();

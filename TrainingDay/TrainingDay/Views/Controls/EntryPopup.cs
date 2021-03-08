@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace TrainingDay.Views.Controls
 {
@@ -10,11 +11,6 @@ namespace TrainingDay.Views.Controls
     {
         public string Text { get; set; }
         public string Button { get; set; }
-    }
-
-    public interface IPopupLoader
-    {
-        void ShowQuestionPopup(QuestionPopup reference, string ok, string neg);
     }
 
     public class QuestionPopup
@@ -29,15 +25,14 @@ namespace TrainingDay.Views.Controls
         }
 
         public event EventHandler<PopupClosedArgs> PopupClosed;
-        public void OnPopupClosed(PopupClosedArgs e)
+        public async void Show(string ok, string neg)
         {
+            var task = await App.Current.MainPage.DisplayAlert(this.Title, this.Text, ok, neg);
             var handler = PopupClosed;
-            handler?.Invoke(this, e);
-        }
-
-        public void Show(string ok, string neg)
-        {
-            DependencyService.Get<IPopupLoader>().ShowQuestionPopup(this, ok, neg);
+            handler?.Invoke(this, new PopupClosedArgs()
+            {
+                Button = task ? ok : neg
+            });
         }
     }
 }

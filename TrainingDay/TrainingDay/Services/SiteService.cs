@@ -5,6 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using DataClassLibrary;
 using TrainingDay.Model;
 
 namespace TrainingDay.Services
@@ -261,11 +262,11 @@ namespace TrainingDay.Services
         private static string _uploadRepoUrl = domain + @"/MobileTokens/repo_sync/{0)";
         public static async Task<bool> UploadRepo()
         {
-            var repo = new
+            var repo = new RepoMobileSite
             {
                 Trainings = App.Database.GetTrainingItems(),
                 Exercises = App.Database.GetExerciseItems(),
-                TrainingExercise = App.Database.GetTrainingExerciseItems(),
+                TrainingExercise = App.Database.GetTrainingExerciseItems(), 
                 TrainingUnions = App.Database.GetTrainingsGroups(),
                 SuperSets = App.Database.GetSuperSetItems(),
                 LastTrainings = App.Database.GetLastTrainingItems(),

@@ -14,110 +14,65 @@ using Xamarin.Forms;
 
 namespace TrainingDay.Services
 {
-    public class TrainingUnion
+    public class TrainingUnion: DataClassLibrary.TrainingUnion
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-        public string TrainingIDsString { get; set; }
-        public bool IsExpanded { get; set; }
+        public new int Id { get; set; }
     }
 
     [Table("Alarm")]
-    public class Alarm
+    public class Alarm : DataClassLibrary.Alarm
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public DateTimeOffset TimeOffset { get; set; }
-        public bool IsActive { get; set; }// need
-        public int Days { get; set; }// need
-        public int TrainingId { get; set; }// need
-        public int ServerId { get; set; }
+        public new int Id { get; set; }
     }
 
     [Table("WeightNote")]
-    public class WeightNote
+    public class WeightNote : DataClassLibrary.WeightNote
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
-        public int Id { get; set; }
-        public double Weight { get; set; }
-        public DateTime Date { get; set; }
-        public int Type { get; set; }
+        public new int Id { get; set; }
     }
 
     [Table("TrainingExerciseComm")]
-    public class TrainingExerciseComm
+    public class TrainingExerciseComm : DataClassLibrary.TrainingExerciseComm
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
-        public int Id { get; set; }
-
-        public int TrainingId { get; set; }
-        public int ExerciseId { get; set; }
-        public int OrderNumber { get; set; }
-        public int SuperSetId { get; set; }
-        public string WeightAndRepsString { get; set; }
+        public new int Id { get; set; }
     }
 
     [Table("Exercises")]
-    public class Exercise
+    public class Exercise: DataClassLibrary.Exercise
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
-        public int Id { get; set; }
-
-        public string ExerciseItemName { get; set; }
-        public string Description { get; set; }
-        public string ExerciseImageUrl { get; set; }
-        public string Version { get; set; }
-        public string MusclesString { get; set; } // text, by "," enum collection
-        public int TagsValue { get; set; }
-        public int CodeNum { get; set; }
+        public new int Id { get; set; }
     }
 
     [Table("Trainings")]
-    public class Training
+    public class Training:DataClassLibrary.Training
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
-        public int Id { get; set; }
-        public string Title { get; set; }
+        public new int Id { get; set; }
     }
 
     [Table("LastTrainings")]
-    public class LastTraining
+    public class LastTraining : DataClassLibrary.LastTraining
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public DateTime Time { get; set; }
-        public TimeSpan ElapsedTime { get; set; }
-        public int TrainingId { get; set; }
+        public new int Id { get; set; }
     }
 
-    public class LastTrainingExercise
+    public class LastTrainingExercise : DataClassLibrary.LastTrainingExercise
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
-        public int Id { get; set; }
-        public int LastTrainingId { get; set; }
-        public string ExerciseName { get; set; }
-        public string Description { get; set; }
-        public string ExerciseImageUrl { get; set; }
-
-        public int OrderNumber { get; set; }
-        public int SuperSetId { get; set; }
-
-        public string MusclesString { get; set; }
-        public string WeightAndRepsString { get; set; }
-        public int TagsValue { get; set; }
+        public new int Id { get; set; }
     }
 
     [Serializable]
-    public class SuperSet
+    public class SuperSet : DataClassLibrary.SuperSet
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
-        public int Id { get; set; }
-        public int Count { get; set; }
-        public int TrainingId { get; set; }
+        public new int Id { get; set; }
     }
 
     public interface ISQLite
