@@ -82,6 +82,7 @@
     <Compile Include="Services\Localize.cs" />
     <Compile Include="Services\Message.cs" />
     <Compile Include="Services\Sqlite.cs" />
+    <Compile Include="Services\ToolTipRender.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -156,6 +157,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="EasyTipView">
+      <Version>1.0.1</Version>
+    </PackageReference>
     <PackageReference Include="SkiaSharp">
       <Version>2.80.2</Version>
     </PackageReference>
@@ -300,7 +304,7 @@
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadDebuggerTimeoutExceptionTrainingDayiOSHideInfoBar="True" />
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionTrainingDayiOSHideInfoBar="True" TriggeredFromHotReload="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
