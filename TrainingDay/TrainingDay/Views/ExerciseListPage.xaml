@@ -4,7 +4,7 @@
              xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
              xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
              xmlns:controls2="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
-             xmlns:androidSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:androidSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" 
              x:Class="TrainingDay.Views.ExerciseListPage" Title="{services:Translate ExercisesString}" IconImageSource="main.png">
     <ContentPage.BindingContext>
         <viewModels:ExerciseListPageViewModel/>
@@ -39,10 +39,6 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell x:Name="viewCell">
-                                    <ViewCell.ContextActions>
-                                        <MenuItem IsDestructive="true" IconImageSource="remove.png" Command="{Binding Source={x:Reference ExercisesListView}, Path=BindingContext.DeleteExerciseCommand}" 
-                                                  CommandParameter="{Binding Source={x:Reference viewCell}}"/>
-                                    </ViewCell.ContextActions>
                                     <Frame Style="{StaticResource FrameCellStyle}">
                                         <Grid>
                                             <Grid.RowDefinitions>

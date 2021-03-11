@@ -86,6 +86,12 @@
                 </ListView.Behaviors>
             </ListView>
 
+            <Image Source="add.png" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="60" WidthRequest="60" x:Name="AddImage" Grid.Row="1">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AddNewTrainingCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
             <controls1:AdMobView VerticalOptions="End" BackgroundColor="Transparent" Grid.Row="2" x:Name="AdMobView">
                 <controls1:AdMobView.AdUnitId>
                     <OnPlatform x:TypeArguments="x:String">
@@ -94,15 +100,6 @@
                     </OnPlatform>
                 </controls1:AdMobView.AdUnitId>
             </controls1:AdMobView>
-
-            <Image Source="add.png" HorizontalOptions="Center" VerticalOptions="End" HeightRequest="60" WidthRequest="60" x:Name="AddImage" Grid.Row="1"
-                   myToolTipSample:ToolTipEffect.IsTapAttached="True"
-                   myToolTipSample:ToolTipEffect.Position="Top"
-                   myToolTipSample:ToolTipEffect.Text="{services:Translate AddTrainingButtonToolTip}">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding AddNewTrainingCommand}"/>
-                </Image.GestureRecognizers>
-            </Image>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -5,6 +5,7 @@
              xmlns:services="clr-namespace:TrainingDay.Services;assembly=TrainingDay"
              xmlns:controls1="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
              xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:myToolTipSample="clr-namespace:myToolTipSample;assembly=TrainingDay" x:Name="AddNewTrainingPage"
              x:Class="TrainingDay.Views.AddTrainingPage" Title="{services:Translate AddTrainingString}">
     <ContentPage.BindingContext>
         <viewModels:AddTrainingViewModel/>
@@ -17,7 +18,10 @@
             <StackLayout>
                 <Entry Keyboard="Text" Text="{Binding Title}" FontSize="Medium" HorizontalOptions="FillAndExpand" Placeholder="{services:Translate NameString1}"/>
 
-                <Button Text="{services:Translate ChouseExerciseString}" Command="{Binding SelectExercisesCommand}" />
+                <Button Text="{services:Translate ChouseExerciseString}" Command="{Binding SelectExercisesCommand}" x:Name="SelectExercisesButton"                 
+                        myToolTipSample:ToolTipEffect.IsTapAttached="True"
+                        myToolTipSample:ToolTipEffect.Position="Bottom"
+                        myToolTipSample:ToolTipEffect.Text="{services:Translate ToolTipSelectExercisesToTrainingButton}"/>
                 <xForms:SfListView ItemsSource="{Binding ExerciseItems}" x:Name="ItemsListView" AutoFitMode="Height" DragStartMode="OnHold">
                     <xForms:SfListView.ItemTemplate>
                         <DataTemplate>
@@ -42,7 +46,7 @@
                                     <!--<Label Text="{Binding ExerciseItemName}" FontSize="Medium" FontAttributes="Bold" />-->
                                     <Image Source="clear.png" HorizontalOptions="FillAndExpand" Grid.Column="1" >
                                         <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={x:Reference ItemsListView}, Path=BindingContext.DeleteExerciseCommand}" BindingContext="{Binding .}" CommandParameter="{Binding .}"/>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference AddNewTrainingPage}, Path=BindingContext.DeleteExerciseCommand}" BindingContext="{Binding .}" CommandParameter="{Binding .}"/>
                                         </Image.GestureRecognizers>
                                     </Image>
                                 </Grid>

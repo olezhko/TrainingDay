@@ -29,16 +29,16 @@ namespace TrainingDay.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ToolTipEffect.SetIsOpen(AddImage, false);
-            ToolTipEffect.SetIsOpen(AddImage, true);
             vm = BindingContext as TrainingItemsBasePageViewModel;
             vm.LoadItems();
             IsStartNotFinishedTraining();
+            ToolTipEffect.SetIsOpen(AddImage, false);
+            ToolTipEffect.SetIsOpen(AddImage, true);
         }
 
         protected override void OnDisappearing()
         {
-            ToolTipEffect.SetIsOpen(AddImage, false);
+            //ToolTipEffect.SetIsOpen(AddImage, false);
             base.OnDisappearing();
         }
 

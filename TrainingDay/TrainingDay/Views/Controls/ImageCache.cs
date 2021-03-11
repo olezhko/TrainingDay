@@ -134,7 +134,7 @@ namespace TrainingDay.Views.Controls
                         Console.WriteLine(e);
                     }
 
-                    Thread.Sleep(400);
+                    Task.Delay(400).Wait();
                 }
             });
         }

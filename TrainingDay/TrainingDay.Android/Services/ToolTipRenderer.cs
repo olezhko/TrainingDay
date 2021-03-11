@@ -54,9 +54,10 @@ namespace TrainingDay.Droid.Services
                         builder.SetGravity((int)GravityFlags.Bottom);
                         break;
                     default:
-                        builder.SetGravity((int)GravityFlags.NoGravity);
+                        builder.SetGravity((int)GravityFlags.Bottom);
                         break;
                 }
+
 
                 builder.SetText(text);
                 builder.SetCornerRadius(Convert.ToSingle(ToolTipEffect.GetCornerRadius(Element)));
@@ -116,7 +117,7 @@ namespace TrainingDay.Droid.Services
 
         private void Hide()
         {
-
+            //builder.d
         }
     }
 }

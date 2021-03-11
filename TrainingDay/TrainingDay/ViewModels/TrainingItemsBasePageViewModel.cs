@@ -61,10 +61,10 @@ namespace TrainingDay.ViewModels
         }
 
         public ICommand AddNewTrainingCommand { get; set; }
-        private void AddNewTraining()
+        private async void AddNewTraining()
         {
             PreparedTrainingsPageViewModel vm = new PreparedTrainingsPageViewModel(){Navigation = Navigation};
-            Navigation.PushAsync(new PreparedTrainingsPage(){BindingContext = vm});
+            await Navigation.PushAsync(new PreparedTrainingsPage(){BindingContext = vm});
         }
 
         public ICommand DeleteSelectedTrainingsCommand { get; set; }

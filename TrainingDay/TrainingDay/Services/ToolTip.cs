@@ -100,7 +100,7 @@ namespace myToolTipSample
         /// <summary>
         /// Android Only
         /// </summary>
-        public static readonly BindableProperty CornerRadiusProperty = BindableProperty.CreateAttached("CornerRadius", typeof(double), typeof(ToolTipEffect), default);
+        public static readonly BindableProperty CornerRadiusProperty = BindableProperty.CreateAttached("CornerRadius", typeof(double), typeof(ToolTipEffect), 5.0);
 
         /// <summary>
         /// Android Only
@@ -196,6 +196,11 @@ namespace myToolTipSample
         public static double GetMargin(BindableObject view)
         {
             return (double)view.GetValue(MarginProperty);
+        }
+
+        public static void SetMargin(BindableObject view, int value)
+        {
+            view.SetValue(MarginProperty, value);
         }
 
         public static int GetPadding(BindableObject view)

@@ -555,7 +555,10 @@
   <data name="ShowToolTipsString" xml:space="preserve">
     <value>Show tooltips</value>
   </data>
-  <data name="AddTrainingButtonToolTip" xml:space="preserve">
+  <data name="ToolTipAddTrainingButton" xml:space="preserve">
     <value>Click this button to add a new workout</value>
+  </data>
+  <data name="ToolTipSelectExercisesToTrainingButton" xml:space="preserve">
+    <value>Press the button to select exercises for workout</value>
   </data>
 </root>

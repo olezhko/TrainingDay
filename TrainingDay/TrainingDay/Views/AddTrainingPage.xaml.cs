@@ -1,4 +1,5 @@
-﻿using TrainingDay.ViewModels;
+﻿using myToolTipSample;
+using TrainingDay.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,6 +15,19 @@ namespace TrainingDay.Views
             ItemsListView.DragDropController.UpdateSource = true;
             viewModel.Navigation = this.Navigation;
             BindingContext = viewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ToolTipEffect.SetIsOpen(SelectExercisesButton,false);
+            ToolTipEffect.SetIsOpen(SelectExercisesButton,true);
+        }
+
+        protected override void OnDisappearing()
+        {
+            //ToolTipEffect.SetIsOpen(SelectExercisesButton, false);
+            base.OnDisappearing();
         }
     }
 }
