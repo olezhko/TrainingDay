@@ -18,8 +18,9 @@ namespace TrainingDay.Views
             ThemeSwitch.IsToggled = ((App.Current) as App).IsLightTheme;
 		    WeightNotifyCheckBox.IsToggled =  Settings.IsWeightNotify;
             FreqWeightNotify.Text = Settings.WeightNotifyFreq.ToString();
+            ToolTipIsShownSwitch.IsToggled = Settings.IsToolTipShow;
 
-		    ScreenOnImplementedSwitch.IsToggled = Settings.IsDisplayOnImplement;
+            ScreenOnImplementedSwitch.IsToggled = Settings.IsDisplayOnImplement;
             ThemeSwitch.Toggled += Switch_OnToggled;
 
             TokenEditor.Text = Settings.Token;
@@ -75,6 +76,11 @@ namespace TrainingDay.Views
         private void ScreenOnImplementedSwitch_OnToggled(object sender, ToggledEventArgs e)
         {
             Settings.IsDisplayOnImplement = ScreenOnImplementedSwitch.IsToggled;
+        }
+
+        private void ToolTipShow_OnToogled(object sender, ToggledEventArgs e)
+        {
+            Settings.IsToolTipShow = ToolTipIsShownSwitch.IsToggled;
         }
     }
 }

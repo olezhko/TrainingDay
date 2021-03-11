@@ -552,4 +552,10 @@
   <data name="YesString" xml:space="preserve">
     <value>Да</value>
   </data>
+  <data name="ShowToolTipsString" xml:space="preserve">
+    <value>Показывать подсказки</value>
+  </data>
+  <data name="AddTrainingButtonToolTip" xml:space="preserve">
+    <value>Нажмите на эту кнопку, чтобы добавить новую тренировку</value>
+  </data>
 </root>

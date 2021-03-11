@@ -107,8 +107,16 @@ namespace TrainingDay.Droid.Services
                 {
                     GetToolTip();
                 }
+                else
+                {
+                    Hide();
+                }
             }
         }
 
+        private void Hide()
+        {
+
+        }
     }
 }

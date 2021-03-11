@@ -4,6 +4,7 @@ using System.Text;
 
 using System.Linq;
 using Xamarin.Forms;
+using TrainingDay.Services;
 
 namespace myToolTipSample
 {
@@ -21,7 +22,7 @@ namespace myToolTipSample
 
         public static readonly BindableProperty TextColorProperty = BindableProperty.CreateAttached("TextColor", typeof(Color), typeof(ToolTipEffect), Color.Black);
 
-        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.CreateAttached("BackgroundColor", typeof(Color), typeof(ToolTipEffect), Color.White);
+        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.CreateAttached("BackgroundColor", typeof(Color), typeof(ToolTipEffect), Color.Silver);
 
         public static readonly BindableProperty IsOpenProperty = BindableProperty.CreateAttached("IsOpen", typeof(bool), typeof(ToolTipEffect), false, propertyChanged: IsOpenChanged);
 
@@ -55,6 +56,8 @@ namespace myToolTipSample
 
         public static void SetIsOpen(BindableObject view, bool value)
         {
+            if (!Settings.IsToolTipShow)
+                return;
             view.SetValue(IsOpenProperty, value);
         }
 
@@ -102,7 +105,7 @@ namespace myToolTipSample
         /// <summary>
         /// Android Only
         /// </summary>
-        public static readonly BindableProperty MarginProperty = BindableProperty.CreateAttached("Margin", typeof(double), typeof(ToolTipEffect), default);
+        public static readonly BindableProperty MarginProperty = BindableProperty.CreateAttached("Margin", typeof(double), typeof(ToolTipEffect), 10.0);
         #endregion
 
         #region UWPOnly

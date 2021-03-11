@@ -23,34 +23,41 @@ namespace TrainingDay.iOS.Services
 
         void OnTap(object sender, EventArgs e)
         {
-            var control = Control ?? Container;
-
-            var text = ToolTipEffect.GetText(Element);
-
-            if (!string.IsNullOrEmpty(text))
+            bool isOpen = ToolTipEffect.GetIsOpen(Element);
+            if (isOpen)
             {
-                tooltip.BubbleColor = ToolTipEffect.GetBackgroundColor(Element).ToUIColor();
-                tooltip.ForegroundColor = ToolTipEffect.GetTextColor(Element).ToUIColor();
-                tooltip.Text = new Foundation.NSString(text);
-                var heightArrow = ToolTipEffect.GetArrowHeight(Element);
-                if (heightArrow > 0.0)
-                    tooltip.ArrowHeight = Convert.ToSingle(heightArrow);
-                var widthArrow = ToolTipEffect.GetArrowWidth(Element);
-                if (widthArrow > 0.0)
-                    tooltip.ArrowWidth = Convert.ToSingle(widthArrow);
-                UpdatePosition();
+                var control = Control ?? Container;
 
-                var window = UIApplication.SharedApplication.KeyWindow;
-                var vc = window.RootViewController;
-                while (vc.PresentedViewController != null)
+                var text = ToolTipEffect.GetText(Element);
+
+                if (!string.IsNullOrEmpty(text))
                 {
-                    vc = vc.PresentedViewController;
+                    tooltip.BubbleColor = ToolTipEffect.GetBackgroundColor(Element).ToUIColor();
+                    tooltip.ForegroundColor = ToolTipEffect.GetTextColor(Element).ToUIColor();
+                    tooltip.Text = new Foundation.NSString(text);
+                    var heightArrow = ToolTipEffect.GetArrowHeight(Element);
+                    if (heightArrow > 0.0)
+                        tooltip.ArrowHeight = Convert.ToSingle(heightArrow);
+                    var widthArrow = ToolTipEffect.GetArrowWidth(Element);
+                    if (widthArrow > 0.0)
+                        tooltip.ArrowWidth = Convert.ToSingle(widthArrow);
+                    UpdatePosition();
+
+                    var window = UIApplication.SharedApplication.KeyWindow;
+                    var vc = window.RootViewController;
+                    while (vc.PresentedViewController != null)
+                    {
+                        vc = vc.PresentedViewController;
+                    }
+
+
+                    tooltip?.Show(control, vc.View, true);
                 }
-
-
-                tooltip?.Show(control, vc.View, true);
             }
-
+            else
+            {
+                tooltip?.Dismiss();
+            }
         }
 
         void OnDismiss(object sender, EventArgs e)
@@ -63,6 +70,7 @@ namespace TrainingDay.iOS.Services
         {
             var control = Control ?? Container;
 
+            return;
             if (control is UIButton)
             {
                 var btn = Control as UIButton;
@@ -78,7 +86,7 @@ namespace TrainingDay.iOS.Services
 
         protected override void OnDetached()
         {
-
+            return;
             var control = Control ?? Container;
 
             if (control is UIButton)
@@ -126,6 +134,10 @@ namespace TrainingDay.iOS.Services
             else if (args.PropertyName == ToolTipEffect.PositionProperty.PropertyName)
             {
                 UpdatePosition();
+            }
+            else if (args.PropertyName == ToolTipEffect.IsOpenProperty.PropertyName)
+            {
+                OnTap(this,null);
             }
         }
 

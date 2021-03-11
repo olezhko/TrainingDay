@@ -108,6 +108,13 @@ namespace TrainingDay.Services
             set => AppSettings.AddOrUpdateValue(nameof(IsExpandedMainGroup), value);
         }
 
+        private static readonly bool SettingsIsToolTipShow = true;
+        public static bool IsToolTipShow
+        {
+            get => AppSettings.GetValueOrDefault(nameof(IsToolTipShow), SettingsIsToolTipShow);
+            set => AppSettings.AddOrUpdateValue(nameof(IsToolTipShow), value);
+        }
+
         private static readonly string SettingsToken = "";
         public static string Token
         {

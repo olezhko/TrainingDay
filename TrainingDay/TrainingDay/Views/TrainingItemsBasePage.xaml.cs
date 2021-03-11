@@ -35,7 +35,13 @@ namespace TrainingDay.Views
             vm.LoadItems();
             IsStartNotFinishedTraining();
         }
-        
+
+        protected override void OnDisappearing()
+        {
+            ToolTipEffect.SetIsOpen(AddImage, false);
+            base.OnDisappearing();
+        }
+
         private void IsStartNotFinishedTraining()
         {
             if (Settings.IsTrainingNotFinished)

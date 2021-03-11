@@ -15,7 +15,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
@@ -37,7 +36,6 @@
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidSupportedAbis />
     <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
-    <EnableProguard>false</EnableProguard>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
@@ -180,7 +178,7 @@
       <Name>DataClassLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\TrainingDay\TrainingDay.csproj">
-      <Project>{B68D315E-8E79-4280-AA4F-5366E48FDF46}</Project>
+      <Project>{148F462C-B448-438B-AFDE-A908B0AFDAC2}</Project>
       <Name>TrainingDay</Name>
     </ProjectReference>
   </ItemGroup>

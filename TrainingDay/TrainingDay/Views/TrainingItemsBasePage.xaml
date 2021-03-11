@@ -96,12 +96,9 @@
             </controls1:AdMobView>
 
             <Image Source="add.png" HorizontalOptions="Center" VerticalOptions="End" HeightRequest="60" WidthRequest="60" x:Name="AddImage" Grid.Row="1"
-                   myToolTipSample:ToolTipEffect.BackgroundColor="Silver"
                    myToolTipSample:ToolTipEffect.IsTapAttached="True"
-                   myToolTipSample:ToolTipEffect.Margin="10"
-                   myToolTipSample:ToolTipEffect.Position="Right"
-                   myToolTipSample:ToolTipEffect.Text="This button to add new Training Item"
-                   myToolTipSample:ToolTipEffect.TextColor="Teal">
+                   myToolTipSample:ToolTipEffect.Position="Top"
+                   myToolTipSample:ToolTipEffect.Text="{services:Translate AddTrainingButtonToolTip}">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding AddNewTrainingCommand}"/>
                 </Image.GestureRecognizers>
