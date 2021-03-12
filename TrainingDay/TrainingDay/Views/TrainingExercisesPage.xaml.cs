@@ -20,7 +20,6 @@ namespace TrainingDay.View
         {
             base.OnAppearing();
             Load(TrainingId);
-            ItemsListView.SelectedItem = null;
         }
 
         public int TrainingId { get; set; }
@@ -28,11 +27,15 @@ namespace TrainingDay.View
         {
             TrainingViewModel trVm = new TrainingViewModel(App.Database.GetTrainingItem(id));
             PrepareTrainingViewModel(trVm);
-            TrainingExercisesPageViewModel vm = BindingContext as TrainingExercisesPageViewModel ?? new TrainingExercisesPageViewModel();
+            TrainingExercisesPageViewModel vm = BindingContext as TrainingExercisesPageViewModel;
+            if (vm == null)
+            {
+                vm = new TrainingExercisesPageViewModel();
+            }
 
             vm.Navigation = Navigation;
             vm.Load(trVm);
-            BindingContext = vm;
+            //BindingContext = vm; // ne
         }
 
         public static void PrepareTrainingViewModel(TrainingViewModel vm)

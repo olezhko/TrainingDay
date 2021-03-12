@@ -47,7 +47,6 @@ namespace TrainingDay.ViewModels
             OnPropertyChanged(nameof(Training.Exercises));
         }
 
-
         public ICommand AddExercisesCommand => new Command(AddExercises);
         private async void AddExercises()
         {
@@ -105,13 +104,13 @@ namespace TrainingDay.ViewModels
 
                         if (sender.SuperSetId != 0)
                             CheckSuperSetExist(sender.SuperSetId);
+
+                        App.Database.DeleteTrainingExerciseItem(sender.TrainingExerciseId);
                     }
                 };
                 popup.Show(Resource.OkString, Resource.CancelString);
             }
         }
-
-
 
         public ICommand MakeNotifyCommand => new Command(MakeNotify);
         private async void MakeNotify()
@@ -130,17 +129,10 @@ namespace TrainingDay.ViewModels
             if (CurrentAction != ExerciseCheckBoxAction.None) // when we in action, tapped equals changing selected
             {
                 if (CurrentAction == ExerciseCheckBoxAction.SuperSet)
-                {
-                    if ( viewModel.SuperSetId == 0 ) //!IsExerciseInSuperSet
-                    {
+                    if (viewModel.SuperSetId == 0) //!IsExerciseInSuperSet
                         viewModel.IsSelected = !viewModel.IsSelected;
-                    }
-                }
-                else
-                {
-                    viewModel.IsSelected = !viewModel.IsSelected;
-                }
-
+                    else
+                        viewModel.IsSelected = !viewModel.IsSelected;
                 return;
             }
 
@@ -149,10 +141,6 @@ namespace TrainingDay.ViewModels
             page.LoadExercise(viewModel);
             await Navigation.PushAsync(page);
         }
-
-
-
-
 
         private void CheckSuperSetExist(int supersetId)
         {
@@ -184,7 +172,6 @@ namespace TrainingDay.ViewModels
             }
             await Navigation.PushAsync(new TrainingImplementPage() { TrainingItem = Training, Title = Training.Title });
         }
-
 
         // save name
         // save super-sets

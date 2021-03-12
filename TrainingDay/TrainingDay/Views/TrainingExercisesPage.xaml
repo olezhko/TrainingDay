@@ -5,6 +5,7 @@
              xmlns:viewModels="clr-namespace:TrainingDay.ViewModels;assembly=TrainingDay"
              xmlns:controls2="clr-namespace:TrainingDay.Views.Controls;assembly=TrainingDay"
              xmlns:xForms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:androidSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              x:Class="TrainingDay.View.TrainingExercisesPage" Title="{services:Translate TrainingString}" x:Name="ContentPage">
     <ContentPage.BindingContext>
         <viewModels:TrainingExercisesPageViewModel/>
@@ -25,7 +26,8 @@
             </Grid.RowDefinitions>
             <Entry Keyboard="Text" Text="{Binding Training.Title}" FontSize="Large" HorizontalOptions="FillAndExpand" Placeholder="{services:Translate NameString1}" Grid.Row="0" FontAttributes="Bold" Margin="5,0"/>
 
-            <xForms:SfListView ItemsSource="{Binding Training.Exercises}" Grid.Row="1" x:Name="ItemsListView" AutoFitMode="Height" DragStartMode="OnHold">
+            <xForms:SfListView ItemsSource="{Binding Training.Exercises}" Grid.Row="1" x:Name="ItemsListView" AutoFitMode="Height" DragStartMode="OnHold"
+                               androidSpecific:ListView.IsFastScrollEnabled="True">
                 <xForms:SfListView.Behaviors>
                     <services:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}" />
                 </xForms:SfListView.Behaviors>
